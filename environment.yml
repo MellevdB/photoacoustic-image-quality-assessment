@@ -1,0 +1,17 @@
+name: photoacoustic-env
+channels:
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - matplotlib
+  - h5py
+  - scipy          # Useful for scientific computations
+  - pandas         # For data manipulation (potentially useful later)
+  - seaborn        # For advanced visualizations
+  - pip
+  - pip:
+      - ipython    # Interactive Python
+      - jupyter    # Jupyter Notebooks
