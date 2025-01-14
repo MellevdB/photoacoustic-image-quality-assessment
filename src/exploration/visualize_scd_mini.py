@@ -3,7 +3,7 @@ import h5py
 import numpy as np
 
 # File path to SCD-mini dataset
-file_path = "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/Data (OADAT)/SCD/SCD_RawBP-mini.h5"
+file_path = "data/OADAT/SCD/SCD_RawBP-mini.h5"
 
 # Check data range
 def check_data_range(file_path, dataset_name):

@@ -3,7 +3,7 @@ import h5py
 import numpy as np
 
 # File path to OADAT-mini dataset
-file_path = "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/Data (OADAT)/OADAT-mini/OADAT-mini.h5"
+file_path = "data/OADAT/OADAT-mini/OADAT-mini.h5"
 
 # Check data range
 def check_data_range(file_path, group, dataset):
