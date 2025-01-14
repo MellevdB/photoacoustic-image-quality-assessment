@@ -28,4 +28,4 @@ This repository contains code and data for my MSc AI thesis project. The aim is 
 [MIT License](LICENSE)
 
 ## Contact  
-For any questions or collaboration inquiries, contact me at melle.vanderbrugge@student.uva.nl.  
+For any questions or collaboration inquiries, contact me at melle.vanderbrugge@student.uva.nl

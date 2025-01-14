@@ -8,11 +8,10 @@ dependencies:
   - numpy
   - matplotlib
   - h5py
-  - scipy          # Useful for scientific computations
-  - pandas         # For data manipulation (potentially useful later)
-  - seaborn        # For advanced visualizations
+  - scikit-image
+  - tensorflow
   - pip
   - pip:
-      - ipython    # Interactive Python
-      - jupyter    # Jupyter Notebooks
-      - git+https://github.com/berkanlafci/pyoat.git # PyOAT
+      - git+https://github.com/berkanlafci/pyoat.git
+      - ipython
+      - jupyter
