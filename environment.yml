@@ -15,3 +15,4 @@ dependencies:
   - pip:
       - ipython    # Interactive Python
       - jupyter    # Jupyter Notebooks
+      - git+https://github.com/berkanlafci/pyoat.git # PyOAT
