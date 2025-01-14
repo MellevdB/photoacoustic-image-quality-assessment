@@ -3,7 +3,7 @@ import h5py
 import numpy as np
 
 # File path to MSFD-mini dataset
-file_path = "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/Data (OADAT)/MSFD/MSFD_multisegment_RawBP-mini.h5"
+file_path = "data/OADAT/MSFD/MSFD_multisegment_RawBP-mini.h5"
 
 # Visualize a single sample across multiple wavelengths
 def visualize_single_sample_across_wavelengths(file_path):

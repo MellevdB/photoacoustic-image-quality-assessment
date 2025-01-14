@@ -4,8 +4,8 @@ import numpy as np
 
 # File paths to SWFD-mini datasets
 file_paths = [
-    "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/Data (OADAT)/SWFD/SWFD_multisegment_RawBP-mini.h5",
-    "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/Data (OADAT)/SWFD/SWFD_semicircle_RawBP-mini.h5"
+    "data/OADAT/SWFD/SWFD_multisegment_RawBP-mini.h5",
+    "data/OADAT/SWFD/SWFD_semicircle_RawBP-mini.h5"
 ]
 
 # Check data range
