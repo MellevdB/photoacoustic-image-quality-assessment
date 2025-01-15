@@ -3,6 +3,9 @@ import numpy as np
 from src.metrics.compute_psnr import compute_psnr
 from src.metrics.compute_ssim import compute_ssim
 from src.data_loading_oadat.extract_data_oadat import extract_data
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 def compare_metrics(file_path, in_key, out_key):
     inputs, ground_truths = extract_data(file_path, in_key, out_key)

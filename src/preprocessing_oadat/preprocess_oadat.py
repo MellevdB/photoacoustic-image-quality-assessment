@@ -16,6 +16,9 @@ def preprocess_data(sigMat, apply_filter=True, lowCutOff=0.1e6, highCutOff=6e6, 
 
     :return: Preprocessed 3D signal array
     """
+    
+    print("Shape of sigMat:", sigMat.shape)
+
     # Normalize the signals
     normalized_data = sigMatNormalize(sigMat)
     

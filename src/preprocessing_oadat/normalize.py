@@ -23,6 +23,7 @@ def sigMatNormalize(sigMatIn):
     print('***** normalization *****')
     startTime       = time.time()
 
+    sigMatIn = np.atleast_3d(sigMatIn)  # Convert 2D input to 3D with a single repetition
     sigMatOut = np.zeros(np.shape(sigMatIn))
 
     for i in range(np.shape(sigMatIn)[2]):
