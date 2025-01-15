@@ -24,7 +24,9 @@ def extract_data(file_path, in_key, out_key, indices=None, apply_filter=True):
     
     for x, y in generator:
         # Preprocess the input (sparse data)
+        x = np.atleast_3d(x)
         x_preprocessed = preprocess_data(x, apply_filter=apply_filter)
+        x_preprocessed = np.squeeze(x_preprocessed, axis=-1)
         inputs.append(x_preprocessed)
         ground_truths.append(y)  # Ground truth data doesn't need preprocessing
     
