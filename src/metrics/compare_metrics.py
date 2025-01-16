@@ -8,9 +8,9 @@ from src.data_loading_oadat.extract_data_oadat import extract_data
 def compare_metrics(file_path, in_key, out_key):
     inputs, ground_truths = extract_data(file_path, in_key, out_key)
 
-    # Print shapes for debugging
-    for i, (inp, gt) in enumerate(zip(inputs, ground_truths)):
-        print(f"Sample {i}: Input shape {inp.shape}, Ground truth shape {gt.shape}")
+    # # Print shapes for debugging
+    # for i, (inp, gt) in enumerate(zip(inputs, ground_truths)):
+    #     print(f"Sample {i}: Input shape {inp.shape}, Ground truth shape {gt.shape}")
 
     psnr_values = [compute_psnr(gt, pred) for gt, pred in zip(ground_truths, inputs)]
     ssim_values = [compute_ssim(gt, pred) for gt, pred in zip(ground_truths, inputs)]

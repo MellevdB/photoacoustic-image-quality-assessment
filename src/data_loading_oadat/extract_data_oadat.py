@@ -17,20 +17,42 @@ def extract_data(file_path, in_key, out_key, indices=None, apply_filter=True):
     Returns:
         tuple: (inputs, ground_truths) as numpy arrays.
     """
+    # Print input shape for debugging
+    print("Input is: ", in_key)
+
+    # Print GT shape for debugging
+    print("Ground truth is: ", out_key)
+
     generator = Generator_Paired_Input_Output(
         fname_h5=file_path, in_key=in_key, out_key=out_key, inds=indices
     )
     inputs, ground_truths = [], []
+
     
+    # for x, y in generator:
+    #     x = np.atleast_3d(x) # Needed for preprocessing
+    #     x_preprocessed = preprocess_data(x, apply_filter=apply_filter)
+    #     x_preprocessed = np.squeeze(x_preprocessed, axis=-1) # Remove the last dimension
+    #     inputs.append(x_preprocessed)
+
+    #     ground_truths.append(y)  # Ground truth data doesn't need preprocessing
+    
+    # return np.array(inputs), np.array(ground_truths)
+
     for x, y in generator:
-        # Preprocess the input (sparse data)
-        x = np.atleast_3d(x)
-        x_preprocessed = preprocess_data(x, apply_filter=apply_filter)
-        x_preprocessed = np.squeeze(x_preprocessed, axis=-1)
-        inputs.append(x_preprocessed)
-        ground_truths.append(y)  # Ground truth data doesn't need preprocessing
-    
-    return np.array(inputs), np.array(ground_truths)
+        # Reshape x to add a sample dimension
+        x = np.expand_dims(x, axis=0)  # (1, 256, 256)
+        inputs.append(x)
+        ground_truths.append(y)
+
+    # Stack all inputs to form a 3D array: (samples, 256, 256)
+    stacked_inputs = np.concatenate(inputs, axis=0)  # (samples, 256, 256)
+    print(f"Stacked input shape: {stacked_inputs.shape}")
+
+    # Preprocess the stacked 3D input
+    preprocessed_inputs = preprocess_data(stacked_inputs, apply_filter=apply_filter)
+
+    return preprocessed_inputs, np.array(ground_truths)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract and preprocess data from OADAT dataset.")

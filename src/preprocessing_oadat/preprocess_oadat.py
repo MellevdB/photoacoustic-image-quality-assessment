@@ -17,7 +17,6 @@ def preprocess_data(sigMat, apply_filter=True, lowCutOff=0.1e6, highCutOff=6e6, 
     :return: Preprocessed 3D signal array
     """
     
-    print("Shape of sigMat:", sigMat.shape)
 
     # Normalize the signals
     normalized_data = sigMatNormalize(sigMat)
@@ -28,9 +27,3 @@ def preprocess_data(sigMat, apply_filter=True, lowCutOff=0.1e6, highCutOff=6e6, 
         return filtered_data
     
     return normalized_data
-
-if __name__ == "__main__":
-    # Example usage
-    dummy_data = np.random.rand(1000, 256, 10)  # Example 3D signal array
-    preprocessed_data = preprocess_data(dummy_data)
-    print("Preprocessed data shape:", preprocessed_data.shape)

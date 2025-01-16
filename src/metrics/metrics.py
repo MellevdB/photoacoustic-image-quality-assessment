@@ -6,4 +6,4 @@ def compute_psnr(gt, pred):
     return psnr(gt, pred, data_range=gt.max() - gt.min())
 
 def compute_ssim(gt, pred):
-    return ssim(gt, pred, data_range=gt.max() - gt.min(), win_size=5)
+    return ssim(gt, pred, data_range=gt.max() - gt.min())
