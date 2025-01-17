@@ -10,7 +10,7 @@ def list_keys(file_path):
     with h5py.File(file_path, "r") as hdf:
         print("Available keys in the file:")
         for key in hdf.keys():
-            print(f"- {key}")
+            print(f"- {key}, shape: {hdf[key].shape}")
 
 # Check data range for a specific key
 def check_data_range(file_path, dataset_name):
@@ -94,10 +94,10 @@ if __name__ == "__main__":
     print("\nChecking statistics for key datasets...")
     check_statistics(file_path, ["vc,ss32_BP", "ground_truth", "ms,ss32_BP"])
 
-    # Visualize a single sample across all datasets
-    print("\nVisualizing a single sample across all datasets...")
-    visualize_sample_from_datasets(file_path, sample_index=0)
+    # # Visualize a single sample across all datasets
+    # print("\nVisualizing a single sample across all datasets...")
+    # visualize_sample_from_datasets(file_path, sample_index=0)
 
-    # Visualize multiple samples from a specific dataset
-    print("\nVisualizing multiple samples from linear_BP...")
-    visualize_multiple_samples(file_path, dataset_name="linear_BP", num_samples=5)
+    # # Visualize multiple samples from a specific dataset
+    # print("\nVisualizing multiple samples from linear_BP...")
+    # visualize_multiple_samples(file_path, dataset_name="linear_BP", num_samples=5)
