@@ -1,5 +1,5 @@
 import os
-import scipy.io as sio
+import h5py
 
 def explore_mouse_data(data_path):
     """
@@ -14,14 +14,11 @@ def explore_mouse_data(data_path):
         file_path = os.path.join(data_path, file)
         print(f"Loading {file}...")
         
-        # Load the .mat file
-        data = sio.loadmat(file_path)
-        
-        # Explore the keys and data
-        print(f"Keys in {file}: {list(data.keys())}")
-        for key in data:
-            if not key.startswith("__"):  # Skip meta keys
-                print(f"Key: {key}, Shape: {data[key].shape}, Type: {type(data[key])}")
+        # Load the .mat file using h5py for MATLAB v7.3 format
+        with h5py.File(file_path, "r") as data:
+            print(f"Keys in {file}: {list(data.keys())}")
+            for key in data:
+                print(f"Key: {key}, Shape: {data[key].shape}, Type: {data[key].dtype}")
         print("=" * 50)
 
 if __name__ == "__main__":
