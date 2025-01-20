@@ -7,7 +7,7 @@ from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 from preprocessing_oadat.filterBandPass import sigMatFilter
 from preprocessing_oadat.normalize import sigMatNormalize
 
-from config.oadat_config import OADAT_DATA_DIR, RESULTS_DIR, DATASETS
+from config.data_config import OADAT_DATA_DIR, RESULTS_DIR, DATASETS
 
 
 def calculate_metrics(y_pred, y_true):

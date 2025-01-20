@@ -4,7 +4,7 @@ import os
 import argparse
 
 from evaluation_oadat.eval_translation import evaluate
-from config.oadat_config import DATASETS
+from config.data_config import DATASETS
 
 
 def evaluate_all_datasets(save_to_file=True, summary_path=None):
