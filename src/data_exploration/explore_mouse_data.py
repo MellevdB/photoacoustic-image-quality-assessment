@@ -22,5 +22,12 @@ def explore_mouse_data(data_path):
         print("=" * 50)
 
 if __name__ == "__main__":
-    mouse_data_path = "data/mouse/9250634"
+    mouse_data_path = "data/mice"
+    phantom_data_path = "data/phantom"
+    v_phantom_data_path = "data/v_phantom"
+    print("Exploring mouse data...")
     explore_mouse_data(mouse_data_path)
+    print("Exploring phantom data...")
+    explore_mouse_data(phantom_data_path)
+    print("Exploring v_phantom data...")
+    explore_mouse_data(v_phantom_data_path)

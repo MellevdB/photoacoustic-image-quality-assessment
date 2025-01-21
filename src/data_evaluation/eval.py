@@ -23,7 +23,7 @@ def calculate_metrics(y_pred, y_true):
     return psnr, ssim
 
 
-def evaluate(dataset, full_config, file_key=None, save_results=True):
+def evaluate(dataset, config, full_config, file_key=None, save_results=True):
     """
     Evaluate a specific dataset and configuration for PSNR and SSIM.
 
@@ -89,8 +89,10 @@ def evaluate(dataset, full_config, file_key=None, save_results=True):
     # Handle MAT files for datasets like mice, phantom, v_phantom
     elif dataset in ["mice", "phantom", "v_phantom"]:
         path = dataset_info["path"]
-        gt_file = f"{dataset}_full_recon.mat"
-        config_file = os.path.join(path, full_config + ".mat")
+        gt_file = os.path.join(path, dataset + "_full_recon.mat")
+        # print(f"Ground truth file: {gt_file}")
+        
+        config_file = os.path.join(path, dataset + "_" + config + "_recon.mat")
 
         if not os.path.isfile(gt_file):
             print(f"[WARNING] Ground truth file not found: {gt_file}. Skipping...")

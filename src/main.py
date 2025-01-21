@@ -22,14 +22,20 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
         if isinstance(dataset_info["path"], dict):
             for file_key in dataset_info["path"]:
                 for config, config_values in dataset_info["configs"].items():
+                    # print("config", config)
+                    # print("config_values", config_values)
                     for full_config in config_values:
-                        partial_results = evaluate(dataset, full_config, file_key, save_results=False)
+                        # print("full_config", full_config)
+                        partial_results = evaluate(dataset, config, full_config, file_key, save_results=False)
                         if partial_results:
                             results.extend([(full_config, entry) for entry in partial_results])
         else:
             for config, config_values in dataset_info["configs"].items():
+                # print("config", config)
+                # print("config_values", config_values)
                 for full_config in config_values:
-                    partial_results = evaluate(dataset, full_config, file_key=None, save_results=False)
+                    # print("full_config", full_config)
+                    partial_results = evaluate(dataset, config, full_config, file_key=None, save_results=False)
                     if partial_results:
                         results.extend([(full_config, entry) for entry in partial_results])
 
