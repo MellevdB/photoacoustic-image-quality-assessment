@@ -56,13 +56,22 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
         with h5py.File(data_path, "r") as data:
             if dataset == "MSFD":
                 # MSFD: Iterate over wavelengths
+                # print("Keys in data:", list(data.keys()))
                 for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
-                    if full_config in data and ground_truth_key in data:
-                        print(f"Processing wavelength={wavelength}")
-                        y_pred = sigMatNormalize(sigMatFilter(data[full_config][:]))
+                    # Construct the correct key for the current configuration and wavelength
+                    expected_key = f"{full_config}"
+                    print(f"Checking key: {expected_key}")
+                    print(f"Ground truth key: {ground_truth_key}")
+
+                    if expected_key in data and ground_truth_key in data:
+                        print(f"Processing wavelength={wavelength} for config={full_config}")
+                        y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
                         y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
                         psnr, ssim = calculate_metrics(y_pred, y_true)
-                        results.append((full_config, wavelength, psnr, ssim))
+                        results.append((expected_key, wavelength, psnr, ssim))
+                    else:
+                        print(f"[DEBUG] Missing key: {expected_key} or {ground_truth_key}")
+
             else:
                 # SCD/SWFD: Match ground truth based on file_key or configuration
                 ground_truth_key = None
