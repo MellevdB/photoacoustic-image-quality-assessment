@@ -1,0 +1,10 @@
+Dataset   Configuration       Wavelength   PSNR     SSIM
+------------------------------------------------------
+SWFD      linear_BP            ---         36.661  0.810  
+SWFD      ms,ss128_BP          ---         38.220  0.887  
+SWFD      ms,ss64_BP           ---         35.195  0.775  
+SWFD      ms,ss32_BP           ---         34.008  0.712  
+SWFD      sc,lv128_BP          ---         45.766  0.961  
+SWFD      sc,ss128_BP          ---         43.402  0.956  
+SWFD      sc,ss64_BP           ---         40.582  0.916  
+SWFD      sc,ss32_BP           ---         39.475  0.893  
