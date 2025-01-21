@@ -62,15 +62,18 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                     expected_key = f"{full_config}"
                     print(f"Checking key: {expected_key}")
                     print(f"Ground truth key: {ground_truth_key}")
-
-                    if expected_key in data and ground_truth_key in data:
+                    
+                    # print("last 4 characters of expected_key", expected_key[-4:])
+                    # print("last 4 characters of ground_truth_key", ground_truth_key[-4:])
+                    if expected_key[-4:] == ground_truth_key[-4:]:
+                    # if expected_key in data and ground_truth_key in data:
                         print(f"Processing wavelength={wavelength} for config={full_config}")
                         y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
                         y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
                         psnr, ssim = calculate_metrics(y_pred, y_true)
                         results.append((expected_key, wavelength, psnr, ssim))
                     else:
-                        print(f"[DEBUG] Missing key: {expected_key} or {ground_truth_key}")
+                        print(f"Key not corresponding to correct ground truth: {expected_key} is not the same wavelength as {ground_truth_key}")
 
             else:
                 # SCD/SWFD: Match ground truth based on file_key or configuration
