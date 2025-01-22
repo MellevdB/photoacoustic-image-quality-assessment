@@ -1,15 +1,15 @@
-name: photoacoustic-env
+name: photoacoustic-py38
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.9
-  - numpy=1.24.4
-  - scipy=1.9.1
+  - python=3.8
+  - numpy
+  - scipy
   - matplotlib
   - h5py
   - scikit-image
-  - tensorflow>=2.12
+  - tensorflow
   - astropy
   - mkl_fft
   - pip
@@ -19,5 +19,3 @@ dependencies:
       - jupyter
       - sewar
       - pyfftw
-      - read-roi
-      - tqdm

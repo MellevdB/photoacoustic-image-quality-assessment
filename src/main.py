@@ -50,18 +50,30 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
 
             os.makedirs(os.path.dirname(results_path), exist_ok=True)
             with open(results_path, "w") as f:
-                f.write("Dataset   Configuration       Wavelength   PSNR     SSIM\n")
-                f.write("------------------------------------------------------\n")
-                for config, entry in results:
-                    if dataset == "MSFD":
-                        mode, wave, psnr, ssim = entry
+                if dataset == "MSFD":
+                    # Header
+                    header = "Dataset   Configuration       Wavelength   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
+                    f.write(header)
+                    f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
+                    
+                    for config, entry in results:
+                        mode, wave, *metrics = entry
                         wave_str = f"{wave}"
-                    else:
-                        mode, psnr, ssim = entry
-                        wave_str = "---"
-                    f.write(f"{dataset:<9} {config:<20} {wave_str:<11} {psnr:<7.3f} {ssim:<7.3f}\n")
+                        # Format metrics with fallback for non-numerical values
+                        metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
+                        f.write(f"{dataset:<9} {config:<20} {wave_str:<11} {metrics_str}\n")
+                else:
+                    # Header
+                    header = "Dataset   Configuration       PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
+                    f.write(header)
+                    f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
+                    
+                    for config, entry in results:
+                        mode, *metrics = entry
+                        # Format metrics with fallback for non-numerical values
+                        metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
+                        f.write(f"{dataset:<9} {config:<20} {metrics_str}\n")
             print(f"Results saved to {results_path}")
-
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate datasets and configurations.")

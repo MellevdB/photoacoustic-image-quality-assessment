@@ -1,10 +1,19 @@
 import os
 import scipy.io as sio
 import h5py
-from skimage.metrics import peak_signal_noise_ratio, structural_similarity
-from preprocessing_data.filterBandPass import sigMatFilter
+import numpy as np
 from preprocessing_data.normalize import sigMatNormalize
+from preprocessing_data.filterBandPass import sigMatFilter
 from config.data_config import DATASETS, DATA_DIR, RESULTS_DIR
+from .metrics import (
+    fsim,
+    # gmsd,
+    calculate_vifp,
+    calculate_uqi,
+    # calculate_msssim,
+    calculate_psnr,
+    calculate_ssim,
+)
 
 
 def load_mat_file(file_path, key):
@@ -16,11 +25,65 @@ def load_mat_file(file_path, key):
             return f[key][()]
 
 
+# def load_mat_file(file_path, key):
+#     """
+#     Load data from a .mat file.
+
+#     :param file_path: Path to the .mat file.
+#     :param key: Key to extract data.
+#     :return: Data corresponding to the key.
+#     """
+#     try:
+#         with h5py.File(file_path, "r") as f:
+#             return f[key][()]
+#     except KeyError:
+#         raise KeyError(f"Key '{key}' not found in {file_path}")
+
+
 def calculate_metrics(y_pred, y_true):
+    """
+    Calculate image quality metrics for the given predicted and ground truth images.
+    
+    :param y_pred: Predicted image.
+    :param y_true: Ground truth image.
+    :return: Dictionary containing all calculated metrics.
+    """
     data_range = y_true.max() - y_true.min()
-    psnr = peak_signal_noise_ratio(y_true, y_pred, data_range=data_range)
-    ssim = structural_similarity(y_true, y_pred, data_range=data_range)
-    return psnr, ssim
+
+    # PSNR and SSIM
+    psnr = calculate_psnr(y_true, y_pred, data_range=data_range)
+    ssim = calculate_ssim(y_true, y_pred, data_range=data_range)
+
+    # Additional metrics
+    vif = calculate_vifp(y_true, y_pred)  # Visual Information Fidelity
+    fsim_score = fsim(y_true, y_pred)  # Feature Similarity Index
+    nqm = calculate_uqi(y_true, y_pred)  # Universal Quality Index (similar to NQM)
+
+    # # Normalize to range 0–255 and convert to uint8 if needed
+    # org_img = ((y_true - y_true.min()) / (y_true.max() - y_true.min()) * 255).astype(np.uint8)
+    # pred_img = ((y_pred - y_pred.min()) / (y_pred.max() - y_pred.min()) * 255).astype(np.uint8)
+    # # Dynamically adjust the window size (ws) based on the image dimensions
+    # min_dim = min(org_img.shape[0], org_img.shape[1])
+    # ws = min(11, min_dim)  # Use a maximum window size of 11, or smaller for tiny images
+    # iwssim = calculate_msssim(org_img, pred_img, ws=ws)  # Multi-Scale SSIM
+    iwssim = None
+
+    # GMSD and HDRVDP placeholders (not implemented)
+    gmsd_score = None  # Placeholder for GMSD
+    hdrvdp_score = None  # Placeholder for HDRVDP
+
+    metrics = {
+        'PSNR': psnr,
+        'SSIM': ssim,
+        'VIF': vif,
+        'FSIM': fsim_score,
+        'NQM': nqm,
+        'MSSIM': iwssim,
+        'GMSD': gmsd_score,  # Placeholder
+        'HDRVDP': hdrvdp_score  # Placeholder
+    }
+    print("Calculated metrics:", metrics)
+    return metrics
 
 
 def evaluate(dataset, config, full_config, file_key=None, save_results=True):
@@ -70,8 +133,9 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                         print(f"Processing wavelength={wavelength} for config={full_config}")
                         y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
                         y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-                        psnr, ssim = calculate_metrics(y_pred, y_true)
-                        results.append((expected_key, wavelength, psnr, ssim))
+                        
+                        metrics = calculate_metrics(y_pred, y_true)
+                        results.append((expected_key, wavelength, *metrics.values()))
                     else:
                         print(f"Key not corresponding to correct ground truth: {expected_key} is not the same wavelength as {ground_truth_key}")
 
@@ -93,10 +157,14 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                     return results
 
                 if full_config in data and ground_truth_key in data:
+                    print(f"Processing config={full_config}")
+                    print(f"Ground truth key: {ground_truth_key}")
                     y_pred = sigMatNormalize(sigMatFilter(data[full_config][:]))
                     y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-                    psnr, ssim = calculate_metrics(y_pred, y_true)
-                    results.append((full_config, psnr, ssim))
+                    
+                    metrics = calculate_metrics(y_pred, y_true)
+                    results.append((full_config, *metrics.values()))
+
 
     # Handle MAT files for datasets like mice, phantom, v_phantom
     elif dataset in ["mice", "phantom", "v_phantom"]:
@@ -118,27 +186,40 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
         gt_data = load_mat_file(gt_file, dataset_info["ground_truth"])
         config_data = load_mat_file(config_file, full_config)
 
+        print(f"Processing config={full_config}")
+        print(f"Ground truth key: {dataset_info['ground_truth']}")
         y_pred = sigMatNormalize(sigMatFilter(config_data))
         y_true = sigMatNormalize(sigMatFilter(gt_data))
 
-        psnr, ssim = calculate_metrics(y_pred, y_true)
-        results.append((full_config, psnr, ssim))
+        metrics = calculate_metrics(y_pred, y_true)
+        results.append((full_config, *metrics.values()))
 
+    # Save results if required
     if save_results and results:
         os.makedirs(os.path.dirname(RESULTS_DIR), exist_ok=True)
         with open(f"{RESULTS_DIR}/{dataset}_results.txt", "a") as f:
             if dataset == "MSFD":
-                f.write("Configuration   Wavelength   PSNR     SSIM\n")
-                f.write("---------------------------------------\n")
+                # Header
+                header = "Configuration   Wavelength   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
+                f.write(header)
+                f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
+                
                 for entry in results:
-                    config, wavelength, psnr, ssim = entry
-                    f.write(f"{config:<14} {wavelength:<11} {psnr:<7.3f} {ssim:<7.3f}\n")
+                    config, wavelength, *metrics = entry
+                    # Replace None or non-numeric values
+                    metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
+                    f.write(f"{config:<14} {wavelength:<11} {metrics_str}\n")
             else:
-                f.write("Configuration   PSNR     SSIM\n")
-                f.write("-----------------------------\n")
+                # Header
+                header = "Configuration   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
+                f.write(header)
+                f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
+                
                 for entry in results:
-                    config, psnr, ssim = entry
-                    f.write(f"{config:<14} {psnr:<7.3f} {ssim:<7.3f}\n")
+                    config, *metrics = entry
+                    # Replace None or non-numeric values
+                    metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
+                    f.write(f"{config:<14} {metrics_str}\n")
         print(f"Results saved to: {RESULTS_DIR}/{dataset}_results.txt")
 
     return results
