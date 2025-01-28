@@ -25,21 +25,6 @@ def load_mat_file(file_path, key):
             return f[key][()]
 
 
-# def load_mat_file(file_path, key):
-#     """
-#     Load data from a .mat file.
-
-#     :param file_path: Path to the .mat file.
-#     :param key: Key to extract data.
-#     :return: Data corresponding to the key.
-#     """
-#     try:
-#         with h5py.File(file_path, "r") as f:
-#             return f[key][()]
-#     except KeyError:
-#         raise KeyError(f"Key '{key}' not found in {file_path}")
-
-
 def calculate_metrics(y_pred, y_true):
     """
     Calculate image quality metrics for the given predicted and ground truth images.
@@ -59,18 +44,11 @@ def calculate_metrics(y_pred, y_true):
     fsim_score = fsim(y_true, y_pred)  # Feature Similarity Index
     nqm = calculate_uqi(y_true, y_pred)  # Universal Quality Index (similar to NQM)
 
-    # # Normalize to range 0–255 and convert to uint8 if needed
-    # org_img = ((y_true - y_true.min()) / (y_true.max() - y_true.min()) * 255).astype(np.uint8)
-    # pred_img = ((y_pred - y_pred.min()) / (y_pred.max() - y_pred.min()) * 255).astype(np.uint8)
-    # # Dynamically adjust the window size (ws) based on the image dimensions
-    # min_dim = min(org_img.shape[0], org_img.shape[1])
-    # ws = min(11, min_dim)  # Use a maximum window size of 11, or smaller for tiny images
-    # iwssim = calculate_msssim(org_img, pred_img, ws=ws)  # Multi-Scale SSIM
-    iwssim = None
 
     # GMSD and HDRVDP placeholders (not implemented)
     gmsd_score = None  # Placeholder for GMSD
     hdrvdp_score = None  # Placeholder for HDRVDP
+    iwssim = None  # Placeholder for IW-SSIM
 
     metrics = {
         'PSNR': psnr,
@@ -79,8 +57,8 @@ def calculate_metrics(y_pred, y_true):
         'FSIM': fsim_score,
         'NQM': nqm,
         'MSSIM': iwssim,
-        'GMSD': gmsd_score,  # Placeholder
-        'HDRVDP': hdrvdp_score  # Placeholder
+        'GMSD': gmsd_score,  
+        'HDRVDP': hdrvdp_score
     }
     print("Calculated metrics:", metrics)
     return metrics
@@ -98,7 +76,11 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
     """
     results = []
     dataset_info = DATASETS[dataset]
-    print(f"Processing dataset={dataset}, config={full_config}, file_key={file_key}")
+
+    if dataset == "SWFD":
+        print(f"Processing dataset={dataset}, config={full_config}, file_key={file_key}")
+    else:
+        print(f"Processing dataset={dataset}, config={full_config}")
 
     # Handle HDF5 datasets (e.g., SCD, SWFD, MSFD)
     if dataset in ["SCD", "SWFD", "MSFD"]:
@@ -164,6 +146,8 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                     
                     metrics = calculate_metrics(y_pred, y_true)
                     results.append((full_config, *metrics.values()))
+                else:
+                    print(f"[ERROR] Configuration '{full_config}' or ground truth '{ground_truth_key}' not found in data. Skipping...")
 
 
     # Handle MAT files for datasets like mice, phantom, v_phantom

@@ -78,8 +78,6 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
 def main():
     parser = argparse.ArgumentParser(description="Evaluate datasets and configurations.")
     parser.add_argument("--datasets", nargs="+", help="Specify datasets to evaluate (e.g., SCD, SWFD).")
-    parser.add_argument("--config", help="Configuration (e.g., lv128, ss64, sparse32).")
-    parser.add_argument("--file_key", default=None, help="Optional file key for datasets like SWFD.")
     parser.add_argument("--no_save", action="store_true", help="If provided, results are not saved to a file.")
     args = parser.parse_args()
 
