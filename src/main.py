@@ -2,6 +2,7 @@ import os
 import argparse
 from data_evaluation.eval import evaluate
 from config.data_config import DATASETS, RESULTS_DIR
+import datetime
 
 
 def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
@@ -57,6 +58,13 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
 
 
 def save_results_to_file(results, results_path, dataset_name):
+    
+    # Generate timestamp for unique filenames
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # Insert timestamp into the results file name
+    base, ext = os.path.splitext(results_path)
+    results_path = f"{base}_{timestamp}{ext}"
+
     os.makedirs(os.path.dirname(results_path), exist_ok=True)
     with open(results_path, "w") as f:
         # Flexible headers based on metrics

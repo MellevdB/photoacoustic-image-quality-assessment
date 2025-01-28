@@ -178,32 +178,4 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
         metrics = calculate_metrics(y_pred, y_true)
         results.append((full_config, *metrics.values()))
 
-    # Save results if required
-    if save_results and results:
-        os.makedirs(os.path.dirname(RESULTS_DIR), exist_ok=True)
-        with open(f"{RESULTS_DIR}/{dataset}_results.txt", "a") as f:
-            if dataset == "MSFD":
-                # Header
-                header = "Configuration   Wavelength   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
-                f.write(header)
-                f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
-                
-                for entry in results:
-                    config, wavelength, *metrics = entry
-                    # Replace None or non-numeric values
-                    metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
-                    f.write(f"{config:<14} {wavelength:<11} {metrics_str}\n")
-            else:
-                # Header
-                header = "Configuration   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
-                f.write(header)
-                f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
-                
-                for entry in results:
-                    config, *metrics = entry
-                    # Replace None or non-numeric values
-                    metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
-                    f.write(f"{config:<14} {metrics_str}\n")
-        print(f"Results saved to: {RESULTS_DIR}/{dataset}_results.txt")
-
     return results
