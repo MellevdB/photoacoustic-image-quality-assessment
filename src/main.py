@@ -13,6 +13,7 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
     :param selected_datasets: List of datasets to evaluate (default: all datasets).
     """
     datasets_to_evaluate = selected_datasets if selected_datasets else DATASETS.keys()
+    all_results = []
 
     for dataset in datasets_to_evaluate:
         dataset_info = DATASETS[dataset]
@@ -38,42 +39,53 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
                     partial_results = evaluate(dataset, config, full_config, file_key=None, save_results=False)
                     if partial_results:
                         results.extend([(full_config, entry) for entry in partial_results])
+                        print("results", results)
 
         # Save results to file
         if save_to_file and results:
             if selected_datasets and len(selected_datasets) == 1:
                 # Save to dataset-specific results file
                 results_path = os.path.join(RESULTS_DIR, dataset, f"{dataset}_results.txt")
-            else:
-                # Save to all_datasets directory
-                results_path = os.path.join(RESULTS_DIR, "all_datasets", f"{dataset}_results.txt")
+                save_results_to_file(results, results_path, dataset)
+            else:  # Collect results for all datasets
+                all_results.extend([(dataset, *entry) for entry in results])
+        
+    # Save all results in a single file when running all datasets
+    if save_to_file and not selected_datasets and all_results:
+        all_results_path = os.path.join(RESULTS_DIR, "all_datasets", "all_datasets_results.txt")
+        save_results_to_file(all_results, all_results_path, "all_datasets")
 
-            os.makedirs(os.path.dirname(results_path), exist_ok=True)
-            with open(results_path, "w") as f:
-                if dataset == "MSFD":
-                    # Header
-                    header = "Dataset   Configuration       Wavelength   PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
-                    f.write(header)
-                    f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
-                    
-                    for config, entry in results:
-                        mode, wave, *metrics = entry
-                        wave_str = f"{wave}"
-                        # Format metrics with fallback for non-numerical values
-                        metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
-                        f.write(f"{dataset:<9} {config:<20} {wave_str:<11} {metrics_str}\n")
-                else:
-                    # Header
-                    header = "Dataset   Configuration       PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP\n"
-                    f.write(header)
-                    f.write("-" * len(header.strip()) + "\n")  # Adjust dash length to header size
-                    
-                    for config, entry in results:
-                        mode, *metrics = entry
-                        # Format metrics with fallback for non-numerical values
-                        metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metrics])
-                        f.write(f"{dataset:<9} {config:<20} {metrics_str}\n")
-            print(f"Results saved to {results_path}")
+
+def save_results_to_file(results, results_path, dataset_name):
+    os.makedirs(os.path.dirname(results_path), exist_ok=True)
+    with open(results_path, "w") as f:
+        # Flexible headers based on metrics
+        headers = ["Dataset", "Configuration"]
+        if dataset_name == "MSFD":
+            headers.append("Wavelength")
+        headers.extend(["PSNR", "SSIM", "VIF", "FSIM", "NQM", "MSSIM", "GMSD", "HDRVDP"])
+        header_line = "   ".join(headers)
+        f.write(header_line + "\n")
+        f.write("-" * len(header_line) + "\n")
+
+        for entry in results:
+            # Unpack the tuple
+            config, metrics = entry[0], entry[1]
+            config_str = config if isinstance(config, str) else ", ".join(config)
+            
+            if dataset_name == "MSFD":
+                wave, *metric_values = metrics[1:]
+                row = f"{dataset_name:<9} {config_str:<20} {wave:<11} "
+            else:
+                metric_values = metrics[1:]
+                row = f"{dataset_name:<9} {config_str:<20} "
+
+            # Format metrics with fallback for non-numerical values
+            metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metric_values])
+            row += metrics_str
+            f.write(row + "\n")
+
+    print(f"Results saved to {results_path}")
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate datasets and configurations.")
