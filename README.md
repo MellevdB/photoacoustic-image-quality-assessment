@@ -32,9 +32,9 @@ For any questions or collaboration inquiries, contact me at melle.vanderbrugge@s
 
 ## Run examples
 python src/main.py --datasets SCD
-python src/main.py --datasets SWFD --file_key multisegment
-python src/main.py --datasets SWFD --file_key semicircle
+python src/main.py --datasets SWFD 
 python src/main.py --datasets MSFD
 python src/main.py --datasets mice
 python src/main.py --datasets phantom
 python src/main.py --datasets v_phantom
+python src/main.py
