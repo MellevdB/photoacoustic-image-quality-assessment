@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 DATA_DIR = "data/OADAT"
-RESULTS_DIR = "results/OADAT"
+RESULTS_DIR = "results/OADAT_images" 
 
 # Dataset configuration
 DATASETS = {

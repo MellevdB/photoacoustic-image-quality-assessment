@@ -111,13 +111,10 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                     # print("last 4 characters of expected_key", expected_key[-4:])
                     # print("last 4 characters of ground_truth_key", ground_truth_key[-4:])
                     if expected_key[-4:] == ground_truth_key[-4:]:
-                    # if expected_key in data and ground_truth_key in data:
-                        print(f"Processing wavelength={wavelength} for config={full_config}")
                         y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
                         y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-                        
                         metrics = calculate_metrics(y_pred, y_true)
-                        results.append((expected_key, wavelength, *metrics.values()))
+                        results.append((full_config, ground_truth_key, wavelength, metrics))
                     else:
                         print(f"Key not corresponding to correct ground truth: {expected_key} is not the same wavelength as {ground_truth_key}")
 
@@ -139,13 +136,10 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
                     return results
 
                 if full_config in data and ground_truth_key in data:
-                    print(f"Processing config={full_config}")
-                    print(f"Ground truth key: {ground_truth_key}")
                     y_pred = sigMatNormalize(sigMatFilter(data[full_config][:]))
                     y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-                    
                     metrics = calculate_metrics(y_pred, y_true)
-                    results.append((full_config, *metrics.values()))
+                    results.append((full_config, ground_truth_key, metrics))
                 else:
                     print(f"[ERROR] Configuration '{full_config}' or ground truth '{ground_truth_key}' not found in data. Skipping...")
 
@@ -176,6 +170,6 @@ def evaluate(dataset, config, full_config, file_key=None, save_results=True):
         y_true = sigMatNormalize(sigMatFilter(gt_data))
 
         metrics = calculate_metrics(y_pred, y_true)
-        results.append((full_config, *metrics.values()))
+        results.append((full_config, dataset_info["ground_truth"], metrics))
 
     return results

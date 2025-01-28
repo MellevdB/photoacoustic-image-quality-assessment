@@ -24,22 +24,18 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
         if isinstance(dataset_info["path"], dict):
             for file_key in dataset_info["path"]:
                 for config, config_values in dataset_info["configs"].items():
-                    # print("config", config)
-                    # print("config_values", config_values)
                     for full_config in config_values:
-                        # print("full_config", full_config)
                         partial_results = evaluate(dataset, config, full_config, file_key, save_results=False)
                         if partial_results:
-                            results.extend([(full_config, entry) for entry in partial_results])
+                            # Directly extend results with partial_results
+                            results.extend(partial_results)
         else:
             for config, config_values in dataset_info["configs"].items():
-                # print("config", config)
-                # print("config_values", config_values)
                 for full_config in config_values:
-                    # print("full_config", full_config)
                     partial_results = evaluate(dataset, config, full_config, file_key=None, save_results=False)
                     if partial_results:
-                        results.extend([(full_config, entry) for entry in partial_results])
+                        # Directly extend results with partial_results
+                        results.extend(partial_results)
                         print("results", results)
 
         # Save results to file
@@ -58,38 +54,37 @@ def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
 
 
 def save_results_to_file(results, results_path, dataset_name):
-    
     # Generate timestamp for unique filenames
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    # Insert timestamp into the results file name
     base, ext = os.path.splitext(results_path)
     results_path = f"{base}_{timestamp}{ext}"
 
     os.makedirs(os.path.dirname(results_path), exist_ok=True)
+
+    # Extract dynamic headers from metrics
+    example_metrics = results[0][3] if dataset_name == "MSFD" else results[0][2]
+    metric_headers = list(example_metrics.keys())
+    headers = ["Dataset", "Configuration", "Ground Truth"]
+    if dataset_name == "MSFD":
+        headers.append("Wavelength")
+    headers.extend(metric_headers)
+
+    # Write headers
+    header_line = "   ".join(headers)
     with open(results_path, "w") as f:
-        # Flexible headers based on metrics
-        headers = ["Dataset", "Configuration"]
-        if dataset_name == "MSFD":
-            headers.append("Wavelength")
-        headers.extend(["PSNR", "SSIM", "VIF", "FSIM", "NQM", "MSSIM", "GMSD", "HDRVDP"])
-        header_line = "   ".join(headers)
         f.write(header_line + "\n")
         f.write("-" * len(header_line) + "\n")
 
+        # Write results
         for entry in results:
-            # Unpack the tuple
-            config, metrics = entry[0], entry[1]
-            config_str = config if isinstance(config, str) else ", ".join(config)
-            
             if dataset_name == "MSFD":
-                wave, *metric_values = metrics[1:]
-                row = f"{dataset_name:<9} {config_str:<20} {wave:<11} "
+                config, ground_truth, wavelength, metrics = entry
+                row = f"{dataset_name:<9} {config:<20} {ground_truth:<15} {wavelength:<11} "
             else:
-                metric_values = metrics[1:]
-                row = f"{dataset_name:<9} {config_str:<20} "
+                config, ground_truth, metrics = entry
+                row = f"{dataset_name:<9} {config:<20} {ground_truth:<15} "
 
-            # Format metrics with fallback for non-numerical values
-            metrics_str = " ".join([f"{float(m):<7.3f}" if isinstance(m, (int, float)) else "---" for m in metric_values])
+            metrics_str = " ".join([f"{float(value):<7.3f}" if isinstance(value, (int, float)) else "---" for value in metrics.values()])
             row += metrics_str
             f.write(row + "\n")
 

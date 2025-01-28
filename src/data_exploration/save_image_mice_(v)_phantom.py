@@ -27,7 +27,6 @@ DATASETS = {
     }
 }
 
-
 def save_image(data, save_path_prefix):
     """
     Save the given 2D or 3D data as images.
@@ -90,8 +89,8 @@ def process_dataset(dataset_name, dataset_info):
     Process and save images for a given dataset.
     """
     dataset_path = dataset_info["path"]
-    save_dir = os.path.join(RESULTS_PATH, dataset_name)
-    os.makedirs(save_dir, exist_ok=True)
+    images_dir = os.path.join(RESULTS_PATH, dataset_name, "images")
+    os.makedirs(images_dir, exist_ok=True)
 
     # Process ground truth
     gt_file = os.path.join(dataset_path, f"{dataset_name}_{dataset_info['gt']}.mat")
@@ -100,7 +99,7 @@ def process_dataset(dataset_name, dataset_info):
         data = load_mat_file(gt_file)
         if data:
             for key, value in data.items():
-                save_path = os.path.join(save_dir, f"{dataset_name}_gt.png")
+                save_path = os.path.join(images_dir, f"{dataset_name}_gt")
                 save_image(value, save_path)
 
     # Process sparse keys
@@ -111,7 +110,7 @@ def process_dataset(dataset_name, dataset_info):
             data = load_mat_file(sparse_file)
             if data:
                 for data_key, value in data.items():
-                    save_path = os.path.join(save_dir, f"{dataset_name}_{key}.png")
+                    save_path = os.path.join(images_dir, f"{dataset_name}_{key}")
                     save_image(value, save_path)
 
 def main():
