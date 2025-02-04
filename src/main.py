@@ -64,69 +64,51 @@ def evaluate_dataset(dataset, dataset_info):
 
     return results
 
-def save_results_to_file(results, results_path, dataset_name):
+def save_results_to_file(results, file_path, dataset_name):
     """
-    Save a list of result tuples to a timestamped file, with dynamic headers.
-
-    :param results: List of result tuples. For a single dataset:
-        - MSFD -> (config, ground_truth, wavelength, metrics)
-        - Others -> (config, ground_truth, metrics)
-      For 'all_datasets':
-        - Some rows: (dataset, config, ground_truth, metrics)
-        - Others: (dataset, config, ground_truth, wavelength, metrics)
-    :param results_path: The base path where results will be saved.
-    :param dataset_name: Name of the dataset, or "all_datasets".
+    Save evaluation results to a text file with timestamp in the filename.
+    
+    Args:
+        results: List of tuples containing (config, ground_truth, (metrics_mean, metrics_std))
+        file_path: Path to save the results file
+        dataset_name: Name of the dataset being evaluated
     """
-    # Generate timestamp for unique filenames
+    # Add timestamp to filename
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    base, ext = os.path.splitext(results_path)
-    results_path = f"{base}_{timestamp}{ext}"
-
-    os.makedirs(os.path.dirname(results_path), exist_ok=True)
-
-    # === 1) Determine headers based on the dataset or the content of `results` ===
-    if dataset_name == "all_datasets":
-        # In this scenario, each entry in `results` might be 4-tuple or 5-tuple:
-        #   (dataset, config, ground_truth, metrics)                   [4-tuple, no wavelength]
-        #   (dataset, config, ground_truth, wavelength, metrics)      [5-tuple, has wavelength]
-        has_wavelength = any(len(r) == 5 for r in results)  # Check if any row is 5-tuple
-        # Figure out the metric headers from an example row with the maximum length
-        max_len_entry = max(results, key=len)  # pick the row that might have 5
-        # if 5-tuple => metrics is max_len_entry[4], else metrics is max_len_entry[3]
-        metrics = max_len_entry[4] if len(max_len_entry) == 5 else max_len_entry[3]
-        metric_headers = list(metrics.keys())
-
-        if has_wavelength:
-            headers = ["Dataset", "Configuration", "Ground Truth", "Wavelength"]
-        else:
-            headers = ["Dataset", "Configuration", "Ground Truth"]
-    else:
-        # Single dataset scenario
-        if dataset_name == "MSFD":
-            # MSFD results are 4-tuples: (config, ground_truth, wavelength, metrics)
-            example_metrics = results[0][3]
-            metric_headers = list(example_metrics.keys())
-            headers = ["Dataset", "Configuration", "Ground Truth", "Wavelength"]
-        else:
-            # Others are 3-tuples: (config, ground_truth, metrics)
-            example_metrics = results[0][2]
-            metric_headers = list(example_metrics.keys())
-            headers = ["Dataset", "Configuration", "Ground Truth"]
-
-    headers.extend(metric_headers)
-
-    # === 2) Write headers to file ===
-    header_line = "   ".join(headers)
-    with open(results_path, "w") as f:
-        f.write(header_line + "\n")
-        f.write("-" * len(header_line) + "\n")
-
-        # === 3) Write each row ===
-        for entry in results:
-            row_str = format_result_line(entry, dataset_name, metric_headers)
-            f.write(row_str + "\n")
-
-    print(f"Results saved to {results_path}")
+    dir_path = os.path.dirname(file_path)
+    base_name = os.path.basename(file_path).replace(".txt", "")
+    new_file_path = os.path.join(dir_path, f"{base_name}_{timestamp}.txt")
+    
+    # Define the header
+    header = "Dataset   Configuration   Ground Truth   " + \
+             "FSIM_mean   FSIM_std   NQM_mean   NQM_std   " + \
+             "PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   " + \
+             "VIF_mean   VIF_std   S3IM_mean   S3IM_std"
+    
+    # Prepare the results lines
+    result_lines = []
+    for config, ground_truth, (metrics_mean, metrics_std) in results:
+        # Create the base line with dataset, config and ground truth
+        line = f"{dataset_name:<9} {config:<20} {ground_truth:<15}"
+        
+        # Add each metric with mean and std
+        for metric in ['FSIM', 'NQM', 'PSNR', 'SSIM', 'VIF', 'S3IM']:
+            mean = metrics_mean.get(metric, float('nan'))
+            std = metrics_std.get(metric, float('nan'))
+            line += f"{mean:<10.3f} {std:<8.3f}"
+        
+        result_lines.append(line)
+    
+    # Write to file
+    with open(new_file_path, 'w') as f:
+        # Write header
+        f.write(header + "\n")
+        f.write("-" * len(header) + "\n")
+        
+        # Write results
+        f.write("\n".join(result_lines))
+    
+    print(f"Results saved to: {new_file_path}")
 
 def format_result_line(entry, dataset_name, metric_headers):
     """

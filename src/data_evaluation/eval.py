@@ -13,6 +13,7 @@ from .metrics import (
     # calculate_msssim,
     calculate_psnr,
     calculate_ssim,
+    calculate_s3im
 )
 
 def load_mat_file(file_path, key):
@@ -31,40 +32,48 @@ def load_mat_file(file_path, key):
 
 def calculate_metrics(y_pred, y_true):
     """
-    Calculate image quality metrics for the given predicted and ground truth images.
-    
-    :param y_pred: Predicted image (numpy array).
-    :param y_true: Ground truth image (numpy array).
-    :return: Dictionary containing all calculated metrics.
+    Calculate image quality metrics for the full volume while also computing 
+    the standard deviation across slices.
+
+    :param y_pred: Predicted image (numpy array of shape [slices, height, width]).
+    :param y_true: Ground truth image (same shape as y_pred).
+    :return: Tuple containing:
+             - Dictionary of mean metrics for the whole volume
+             - Dictionary of standard deviations across slices
     """
+    num_slices = y_pred.shape[0]
+
+    # Ensure valid data range
     data_range = y_true.max() - y_true.min()
 
-    # PSNR and SSIM
-    psnr = calculate_psnr(y_true, y_pred, data_range=data_range)
-    ssim = calculate_ssim(y_true, y_pred, data_range=data_range)
-
-    # Additional metrics
-    vif = calculate_vifp(y_true, y_pred)  # Visual Information Fidelity
-    fsim_score = fsim(y_true, y_pred)     # Feature Similarity Index
-    nqm = calculate_uqi(y_true, y_pred)   # Universal Quality Index (similar to NQM)
-
-    # GMSD and HDRVDP placeholders (not implemented)
-    gmsd_score = None
-    hdrvdp_score = None
-    iwssim = None
-
-    metrics = {
-        'PSNR': psnr,
-        'SSIM': ssim,
-        'VIF': vif,
-        'FSIM': fsim_score,
-        'NQM': nqm,
-        'MSSIM': iwssim,
-        'GMSD': gmsd_score,
-        'HDRVDP': hdrvdp_score
+    # === Compute Volume-wise Metrics (Entire 3D Image at Once) ===
+    volume_metrics = {
+        'PSNR': calculate_psnr(y_true, y_pred, data_range=data_range),
+        'SSIM': calculate_ssim(y_true, y_pred, data_range=data_range),
+        'VIF': calculate_vifp(y_true, y_pred),
+        'FSIM': fsim(y_true, y_pred),
+        'NQM': calculate_uqi(y_true, y_pred),
+        'S3IM': calculate_s3im(y_true, y_pred)
     }
-    print("Calculated metrics:", metrics)
-    return metrics
+
+    # === Compute Per-Slice Metrics for Standard Deviation ===
+    all_metrics = {key: [] for key in volume_metrics}  # Store slice-wise values
+
+    for i in range(num_slices):
+        all_metrics['PSNR'].append(calculate_psnr(y_true[i], y_pred[i], data_range=data_range))
+        all_metrics['SSIM'].append(calculate_ssim(y_true[i], y_pred[i], data_range=data_range))
+        all_metrics['VIF'].append(calculate_vifp(y_true[i], y_pred[i]))
+        all_metrics['FSIM'].append(fsim(y_true[i], y_pred[i]))
+        all_metrics['NQM'].append(calculate_uqi(y_true[i], y_pred[i]))
+        all_metrics['S3IM'].append(calculate_s3im(y_true[i], y_pred[i]))
+
+    # Compute standard deviation across slices
+    std_metrics = {key: np.std(all_metrics[key]) for key in all_metrics}
+
+    print("Volume Metrics:", volume_metrics)
+    print("Per-Slice STD:", std_metrics)
+
+    return volume_metrics, std_metrics
 
 def evaluate(dataset, config, full_config, file_key=None, save_results=True):
     """
@@ -124,18 +133,50 @@ def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results)
 def _evaluate_msfd(data, dataset_info, full_config, results):
     """
     Evaluate the MSFD dataset by iterating over each wavelength defined in the config.
+    Uses 70% of the slices for training (metric calculation).
     """
     for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
         expected_key = f"{full_config}"
-        print(f"Checking key: {expected_key}")
-        print(f"Ground truth key: {ground_truth_key}")
-
-        # Compare the last 4 chars (for matching wavelength or other logic you have)
+        
         if expected_key[-4:] == ground_truth_key[-4:]:
             y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
             y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-            metrics = calculate_metrics(y_pred, y_true)
-            results.append((full_config, ground_truth_key, wavelength, metrics))
+            
+            # Split the data into training (70%), validation (15%), and test (15%)
+            num_slices = y_true.shape[-1]
+            train_size = int(0.7 * num_slices)
+            
+            # Randomly select training slices
+            train_indices = np.random.choice(num_slices, train_size, replace=False)
+            y_pred_train = y_pred[..., train_indices]
+            y_true_train = y_true[..., train_indices]
+            
+            # Calculate volume-wise metrics on training data
+            volume_metrics = calculate_metrics(y_pred_train, y_true_train)
+            
+            # Initialize dictionaries to store per-slice metrics for std calculation
+            slice_metrics = {
+                'PSNR': [], 'SSIM': [], 'VIF': [], 
+                'FSIM': [], 'NQM': [], 'MSSIM': [],
+                'GMSD': [], 'HDRVDP': []
+            }
+            
+            # Calculate per-slice metrics only for std (on training data)
+            for slice_idx in range(y_true_train.shape[-1]):
+                slice_result = calculate_metrics(y_pred_train[..., slice_idx], y_true_train[..., slice_idx])
+                for metric in slice_metrics.keys():
+                    if f'{metric}_mean' in slice_result:
+                        slice_metrics[metric].append(slice_result[f'{metric}_mean'])
+            
+            # Combine volume metrics with slice std
+            final_metrics = {}
+            for metric in slice_metrics.keys():
+                if slice_metrics[metric]:  # If we have values for this metric
+                    values = np.array(slice_metrics[metric])
+                    final_metrics[f'{metric}_mean'] = volume_metrics[f'{metric}_mean']  # Use volume-wise mean
+                    final_metrics[f'{metric}_std'] = float(np.std(values))  # Use per-slice std
+            
+            results.append((full_config, ground_truth_key, wavelength, final_metrics))
         else:
             print(f"Key not corresponding to correct ground truth: {expected_key} is not the same wavelength as {ground_truth_key}")
 

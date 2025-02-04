@@ -3,7 +3,47 @@ import cv2
 from phasepack import phasecong as pc
 # from neutompy.metrics.metrics import GMSD
 from sewar.full_ref import vifp, uqi, msssim
+from skimage.filters import threshold_local
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
+
+def calculate_s3im(org_img: np.ndarray, pred_img: np.ndarray) -> float:
+    """
+    Sparse SSIM (S3IM) metric for image quality assessment.
+
+    Args:
+        org_img (np.ndarray): Reference image.
+        pred_img (np.ndarray): Predicted image.
+
+    Returns:
+        float: Sparse SSIM value.
+    """
+    # Define parameters
+    neighborhood_size = (org_img.shape[0] // 16) * 2 + 1  # Adaptive window size
+    sensitivity = 0.5  # Can be tuned based on dataset noise
+
+    # Adaptive thresholding to create masks
+    level1 = threshold_local(org_img, neighborhood_size, method='gaussian', offset=sensitivity)
+    level2 = threshold_local(pred_img, neighborhood_size, method='gaussian', offset=sensitivity)
+
+    mask1 = org_img > level1
+    mask2 = pred_img > level2
+    mask = np.logical_or(mask1, mask2)  # Combine masks
+
+    # Apply mask to images
+    masked_img1 = org_img * mask
+    masked_img2 = pred_img * mask
+
+    # Compute SSIM only in masked regions
+    ssim_map = structural_similarity(masked_img1, masked_img2, data_range=org_img.max() - org_img.min(), full=True)[1]
+    s3im_map = ssim_map * mask.astype(np.float64)
+
+    # Compute Sparse SSIM
+    if np.any(mask):
+        s3im_val = np.sum(s3im_map) / np.sum(mask)
+    else:
+        s3im_val = 0  # Safe fallback if no regions detected
+
+    return s3im_val
 
 def calculate_psnr(org_img: np.ndarray, pred_img: np.ndarray, data_range: float = None) -> float:
     """
@@ -130,31 +170,57 @@ def _gradient_magnitude(img: np.ndarray, img_depth: int):
 def fsim(org_img: np.ndarray, pred_img: np.ndarray, T1: float = 0.85, T2: float = 160) -> float:
     """
     Feature-based similarity index, based on phase congruency (PC) and image gradient magnitude (GM).
+    Works for both 2D and 3D images.
+
+    :param org_img: Ground truth image (2D or 3D numpy array).
+    :param pred_img: Predicted image (same shape as org_img).
+    :param T1: Tuning parameter for phase congruency similarity.
+    :param T2: Tuning parameter for gradient similarity.
+    :return: FSIM score (float).
     """
     _assert_image_shapes_equal(org_img, pred_img, "FSIM")
 
+    # If 2D image, directly compute FSIM
     if org_img.ndim == 2:
-        org_img = np.expand_dims(org_img, axis=-1)
-
-    alpha = beta = 1  # Adjust the relative importance of PC and GM features
-    fsim_list = []
-    for i in range(org_img.shape[2]):
-        pc1 = pc(org_img[:, :, i], nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
-        pc2 = pc(pred_img[:, :, i], nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
+        pc1 = pc(org_img, nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
+        pc2 = pc(pred_img, nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
 
         pc1_sum = sum(pc1[4])
         pc2_sum = sum(pc2[4])
 
-        gm1 = _gradient_magnitude(org_img[:, :, i], cv2.CV_16U)
-        gm2 = _gradient_magnitude(pred_img[:, :, i], cv2.CV_16U)
+        gm1 = _gradient_magnitude(org_img, cv2.CV_16U)
+        gm2 = _gradient_magnitude(pred_img, cv2.CV_16U)
 
         S_pc = _similarity_measure(pc1_sum, pc2_sum, T1)
         S_g = _similarity_measure(gm1, gm2, T2)
 
-        S_l = (S_pc**alpha) * (S_g**beta)
+        S_l = (S_pc**1) * (S_g**1)
 
         numerator = np.sum(S_l * np.maximum(pc1_sum, pc2_sum))
         denominator = np.sum(np.maximum(pc1_sum, pc2_sum))
+
+        return numerator / denominator
+
+    # If 3D image, iterate over slices
+    fsim_list = []
+    for i in range(org_img.shape[0]):  # Iterate over slices (assuming shape [slices, H, W])
+        pc1 = pc(org_img[i], nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
+        pc2 = pc(pred_img[i], nscale=4, minWaveLength=6, mult=2, sigmaOnf=0.5978)
+
+        pc1_sum = sum(pc1[4])
+        pc2_sum = sum(pc2[4])
+
+        gm1 = _gradient_magnitude(org_img[i], cv2.CV_16U)
+        gm2 = _gradient_magnitude(pred_img[i], cv2.CV_16U)
+
+        S_pc = _similarity_measure(pc1_sum, pc2_sum, T1)
+        S_g = _similarity_measure(gm1, gm2, T2)
+
+        S_l = (S_pc**1) * (S_g**1)
+
+        numerator = np.sum(S_l * np.maximum(pc1_sum, pc2_sum))
+        denominator = np.sum(np.maximum(pc1_sum, pc2_sum))
+
         fsim_list.append(numerator / denominator)
 
-    return np.mean(fsim_list)
+    return np.mean(fsim_list)  # Return mean FSIM over slices
