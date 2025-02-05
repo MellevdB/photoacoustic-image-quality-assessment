@@ -89,7 +89,13 @@ def calculate_vifp(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     Returns:
         float: VIFP value.
     """
+    # print(f"Input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"Input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"Input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+
     return vifp(org_img, pred_img)
+
+
 
 
 def calculate_uqi(org_img: np.ndarray, pred_img: np.ndarray) -> float:

@@ -5,7 +5,7 @@ import numpy as np
 from preprocessing_data.normalize import sigMatNormalize
 from preprocessing_data.filterBandPass import sigMatFilter
 from config.data_config import DATASETS
-from .metrics import (
+from .fr_metrics import (
     calculate_vifp,
     calculate_uqi,
     calculate_psnr,

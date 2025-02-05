@@ -57,58 +57,79 @@ def evaluate_dataset(dataset, dataset_info):
         # Single path
         for config, config_values in dataset_info["configs"].items():
             for full_config in config_values:
+                print("evaluating config", config, "and full_config", full_config)
                 partial_results = evaluate(dataset, config, full_config, file_key=None, save_results=False)
                 if partial_results:
                     results.extend(partial_results)
                     print("results", results)
+                    
 
     return results
 
 def save_results_to_file(results, file_path, dataset_name):
     """
-    Save evaluation results to a text file with timestamp in the filename.
+    Save evaluation results to a text file with a timestamp in the filename.
     
     Args:
-        results: List of tuples containing (config, ground_truth, (metrics_mean, metrics_std))
-        file_path: Path to save the results file
-        dataset_name: Name of the dataset being evaluated
+        results: List of tuples containing:
+                 - For MSFD: (config, ground_truth, wavelength, metrics_mean, metrics_std)
+                 - For other datasets: (config, ground_truth, (metrics_mean, metrics_std))
+        file_path: Path to save the results file.
+        dataset_name: Name of the dataset being evaluated.
     """
     # Add timestamp to filename
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     dir_path = os.path.dirname(file_path)
     base_name = os.path.basename(file_path).replace(".txt", "")
     new_file_path = os.path.join(dir_path, f"{base_name}_{timestamp}.txt")
-    
-    # Define the header
-    header = "Dataset   Configuration   Ground Truth   " + \
-             "FSIM_mean   FSIM_std   NQM_mean   NQM_std   " + \
-             "PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   " + \
-             "VIF_mean   VIF_std   S3IM_mean   S3IM_std"
-    
+
+    # Define the metric headers
+    metric_headers = ['FSIM', 'NQM', 'PSNR', 'SSIM', 'VIF', 'S3IM']
+
+    # Define the header row
+    if dataset_name == "MSFD":
+        header = "Dataset   Configuration   Ground Truth   Wavelength   " + \
+                 "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+    else:
+        header = "Dataset   Configuration   Ground Truth   " + \
+                 "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+
     # Prepare the results lines
     result_lines = []
-    for config, ground_truth, (metrics_mean, metrics_std) in results:
-        # Create the base line with dataset, config and ground truth
-        line = f"{dataset_name:<9} {config:<20} {ground_truth:<15}"
-        
-        # Add each metric with mean and std
-        for metric in ['FSIM', 'NQM', 'PSNR', 'SSIM', 'VIF', 'S3IM']:
-            mean = metrics_mean.get(metric, float('nan'))
-            std = metrics_std.get(metric, float('nan'))
+    for entry in results:
+        if dataset_name == "MSFD":
+            # ✅ Correctly unpack MSFD entries
+            config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
+            line = f"{dataset_name:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
+        else:
+            # ✅ Correctly unpack SCD, SWFD
+            config, ground_truth, metrics_tuple = entry
+            if isinstance(metrics_tuple, tuple) and len(metrics_tuple) == 2:
+                metrics_mean, metrics_std = metrics_tuple
+            else:
+                print(f"⚠️ Unexpected format for metrics in {dataset_name}, entry: {entry}")
+                continue  # Skip entry if it's not in the expected format
+
+            line = f"{dataset_name:<9} {config:<20} {ground_truth:<15}"
+
+        # ✅ Now safely extract metric values
+        for metric in metric_headers:
+            mean = metrics_mean.get(metric, float('nan')) if isinstance(metrics_mean, dict) else float('nan')
+            std = metrics_std.get(metric, float('nan')) if isinstance(metrics_std, dict) else float('nan')
             line += f"{mean:<10.3f} {std:<8.3f}"
-        
+
         result_lines.append(line)
-    
-    # Write to file
+
+    # Write results to file
+    os.makedirs(dir_path, exist_ok=True)  # Ensure the directory exists
     with open(new_file_path, 'w') as f:
         # Write header
         f.write(header + "\n")
         f.write("-" * len(header) + "\n")
-        
         # Write results
         f.write("\n".join(result_lines))
-    
-    print(f"Results saved to: {new_file_path}")
+
+    print(f"✅ Results saved to: {new_file_path}")
 
 def format_result_line(entry, dataset_name, metric_headers):
     """

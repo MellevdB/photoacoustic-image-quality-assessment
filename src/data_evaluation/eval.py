@@ -5,7 +5,7 @@ import numpy as np
 from preprocessing_data.normalize import sigMatNormalize
 from preprocessing_data.filterBandPass import sigMatFilter
 from config.data_config import DATASETS, DATA_DIR, RESULTS_DIR
-from .metrics import (
+from .fr_metrics import (
     fsim,
     # gmsd,
     calculate_vifp,
@@ -126,57 +126,30 @@ def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results)
 
     with h5py.File(data_path, "r") as data:
         if dataset == "MSFD":
+            print("Going to evaluate MSFD")
             _evaluate_msfd(data, dataset_info, full_config, results)
+            print("Finished evaluating MSFD")
         else:
+            print("Going to evaluate SCD or SWFD")
             _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, results)
+            print("Finished evaluating SCD or SWFD")
+
 
 def _evaluate_msfd(data, dataset_info, full_config, results):
     """
     Evaluate the MSFD dataset by iterating over each wavelength defined in the config.
     Uses 70% of the slices for training (metric calculation).
     """
+
     for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
         expected_key = f"{full_config}"
-        
+
+        print("Processing expected_key", expected_key, "and ground_truth_key", ground_truth_key)
         if expected_key[-4:] == ground_truth_key[-4:]:
             y_pred = sigMatNormalize(sigMatFilter(data[expected_key][:]))
             y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
-            
-            # Split the data into training (70%), validation (15%), and test (15%)
-            num_slices = y_true.shape[-1]
-            train_size = int(0.7 * num_slices)
-            
-            # Randomly select training slices
-            train_indices = np.random.choice(num_slices, train_size, replace=False)
-            y_pred_train = y_pred[..., train_indices]
-            y_true_train = y_true[..., train_indices]
-            
-            # Calculate volume-wise metrics on training data
-            volume_metrics = calculate_metrics(y_pred_train, y_true_train)
-            
-            # Initialize dictionaries to store per-slice metrics for std calculation
-            slice_metrics = {
-                'PSNR': [], 'SSIM': [], 'VIF': [], 
-                'FSIM': [], 'NQM': [], 'MSSIM': [],
-                'GMSD': [], 'HDRVDP': []
-            }
-            
-            # Calculate per-slice metrics only for std (on training data)
-            for slice_idx in range(y_true_train.shape[-1]):
-                slice_result = calculate_metrics(y_pred_train[..., slice_idx], y_true_train[..., slice_idx])
-                for metric in slice_metrics.keys():
-                    if f'{metric}_mean' in slice_result:
-                        slice_metrics[metric].append(slice_result[f'{metric}_mean'])
-            
-            # Combine volume metrics with slice std
-            final_metrics = {}
-            for metric in slice_metrics.keys():
-                if slice_metrics[metric]:  # If we have values for this metric
-                    values = np.array(slice_metrics[metric])
-                    final_metrics[f'{metric}_mean'] = volume_metrics[f'{metric}_mean']  # Use volume-wise mean
-                    final_metrics[f'{metric}_std'] = float(np.std(values))  # Use per-slice std
-            
-            results.append((full_config, ground_truth_key, wavelength, final_metrics))
+            metrics = calculate_metrics(y_pred, y_true)
+            results.append((full_config, ground_truth_key, wavelength, metrics))
         else:
             print(f"Key not corresponding to correct ground truth: {expected_key} is not the same wavelength as {ground_truth_key}")
 
@@ -201,6 +174,7 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
         return
 
     if full_config in data and ground_truth_key in data:
+        print("Processing full_config", full_config, "and ground_truth_key", ground_truth_key)
         y_pred = sigMatNormalize(sigMatFilter(data[full_config][:]))
         y_true = sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
         metrics = calculate_metrics(y_pred, y_true)
