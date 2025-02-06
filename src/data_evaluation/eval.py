@@ -46,7 +46,6 @@ def calculate_metrics(y_pred, y_true):
     # Ensure valid data range
     data_range = y_true.max() - y_true.min()
 
-    # === Compute Volume-wise Metrics (Entire 3D Image at Once) ===
     volume_metrics = {
         'PSNR': calculate_psnr(y_true, y_pred, data_range=data_range),
         'SSIM': calculate_ssim(y_true, y_pred, data_range=data_range),
