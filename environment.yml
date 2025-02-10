@@ -24,3 +24,4 @@ dependencies:
       - opencv-python  # cv2 package
       - image-similarity-measures  # phasepack package
       - brisque  # BRISQUE package
+      - libsvm-official

@@ -33,6 +33,9 @@ import scipy.linalg
 import math
 from os.path import dirname, join
 from scipy.stats import kurtosis
+from scipy.ndimage.filters import convolve
+from scipy.special import gamma
+from brisque import BRISQUE
 
 # -------------------------
 # BRISQUE
@@ -48,230 +51,146 @@ def calculate_brisque(img: np.ndarray) -> float:
     Returns:
         float: BRISQUE score.
     """
-    from brisque import BRISQUE
 
-    # Convert to grayscale if necessary
-    if img.ndim == 3:
-        img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    else:
-        img_gray = img
+    
 
-    brisque_obj = BRISQUE(url=False)
-    score = brisque_obj.score(img=img_gray)
+    obj = BRISQUE(url=False)
+    score = obj.score(img=img)
+    print("Score", score)
     return score
 
 # -------------------------
 # NIQE and supporting functions
 # -------------------------
 
-# Precompute values for the AGGD feature extraction
-gamma_range = np.arange(0.2, 10, 0.001)
-a = scipy.special.gamma(2.0 / gamma_range)
-a *= a
-b = scipy.special.gamma(1.0 / gamma_range)
-c = scipy.special.gamma(3.0 / gamma_range)
-prec_gammas = a / (b * c)
+def estimate_aggd_param(block):
+    """Estimate AGGD (Asymmetric Generalized Gaussian Distribution) parameters.
+    
+    Args:
+        block (ndarray): 2D image block.
+    
+    Returns:
+        tuple: (alpha, beta_l, beta_r)
+    """
+    block = block.flatten()
+    gam = np.arange(0.2, 10.001, 0.001)  # length ~9801
+    gam_reciprocal = 1.0 / gam
+    r_gam = np.square(gamma(gam_reciprocal * 2)) / (gamma(gam_reciprocal) * gamma(gam_reciprocal * 3))
+    
+    left_std = np.sqrt(np.mean(block[block < 0] ** 2))
+    right_std = np.sqrt(np.mean(block[block > 0] ** 2))
+    gammahat = left_std / right_std if right_std != 0 else np.inf
+    rhat = (np.mean(np.abs(block))) ** 2 / np.mean(block ** 2)
+    rhatnorm = (rhat * (gammahat ** 3 + 1) * (gammahat + 1)) / ((gammahat ** 2 + 1) ** 2)
+    array_position = np.argmin((r_gam - rhatnorm) ** 2)
+    
+    alpha = gam[array_position]
+    beta_l = left_std * np.sqrt(gamma(1 / alpha) / gamma(3 / alpha))
+    beta_r = right_std * np.sqrt(gamma(1 / alpha) / gamma(3 / alpha))
+    return (alpha, beta_l, beta_r)
 
-def aggd_features(imdata):
+def compute_feature(block):
+    """Compute features for a given block.
+    
+    Args:
+        block (ndarray): 2D image block.
+    
+    Returns:
+        list: Features (length 18).
     """
-    Compute Asymmetric Generalized Gaussian Distribution (AGGD) features.
-    """
-    imdata = imdata.flatten()
-    imdata2 = imdata * imdata
-    left_data = imdata2[imdata < 0]
-    right_data = imdata2[imdata >= 0]
-    left_mean_sqrt = np.sqrt(np.average(left_data)) if left_data.size > 0 else 0
-    right_mean_sqrt = np.sqrt(np.average(right_data)) if right_data.size > 0 else 0
-    gamma_hat = left_mean_sqrt / right_mean_sqrt if right_mean_sqrt != 0 else np.inf
-    imdata2_mean = np.mean(imdata2)
-    r_hat = (np.mean(np.abs(imdata)) ** 2) / (np.mean(imdata2)) if imdata2_mean != 0 else np.inf
-    rhat_norm = r_hat * (((gamma_hat ** 3 + 1) * (gamma_hat + 1)) / ((gamma_hat ** 2 + 1) ** 2))
-    pos = np.argmin((prec_gammas - rhat_norm) ** 2)
-    alpha = gamma_range[pos]
-    gam1 = scipy.special.gamma(1.0 / alpha)
-    gam2 = scipy.special.gamma(2.0 / alpha)
-    gam3 = scipy.special.gamma(3.0 / alpha)
-    aggdratio = np.sqrt(gam1) / np.sqrt(gam3)
-    bl = aggdratio * left_mean_sqrt
-    br = aggdratio * right_mean_sqrt
-    N = (br - bl) * (gam2 / gam1)
-    return (alpha, N, bl, br, left_mean_sqrt, right_mean_sqrt)
+    feat = []
+    alpha, beta_l, beta_r = estimate_aggd_param(block)
+    feat.extend([alpha, (beta_l + beta_r) / 2])
+    
+    shifts = [[0, 1], [1, 0], [1, 1], [1, -1]]
+    for shift in shifts:
+        shifted_block = np.roll(block, shift, axis=(0, 1))
+        alpha, beta_l, beta_r = estimate_aggd_param(block * shifted_block)
+        mean_val = (beta_r - beta_l) * (gamma(2 / alpha) / gamma(1 / alpha))
+        feat.extend([alpha, mean_val, beta_l, beta_r])
+    return feat
 
-def ggd_features(imdata):
+def niqe(img, mu_pris_param, cov_pris_param, gaussian_window, block_size_h=96, block_size_w=96):
     """
-    Compute Generalized Gaussian Distribution (GGD) features.
+    Compute NIQE (Natural Image Quality Evaluator) metric.
+    
+    Args:
+        img (ndarray): Grayscale image with shape (h, w) in range [0, 255].
+        mu_pris_param (ndarray): Mean parameter from pristine images.
+        cov_pris_param (ndarray): Covariance parameter from pristine images.
+        gaussian_window (ndarray): A 7x7 Gaussian window.
+        block_size_h (int): Block height (default: 96).
+        block_size_w (int): Block width (default: 96).
+    
+    Returns:
+        float: NIQE score.
     """
-    nr_gam = 1 / prec_gammas
-    sigma_sq = np.var(imdata)
-    E = np.mean(np.abs(imdata))
-    rho = sigma_sq / (E ** 2)
-    pos = np.argmin(np.abs(nr_gam - rho))
-    return gamma_range[pos], sigma_sq
-
-def paired_product(new_im):
-    """
-    Compute paired products for NIQE feature extraction.
-    """
-    shift1 = np.roll(new_im.copy(), 1, axis=1)
-    shift2 = np.roll(new_im.copy(), 1, axis=0)
-    shift3 = np.roll(np.roll(new_im.copy(), 1, axis=0), 1, axis=1)
-    shift4 = np.roll(np.roll(new_im.copy(), 1, axis=0), -1, axis=1)
-    H_img = shift1 * new_im
-    V_img = shift2 * new_im
-    D1_img = shift3 * new_im
-    D2_img = shift4 * new_im
-    return (H_img, V_img, D1_img, D2_img)
-
-def gen_gauss_window(lw, sigma):
-    """
-    Generate a Gaussian window.
-    """
-    sd = np.float32(sigma)
-    lw = int(lw)
-    weights = [0.0] * (2 * lw + 1)
-    weights[lw] = 1.0
-    sum_val = 1.0
-    sd = sd * sd
-    for ii in range(1, lw + 1):
-        tmp = np.exp(-0.5 * (ii * ii) / sd)
-        weights[lw + ii] = tmp
-        weights[lw - ii] = tmp
-        sum_val += 2.0 * tmp
-    weights = [w / sum_val for w in weights]
-    return weights
-
-def compute_image_mscn_transform(image, C=1, avg_window=None, extend_mode='constant'):
-    """
-    Compute Mean Subtracted Contrast Normalized (MSCN) coefficients.
-    """
-    if avg_window is None:
-        avg_window = gen_gauss_window(3, 7.0 / 6.0)
-    assert image.ndim == 2, "Input image must be 2D."
-    h, w = image.shape
-    mu_image = np.zeros((h, w), dtype=np.float32)
-    var_image = np.zeros((h, w), dtype=np.float32)
-    image = image.astype('float32')
-    scipy.ndimage.correlate1d(image, avg_window, axis=0, output=mu_image, mode=extend_mode)
-    scipy.ndimage.correlate1d(mu_image, avg_window, axis=1, output=mu_image, mode=extend_mode)
-    scipy.ndimage.correlate1d(image ** 2, avg_window, axis=0, output=var_image, mode=extend_mode)
-    scipy.ndimage.correlate1d(var_image, avg_window, axis=1, output=var_image, mode=extend_mode)
-    var_image = np.sqrt(np.abs(var_image - mu_image ** 2))
-    return ((image - mu_image) / (var_image + C), var_image, mu_image)
-
-def _niqe_extract_subband_feats(mscncoefs):
-    """
-    Extract subband features for NIQE.
-    """
-    alpha_m, _, _, _, _, _ = aggd_features(mscncoefs.copy())
-    pps1, pps2, pps3, pps4 = paired_product(mscncoefs)
-    alpha1, N1, bl1, br1, _, _ = aggd_features(pps1)
-    alpha2, N2, bl2, br2, _, _ = aggd_features(pps2)
-    alpha3, N3, bl3, br3, _, _ = aggd_features(pps3)
-    alpha4, N4, bl4, br4, _, _ = aggd_features(pps4)
-    feats = np.array([alpha_m, (bl1 + br1) / 2.0,
-                      alpha1, N1, bl1, br1,
-                      alpha2, N2, bl2, br2,
-                      alpha3, N3, bl3, br3,
-                      alpha4, N4, bl4, br4])
-    return feats
-
-def get_patches_train_features(img, patch_size, stride=8):
-    return _get_patches_generic(img, patch_size, 1, stride)
-
-def get_patches_test_features(img, patch_size, stride=8):
-    return _get_patches_generic(img, patch_size, 0, stride)
-
-def extract_on_patches(img, patch_size):
-    """
-    Extract features on non-overlapping patches.
-    """
+    assert img.ndim == 2, 'Input image must be grayscale with shape (h, w).'
     h, w = img.shape
-    patch_size = int(patch_size)
-    patches = []
-    for j in range(0, h - patch_size + 1, patch_size):
-        for i in range(0, w - patch_size + 1, patch_size):
-            patch = img[j:j + patch_size, i:i + patch_size]
-            patches.append(patch)
-    patches = np.array(patches)
-    patch_features = []
-    for p in patches:
-        patch_features.append(_niqe_extract_subband_feats(p))
-    patch_features = np.array(patch_features)
-    return patch_features
+    num_block_h = math.floor(h / block_size_h)
+    num_block_w = math.floor(w / block_size_w)
+    img_cropped = img[:num_block_h * block_size_h, :num_block_w * block_size_w]
+    
+    distparam = []
+    for scale in (1, 2):
+        mu = convolve(img_cropped, gaussian_window, mode='nearest')
+        sigma = np.sqrt(np.abs(convolve(np.square(img_cropped), gaussian_window, mode='nearest') - np.square(mu)))
+        img_normalized = (img_cropped - mu) / (sigma + 1)
+        
+        feat = []
+        for idx_h in range(num_block_h):
+            for idx_w in range(num_block_w):
+                block = img_normalized[idx_h*block_size_h//scale:(idx_h+1)*block_size_h//scale,
+                                        idx_w*block_size_w//scale:(idx_w+1)*block_size_w//scale]
+                feat.append(compute_feature(block))
+        distparam.append(np.array(feat))
+        if scale == 1:
+            h2, w2 = img_cropped.shape
+            img_cropped = cv2.resize(img_cropped/255., (w2//2, h2//2), interpolation=cv2.INTER_LINEAR)*255.
+    
+    distparam = np.concatenate(distparam, axis=1)
+    mu_distparam = np.nanmean(distparam, axis=0)
+    distparam_no_nan = distparam[~np.isnan(distparam).any(axis=1)]
+    cov_distparam = np.cov(distparam_no_nan, rowvar=False)
+    
+    invcov_param = np.linalg.pinv((cov_pris_param + cov_distparam) / 2)
+    X = mu_pris_param - mu_distparam
+    quality = np.sqrt(np.dot(np.dot(X, invcov_param), X))
+    return quality
 
-def _get_patches_generic(img, patch_size, is_train, stride):
+def calculate_niqe(img: np.ndarray, crop_border=0, input_order='HWC', convert_to='y') -> float:
     """
-    Generic patch extraction for NIQE feature computation.
+    Calculate NIQE metric.
+    
+    Args:
+        img (ndarray): Input image with range [0, 255]. Can be in 'HW', 'HWC', or 'CHW' format.
+        crop_border (int): Border to crop (default 0).
+        input_order (str): 'HW', 'HWC', or 'CHW' (default 'HWC').
+        convert_to (str): Convert to 'y' (default) or 'gray'.
+    
+    Returns:
+        float: NIQE score.
     """
-    h, w = img.shape
-    if h < patch_size or w < patch_size:
-        print("Input image is too small")
-        exit(0)
-    hoffset = h % patch_size
-    woffset = w % patch_size
-    if hoffset > 0:
-        img = img[:-hoffset, :]
-    if woffset > 0:
-        img = img[:, :-woffset]
+    # Load pristine parameters from a .npz file
+    niqe_pris_params = np.load('basicsr/metrics/niqe_pris_params.npz')
+    mu_pris_param = niqe_pris_params['mu_pris_param']
+    cov_pris_param = niqe_pris_params['cov_pris_param']
+    gaussian_window = niqe_pris_params['gaussian_window']
+    
     img = img.astype(np.float32)
-    # Resize image to half size for second-level features
-    img2 = cv2.resize(img, (img.shape[1] // 2, img.shape[0] // 2), interpolation=cv2.INTER_CUBIC)
-    mscn1, _, _ = compute_image_mscn_transform(img)
-    mscn1 = mscn1.astype(np.float32)
-    mscn2, _, _ = compute_image_mscn_transform(img2)
-    mscn2 = mscn2.astype(np.float32)
-    feats_lvl1 = extract_on_patches(mscn1, patch_size)
-    feats_lvl2 = extract_on_patches(mscn2, patch_size / 2)
-    feats = np.hstack((feats_lvl1, feats_lvl2))
-    return feats
-
-def niqe(inputImgData):
-    """
-    Compute the NIQE score for a given 2D image.
-    Source: https://github.com/guptapraful/niqe
+    if input_order != 'HW':
+        img = reorder_image(img, input_order=input_order)
+        if convert_to == 'y':
+            img = to_y_channel(img)
+        elif convert_to == 'gray':
+            img = cv2.cvtColor(img / 255., cv2.COLOR_BGR2GRAY) * 255.
+        img = np.squeeze(img)
     
-    Parameters:
-        inputImgData (np.ndarray): Grayscale image.
+    if crop_border != 0:
+        img = img[crop_border:-crop_border, crop_border:-crop_border]
     
-    Returns:
-        float: NIQE score.
-    """
-    patch_size = 96
-    module_path = dirname(__file__)
-    # Load pre-trained NIQE parameters from a .mat file
-    params = scipy.io.loadmat(join(module_path, 'data', 'niqe_image_params.mat'))
-    pop_mu = np.ravel(params["pop_mu"])
-    pop_cov = params["pop_cov"]
-
-    M, N = inputImgData.shape
-    assert M > (patch_size * 2 + 1), "Image too small for NIQE computation"
-    assert N > (patch_size * 2 + 1), "Image too small for NIQE computation"
-
-    feats = get_patches_test_features(inputImgData, patch_size)
-    sample_mu = np.mean(feats, axis=0)
-    sample_cov = np.cov(feats.T)
-    X = sample_mu - pop_mu
-    covmat = ((pop_cov + sample_cov) / 2.0)
-    pinvmat = scipy.linalg.pinv(covmat)
-    niqe_score = np.sqrt(np.dot(np.dot(X, pinvmat), X))
-    return niqe_score
-
-def calculate_niqe(img: np.ndarray) -> float:
-    """
-    Wrapper function to calculate NIQE score.
-    Ensures the image is in grayscale.
-    
-    Parameters:
-        img (np.ndarray): Input image.
-    
-    Returns:
-        float: NIQE score.
-    """
-    if img.ndim == 3:
-        img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    else:
-        img_gray = img
-    return niqe(img_gray)
+    niqe_result = niqe(img, mu_pris_param, cov_pris_param, gaussian_window)
+    return niqe_result
 
 # -------------------------
 # NIQE-K (Modified NIQE)
@@ -368,3 +287,138 @@ def calculate_msm(img: np.ndarray) -> float:
     """
     # To be implemented
     return None
+
+# Helper functions
+def reorder_image(img, input_order='HWC'):
+    """Reorder images to 'HWC' order.
+
+    If the input_order is (h, w), return (h, w, 1);
+    If the input_order is (c, h, w), return (h, w, c);
+    If the input_order is (h, w, c), return as it is.
+
+    Args:
+        img (ndarray): Input image.
+        input_order (str): Whether the input order is 'HWC' or 'CHW'.
+            If the input image shape is (h, w), input_order will not have
+            effects. Default: 'HWC'.
+
+    Returns:
+        ndarray: reordered image.
+    """
+
+    if input_order not in ['HWC', 'CHW']:
+        raise ValueError(
+            f'Wrong input_order {input_order}. Supported input_orders are '
+            "'HWC' and 'CHW'")
+    if len(img.shape) == 2:
+        img = img[..., None]
+    if input_order == 'CHW':
+        img = img.transpose(1, 2, 0)
+    return img
+
+
+def to_y_channel(img):
+    """Change to Y channel of YCbCr.
+
+    Args:
+        img (ndarray): Images with range [0, 255].
+
+    Returns:
+        (ndarray): Images with range [0, 255] (float type) without round.
+    """
+    img = img.astype(np.float32) / 255.
+    if img.ndim == 3 and img.shape[2] == 3:
+        img = bgr2ycbcr(img, y_only=True)
+        img = img[..., None]
+    return img * 255.
+
+def bgr2ycbcr(img, y_only=False):
+    """Convert a BGR image to YCbCr image.
+
+    The bgr version of rgb2ycbcr.
+    It implements the ITU-R BT.601 conversion for standard-definition
+    television. See more details in
+    https://en.wikipedia.org/wiki/YCbCr#ITU-R_BT.601_conversion.
+
+    It differs from a similar function in cv2.cvtColor: `BGR <-> YCrCb`.
+    In OpenCV, it implements a JPEG conversion. See more details in
+    https://en.wikipedia.org/wiki/YCbCr#JPEG_conversion.
+
+    Args:
+        img (ndarray): The input image. It accepts:
+            1. np.uint8 type with range [0, 255];
+            2. np.float32 type with range [0, 1].
+        y_only (bool): Whether to only return Y channel. Default: False.
+
+    Returns:
+        ndarray: The converted YCbCr image. The output image has the same type
+            and range as input image.
+    """
+    img_type = img.dtype
+    img = _convert_input_type_range(img)
+    if y_only:
+        out_img = np.dot(img, [24.966, 128.553, 65.481]) + 16.0
+    else:
+        out_img = np.matmul(
+            img, [[24.966, 112.0, -18.214], [128.553, -74.203, -93.786],
+                  [65.481, -37.797, 112.0]]) + [16, 128, 128]
+    out_img = _convert_output_type_range(out_img, img_type)
+    return out_img
+
+def _convert_input_type_range(img):
+    """Convert the type and range of the input image.
+
+    It converts the input image to np.float32 type and range of [0, 1].
+    It is mainly used for pre-processing the input image in colorspace
+    convertion functions such as rgb2ycbcr and ycbcr2rgb.
+
+    Args:
+        img (ndarray): The input image. It accepts:
+            1. np.uint8 type with range [0, 255];
+            2. np.float32 type with range [0, 1].
+
+    Returns:
+        (ndarray): The converted image with type of np.float32 and range of
+            [0, 1].
+    """
+    img_type = img.dtype
+    img = img.astype(np.float32)
+    if img_type == np.float32:
+        pass
+    elif img_type == np.uint8:
+        img /= 255.
+    else:
+        raise TypeError('The img type should be np.float32 or np.uint8, '
+                        f'but got {img_type}')
+    return img
+
+
+def _convert_output_type_range(img, dst_type):
+    """Convert the type and range of the image according to dst_type.
+
+    It converts the image to desired type and range. If `dst_type` is np.uint8,
+    images will be converted to np.uint8 type with range [0, 255]. If
+    `dst_type` is np.float32, it converts the image to np.float32 type with
+    range [0, 1].
+    It is mainly used for post-processing images in colorspace convertion
+    functions such as rgb2ycbcr and ycbcr2rgb.
+
+    Args:
+        img (ndarray): The image to be converted with np.float32 type and
+            range [0, 255].
+        dst_type (np.uint8 | np.float32): If dst_type is np.uint8, it
+            converts the image to np.uint8 type with range [0, 255]. If
+            dst_type is np.float32, it converts the image to np.float32 type
+            with range [0, 1].
+
+    Returns:
+        (ndarray): The converted image with desired type and range.
+    """
+    if dst_type not in (np.uint8, np.float32):
+        raise TypeError('The dst_type should be np.float32 or np.uint8, '
+                        f'but got {dst_type}')
+    if dst_type == np.uint8:
+        img = img.round()
+    else:
+        img /= 255.
+    return img.astype(dst_type)

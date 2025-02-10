@@ -1,0 +1,762 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'
+srun: error: gcn36: task 0: Exited with exit code 1
+srun: Terminating StepId=9844350.0
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/skimage/metrics/simple_metrics.py:163: RuntimeWarning: divide by zero encountered in scalar divide
+  return 10 * np.log10((data_range ** 2) / err)
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/numpy/core/_methods.py:236: RuntimeWarning: invalid value encountered in subtract
+  x = asanyarray(arr - arrmean)
+No datasets specified. Evaluating all datasets...
+evaluating config lv128 and full_config vc,lv128_BP
+Processing dataset=SCD, config=vc,lv128_BP
+Going to evaluate SCD or SWFD
+Processing full_config vc,lv128_BP and ground_truth_key vc_BP
+***** filtering *****
+time elapsed: 0.32
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}
+Per-Slice STD: {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526}))]
+evaluating config ss128 and full_config vc,ss128_BP
+Processing dataset=SCD, config=vc,ss128_BP
+Going to evaluate SCD or SWFD
+Processing full_config vc,ss128_BP and ground_truth_key vc_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}
+Per-Slice STD: {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554}))]
+evaluating config ss64 and full_config vc,ss64_BP
+Processing dataset=SCD, config=vc,ss64_BP
+Going to evaluate SCD or SWFD
+Processing full_config vc,ss64_BP and ground_truth_key vc_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}
+Per-Slice STD: {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426}))]
+evaluating config ss32 and full_config vc,ss32_BP
+Processing dataset=SCD, config=vc,ss32_BP
+Going to evaluate SCD or SWFD
+Processing full_config vc,ss32_BP and ground_truth_key vc_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}
+Per-Slice STD: {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426})), ('vc,ss32_BP', 'vc_BP', ({'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}, {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436}))]
+evaluating config linear and full_config linear_BP
+Processing dataset=SCD, config=linear_BP
+Going to evaluate SCD or SWFD
+Processing full_config linear_BP and ground_truth_key linear_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': inf, 'SSIM': 1.0, 'VIF': 0.9999999999991271, 'FSIM': 1.0, 'NQM': 1.0, 'S3IM': 1.0}
+Per-Slice STD: {'PSNR': nan, 'SSIM': 0.0, 'VIF': 8.68505268839139e-15, 'FSIM': 0.0, 'NQM': 0.0, 'S3IM': 0.0}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426})), ('vc,ss32_BP', 'vc_BP', ({'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}, {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436})), ('linear_BP', 'linear_BP', ({'PSNR': inf, 'SSIM': 1.0, 'VIF': 0.9999999999991271, 'FSIM': 1.0, 'NQM': 1.0, 'S3IM': 1.0}, {'PSNR': nan, 'SSIM': 0.0, 'VIF': 8.68505268839139e-15, 'FSIM': 0.0, 'NQM': 0.0, 'S3IM': 0.0}))]
+evaluating config ms_ss128 and full_config ms,ss128_BP
+Processing dataset=SCD, config=ms,ss128_BP
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss128_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.18
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.18
+Volume Metrics: {'PSNR': 34.392679789107845, 'SSIM': 0.8607940669497697, 'VIF': 0.04739134703325264, 'FSIM': 0.9734019865475599, 'NQM': 0.4833393126262439, 'S3IM': 0.900543459516013}
+Per-Slice STD: {'PSNR': 1.7142725036396051, 'SSIM': 0.021677493991664697, 'VIF': 0.0026179249995122163, 'FSIM': 0.004927902029542099, 'NQM': 0.014658677624228622, 'S3IM': 0.019984689353008428}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426})), ('vc,ss32_BP', 'vc_BP', ({'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}, {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436})), ('linear_BP', 'linear_BP', ({'PSNR': inf, 'SSIM': 1.0, 'VIF': 0.9999999999991271, 'FSIM': 1.0, 'NQM': 1.0, 'S3IM': 1.0}, {'PSNR': nan, 'SSIM': 0.0, 'VIF': 8.68505268839139e-15, 'FSIM': 0.0, 'NQM': 0.0, 'S3IM': 0.0})), ('ms,ss128_BP', 'ms_BP', ({'PSNR': 34.392679789107845, 'SSIM': 0.8607940669497697, 'VIF': 0.04739134703325264, 'FSIM': 0.9734019865475599, 'NQM': 0.4833393126262439, 'S3IM': 0.900543459516013}, {'PSNR': 1.7142725036396051, 'SSIM': 0.021677493991664697, 'VIF': 0.0026179249995122163, 'FSIM': 0.004927902029542099, 'NQM': 0.014658677624228622, 'S3IM': 0.019984689353008428}))]
+evaluating config ms_ss64 and full_config ms,ss64_BP
+Processing dataset=SCD, config=ms,ss64_BP
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss64_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.19
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.19
+Volume Metrics: {'PSNR': 30.880086964468806, 'SSIM': 0.6867464469360905, 'VIF': 0.023796109806580555, 'FSIM': 0.8521124957852381, 'NQM': 0.15826928411191377, 'S3IM': 0.765903733490678}
+Per-Slice STD: {'PSNR': 1.7128583273968503, 'SSIM': 0.04769894614536406, 'VIF': 0.001667591098217248, 'FSIM': 0.013229240468116977, 'NQM': 0.006590740386099372, 'S3IM': 0.043288551545591636}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426})), ('vc,ss32_BP', 'vc_BP', ({'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}, {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436})), ('linear_BP', 'linear_BP', ({'PSNR': inf, 'SSIM': 1.0, 'VIF': 0.9999999999991271, 'FSIM': 1.0, 'NQM': 1.0, 'S3IM': 1.0}, {'PSNR': nan, 'SSIM': 0.0, 'VIF': 8.68505268839139e-15, 'FSIM': 0.0, 'NQM': 0.0, 'S3IM': 0.0})), ('ms,ss128_BP', 'ms_BP', ({'PSNR': 34.392679789107845, 'SSIM': 0.8607940669497697, 'VIF': 0.04739134703325264, 'FSIM': 0.9734019865475599, 'NQM': 0.4833393126262439, 'S3IM': 0.900543459516013}, {'PSNR': 1.7142725036396051, 'SSIM': 0.021677493991664697, 'VIF': 0.0026179249995122163, 'FSIM': 0.004927902029542099, 'NQM': 0.014658677624228622, 'S3IM': 0.019984689353008428})), ('ms,ss64_BP', 'ms_BP', ({'PSNR': 30.880086964468806, 'SSIM': 0.6867464469360905, 'VIF': 0.023796109806580555, 'FSIM': 0.8521124957852381, 'NQM': 0.15826928411191377, 'S3IM': 0.765903733490678}, {'PSNR': 1.7128583273968503, 'SSIM': 0.04769894614536406, 'VIF': 0.001667591098217248, 'FSIM': 0.013229240468116977, 'NQM': 0.006590740386099372, 'S3IM': 0.043288551545591636}))]
+evaluating config ms_ss32 and full_config ms,ss32_BP
+Processing dataset=SCD, config=ms,ss32_BP
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss32_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.19
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.19
+Volume Metrics: {'PSNR': 29.574493719556795, 'SSIM': 0.5970966527120448, 'VIF': 0.011222319874631759, 'FSIM': 0.7420620924847995, 'NQM': 0.053141809233547915, 'S3IM': 0.6837422853249737}
+Per-Slice STD: {'PSNR': 1.7186100730304512, 'SSIM': 0.060026532742646375, 'VIF': 0.0008000433435728137, 'FSIM': 0.02098517352314616, 'NQM': 0.0022206535448825336, 'S3IM': 0.05182917129115485}
+Finished evaluating SCD or SWFD
+results [('vc,lv128_BP', 'vc_BP', ({'PSNR': 29.506926535597906, 'SSIM': 0.6426351254385351, 'VIF': 0.011577544584715164, 'FSIM': 0.8318714313321065, 'NQM': 0.24370707984765633, 'S3IM': 0.7153909679876401}, {'PSNR': 1.8198409493832317, 'SSIM': 0.05062443586200667, 'VIF': 0.0005650667878354478, 'FSIM': 0.010455057963156366, 'NQM': 0.019860536858699082, 'S3IM': 0.04773282872331526})), ('vc,ss128_BP', 'vc_BP', ({'PSNR': 27.91788758001389, 'SSIM': 0.5259062831571896, 'VIF': 0.018591329767514965, 'FSIM': 0.8061686725649299, 'NQM': 0.06287557647962091, 'S3IM': 0.6515931580826214}, {'PSNR': 1.7793203976455652, 'SSIM': 0.059286761719309355, 'VIF': 0.0017339336582638204, 'FSIM': 0.021286635025261326, 'NQM': 0.0028693500813643915, 'S3IM': 0.050288184153333554})), ('vc,ss64_BP', 'vc_BP', ({'PSNR': 27.3257941637307, 'SSIM': 0.4781900002108452, 'VIF': 0.009368507649230143, 'FSIM': 0.7010469993938101, 'NQM': 0.03318618620310219, 'S3IM': 0.5959194992022551}, {'PSNR': 1.7828185325575967, 'SSIM': 0.06475302011470085, 'VIF': 0.0007577361787656927, 'FSIM': 0.024124508986695898, 'NQM': 0.004604616376937451, 'S3IM': 0.05469515124480426})), ('vc,ss32_BP', 'vc_BP', ({'PSNR': 27.049750710217207, 'SSIM': 0.457787792440209, 'VIF': 0.005204350047033669, 'FSIM': 0.6397818648950966, 'NQM': 0.023876967788704732, 'S3IM': 0.5675428978907905}, {'PSNR': 1.7896972574155399, 'SSIM': 0.06727361618913706, 'VIF': 0.0003814047534052941, 'FSIM': 0.026716317790258955, 'NQM': 0.004076083984063587, 'S3IM': 0.056781146088237436})), ('linear_BP', 'linear_BP', ({'PSNR': inf, 'SSIM': 1.0, 'VIF': 0.9999999999991271, 'FSIM': 1.0, 'NQM': 1.0, 'S3IM': 1.0}, {'PSNR': nan, 'SSIM': 0.0, 'VIF': 8.68505268839139e-15, 'FSIM': 0.0, 'NQM': 0.0, 'S3IM': 0.0})), ('ms,ss128_BP', 'ms_BP', ({'PSNR': 34.392679789107845, 'SSIM': 0.8607940669497697, 'VIF': 0.04739134703325264, 'FSIM': 0.9734019865475599, 'NQM': 0.4833393126262439, 'S3IM': 0.900543459516013}, {'PSNR': 1.7142725036396051, 'SSIM': 0.021677493991664697, 'VIF': 0.0026179249995122163, 'FSIM': 0.004927902029542099, 'NQM': 0.014658677624228622, 'S3IM': 0.019984689353008428})), ('ms,ss64_BP', 'ms_BP', ({'PSNR': 30.880086964468806, 'SSIM': 0.6867464469360905, 'VIF': 0.023796109806580555, 'FSIM': 0.8521124957852381, 'NQM': 0.15826928411191377, 'S3IM': 0.765903733490678}, {'PSNR': 1.7128583273968503, 'SSIM': 0.04769894614536406, 'VIF': 0.001667591098217248, 'FSIM': 0.013229240468116977, 'NQM': 0.006590740386099372, 'S3IM': 0.043288551545591636})), ('ms,ss32_BP', 'ms_BP', ({'PSNR': 29.574493719556795, 'SSIM': 0.5970966527120448, 'VIF': 0.011222319874631759, 'FSIM': 0.7420620924847995, 'NQM': 0.053141809233547915, 'S3IM': 0.6837422853249737}, {'PSNR': 1.7186100730304512, 'SSIM': 0.060026532742646375, 'VIF': 0.0008000433435728137, 'FSIM': 0.02098517352314616, 'NQM': 0.0022206535448825336, 'S3IM': 0.05182917129115485}))]
+Processing dataset=SWFD, config=linear_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+Processing full_config linear_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 36.66091638450598, 'SSIM': 0.8097877037709921, 'VIF': 0.022216113223682186, 'FSIM': 0.8584459695231714, 'NQM': 0.23748148472956754, 'S3IM': 0.8626310974300339}
+Per-Slice STD: {'PSNR': 2.076885176751272, 'SSIM': 0.046453852767782446, 'VIF': 0.0015148056031066446, 'FSIM': 0.012670517587730926, 'NQM': 0.02038053133338272, 'S3IM': 0.04472185337137499}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss128_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss128_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.18
+***** filtering *****
+time elapsed: 0.32
+***** normalization *****
+time elapsed: 0.18
+Volume Metrics: {'PSNR': 38.220060571736944, 'SSIM': 0.8867935909130751, 'VIF': 0.040250490079222344, 'FSIM': 0.9568126221637618, 'NQM': 0.4200194257362251, 'S3IM': 0.9161354662961759}
+Per-Slice STD: {'PSNR': 2.0750896219453216, 'SSIM': 0.02436528274648858, 'VIF': 0.001969440759605039, 'FSIM': 0.004640494892977304, 'NQM': 0.012905921688138566, 'S3IM': 0.03396986491162704}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss64_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss64_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 35.19527453735953, 'SSIM': 0.7752822754941773, 'VIF': 0.019946247508389178, 'FSIM': 0.8630174808463148, 'NQM': 0.1557709778243483, 'S3IM': 0.8303083172527921}
+Per-Slice STD: {'PSNR': 2.1278948973990865, 'SSIM': 0.047402090373682204, 'VIF': 0.0011726527195518404, 'FSIM': 0.012231571284625733, 'NQM': 0.0059935714943135324, 'S3IM': 0.057345791236920816}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss32_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+Processing full_config ms,ss32_BP and ground_truth_key ms_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 34.00751688212135, 'SSIM': 0.7115060509217015, 'VIF': 0.009849203069716423, 'FSIM': 0.7708040884643382, 'NQM': 0.05914134785909213, 'S3IM': 0.7763823793334474}
+Per-Slice STD: {'PSNR': 2.144964871830692, 'SSIM': 0.05993368377119065, 'VIF': 0.0007058878798731155, 'FSIM': 0.01949333210079049, 'NQM': 0.0030705716230907103, 'S3IM': 0.06788720179126527}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,lv128_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'sc,lv128_BP' or ground truth 'ms_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss128_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'sc,ss128_BP' or ground truth 'ms_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss64_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'sc,ss64_BP' or ground truth 'ms_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss32_BP, file_key=multisegment
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'sc,ss32_BP' or ground truth 'ms_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=linear_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'linear_BP' or ground truth 'sc_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss128_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'ms,ss128_BP' or ground truth 'sc_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss64_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'ms,ss64_BP' or ground truth 'sc_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=ms,ss32_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+[ERROR] Configuration 'ms,ss32_BP' or ground truth 'sc_BP' not found in data. Skipping...
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,lv128_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+Processing full_config sc,lv128_BP and ground_truth_key sc_BP
+***** filtering *****
+time elapsed: 0.38
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 45.765884361877426, 'SSIM': 0.9609617689089961, 'VIF': 0.03120286568273369, 'FSIM': 0.908559820191828, 'NQM': 0.2909885460313955, 'S3IM': 0.9776525523695219}
+Per-Slice STD: {'PSNR': 2.0352491416640195, 'SSIM': 0.012644033726177705, 'VIF': 0.0024056513572550593, 'FSIM': 0.013459424752780435, 'NQM': 0.03680446310349742, 'S3IM': 0.0320702929376647}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss128_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+Processing full_config sc,ss128_BP and ground_truth_key sc_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 43.401763739185014, 'SSIM': 0.9558607071141677, 'VIF': 0.03514172039575532, 'FSIM': 0.9512894692233635, 'NQM': 0.3652205240062154, 'S3IM': 0.9681781135215044}
+Per-Slice STD: {'PSNR': 2.0902233715584067, 'SSIM': 0.012198432760343434, 'VIF': 0.001711866910219709, 'FSIM': 0.005567894327564275, 'NQM': 0.01335218274399076, 'S3IM': 0.02887214051766542}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss64_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+Processing full_config sc,ss64_BP and ground_truth_key sc_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 40.58205568251414, 'SSIM': 0.9157849402374395, 'VIF': 0.016778767996886396, 'FSIM': 0.8447259250451877, 'NQM': 0.13690447693843544, 'S3IM': 0.9400785376203451}
+Per-Slice STD: {'PSNR': 2.101009203997237, 'SSIM': 0.021761618064324695, 'VIF': 0.0011150508701460564, 'FSIM': 0.012703029870968309, 'NQM': 0.005239631532871598, 'S3IM': 0.048106861996912116}
+Finished evaluating SCD or SWFD
+Processing dataset=SWFD, config=sc,ss32_BP, file_key=semicircle
+Going to evaluate SCD or SWFD
+Processing full_config sc,ss32_BP and ground_truth_key sc_BP
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 39.47466993409863, 'SSIM': 0.8927757571522988, 'VIF': 0.008515882201624945, 'FSIM': 0.7662382302887605, 'NQM': 0.055205067876224076, 'S3IM': 0.921579183590215}
+Per-Slice STD: {'PSNR': 2.11490779310407, 'SSIM': 0.027081917945614372, 'VIF': 0.0007658384873220708, 'FSIM': 0.019138754977456728, 'NQM': 0.0020206377832507885, 'S3IM': 0.058123301945435725}
+Finished evaluating SCD or SWFD
+evaluating config ss32 and full_config ms,ss32_BP_w700
+Processing dataset=MSFD, config=ms,ss32_BP_w700
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w700
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}
+Per-Slice STD: {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117}
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss32_BP_w700 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss32_BP_w700 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss32_BP_w700 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss32_BP_w700 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss32_BP_w700 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss32_BP_w700 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117}))]
+evaluating config ss32 and full_config ms,ss32_BP_w730
+Processing dataset=MSFD, config=ms,ss32_BP_w730
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss32_BP_w730 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w730
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}
+Per-Slice STD: {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081}
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss32_BP_w730 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss32_BP_w730 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss32_BP_w730 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss32_BP_w730 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss32_BP_w730 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081}))]
+evaluating config ss32 and full_config ms,ss32_BP_w760
+Processing dataset=MSFD, config=ms,ss32_BP_w760
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss32_BP_w760 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss32_BP_w760 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w760
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}
+Per-Slice STD: {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558}
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss32_BP_w760 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss32_BP_w760 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss32_BP_w760 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss32_BP_w760 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558}))]
+evaluating config ss32 and full_config ms,ss32_BP_w780
+Processing dataset=MSFD, config=ms,ss32_BP_w780
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss32_BP_w780 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss32_BP_w780 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss32_BP_w780 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w780
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}
+Per-Slice STD: {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056}
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss32_BP_w780 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss32_BP_w780 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss32_BP_w780 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056}))]
+evaluating config ss32 and full_config ms,ss32_BP_w800
+Processing dataset=MSFD, config=ms,ss32_BP_w800
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss32_BP_w800 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss32_BP_w800 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss32_BP_w800 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss32_BP_w800 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w800
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}
+Per-Slice STD: {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028}
+Processing expected_key ms,ss32_BP_w800 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss32_BP_w800 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028}))]
+evaluating config ss32 and full_config ms,ss32_BP_w850
+Processing dataset=MSFD, config=ms,ss32_BP_w850
+Going to evaluate MSFD
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss32_BP_w850 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss32_BP_w850 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss32_BP_w850 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss32_BP_w850 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss32_BP_w850 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss32_BP_w850 and ground_truth_key ms_BP_w850
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}
+Per-Slice STD: {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733}
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733}))]
+evaluating config ss64 and full_config ms,ss64_BP_w700
+Processing dataset=MSFD, config=ms,ss64_BP_w700
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w700
+***** filtering *****
+time elapsed: 0.33
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}
+Per-Slice STD: {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864}
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss64_BP_w700 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss64_BP_w700 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss64_BP_w700 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss64_BP_w700 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss64_BP_w700 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss64_BP_w700 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864}))]
+evaluating config ss64 and full_config ms,ss64_BP_w730
+Processing dataset=MSFD, config=ms,ss64_BP_w730
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss64_BP_w730 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w730
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}
+Per-Slice STD: {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926}
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss64_BP_w730 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss64_BP_w730 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss64_BP_w730 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss64_BP_w730 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss64_BP_w730 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926}))]
+evaluating config ss64 and full_config ms,ss64_BP_w760
+Processing dataset=MSFD, config=ms,ss64_BP_w760
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss64_BP_w760 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss64_BP_w760 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w760
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}
+Per-Slice STD: {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376}
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss64_BP_w760 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss64_BP_w760 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss64_BP_w760 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss64_BP_w760 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376}))]
+evaluating config ss64 and full_config ms,ss64_BP_w780
+Processing dataset=MSFD, config=ms,ss64_BP_w780
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss64_BP_w780 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss64_BP_w780 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss64_BP_w780 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w780
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}
+Per-Slice STD: {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668}
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss64_BP_w780 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss64_BP_w780 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss64_BP_w780 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668}))]
+evaluating config ss64 and full_config ms,ss64_BP_w800
+Processing dataset=MSFD, config=ms,ss64_BP_w800
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss64_BP_w800 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss64_BP_w800 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss64_BP_w800 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss64_BP_w800 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w800
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}
+Per-Slice STD: {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144}
+Processing expected_key ms,ss64_BP_w800 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss64_BP_w800 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144}))]
+evaluating config ss64 and full_config ms,ss64_BP_w850
+Processing dataset=MSFD, config=ms,ss64_BP_w850
+Going to evaluate MSFD
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss64_BP_w850 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss64_BP_w850 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss64_BP_w850 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss64_BP_w850 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss64_BP_w850 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss64_BP_w850 and ground_truth_key ms_BP_w850
+***** filtering *****
+time elapsed: 0.34
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}
+Per-Slice STD: {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493}
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493}))]
+evaluating config ss128 and full_config ms,ss128_BP_w700
+Processing dataset=MSFD, config=ms,ss128_BP_w700
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w700
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}
+Per-Slice STD: {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354}
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss128_BP_w700 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss128_BP_w700 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss128_BP_w700 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss128_BP_w700 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss128_BP_w700 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss128_BP_w700 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493})), ('ms,ss128_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}, {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354}))]
+evaluating config ss128 and full_config ms,ss128_BP_w730
+Processing dataset=MSFD, config=ms,ss128_BP_w730
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss128_BP_w730 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w730
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 39.15392690871825, 'SSIM': 0.9140564370712043, 'VIF': 0.0405564141041162, 'FSIM': 0.9575387627296504, 'NQM': 0.38396482534690657, 'S3IM': 0.9304559491669936}
+Per-Slice STD: {'PSNR': 2.4950499979656935, 'SSIM': 0.027721681132446385, 'VIF': 0.0018354094273039568, 'FSIM': 0.005246766499109249, 'NQM': 0.011233466963998948, 'S3IM': 0.04271889252371054}
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss128_BP_w730 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss128_BP_w730 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss128_BP_w730 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss128_BP_w730 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss128_BP_w730 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493})), ('ms,ss128_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}, {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354})), ('ms,ss128_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 39.15392690871825, 'SSIM': 0.9140564370712043, 'VIF': 0.0405564141041162, 'FSIM': 0.9575387627296504, 'NQM': 0.38396482534690657, 'S3IM': 0.9304559491669936}, {'PSNR': 2.4950499979656935, 'SSIM': 0.027721681132446385, 'VIF': 0.0018354094273039568, 'FSIM': 0.005246766499109249, 'NQM': 0.011233466963998948, 'S3IM': 0.04271889252371054}))]
+evaluating config ss128 and full_config ms,ss128_BP_w760
+Processing dataset=MSFD, config=ms,ss128_BP_w760
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss128_BP_w760 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss128_BP_w760 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w760
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.18
+Volume Metrics: {'PSNR': 38.05269057778558, 'SSIM': 0.8976501345122408, 'VIF': 0.03967878018456619, 'FSIM': 0.9571751976379664, 'NQM': 0.38376439871515056, 'S3IM': 0.916393670851398}
+Per-Slice STD: {'PSNR': 2.471707233165827, 'SSIM': 0.031026765733513432, 'VIF': 0.00178138622293082, 'FSIM': 0.004882147120628676, 'NQM': 0.010742721819025854, 'S3IM': 0.047395696337882584}
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss128_BP_w760 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss128_BP_w760 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss128_BP_w760 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss128_BP_w760 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493})), ('ms,ss128_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}, {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354})), ('ms,ss128_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 39.15392690871825, 'SSIM': 0.9140564370712043, 'VIF': 0.0405564141041162, 'FSIM': 0.9575387627296504, 'NQM': 0.38396482534690657, 'S3IM': 0.9304559491669936}, {'PSNR': 2.4950499979656935, 'SSIM': 0.027721681132446385, 'VIF': 0.0018354094273039568, 'FSIM': 0.005246766499109249, 'NQM': 0.011233466963998948, 'S3IM': 0.04271889252371054})), ('ms,ss128_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 38.05269057778558, 'SSIM': 0.8976501345122408, 'VIF': 0.03967878018456619, 'FSIM': 0.9571751976379664, 'NQM': 0.38376439871515056, 'S3IM': 0.916393670851398}, {'PSNR': 2.471707233165827, 'SSIM': 0.031026765733513432, 'VIF': 0.00178138622293082, 'FSIM': 0.004882147120628676, 'NQM': 0.010742721819025854, 'S3IM': 0.047395696337882584}))]
+evaluating config ss128 and full_config ms,ss128_BP_w780
+Processing dataset=MSFD, config=ms,ss128_BP_w780
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss128_BP_w780 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss128_BP_w780 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss128_BP_w780 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w780
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+***** filtering *****
+time elapsed: 0.29
+***** normalization *****
+time elapsed: 0.18
+Volume Metrics: {'PSNR': 38.22374821199608, 'SSIM': 0.8987645855121623, 'VIF': 0.039956681926846774, 'FSIM': 0.9576187495738165, 'NQM': 0.38670447203420827, 'S3IM': 0.917887964896246}
+Per-Slice STD: {'PSNR': 2.3472376679368607, 'SSIM': 0.029633438727874845, 'VIF': 0.0018507358573459443, 'FSIM': 0.004524218834326712, 'NQM': 0.009656228784364276, 'S3IM': 0.04658041318192958}
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss128_BP_w780 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss128_BP_w780 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss128_BP_w780 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493})), ('ms,ss128_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}, {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354})), ('ms,ss128_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 39.15392690871825, 'SSIM': 0.9140564370712043, 'VIF': 0.0405564141041162, 'FSIM': 0.9575387627296504, 'NQM': 0.38396482534690657, 'S3IM': 0.9304559491669936}, {'PSNR': 2.4950499979656935, 'SSIM': 0.027721681132446385, 'VIF': 0.0018354094273039568, 'FSIM': 0.005246766499109249, 'NQM': 0.011233466963998948, 'S3IM': 0.04271889252371054})), ('ms,ss128_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 38.05269057778558, 'SSIM': 0.8976501345122408, 'VIF': 0.03967878018456619, 'FSIM': 0.9571751976379664, 'NQM': 0.38376439871515056, 'S3IM': 0.916393670851398}, {'PSNR': 2.471707233165827, 'SSIM': 0.031026765733513432, 'VIF': 0.00178138622293082, 'FSIM': 0.004882147120628676, 'NQM': 0.010742721819025854, 'S3IM': 0.047395696337882584})), ('ms,ss128_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 38.22374821199608, 'SSIM': 0.8987645855121623, 'VIF': 0.039956681926846774, 'FSIM': 0.9576187495738165, 'NQM': 0.38670447203420827, 'S3IM': 0.917887964896246}, {'PSNR': 2.3472376679368607, 'SSIM': 0.029633438727874845, 'VIF': 0.0018507358573459443, 'FSIM': 0.004524218834326712, 'NQM': 0.009656228784364276, 'S3IM': 0.04658041318192958}))]
+evaluating config ss128 and full_config ms,ss128_BP_w800
+Processing dataset=MSFD, config=ms,ss128_BP_w800
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss128_BP_w800 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss128_BP_w800 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss128_BP_w800 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss128_BP_w800 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w800
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.31
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 39.756119447960906, 'SSIM': 0.9144725795637763, 'VIF': 0.037856982595244636, 'FSIM': 0.9588453193065871, 'NQM': 0.3818305938660964, 'S3IM': 0.9331220889462614}
+Per-Slice STD: {'PSNR': 2.054385203229035, 'SSIM': 0.021778115534646224, 'VIF': 0.0016652441478048176, 'FSIM': 0.0044923362640218465, 'NQM': 0.010576151383253211, 'S3IM': 0.04170994810448085}
+Processing expected_key ms,ss128_BP_w800 and ground_truth_key ms_BP_w850
+Key not corresponding to correct ground truth: ms,ss128_BP_w800 is not the same wavelength as ms_BP_w850
+Finished evaluating MSFD
+results [('ms,ss32_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 34.81614406736616, 'SSIM': 0.7981739337550936, 'VIF': 0.009656433909912165, 'FSIM': 0.8135341257678013, 'NQM': 0.05027832199300285, 'S3IM': 0.8330116454182694}, {'PSNR': 3.0140832789055434, 'SSIM': 0.06614665468942128, 'VIF': 0.0007764767311416722, 'FSIM': 0.020743870655923483, 'NQM': 0.0026089525569562375, 'S3IM': 0.05218141754409117})), ('ms,ss32_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 34.94910150415998, 'SSIM': 0.7868853899497502, 'VIF': 0.009409644101768672, 'FSIM': 0.7999278481966834, 'NQM': 0.05202498999867573, 'S3IM': 0.8254515884447444}, {'PSNR': 2.522784918346482, 'SSIM': 0.06096251760504384, 'VIF': 0.0006813696354864491, 'FSIM': 0.021617752082397152, 'NQM': 0.0026419337181819115, 'S3IM': 0.0797350993583081})), ('ms,ss32_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 33.90520489887514, 'SSIM': 0.7523821578080795, 'VIF': 0.009313160013452802, 'FSIM': 0.7932925851687078, 'NQM': 0.05275622798987858, 'S3IM': 0.7949333659361217}, {'PSNR': 2.4889337722302587, 'SSIM': 0.06576050832086591, 'VIF': 0.0006365775679776435, 'FSIM': 0.02310484382713, 'NQM': 0.002535868887790559, 'S3IM': 0.08636603820786558})), ('ms,ss32_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 34.06752258330779, 'SSIM': 0.7529588093087763, 'VIF': 0.009318712821978405, 'FSIM': 0.7894420377388471, 'NQM': 0.05298089985309452, 'S3IM': 0.7966027831800879}, {'PSNR': 2.350989423666154, 'SSIM': 0.0637049108317344, 'VIF': 0.0006459924814276133, 'FSIM': 0.02518235282507704, 'NQM': 0.002415854574138815, 'S3IM': 0.08579100240282056})), ('ms,ss32_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 35.64541262885454, 'SSIM': 0.788294542918639, 'VIF': 0.008871419273225158, 'FSIM': 0.790555206200017, 'NQM': 0.05384011325998099, 'S3IM': 0.8288679784887519}, {'PSNR': 2.07973821926333, 'SSIM': 0.05065200600719025, 'VIF': 0.0005535302394698565, 'FSIM': 0.026732693090196203, 'NQM': 0.0029784068523765503, 'S3IM': 0.08407274214113028})), ('ms,ss32_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 36.03350072042308, 'SSIM': 0.8328079445880702, 'VIF': 0.009491648705783, 'FSIM': 0.803584014478926, 'NQM': 0.04839703554872117, 'S3IM': 0.8625702990352166}, {'PSNR': 3.0025271775683686, 'SSIM': 0.057975618695609986, 'VIF': 0.0008116918068112542, 'FSIM': 0.021764065418543904, 'NQM': 0.0025531865482809704, 'S3IM': 0.05355348784961733})), ('ms,ss64_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 35.943864625194834, 'SSIM': 0.8375536865165513, 'VIF': 0.01997580640002388, 'FSIM': 0.8752670584827038, 'NQM': 0.1349865392551488, 'S3IM': 0.8672962707506788}, {'PSNR': 3.0019383668710935, 'SSIM': 0.057088416136693375, 'VIF': 0.001347638274702769, 'FSIM': 0.014317203270814894, 'NQM': 0.0060006707909400275, 'S3IM': 0.046225188662183864})), ('ms,ss64_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 36.09512414104391, 'SSIM': 0.8299451653060536, 'VIF': 0.019668398987810795, 'FSIM': 0.8697789669483978, 'NQM': 0.1374165612275166, 'S3IM': 0.8631670554585009}, {'PSNR': 2.516279772712624, 'SSIM': 0.05160355921041251, 'VIF': 0.0012497908773148663, 'FSIM': 0.014485665435796729, 'NQM': 0.006285729651785432, 'S3IM': 0.06993104825089926})), ('ms,ss64_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 35.040076910527, 'SSIM': 0.8011891098603463, 'VIF': 0.019335559822145153, 'FSIM': 0.8685842862096511, 'NQM': 0.13869864980217655, 'S3IM': 0.8383009282082219}, {'PSNR': 2.48618274673892, 'SSIM': 0.05630725545830914, 'VIF': 0.00118616502308045, 'FSIM': 0.014587906143385449, 'NQM': 0.006185923942867199, 'S3IM': 0.07587237408516376})), ('ms,ss64_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 35.199879984213645, 'SSIM': 0.8020021357208834, 'VIF': 0.01936261481733691, 'FSIM': 0.8674334341048467, 'NQM': 0.13858671943809897, 'S3IM': 0.8397817748323171}, {'PSNR': 2.3547995389823506, 'SSIM': 0.05432487379469107, 'VIF': 0.001113850446672797, 'FSIM': 0.014555096709486265, 'NQM': 0.0049310799436546255, 'S3IM': 0.0757692285738668})), ('ms,ss64_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 36.774592971834, 'SSIM': 0.8322792152956372, 'VIF': 0.018283409691193714, 'FSIM': 0.8687938409632685, 'NQM': 0.13941454803301534, 'S3IM': 0.8674474096017057}, {'PSNR': 2.0730420131117633, 'SSIM': 0.04145314190050364, 'VIF': 0.0010063284989076176, 'FSIM': 0.017120150562050417, 'NQM': 0.005842110128595087, 'S3IM': 0.07130617213768144})), ('ms,ss64_BP_w850', 'ms_BP_w850', 850, ({'PSNR': 37.15334002553541, 'SSIM': 0.8654768454770327, 'VIF': 0.019808858812737706, 'FSIM': 0.8693487085158318, 'NQM': 0.13233318738774605, 'S3IM': 0.8909206020923174}, {'PSNR': 2.9887851327382444, 'SSIM': 0.04979743647347355, 'VIF': 0.0012550792662676836, 'FSIM': 0.014305440047670781, 'NQM': 0.0061864232401415125, 'S3IM': 0.04527790359520493})), ('ms,ss128_BP_w700', 'ms_BP_w700', 700, ({'PSNR': 39.00082194175555, 'SSIM': 0.9172633399302597, 'VIF': 0.041185462660410975, 'FSIM': 0.957874243175701, 'NQM': 0.38156443654856187, 'S3IM': 0.9310953194541408}, {'PSNR': 2.9619365444020005, 'SSIM': 0.031424089858653415, 'VIF': 0.0018261327241813649, 'FSIM': 0.005632750016403548, 'NQM': 0.011154186368899957, 'S3IM': 0.030346999036396354})), ('ms,ss128_BP_w730', 'ms_BP_w730', 730, ({'PSNR': 39.15392690871825, 'SSIM': 0.9140564370712043, 'VIF': 0.0405564141041162, 'FSIM': 0.9575387627296504, 'NQM': 0.38396482534690657, 'S3IM': 0.9304559491669936}, {'PSNR': 2.4950499979656935, 'SSIM': 0.027721681132446385, 'VIF': 0.0018354094273039568, 'FSIM': 0.005246766499109249, 'NQM': 0.011233466963998948, 'S3IM': 0.04271889252371054})), ('ms,ss128_BP_w760', 'ms_BP_w760', 760, ({'PSNR': 38.05269057778558, 'SSIM': 0.8976501345122408, 'VIF': 0.03967878018456619, 'FSIM': 0.9571751976379664, 'NQM': 0.38376439871515056, 'S3IM': 0.916393670851398}, {'PSNR': 2.471707233165827, 'SSIM': 0.031026765733513432, 'VIF': 0.00178138622293082, 'FSIM': 0.004882147120628676, 'NQM': 0.010742721819025854, 'S3IM': 0.047395696337882584})), ('ms,ss128_BP_w780', 'ms_BP_w780', 780, ({'PSNR': 38.22374821199608, 'SSIM': 0.8987645855121623, 'VIF': 0.039956681926846774, 'FSIM': 0.9576187495738165, 'NQM': 0.38670447203420827, 'S3IM': 0.917887964896246}, {'PSNR': 2.3472376679368607, 'SSIM': 0.029633438727874845, 'VIF': 0.0018507358573459443, 'FSIM': 0.004524218834326712, 'NQM': 0.009656228784364276, 'S3IM': 0.04658041318192958})), ('ms,ss128_BP_w800', 'ms_BP_w800', 800, ({'PSNR': 39.756119447960906, 'SSIM': 0.9144725795637763, 'VIF': 0.037856982595244636, 'FSIM': 0.9588453193065871, 'NQM': 0.3818305938660964, 'S3IM': 0.9331220889462614}, {'PSNR': 2.054385203229035, 'SSIM': 0.021778115534646224, 'VIF': 0.0016652441478048176, 'FSIM': 0.0044923362640218465, 'NQM': 0.010576151383253211, 'S3IM': 0.04170994810448085}))]
+evaluating config ss128 and full_config ms,ss128_BP_w850
+Processing dataset=MSFD, config=ms,ss128_BP_w850
+Going to evaluate MSFD
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w700
+Key not corresponding to correct ground truth: ms,ss128_BP_w850 is not the same wavelength as ms_BP_w700
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w730
+Key not corresponding to correct ground truth: ms,ss128_BP_w850 is not the same wavelength as ms_BP_w730
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w760
+Key not corresponding to correct ground truth: ms,ss128_BP_w850 is not the same wavelength as ms_BP_w760
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w780
+Key not corresponding to correct ground truth: ms,ss128_BP_w850 is not the same wavelength as ms_BP_w780
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w800
+Key not corresponding to correct ground truth: ms,ss128_BP_w850 is not the same wavelength as ms_BP_w800
+Processing expected_key ms,ss128_BP_w850 and ground_truth_key ms_BP_w850
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.16
+***** filtering *****
+time elapsed: 0.30
+***** normalization *****
+time elapsed: 0.17
+Volume Metrics: {'PSNR': 40.23502163659579, 'SSIM': 0.9320809210653966, 'VIF': 0.041122472040254175, 'FSIM': 0.9549558379416473, 'NQM': 0.3777007425774925, 'S3IM': 0.9436554127938549}

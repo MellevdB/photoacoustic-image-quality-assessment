@@ -4,180 +4,129 @@ import datetime
 from data_evaluation.eval import evaluate
 from config.data_config import DATASETS, RESULTS_DIR
 
-def evaluate_all_datasets(save_to_file=True, selected_datasets=None):
+def evaluate_all_datasets(selected_datasets=None, metric_type="all", fake_results=False):
     """
     Loop over selected datasets in DATASETS or all datasets if selected_datasets is None.
-    Collect the metrics into a single summary.
+    Collect the metrics into a single summary and save the results.
 
-    :param save_to_file: Whether to save the final summary to a file.
     :param selected_datasets: List of datasets to evaluate (default: all datasets).
+    :param metric_type: "fr" for full-reference metrics, "nr" for no-reference metrics, or "all".
+    :param fake_results: If True, use fake metrics instead of real calculations.
     """
     datasets_to_evaluate = selected_datasets if selected_datasets else DATASETS.keys()
     all_results = []
 
     for dataset in datasets_to_evaluate:
         dataset_info = DATASETS[dataset]
-        results = evaluate_dataset(dataset, dataset_info)
+        results = evaluate_dataset(dataset, dataset_info, metric_type=metric_type, fake_results=fake_results)
 
-        # If specifically evaluating only one dataset, save its results
-        if save_to_file and results and selected_datasets and len(selected_datasets) == 1:
-            results_path = os.path.join(RESULTS_DIR, dataset, f"{dataset}_results.txt")
-            save_results_to_file(results, results_path, dataset)
-        else:
-            # Accumulate in all_results if we're evaluating multiple or all datasets
-            # For multi-dataset results, we prepend the dataset name to each entry
-            all_results.extend([(dataset, *entry) for entry in results])
+        if results:
+            if selected_datasets:
+                # ✅ Save only per dataset when running a single dataset
+                results_path = os.path.join(RESULTS_DIR, dataset, f"{dataset}_results.txt")
+                save_results_to_file(results, results_path, dataset, metric_type, fake_results)
+            else:
+                # ✅ Accumulate results for all datasets
+                all_results.extend([(dataset, *entry) for entry in results])
 
-    # Save all results in a single file when running all datasets
-    if save_to_file and not selected_datasets and all_results:
+    # ✅ Only save to `all_datasets` when evaluating ALL datasets
+    if not selected_datasets and all_results:
         all_results_path = os.path.join(RESULTS_DIR, "all_datasets", "all_datasets_results.txt")
-        save_results_to_file(all_results, all_results_path, "all_datasets")
+        save_results_to_file(all_results, all_results_path, "all_datasets", metric_type, fake_results)
 
-def evaluate_dataset(dataset, dataset_info):
+def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=False):
     """
     Helper function to evaluate a specific dataset by iterating through file keys/config values.
     Returns a list of results for that dataset.
 
     :param dataset: Name of the dataset (string).
     :param dataset_info: Dictionary with dataset info from DATASETS.
-    :return: List of results for this dataset. Each result entry is:
-        - For MSFD: (full_config, ground_truth_key, wavelength, metrics)
-        - Otherwise: (full_config, ground_truth_key, metrics)
+    :param metric_type: "fr", "nr", or "all".
+    :param fake_results: If True, use fake metrics instead of real calculations.
+    :return: List of results for this dataset.
     """
     results = []
-    # Handle datasets with multiple file keys (like SWFD with dict paths)
+    
     if isinstance(dataset_info["path"], dict):
         for file_key in dataset_info["path"]:
             for config, config_values in dataset_info["configs"].items():
                 for full_config in config_values:
-                    partial_results = evaluate(dataset, config, full_config, file_key, save_results=False)
+                    partial_results = evaluate(dataset, config, full_config, file_key, metric_type=metric_type, fake_results=fake_results)
                     if partial_results:
                         results.extend(partial_results)
     else:
-        # Single path
         for config, config_values in dataset_info["configs"].items():
             for full_config in config_values:
-                print("evaluating config", config, "and full_config", full_config)
-                partial_results = evaluate(dataset, config, full_config, file_key=None, save_results=False)
+                partial_results = evaluate(dataset, config, full_config, file_key=None, metric_type=metric_type, fake_results=fake_results)
                 if partial_results:
                     results.extend(partial_results)
-                    print("results", results)
-                    
-
     return results
 
-def save_results_to_file(results, file_path, dataset_name):
+def save_results_to_file(results, file_path, dataset_name, metric_type="all", fake_results=False):
     """
     Save evaluation results to a text file with a timestamp in the filename.
-    
+
     Args:
         results: List of tuples containing:
-                 - For MSFD: (config, ground_truth, wavelength, metrics_mean, metrics_std)
-                 - For other datasets: (config, ground_truth, (metrics_mean, metrics_std))
+                 - For MSFD: (dataset, config, ground_truth, wavelength, metrics_mean, metrics_std)
+                 - For other datasets: (dataset, config, ground_truth, metrics_mean, metrics_std)
         file_path: Path to save the results file.
-        dataset_name: Name of the dataset being evaluated.
+        dataset_name: Name of the dataset being evaluated or "all_datasets".
+        metric_type: "fr", "nr", or "all".
     """
-    # Add timestamp to filename
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     dir_path = os.path.dirname(file_path)
     base_name = os.path.basename(file_path).replace(".txt", "")
     new_file_path = os.path.join(dir_path, f"{base_name}_{timestamp}.txt")
 
-    # Define the metric headers
-    metric_headers = ['FSIM', 'NQM', 'PSNR', 'SSIM', 'VIF', 'S3IM']
-
-    # Define the header row
-    if dataset_name == "MSFD":
-        header = "Dataset   Configuration   Ground Truth   Wavelength   " + \
-                 "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+    # Define metric headers based on metric_type
+    if metric_type == "fr":
+        metric_headers = ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM']
+    elif metric_type == "nr":
+        metric_headers = ['BRISQUE']  # Expand with 'NIQE', 'NIQE-K' if needed
+    elif metric_type == "all":
+        metric_headers = ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM', 'BRISQUE']  # Expand if needed
     else:
-        header = "Dataset   Configuration   Ground Truth   " + \
-                 "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+        metric_headers = []
 
-    # Prepare the results lines
+    header = "Dataset   Configuration   Ground Truth   Wavelength   " + "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+
     result_lines = []
     for entry in results:
-        if dataset_name == "MSFD":
-            # ✅ Correctly unpack MSFD entries
-            config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
-            line = f"{dataset_name:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
+        if dataset_name == "all_datasets":
+            dataset, *entry_data = entry  
         else:
-            # ✅ Correctly unpack SCD, SWFD
-            config, ground_truth, metrics_tuple = entry
-            if isinstance(metrics_tuple, tuple) and len(metrics_tuple) == 2:
-                metrics_mean, metrics_std = metrics_tuple
-            else:
-                print(f"⚠️ Unexpected format for metrics in {dataset_name}, entry: {entry}")
-                continue  # Skip entry if it's not in the expected format
+            dataset = dataset_name
+            entry_data = entry
 
-            line = f"{dataset_name:<9} {config:<20} {ground_truth:<15}"
+        if dataset == "MSFD":
+            config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry_data
+        else:
+            config, ground_truth, (metrics_mean, metrics_std) = entry_data
+            wavelength = "---"
 
-        # ✅ Now safely extract metric values
+        line = f"{dataset:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
         for metric in metric_headers:
             mean = metrics_mean.get(metric, float('nan')) if isinstance(metrics_mean, dict) else float('nan')
             std = metrics_std.get(metric, float('nan')) if isinstance(metrics_std, dict) else float('nan')
             line += f"{mean:<10.3f} {std:<8.3f}"
-
         result_lines.append(line)
 
-    # Write results to file
-    os.makedirs(dir_path, exist_ok=True)  # Ensure the directory exists
+    os.makedirs(dir_path, exist_ok=True)
     with open(new_file_path, 'w') as f:
-        # Write header
+        if fake_results:
+            f.write("Fake results used. \n")
         f.write(header + "\n")
         f.write("-" * len(header) + "\n")
-        # Write results
         f.write("\n".join(result_lines))
 
     print(f"✅ Results saved to: {new_file_path}")
 
-def format_result_line(entry, dataset_name, metric_headers):
-    """
-    Format a single result entry into a line of text, including the possibility
-    of a wavelength column for MSFD or 'all_datasets'.
-
-    :param entry: A tuple containing result info.
-    :param dataset_name: e.g. 'SCD', 'MSFD', or 'all_datasets'.
-    :param metric_headers: List of metric keys to display in the row.
-    :return: A formatted string that can be written to the file.
-    """
-    # For "all_datasets", we can have either 4 or 5 items in the tuple:
-    if dataset_name == "all_datasets":
-        if len(entry) == 4:
-            # (dataset, config, ground_truth, metrics)
-            dataset, config, ground_truth, metrics = entry
-            # We might still want to handle the wavelength column if it exists among other rows
-            # so we print `---` for the wavelength
-            row_str = f"{dataset:<9} {config:<20} {ground_truth:<15} {'---':<11}"
-        else:
-            # (dataset, config, ground_truth, wavelength, metrics)
-            dataset, config, ground_truth, wavelength, metrics = entry
-            row_str = f"{dataset:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
-
-    else:
-        # Single dataset scenario
-        if dataset_name == "MSFD":
-            # (config, ground_truth, wavelength, metrics)
-            config, ground_truth, wavelength, metrics = entry
-            row_str = f"{dataset_name:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
-        else:
-            # (config, ground_truth, metrics)
-            config, ground_truth, metrics = entry
-            row_str = f"{dataset_name:<9} {config:<20} {ground_truth:<15}"
-
-    # Append metrics
-    metrics_str = " ".join(
-        f"{float(value):<7.3f}" if isinstance(value, (int, float)) else "---"
-        for key, value in metrics.items()
-        if key in metric_headers
-    )
-
-    return row_str + " " + metrics_str
-
 def main():
     parser = argparse.ArgumentParser(description="Evaluate datasets and configurations.")
     parser.add_argument("--datasets", nargs="+", help="Specify datasets to evaluate (e.g., SCD, SWFD).")
-    parser.add_argument("--no_save", action="store_true", help="If provided, results are not saved to a file.")
+    parser.add_argument("--metric_type", choices=["fr", "nr", "all"], default="all", help="Choose 'fr' for full-reference, 'nr' for no-reference, or 'all'.")
+    parser.add_argument("--fake_results", action="store_true", help="Use fake metric values for fast testing.")
     args = parser.parse_args()
 
     selected_datasets = args.datasets if args.datasets else None
@@ -190,7 +139,7 @@ def main():
                 print(f"Unknown dataset '{dataset}'. Available: {list(DATASETS.keys())}")
                 return
 
-    evaluate_all_datasets(save_to_file=(not args.no_save), selected_datasets=selected_datasets)
+    evaluate_all_datasets(selected_datasets=selected_datasets, metric_type=args.metric_type, fake_results=args.fake_results)
 
 if __name__ == "__main__":
     main()
