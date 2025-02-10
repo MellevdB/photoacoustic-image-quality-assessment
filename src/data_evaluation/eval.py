@@ -43,7 +43,7 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
     :return: Tuple containing mean and standard deviation dictionaries.
     """
     if fake_results:
-        print("⚠️ Using FAKE metric values for quick testing!")
+        print("Using FAKE metric values for quick testing!")
         metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM', 'BRISQUE']}
         metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
         return metrics_mean, metrics_std
@@ -76,8 +76,8 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
         for i in range(num_slices):
             slice_img = y_pred[i]
             per_slice_metrics['BRISQUE'].append(calculate_brisque(slice_img))
-            per_slice_metrics['NIQE'].append(calculate_niqe(slice_img))
-            per_slice_metrics['NIQE-K'].append(calculate_niqe_k(slice_img))
+            # per_slice_metrics['NIQE'].append(calculate_niqe(slice_img))
+            # per_slice_metrics['NIQE-K'].append(calculate_niqe_k(slice_img))
         nr_metrics = {k: np.mean(v) for k, v in per_slice_metrics.items()}
         nr_std = {k: np.std(v) for k, v in per_slice_metrics.items()}
     else:
@@ -126,6 +126,7 @@ def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_r
     for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
         expected_key = f"{full_config}"
         if expected_key[-4:] == ground_truth_key[-4:]:
+            print("Fake results: ", fake_results)
             y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[expected_key][:]))
             y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
             metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
@@ -142,6 +143,7 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
         print(f"[ERROR] Missing configuration {full_config} or ground truth {ground_truth_key}. Skipping...")
         return
 
+    print("Fake results: ", fake_results)
     y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[full_config][:]))
     y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
@@ -156,6 +158,7 @@ def _process_mat_dataset(dataset, dataset_info, config, full_config, results, me
         print(f"[WARNING] Missing MAT files for {dataset}. Skipping...")
         return
 
+    print("Fake results: ", fake_results)
     y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(config_file, full_config)))
     y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(gt_file, dataset_info["ground_truth"])))
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)

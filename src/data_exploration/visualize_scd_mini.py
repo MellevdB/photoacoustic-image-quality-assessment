@@ -92,7 +92,7 @@ if __name__ == "__main__":
     compare_dataset_shapes(file_path, "ms,ss32_BP", "ground_truth")
 
     print("\nChecking statistics for key datasets...")
-    check_statistics(file_path, ["vc,ss32_BP", "ground_truth", "ms,ss32_BP"])
+    check_statistics(file_path, ["vc,ss32_BP", "ground_truth", "ms,ss32_BP", "linear_BP", "vc,ss64_BP", "ms,ss64_BP", "vc,ss128_BP", "ms,ss128_BP", "ms,lv128_BP", "ms_BP", "vc_BP"])
 
     # # Visualize a single sample across all datasets
     # print("\nVisualizing a single sample across all datasets...")

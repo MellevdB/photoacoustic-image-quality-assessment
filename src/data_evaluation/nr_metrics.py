@@ -23,6 +23,7 @@ Placeholders (to be implemented later):
 import numpy as np
 import cv2
 from PIL import Image
+from imquality.brisque import score
 
 # --- For NIQE ---
 import scipy
@@ -39,26 +40,29 @@ from brisque import BRISQUE
 
 # -------------------------
 # BRISQUE
+# https://github.com/ocampor/image-quality.git
 # -------------------------
+
+MODEL_PATH = "models/brisque"
+
 def calculate_brisque(img: np.ndarray) -> float:
     """
-    Calculate BRISQUE score for a given image.
-    Source: https://pypi.org/project/brisque/
-    
-    Parameters:
-        img (np.ndarray): Input image (grayscale or color).
-    
-    Returns:
-        float: BRISQUE score.
+    Calculate BRISQUE score using the imquality-based implementation.
     """
+    if isinstance(img, np.ndarray):
+        img = Image.fromarray(img)
 
-    
+    # Debug: Check for NaN or empty images
+    print(f"BRISQUE input shape: {img.size}")
+    np_img = np.asarray(img)
+    print(f"Min: {np.min(np_img)}, Max: {np.max(np_img)}, Mean: {np.mean(np_img)}")
 
-    obj = BRISQUE(url=False)
-    score = obj.score(img=img)
-    print("Score", score)
-    return score
-
+    try:
+        brisque_score = score(img)
+        return brisque_score
+    except Exception as e:
+        print(f"BRISQUE computation failed: {e}")
+        return float('nan')
 # -------------------------
 # NIQE and supporting functions
 # -------------------------
