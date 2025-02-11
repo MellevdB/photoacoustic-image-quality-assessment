@@ -25,4 +25,4 @@ echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 # Run the script
 echo "Starting main.py..."
-srun python src/main.py
+srun python src/main.py --metric_type nr
