@@ -8,7 +8,7 @@ def explore_mouse_data(data_path):
 
     :param data_path: Path to the mouse dataset folder.
     """
-    print(f"🔍 Exploring mouse data in: {data_path}")
+    print(f"Exploring mouse data in: {data_path}")
 
     if not os.path.exists(data_path):
         print(f"⚠️ Path does not exist: {data_path}")
@@ -21,11 +21,11 @@ def explore_mouse_data(data_path):
 
     for file in files:
         file_path = os.path.join(data_path, file)
-        print(f"\n📂 Loading {file}...")
+        print(f"\nLoading {file}...")
 
         # Load the .mat file using h5py for MATLAB v7.3 format
         with h5py.File(file_path, "r") as data:
-            print(f"🔑 Keys in {file}: {list(data.keys())}")
+            print(f"Keys in {file}: {list(data.keys())}")
 
             for key in data:
                 dataset = data[key]
@@ -40,7 +40,7 @@ def explore_mouse_data(data_path):
                     max_val = np.max(array_data)
                     mean_val = np.mean(array_data)
 
-                    print(f"📝 Key: {key}")
+                    print(f"Key: {key}")
                     print(f"   ➤ Shape: {array_data.shape}")
                     print(f"   ➤ Type: {array_data.dtype}")
                     print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
@@ -52,11 +52,11 @@ if __name__ == "__main__":
     phantom_data_path = "data/phantom"
     v_phantom_data_path = "data/v_phantom"
 
-    print("🔎 Exploring mouse data...")
+    print("Exploring mouse data...")
     explore_mouse_data(mouse_data_path)
 
-    print("\n🔎 Exploring phantom data...")
+    print("\nExploring phantom data...")
     explore_mouse_data(phantom_data_path)
 
-    print("\n🔎 Exploring v_phantom data...")
+    print("\nExploring v_phantom data...")
     explore_mouse_data(v_phantom_data_path)

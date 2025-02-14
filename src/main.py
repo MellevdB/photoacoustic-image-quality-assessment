@@ -22,14 +22,14 @@ def evaluate_all_datasets(selected_datasets=None, metric_type="all", fake_result
 
         if results:
             if selected_datasets:
-                # ✅ Save only per dataset when running a single dataset
+                #  Save only per dataset when running a single dataset
                 results_path = os.path.join(RESULTS_DIR, dataset, f"{dataset}_results.txt")
                 save_results_to_file(results, results_path, dataset, metric_type, fake_results)
             else:
-                # ✅ Accumulate results for all datasets
+                #  Accumulate results for all datasets
                 all_results.extend([(dataset, *entry) for entry in results])
 
-    # ✅ Only save to `all_datasets` when evaluating ALL datasets
+    # Only save to `all_datasets` when evaluating ALL datasets
     if not selected_datasets and all_results:
         all_results_path = os.path.join(RESULTS_DIR, "all_datasets", "all_datasets_results.txt")
         save_results_to_file(all_results, all_results_path, "all_datasets", metric_type, fake_results)
@@ -120,7 +120,7 @@ def save_results_to_file(results, file_path, dataset_name, metric_type="all", fa
         f.write("-" * len(header) + "\n")
         f.write("\n".join(result_lines))
 
-    print(f"✅ Results saved to: {new_file_path}")
+    print(f"Results saved to: {new_file_path}")
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate datasets and configurations.")

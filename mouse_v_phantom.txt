@@ -1,0 +1,188 @@
+Exploring mouse data...
+Exploring mouse data in: data/mice
+
+Loading mice_sparse128_recon.mat...
+Keys in mice_sparse128_recon.mat: ['sparse128_recon_all']
+Key: sparse128_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -23986864.8000, Max: 50947485.7100, Mean: -214768.3719
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse64_recon.mat...
+Keys in mice_sparse64_recon.mat: ['sparse64_recon_all']
+Key: sparse64_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -12810100.4600, Max: 25916663.2300, Mean: -108670.0960
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse32_recon.mat...
+Keys in mice_sparse32_recon.mat: ['sparse32_recon_all']
+Key: sparse32_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -6351191.7500, Max: 14316017.8000, Mean: -54338.9380
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse4_recon.mat...
+Keys in mice_sparse4_recon.mat: ['sparse4_recon_all']
+Key: sparse4_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -2614920.4600, Max: 3046414.7800, Mean: -6875.2905
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse16_recon.mat...
+Keys in mice_sparse16_recon.mat: ['sparse16_recon_all']
+Key: sparse16_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -3276943.1800, Max: 7032860.4400, Mean: -27380.8745
+--------------------------------------------------
+================================================================================
+
+Loading mice_full_recon.mat...
+Keys in mice_full_recon.mat: ['full_recon_all']
+Key: full_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -101257026.2500, Max: 200980945.3700, Mean: -860066.7172
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse8_recon.mat...
+Keys in mice_sparse8_recon.mat: ['sparse8_recon_all']
+Key: sparse8_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -3148193.7200, Max: 4764963.0700, Mean: -13368.9828
+--------------------------------------------------
+================================================================================
+
+Loading mice_sparse256_recon.mat...
+Keys in mice_sparse256_recon.mat: ['sparse256_recon_all']
+Key: sparse256_recon_all
+   ➤ Shape: (274, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -48599718.8200, Max: 98959430.4600, Mean: -430958.0052
+--------------------------------------------------
+================================================================================
+
+Exploring phantom data...
+Exploring mouse data in: data/phantom
+
+Loading phantom_sparse8_recon.mat...
+Keys in phantom_sparse8_recon.mat: ['BP_phantom_8']
+Key: BP_phantom_8
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -21983221.7600, Max: 24532306.5600, Mean: -1010776.4059
+--------------------------------------------------
+================================================================================
+
+Loading phantom_sparse128_recon.mat...
+Keys in phantom_sparse128_recon.mat: ['BP_phantom_128']
+Key: BP_phantom_128
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -9848031.7600, Max: 15552574.1600, Mean: -1003699.7741
+--------------------------------------------------
+================================================================================
+
+Loading phantom_full_recon.mat...
+Keys in phantom_full_recon.mat: ['BP_phantom_GT']
+Key: BP_phantom_GT
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -10403026.3900, Max: 15537468.7000, Mean: -1004599.4664
+--------------------------------------------------
+================================================================================
+
+Loading phantom_sparse16_recon.mat...
+Keys in phantom_sparse16_recon.mat: ['BP_phantom_16']
+Key: BP_phantom_16
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -17082836.1600, Max: 20003753.2800, Mean: -1010317.3918
+--------------------------------------------------
+================================================================================
+
+Loading phantom_sparse32_recon.mat...
+Keys in phantom_sparse32_recon.mat: ['BP_phantom_32']
+Key: BP_phantom_32
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -11433817.9200, Max: 16425316.8000, Mean: -1009613.3218
+--------------------------------------------------
+================================================================================
+
+Loading phantom_sparse64_recon.mat...
+Keys in phantom_sparse64_recon.mat: ['BP_phantom_64']
+Key: BP_phantom_64
+   ➤ Shape: (469, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -10219226.9600, Max: 15488901.6800, Mean: -1012260.8704
+--------------------------------------------------
+================================================================================
+
+Exploring v_phantom data...
+Exploring mouse data in: data/v_phantom
+
+Loading v_phantom_sparse64_recon.mat...
+Keys in v_phantom_sparse64_recon.mat: ['v_phantom_64']
+Key: v_phantom_64
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -119760.5229, Max: 167875.5998, Mean: -9.1216
+--------------------------------------------------
+================================================================================
+
+Loading v_phantom_sparse32_recon.mat...
+Keys in v_phantom_sparse32_recon.mat: ['v_phantom_32']
+Key: v_phantom_32
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -160860.3629, Max: 180612.4850, Mean: -8.1627
+--------------------------------------------------
+================================================================================
+
+Loading v_phantom_full_recon.mat...
+Keys in v_phantom_full_recon.mat: ['v_phantom_gt']
+Key: v_phantom_gt
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -121860.4600, Max: 155907.2279, Mean: -9.2714
+--------------------------------------------------
+================================================================================
+
+Loading v_phantom_sparse128_recon.mat...
+Keys in v_phantom_sparse128_recon.mat: ['v_phantom_128']
+Key: v_phantom_128
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -121443.9376, Max: 160190.4106, Mean: -9.3654
+--------------------------------------------------
+================================================================================
+
+Loading v_phantom_sparse8_recon.mat...
+Keys in v_phantom_sparse8_recon.mat: ['v_phantom_8']
+Key: v_phantom_8
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -371544.6660, Max: 424849.8525, Mean: -20.9554
+--------------------------------------------------
+================================================================================
+
+Loading v_phantom_sparse16_recon.mat...
+Keys in v_phantom_sparse16_recon.mat: ['v_phantom_16']
+Key: v_phantom_16
+   ➤ Shape: (98, 512, 512)
+   ➤ Type: float64
+   ➤ Min: -244323.0631, Max: 261725.5912, Mean: -13.6920
+--------------------------------------------------
+================================================================================
