@@ -52,10 +52,10 @@ def calculate_brisque(img: np.ndarray) -> float:
     if isinstance(img, np.ndarray):
         img = Image.fromarray(img)
 
-    # Debug: Check for NaN or empty images
-    print(f"BRISQUE input shape: {img.size}")
-    np_img = np.asarray(img)
-    print(f"Min: {np.min(np_img)}, Max: {np.max(np_img)}, Mean: {np.mean(np_img)}")
+    # # Debug: Check for NaN or empty images
+    # print(f"BRISQUE input shape: {img.size}")
+    # np_img = np.asarray(img)
+    # print(f"Min: {np.min(np_img)}, Max: {np.max(np_img)}, Mean: {np.mean(np_img)}")
 
     try:
         brisque_score = score(img)

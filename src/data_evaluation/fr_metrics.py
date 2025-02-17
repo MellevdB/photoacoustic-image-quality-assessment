@@ -17,10 +17,10 @@ def calculate_s3im(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     Returns:
         float: Sparse SSIM value.
     """
-    # Debug: Check for NaN or empty images
-    print(f"S3IM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"S3IM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"S3IM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"S3IM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"S3IM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"S3IM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     # Define parameters
     neighborhood_size = (org_img.shape[0] // 16) * 2 + 1  # Adaptive window size
@@ -63,10 +63,10 @@ def calculate_psnr(org_img: np.ndarray, pred_img: np.ndarray, data_range: float 
         float: PSNR value.
     """
 
-    # Debug: Check for NaN or empty images
-    print(f"PSNR input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"PSNR input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"PSNR input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"PSNR input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"PSNR input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"PSNR input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     if data_range is None:
         data_range = org_img.max() - org_img.min()
@@ -85,10 +85,10 @@ def calculate_ssim(org_img: np.ndarray, pred_img: np.ndarray, data_range: float 
     Returns:
         float: SSIM value.
     """
-    # Debug: Check for NaN or empty images
-    print(f"SSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"SSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"SSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"SSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"SSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"SSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     if data_range is None:
         data_range = org_img.max() - org_img.min()
@@ -105,10 +105,10 @@ def calculate_vifp(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     Returns:
         float: VIFP value.
     """
-    # Debug: Check for NaN or empty images
-    print(f"VIFP input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"VIFP input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"VIFP input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"VIFP input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"VIFP input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"VIFP input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     return vifp(org_img, pred_img)
 
@@ -126,10 +126,10 @@ def calculate_uqi(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     Returns:
         float: UQI value.
     """
-    # Debug: Check for NaN or empty images
-    print(f"UQI input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"UQI input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"UQI input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"UQI input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"UQI input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"UQI input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     return uqi(org_img, pred_img)
 
@@ -145,10 +145,10 @@ def calculate_msssim(org_img: np.ndarray, pred_img: np.ndarray, ws) -> float:
     Returns:
         float: MS-SSIM value.
     """
-    # Debug: Check for NaN or empty images
-    print(f"MSSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"MSSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"MSSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"MSSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"MSSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"MSSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     return msssim(org_img, pred_img, ws=ws)
 
@@ -211,10 +211,10 @@ def fsim(org_img: np.ndarray, pred_img: np.ndarray, T1: float = 0.85, T2: float 
     :param T2: Tuning parameter for gradient similarity.
     :return: FSIM score (float).
     """
-    # Debug: Check for NaN or empty images
-    print(f"FSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
-    print(f"FSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
-    print(f"FSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
+    # # Debug: Check for NaN or empty images
+    # print(f"FSIM input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
+    # print(f"FSIM input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")
+    # print(f"FSIM input ranges - org_img: [{org_img.min()}, {org_img.max()}], pred_img: [{pred_img.min()}, {pred_img.max()}]")
 
     _assert_image_shapes_equal(org_img, pred_img, "FSIM")
 
