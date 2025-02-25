@@ -32,7 +32,7 @@ def evaluate_all_datasets(selected_datasets=None, metric_type="all", fake_result
             dataset_info = DATASETS[dataset]
             evaluate_dataset(dataset, dataset_info, metric_type, fake_results, file_path=file_path)
 
-        print(f"✅ All results saved to: {file_path}")
+        print(f"All results saved to: {file_path}")
 
     else:
         # Evaluate each dataset separately, saving results in their own folders
@@ -64,7 +64,7 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=Fals
 
         with open(file_path, 'w') as f:
             if fake_results:
-                f.write("⚠️ FAKE RESULTS USED ⚠️\n")
+                f.write("FAKE RESULTS USED\n")
             write_header(f, metric_type)
 
     # Open file in append mode for progressive saving
@@ -93,7 +93,7 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=Fals
                 for entry in results:
                     write_result_entry(f, dataset, entry, metric_type)
 
-        print(f"✅ Results saved progressively to: {file_path}")
+        print(f"Results saved progressively to: {file_path}")
 
 
 def write_header(f, metric_type):

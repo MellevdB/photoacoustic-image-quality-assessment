@@ -5,7 +5,7 @@
 #SBATCH --job-name=metrics_all_datasets  # Job name
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12  # Adjust CPU usage if needed
-#SBATCH --time=16:00:00  # Max time (adjust as needed)
+#SBATCH --time=20:00:00  # Max time (adjust as needed)
 #SBATCH --output=slurm_outputs/metrics_all_datasets_%A.out  # Save output logs
 
 # Load necessary modules
@@ -25,4 +25,4 @@ echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 # Run the script
 echo "Starting main.py..."
-srun python src/main.py --metric_type nr
+srun python src/main.py

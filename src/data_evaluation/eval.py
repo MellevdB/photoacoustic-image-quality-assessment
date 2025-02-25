@@ -43,12 +43,12 @@ def stack_images(image_dir, file_extension=".png", fake_results=False):
         img_path = os.path.join(image_dir, img_file)
         img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  # Load as grayscale
         if img is None:
-            print(f"⚠️ Warning: Failed to load {img_path}. Skipping...")
+            print(f"Warning: Failed to load {img_path}. Skipping...")
             continue
         stacked_images.append(img)
 
     if not stacked_images:
-        print(f"⚠️ Warning: No images found in {image_dir}. Returning empty array.")
+        print(f"Warning: No images found in {image_dir}. Returning empty array.")
         return np.empty((0, 0, 0))
 
     return np.stack(stacked_images, axis=0)  # Stack images along first dimension
@@ -181,14 +181,14 @@ def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results
     for category in dataset_info["training_categories"]:
         category_path = os.path.join(base_path, subset, category)
         if not os.path.exists(category_path):
-            print(f"⚠️ Skipping {category}, missing directory.")
+            print(f"Skipping {category}, missing directory.")
             continue
 
         # List all subfolders (each should have PA1 - PA7 images)
         subfolders = [f for f in os.listdir(category_path) if os.path.isdir(os.path.join(category_path, f))]
 
         if not subfolders:
-            print(f"⚠️ No subfolders found in {category_path}. Skipping...")
+            print(f"No subfolders found in {category_path}. Skipping...")
             continue
 
         for quality_level in range(2, 8):  # PA2 to PA7
@@ -201,7 +201,7 @@ def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results
                 gt_path = os.path.join(subfolder_path, dataset_info["ground_truth"])
 
                 if not os.path.exists(pred_path) or not os.path.exists(gt_path):
-                    print(f"⚠️ Missing PA{quality_level}.png in {subfolder}. Skipping...")
+                    print(f"Missing PA{quality_level}.png in {subfolder}. Skipping...")
                     continue
 
                 y_pred = cv2.imread(pred_path, cv2.IMREAD_GRAYSCALE)
