@@ -22,17 +22,20 @@ def evaluate_all_datasets(selected_datasets=None, metric_type="all", fake_result
         results_dir = os.path.join(RESULTS_DIR, "all_datasets")
         os.makedirs(results_dir, exist_ok=True)
         file_path = os.path.join(results_dir, f"all_datasets_results_{timestamp}.txt")
+
         with open(file_path, 'w') as f:
             if fake_results:
                 f.write("FAKE RESULTS USED\n")
             write_header(f, metric_type)
+
         for dataset in datasets_to_evaluate:
             dataset_info = DATASETS[dataset]
-            evaluate_dataset(dataset, dataset_info, metric_type, fake_results, file_path)
-        print(f"All results saved to: {file_path}")
+            evaluate_dataset(dataset, dataset_info, metric_type, fake_results, file_path=file_path)
+
+        print(f"✅ All results saved to: {file_path}")
 
     else:
-        # Evaluate each dataset separately
+        # Evaluate each dataset separately, saving results in their own folders
         for dataset in datasets_to_evaluate:
             dataset_info = DATASETS[dataset]
             evaluate_dataset(dataset, dataset_info, metric_type, fake_results, timestamp=timestamp)
@@ -49,6 +52,7 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=Fals
     :param file_path: If specified, all results will be saved in this single file (used for all_datasets case).
     :param timestamp: Consistent timestamp for per-dataset files.
     """
+    # If file_path is None, we are saving per dataset
     if file_path is None:
         results_dir = os.path.join(RESULTS_DIR, dataset)
         os.makedirs(results_dir, exist_ok=True)
@@ -65,23 +69,31 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=Fals
 
     # Open file in append mode for progressive saving
     with open(file_path, 'a') as f:
-        if isinstance(dataset_info["path"], dict):
-            for file_key in dataset_info["path"]:
+        if dataset not in ["denoising_data", "pa_experiment_data"]:
+            if isinstance(dataset_info["path"], dict):
+                for file_key in dataset_info["path"]:
+                    for config, config_values in dataset_info["configs"].items():
+                        for full_config in config_values:
+                            partial_results = evaluate(dataset, config, full_config, file_key, metric_type=metric_type, fake_results=fake_results)
+                            if partial_results:
+                                for entry in partial_results:
+                                    write_result_entry(f, dataset, entry, metric_type)
+            else:
                 for config, config_values in dataset_info["configs"].items():
                     for full_config in config_values:
-                        partial_results = evaluate(dataset, config, full_config, file_key, metric_type=metric_type, fake_results=fake_results)
+                        partial_results = evaluate(dataset, config, full_config, file_key=None, metric_type=metric_type, fake_results=fake_results)
                         if partial_results:
                             for entry in partial_results:
                                 write_result_entry(f, dataset, entry, metric_type)
-        else:
-            for config, config_values in dataset_info["configs"].items():
-                for full_config in config_values:
-                    partial_results = evaluate(dataset, config, full_config, file_key=None, metric_type=metric_type, fake_results=fake_results)
-                    if partial_results:
-                        for entry in partial_results:
-                            write_result_entry(f, dataset, entry, metric_type)
 
-        print(f"Results saved progressively to: {file_path}")
+        else:
+            # New datasets: Process them using modified logic
+            results = evaluate(dataset, None, None, None, metric_type, fake_results)
+            if results:
+                for entry in results:
+                    write_result_entry(f, dataset, entry, metric_type)
+
+        print(f"✅ Results saved progressively to: {file_path}")
 
 
 def write_header(f, metric_type):
@@ -111,18 +123,32 @@ def write_result_entry(f, dataset, entry, metric_type):
                      ['BRISQUE'] if metric_type == "nr" else \
                      ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM', 'BRISQUE']
 
-    if dataset == "MSFD":
-        config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
-    else:
-        config, ground_truth, (metrics_mean, metrics_std) = entry
-        wavelength = "---"
+    # Preserve old behavior for existing datasets
+    if dataset not in ["denoising_data", "pa_experiment_data"]:
+        if dataset == "MSFD":
+            config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
+        else:
+            config, ground_truth, (metrics_mean, metrics_std) = entry
+            wavelength = "---"
+        dataset_path = dataset
 
-    line = f"{dataset:<9} {config:<20} {ground_truth:<15} {wavelength:<11}"
+    # New datasets: format entries differently
+    elif dataset == "denoising_data":
+        
+        _, config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
+        dataset_path = "denoising_data/nne/train"
+
+
+    elif dataset == "pa_experiment_data":
+        dataset_path, config, ground_truth, wavelength, (metrics_mean, metrics_std) = entry
+
+    # Construct line for saving results
+    line = f"{dataset_path:<30} {config:<10} {ground_truth:<15} {wavelength:<11}"
     for metric in metric_headers:
         mean = metrics_mean.get(metric, float('nan')) if isinstance(metrics_mean, dict) else float('nan')
         std = metrics_std.get(metric, float('nan')) if isinstance(metrics_std, dict) else float('nan')
         line += f"{mean:<10.3f} {std:<8.3f}"
-    
+
     f.write(line + "\n")
     f.flush()  # Force immediate write to disk
     os.fsync(f.fileno())  # Ensure OS writes data immediately

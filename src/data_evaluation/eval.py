@@ -20,6 +20,39 @@ from .nr_metrics import (
     calculate_niqe_k
 )
 
+import os
+import numpy as np
+import cv2
+
+def stack_images(image_dir, file_extension=".png", fake_results=False):
+    """
+    Stacks all images in a directory along the first axis.
+
+    :param image_dir: Path to the directory containing images.
+    :param file_extension: The image file format (e.g., .png, .jpg).
+    :return: Stacked NumPy array of images.
+    """
+    if fake_results:
+        print(f"FAKE RESULTS: Skipping image loading for {image_dir}")
+        return np.random.rand(10, 128, 128)  # Generate dummy data with 10 fake slices
+
+    image_files = sorted([f for f in os.listdir(image_dir) if f.endswith(file_extension)])
+    stacked_images = []
+
+    for img_file in image_files:
+        img_path = os.path.join(image_dir, img_file)
+        img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  # Load as grayscale
+        if img is None:
+            print(f"⚠️ Warning: Failed to load {img_path}. Skipping...")
+            continue
+        stacked_images.append(img)
+
+    if not stacked_images:
+        print(f"⚠️ Warning: No images found in {image_dir}. Returning empty array.")
+        return np.empty((0, 0, 0))
+
+    return np.stack(stacked_images, axis=0)  # Stack images along first dimension
+
 def load_mat_file(file_path, key):
     """
     Load data from a MATLAB .mat file. Handles both v7.3 (h5py) and older versions (scipy.io).
@@ -42,13 +75,16 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
     :param fake_results: If True, return random dummy values.
     :return: Tuple containing mean and standard deviation dictionaries.
     """
+
+    num_slices = y_pred.shape[0]
+    print(f"Number of slices: {num_slices}")
+
     if fake_results:
         print("Using FAKE metric values for quick testing!")
         metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM', 'BRISQUE']}
         metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
         return metrics_mean, metrics_std
 
-    num_slices = y_pred.shape[0]
 
     if metric_type in ["fr", "all"]:
         data_range = y_true.max() - y_true.min()
@@ -105,8 +141,83 @@ def evaluate(dataset, config, full_config, file_key=None, metric_type="all", fak
         _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results)
     elif dataset in ["mice", "phantom", "v_phantom"]:
         _process_mat_dataset(dataset, dataset_info, config, full_config, results, metric_type, fake_results)
+    elif dataset == "denoising_data":
+        _process_denoising_data(dataset_info, results, metric_type, fake_results)
+    elif dataset == "pa_experiment_data":
+        _process_pa_experiment_data(dataset_info, results, metric_type, fake_results)
 
     return results
+
+def _process_denoising_data(dataset_info, results, metric_type, fake_results):
+    """Processes denoising data (10db - 50db)."""
+    base_path = dataset_info["path"]
+    subset = "train"  # We are processing train first
+    
+    for quality in dataset_info["categories"][:-1]:  # Skip ground_truth for now
+        quality_path = os.path.join(base_path, "nne", subset, quality)
+        ground_truth_path = os.path.join(base_path, "nne", subset, dataset_info["ground_truth"])
+
+        if not os.path.exists(quality_path) or not os.path.exists(ground_truth_path):
+            print(f"Skipping {quality}, missing directories.")
+            continue
+
+        # Stack images
+        y_pred = stack_images(quality_path, file_extension=".png", fake_results=fake_results)
+        y_true = stack_images(ground_truth_path, file_extension=".png", fake_results=fake_results)
+
+        if y_pred.shape != y_true.shape:
+            print(f"Skipping {quality} due to shape mismatch {y_pred.shape} vs {y_true.shape}")
+            continue
+
+        # Compute metrics
+        metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+        results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
+
+def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results):
+    """Processes PA Experiment data (KneeSlice1, Phantoms, SmallAnimal, Transducers)."""
+    base_path = dataset_info["path"]
+    subset = "Training"
+
+    for category in dataset_info["training_categories"]:
+        category_path = os.path.join(base_path, subset, category)
+        if not os.path.exists(category_path):
+            print(f"⚠️ Skipping {category}, missing directory.")
+            continue
+
+        # List all subfolders (each should have PA1 - PA7 images)
+        subfolders = [f for f in os.listdir(category_path) if os.path.isdir(os.path.join(category_path, f))]
+
+        if not subfolders:
+            print(f"⚠️ No subfolders found in {category_path}. Skipping...")
+            continue
+
+        for quality_level in range(2, 8):  # PA2 to PA7
+            y_pred_stack = []
+            y_true_stack = []
+
+            for subfolder in subfolders:
+                subfolder_path = os.path.join(category_path, subfolder)
+                pred_path = os.path.join(subfolder_path, f"PA{quality_level}.png")
+                gt_path = os.path.join(subfolder_path, dataset_info["ground_truth"])
+
+                if not os.path.exists(pred_path) or not os.path.exists(gt_path):
+                    print(f"⚠️ Missing PA{quality_level}.png in {subfolder}. Skipping...")
+                    continue
+
+                y_pred = cv2.imread(pred_path, cv2.IMREAD_GRAYSCALE)
+                y_true = cv2.imread(gt_path, cv2.IMREAD_GRAYSCALE)
+
+                if y_pred is not None and y_true is not None:
+                    y_pred_stack.append(y_pred)
+                    y_true_stack.append(y_true)
+
+            if y_pred_stack and y_true_stack:
+                y_pred_stack = np.stack(y_pred_stack, axis=0)
+                y_true_stack = np.stack(y_true_stack, axis=0)
+
+                # Compute metrics
+                metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results)
+                results.append((f"pa_experiment_data/Training/{category}", f"PA{quality_level}", "PA1", "---", metrics))
 
 def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results):
     """Process HDF5-based datasets (SCD, SWFD, MSFD)."""
