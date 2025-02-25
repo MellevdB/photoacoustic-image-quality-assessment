@@ -116,6 +116,28 @@ DATASETS = {
         },
         "ground_truth": "v_phantom_gt",
     },
+
+    "denoising_data": {
+        "path": os.path.join(DATA_DIR, "denoising_data/"),
+        "subsets": ["train", "test", "validation"],
+        "categories": ["10db", "20db", "30db", "40db", "50db", "ground_truth"],
+        "ground_truth": "ground_truth",
+        "image_extension": {
+            "drive": ".jpg",  # DRIVE dataset uses JPG
+            "nne": ".png",  # NNE dataset uses PNG
+        }
+    },
+
+    # Photoacoustic Experiment Data (Previously "data/Dataset")
+    "pa_experiment_data": {
+        "path": os.path.join(DATA_DIR, "pa_experiment_data/"),
+        "subsets": ["Training", "Testing"],
+        "training_categories": ["KneeSlice1", "Phantoms", "SmallAnimal", "Transducers"],
+        "testing_categories": ["Invivo", "Phantoms"],
+        "num_configs": 7,  # PA1.png to PA7.png, where PA1.png is ground truth
+        "ground_truth": "PA1.png",
+        "image_extension": ".png",
+    },
 }
 
 # Ensure results directories exist

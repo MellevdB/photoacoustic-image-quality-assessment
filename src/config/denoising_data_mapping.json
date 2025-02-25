@@ -1,0 +1,107 @@
+{
+    "drive": {
+        "test": {
+            "10db": 48,
+            "20db": 48,
+            "30db": 48,
+            "40db": 48,
+            "50db": 48,
+            "ground_truth": 48,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        },
+        "train": {
+            "10db": 154,
+            "20db": 154,
+            "30db": 154,
+            "40db": 154,
+            "50db": 154,
+            "ground_truth": 154,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        },
+        "validation": {
+            "10db": 38,
+            "20db": 38,
+            "30db": 38,
+            "40db": 38,
+            "50db": 38,
+            "ground_truth": 38,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        }
+    },
+    "experimental": {
+        "ground_truth": 15,
+        "input": 15,
+        "data.yaml": "EXISTS"
+    },
+    "nne": {
+        "test": {
+            "10db": 3176,
+            "20db": 3176,
+            "30db": 3176,
+            "40db": 3176,
+            "50db": 3176,
+            "ground_truth": 3176,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        },
+        "train": {
+            "10db": 5084,
+            "20db": 5084,
+            "30db": 5084,
+            "40db": 5084,
+            "50db": 5084,
+            "ground_truth": 5084,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        },
+        "validation": {
+            "10db": 1271,
+            "20db": 1271,
+            "30db": 1271,
+            "40db": 1271,
+            "50db": 1271,
+            "ground_truth": 1271,
+            "yaml_files": [
+                "50db.yaml",
+                "40db.yaml",
+                "10db.yaml",
+                "20db.yaml",
+                "all.yaml",
+                "30db.yaml"
+            ]
+        }
+    }
+}

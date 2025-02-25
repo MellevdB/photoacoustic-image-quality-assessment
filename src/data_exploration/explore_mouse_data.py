@@ -4,11 +4,12 @@ import numpy as np
 
 def explore_mouse_data(data_path):
     """
-    Explore and summarize the mouse data files.
+    Explore and summarize the mouse, phantom, and v_phantom data files, 
+    including the number of images per dataset.
 
-    :param data_path: Path to the mouse dataset folder.
+    :param data_path: Path to the dataset folder.
     """
-    print(f"Exploring mouse data in: {data_path}")
+    print(f"Exploring data in: {data_path}")
 
     if not os.path.exists(data_path):
         print(f"⚠️ Path does not exist: {data_path}")
@@ -19,17 +20,19 @@ def explore_mouse_data(data_path):
         print(f"⚠️ No .mat or .h5 files found in {data_path}")
         return
 
+    total_images = 0  # To store the total image count per dataset
+
     for file in files:
         file_path = os.path.join(data_path, file)
         print(f"\nLoading {file}...")
 
-        # Load the .mat file using h5py for MATLAB v7.3 format
+        # Load the file using h5py for MATLAB v7.3 format
         with h5py.File(file_path, "r") as data:
             print(f"Keys in {file}: {list(data.keys())}")
 
             for key in data:
                 dataset = data[key]
-                
+
                 # Check if the dataset is actually an array (not a group)
                 if isinstance(dataset, h5py.Dataset):
                     # Read dataset into a NumPy array
@@ -40,11 +43,18 @@ def explore_mouse_data(data_path):
                     max_val = np.max(array_data)
                     mean_val = np.mean(array_data)
 
+                    # Determine the number of images
+                    num_images = array_data.shape[0] if len(array_data.shape) > 2 else 1
+                    total_images += num_images
+
                     print(f"Key: {key}")
                     print(f"   ➤ Shape: {array_data.shape}")
                     print(f"   ➤ Type: {array_data.dtype}")
                     print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+                    print(f"   ➤ Number of images: {num_images}")
                     print("-" * 50)
+
+        print(f"Total images in {file}: {total_images}")
         print("=" * 80)
 
 if __name__ == "__main__":

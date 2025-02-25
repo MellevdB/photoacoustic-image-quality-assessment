@@ -105,6 +105,7 @@ def calculate_vifp(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     Returns:
         float: VIFP value.
     """
+
     # # Debug: Check for NaN or empty images
     # print(f"VIFP input shapes - org_img: {org_img.shape}, pred_img: {pred_img.shape}")
     # print(f"VIFP input types - org_img: {org_img.dtype}, pred_img: {pred_img.dtype}")

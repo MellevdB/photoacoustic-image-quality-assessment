@@ -1,0 +1,46 @@
+Main Directory,Subdirectory,Category,Number of Files
+drive,test,10db,48
+drive,test,20db,48
+drive,test,30db,48
+drive,test,40db,48
+drive,test,50db,48
+drive,test,ground_truth,48
+drive,test,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
+drive,train,10db,154
+drive,train,20db,154
+drive,train,30db,154
+drive,train,40db,154
+drive,train,50db,154
+drive,train,ground_truth,154
+drive,train,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
+drive,validation,10db,38
+drive,validation,20db,38
+drive,validation,30db,38
+drive,validation,40db,38
+drive,validation,50db,38
+drive,validation,ground_truth,38
+drive,validation,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
+experimental,ground_truth,Total Files,15
+experimental,input,Total Files,15
+experimental,data.yaml,Total Files,EXISTS
+nne,test,10db,3176
+nne,test,20db,3176
+nne,test,30db,3176
+nne,test,40db,3176
+nne,test,50db,3176
+nne,test,ground_truth,3176
+nne,test,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
+nne,train,10db,5084
+nne,train,20db,5084
+nne,train,30db,5084
+nne,train,40db,5084
+nne,train,50db,5084
+nne,train,ground_truth,5084
+nne,train,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
+nne,validation,10db,1271
+nne,validation,20db,1271
+nne,validation,30db,1271
+nne,validation,40db,1271
+nne,validation,50db,1271
+nne,validation,ground_truth,1271
+nne,validation,yaml_files,"['50db.yaml', '40db.yaml', '10db.yaml', '20db.yaml', 'all.yaml', '30db.yaml']"
