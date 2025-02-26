@@ -1,6 +1,9 @@
 import os
 import json
 import csv
+import cv2
+import numpy as np
+
 
 CONFIG_DIR = "src/config"
 
@@ -81,9 +84,59 @@ def save_mapping(data, filename):
 
     print(f"✅ Saved mapping to {csv_path}")
 
+def explore_pa_experiment_data(root_dir):
+    """
+    Explores `data/pa_experiment_data/Training` to gather image statistics.
+
+    :param root_dir: Path to the dataset.
+    """
+    print(f"\n🔍 Exploring PA Experiment Data in: {root_dir}")
+
+    expected_categories = ["KneeSlice1", "Phantoms", "SmallAnimal", "Transducers"]
+    total_images = 0
+
+    for category in expected_categories:
+        category_path = os.path.join(root_dir, "Training", category)
+        if not os.path.exists(category_path):
+            print(f"⚠️ Missing directory: {category_path}")
+            continue
+
+        subfolders = [f for f in os.listdir(category_path) if os.path.isdir(os.path.join(category_path, f))]
+
+        for subfolder in subfolders:
+            subfolder_path = os.path.join(category_path, subfolder)
+            image_files = sorted([f for f in os.listdir(subfolder_path) if f.startswith("PA") and f.endswith(".png")])
+
+            num_images = len(image_files)
+            total_images += num_images
+
+            if num_images == 0:
+                print(f"⚠️ No images found in {subfolder_path}")
+                continue
+
+            # Load first image to check dimensions
+            first_image = cv2.imread(os.path.join(subfolder_path, image_files[0]), cv2.IMREAD_GRAYSCALE)
+            image_shape = first_image.shape if first_image is not None else "Unknown"
+            image_type = first_image.dtype if first_image is not None else "Unknown"
+
+            # Compute statistics
+            all_pixels = np.array([cv2.imread(os.path.join(subfolder_path, f), cv2.IMREAD_GRAYSCALE).flatten() for f in image_files])
+            min_val, max_val, mean_val = np.min(all_pixels), np.max(all_pixels), np.mean(all_pixels)
+
+            print(f"\nKey: {category}/{subfolder}")
+            print(f"   ➤ Shape: {image_shape}")
+            print(f"   ➤ Type: {image_type}")
+            print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+            print(f"   ➤ Number of images: {num_images}")
+            print("-" * 50)
+
+    print(f"\n✅ Total images in PA Experiment Data: {total_images}")
+
+
 if __name__ == "__main__":
     dataset_root = "data/pa_experiment_data"
 
-    print("\n🔍 Mapping `data/pa_experiment_data/` structure...")
-    dataset_mapping = map_experiment_data_structure(dataset_root)
-    save_mapping(dataset_mapping, "experiment_data_mapping")
+    # print("\n🔍 Mapping `data/pa_experiment_data/` structure...")
+    # dataset_mapping = map_experiment_data_structure(dataset_root)
+    # save_mapping(dataset_mapping, "experiment_data_mapping")
+    explore_pa_experiment_data(dataset_root)

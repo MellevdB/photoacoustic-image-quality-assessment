@@ -250,8 +250,8 @@ def _process_denoising_data(dataset, dataset_info, results, metric_type, fake_re
             continue
 
         # Compute metrics
-        y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred))
-        y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true))
+        y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred), method="minmax")
+        y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true), method="minmax")
         metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
         results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
 
@@ -317,8 +317,8 @@ def _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fak
                 print(f"Stacked the images")
 
                 # Compute metrics
-                y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred_stack))
-                y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true_stack))
+                y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred_stack), method="zscore")
+                y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true_stack), method="zscore")
                 metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
                 results.append((f"pa_experiment_data/Training/{category}", f"PA{quality_level}", "PA1", "---", metrics))
 

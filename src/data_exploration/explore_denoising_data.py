@@ -1,6 +1,8 @@
 import os
 import json
 import csv
+import cv2
+import numpy as np
 
 CONFIG_DIR = "src/config"
 
@@ -95,9 +97,53 @@ def save_mapping(data, filename):
 
     print(f"✅ Saved mapping to {csv_path}")
 
+def explore_denoising_data(root_dir):
+    """
+    Explores `data/denoising_data/nne/train` to gather image statistics.
+    
+    :param root_dir: Path to the dataset.
+    """
+    print(f"\n🔍 Exploring Denoising Data in: {root_dir}")
+
+    expected_quality_levels = ["10db", "20db", "30db", "40db", "50db", "ground_truth"]
+    total_images = 0
+
+    for quality in expected_quality_levels:
+        quality_path = os.path.join(root_dir, "nne", "train", quality)
+        if not os.path.exists(quality_path):
+            print(f"⚠️ Missing directory: {quality_path}")
+            continue
+
+        image_files = sorted([f for f in os.listdir(quality_path) if f.endswith(".png")])
+        num_images = len(image_files)
+        total_images += num_images
+
+        if num_images == 0:
+            print(f"⚠️ No images found in {quality_path}")
+            continue
+
+        # Load first image to check dimensions
+        first_image = cv2.imread(os.path.join(quality_path, image_files[0]), cv2.IMREAD_GRAYSCALE)
+        image_shape = first_image.shape if first_image is not None else "Unknown"
+        image_type = first_image.dtype if first_image is not None else "Unknown"
+
+        # Compute statistics
+        all_pixels = np.array([cv2.imread(os.path.join(quality_path, f), cv2.IMREAD_GRAYSCALE).flatten() for f in image_files])
+        min_val, max_val, mean_val = np.min(all_pixels), np.max(all_pixels), np.mean(all_pixels)
+
+        print(f"\nKey: {quality}")
+        print(f"   ➤ Shape: {image_shape}")
+        print(f"   ➤ Type: {image_type}")
+        print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+        print(f"   ➤ Number of images: {num_images}")
+        print("-" * 50)
+
+    print(f"\n✅ Total images in denoising_data/nne/train: {total_images}")
+
 if __name__ == "__main__":
     data_root = "data/denoising_data"
 
-    print("\n🔍 Mapping `data/denoising_data/` structure...")
-    data_mapping = map_denoising_data_structure(data_root)
-    save_mapping(data_mapping, "denoising_data_mapping")
+    # print("\n🔍 Mapping `data/denoising_data/` structure...")
+    # data_mapping = map_denoising_data_structure(data_root)
+    # save_mapping(data_mapping, "denoising_data_mapping")
+    explore_denoising_data(data_root)
