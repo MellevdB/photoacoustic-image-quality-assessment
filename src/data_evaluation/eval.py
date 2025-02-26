@@ -23,6 +23,9 @@ from .nr_metrics import (
 import os
 import numpy as np
 import cv2
+import torch
+from joblib import Parallel, delayed
+
 
 def stack_images(image_dir, file_extension=".png", fake_results=False):
     """
@@ -75,9 +78,9 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
     :param fake_results: If True, return random dummy values.
     :return: Tuple containing mean and standard deviation dictionaries.
     """
-
-    num_slices = y_pred.shape[0]
-    print(f"Number of slices: {num_slices}")
+    print("Going to calculate metrics")
+    num_images = y_pred.shape[0]
+    print(f"Number of images: {num_images}")
 
     if fake_results:
         print("Using FAKE metric values for quick testing!")
@@ -85,44 +88,121 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
         metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
         return metrics_mean, metrics_std
 
-
+    fr_values = {key: [] for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM']}
+    nr_values = {key: [] for key in ['BRISQUE', 'NIQE', 'NIQE-K']}
+    
     if metric_type in ["fr", "all"]:
         data_range = y_true.max() - y_true.min()
-        fr_metrics = {
-            'PSNR': calculate_psnr(y_true, y_pred, data_range=data_range),
-            'SSIM': calculate_ssim(y_true, y_pred, data_range=data_range),
-            'VIF': calculate_vifp(y_true, y_pred),
-            'FSIM': fsim(y_true, y_pred),
-            'UQI': calculate_uqi(y_true, y_pred),
-            'S3IM': calculate_s3im(y_true, y_pred)
-        }
-        fr_std = {key: np.std([calculate_psnr(y_true[i], y_pred[i], data_range) if key == 'PSNR'
-                               else calculate_ssim(y_true[i], y_pred[i], data_range) if key == 'SSIM'
-                               else calculate_vifp(y_true[i], y_pred[i]) if key == 'VIF'
-                               else fsim(y_true[i], y_pred[i]) if key == 'FSIM'
-                               else calculate_uqi(y_true[i], y_pred[i]) if key == 'UQI'
-                               else calculate_s3im(y_true[i], y_pred[i])
-                               for i in range(num_slices)])
-                  for key in fr_metrics}
+        
+        for i in range(num_images):
+            print(f"Calculating FR metrics for image {i}")
+            fr_values['PSNR'].append(calculate_psnr(y_true[i], y_pred[i], data_range))
+            fr_values['SSIM'].append(calculate_ssim(y_true[i], y_pred[i], data_range))
+            fr_values['VIF'].append(calculate_vifp(y_true[i], y_pred[i]))
+            fr_values['FSIM'].append(fsim(y_true[i], y_pred[i]))
+            fr_values['UQI'].append(calculate_uqi(y_true[i], y_pred[i]))
+            fr_values['S3IM'].append(calculate_s3im(y_true[i], y_pred[i]))
+        
+        # Compute mean and std for FR metrics
+        fr_metrics = {key: np.mean(values) for key, values in fr_values.items()}
+        fr_std = {key: np.std(values) for key, values in fr_values.items()}
     else:
         fr_metrics, fr_std = {}, {}
 
     if metric_type in ["nr", "all"]:
-        per_slice_metrics = {'BRISQUE': [], 'NIQE': [], 'NIQE-K': []}
-        for i in range(num_slices):
-            slice_img = y_pred[i]
-            per_slice_metrics['BRISQUE'].append(calculate_brisque(slice_img))
-            # per_slice_metrics['NIQE'].append(calculate_niqe(slice_img))
-            # per_slice_metrics['NIQE-K'].append(calculate_niqe_k(slice_img))
-        nr_metrics = {k: np.mean(v) for k, v in per_slice_metrics.items()}
-        nr_std = {k: np.std(v) for k, v in per_slice_metrics.items()}
+        for i in range(num_images):
+            print(f"Calculating NR metrics for image {i}")
+            nr_values['BRISQUE'].append(calculate_brisque(y_pred[i]))
+            # nr_values['NIQE'].append(calculate_niqe(y_pred[i]))
+            # nr_values['NIQE-K'].append(calculate_niqe_k(y_pred[i]))
+
+        # Compute mean and std for NR metrics
+        nr_metrics = {k: np.mean(v) for k, v in nr_values.items()}
+        nr_std = {k: np.std(v) for k, v in nr_values.items()}
     else:
         nr_metrics, nr_std = {}, {}
 
+    # Merge results
     metrics_mean = {**fr_metrics, **nr_metrics}
     metrics_std = {**fr_std, **nr_std}
 
     return metrics_mean, metrics_std
+
+# def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
+#     """
+#     Optimized parallel computation of image quality metrics.
+    
+#     - Uses **Torch** for full-reference (FR) metrics (GPU-accelerated).
+#     - Uses **Joblib** for no-reference (NR) metrics (parallel CPU execution).
+    
+#     :param y_pred: Predicted image (numpy array [slices, height, width]).
+#     :param y_true: Ground truth image (same shape as y_pred).
+#     :param metric_type: "fr", "nr", or "all".
+#     :param fake_results: If True, return random dummy values.
+#     :return: Tuple containing mean and standard deviation dictionaries.
+#     """
+#     print("Going to calculate metrics")
+#     num_images = y_pred.shape[0]
+#     print(f"Number of images: {num_images}")
+
+#     if fake_results:
+#         print("Using FAKE metric values for quick testing!")
+#         metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM', 'BRISQUE']}
+#         metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
+#         return metrics_mean, metrics_std
+
+#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+#     # **FR Metrics (Torch - GPU accelerated)**
+#     if metric_type in ["fr", "all"]:
+#         print(f"Using Torch for FR metrics on {device}...")
+        
+#         y_pred_torch = torch.tensor(y_pred, dtype=torch.float32, device=device)
+#         y_true_torch = torch.tensor(y_true, dtype=torch.float32, device=device)
+#         data_range = (y_true_torch.max() - y_true_torch.min()).item()
+
+#         # Compute FR metrics **per image** and store results
+#         fr_results = []
+#         for i in range(num_images):
+#             fr_results.append({
+#                 'PSNR': calculate_psnr(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy(), data_range),
+#                 'SSIM': calculate_ssim(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy(), data_range),
+#                 'VIF': calculate_vifp(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
+#                 'FSIM': fsim(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
+#                 'UQI': calculate_uqi(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
+#                 'S3IM': calculate_s3im(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy())
+#             })
+
+#         # Compute **mean and std per metric** across all images
+#         fr_metrics = {key: np.mean([res[key] for res in fr_results]) for key in fr_results[0]}
+#         fr_std = {key: np.std([res[key] for res in fr_results]) for key in fr_results[0]}
+#     else:
+#         fr_metrics, fr_std = {}, {}
+
+#     # **NR Metrics (Joblib - CPU Parallelized)**
+#     if metric_type in ["nr", "all"]:
+#         print("Using Joblib for NR metrics...")
+
+#         def compute_nr(i):
+#             return {
+#                 'BRISQUE': calculate_brisque(y_pred[i]),
+#                 # 'NIQE': calculate_niqe(y_pred[i]),
+#                 # 'NIQE-K': calculate_niqe_k(y_pred[i])
+#             }
+
+#         nr_results = Parallel(n_jobs=-1)(delayed(compute_nr)(i) for i in range(num_images))
+
+#         # Compute **mean and std per metric** across all images
+#         nr_metrics = {k: np.mean([res[k] for res in nr_results if k in res]) for k in nr_results[0]}
+#         nr_std = {k: np.std([res[k] for res in nr_results if k in res]) for k in nr_results[0]}
+#     else:
+#         nr_metrics, nr_std = {}, {}
+
+#     # Merge results
+#     metrics_mean = {**fr_metrics, **nr_metrics}
+#     metrics_std = {**fr_std, **nr_std}
+
+#     return metrics_mean, metrics_std
 
 def evaluate(dataset, config, full_config, file_key=None, metric_type="all", fake_results=False):
     """
@@ -135,25 +215,23 @@ def evaluate(dataset, config, full_config, file_key=None, metric_type="all", fak
     results = []
     dataset_info = DATASETS[dataset]
 
-    print(f"Processing dataset={dataset}, config={full_config}")
-
     if dataset in ["SCD", "SWFD", "MSFD"]:
         _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results)
     elif dataset in ["mice", "phantom", "v_phantom"]:
         _process_mat_dataset(dataset, dataset_info, config, full_config, results, metric_type, fake_results)
     elif dataset == "denoising_data":
-        _process_denoising_data(dataset_info, results, metric_type, fake_results)
+        _process_denoising_data(dataset, dataset_info, results, metric_type, fake_results)
     elif dataset == "pa_experiment_data":
-        _process_pa_experiment_data(dataset_info, results, metric_type, fake_results)
+        _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fake_results)
 
     return results
 
-def _process_denoising_data(dataset_info, results, metric_type, fake_results):
+def _process_denoising_data(dataset, dataset_info, results, metric_type, fake_results):
     """Processes denoising data (10db - 50db)."""
     base_path = dataset_info["path"]
     subset = "train"  # We are processing train first
-    
     for quality in dataset_info["categories"][:-1]:  # Skip ground_truth for now
+        print(f"Processing dataset ={dataset}, config={quality}, ground truth={dataset_info['ground_truth']}")
         quality_path = os.path.join(base_path, "nne", subset, quality)
         ground_truth_path = os.path.join(base_path, "nne", subset, dataset_info["ground_truth"])
 
@@ -162,21 +240,33 @@ def _process_denoising_data(dataset_info, results, metric_type, fake_results):
             continue
 
         # Stack images
+        
         y_pred = stack_images(quality_path, file_extension=".png", fake_results=fake_results)
         y_true = stack_images(ground_truth_path, file_extension=".png", fake_results=fake_results)
+        print(f"Stacked the images")
 
         if y_pred.shape != y_true.shape:
             print(f"Skipping {quality} due to shape mismatch {y_pred.shape} vs {y_true.shape}")
             continue
 
         # Compute metrics
+        y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred))
+        y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true))
         metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
         results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
 
-def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results):
-    """Processes PA Experiment data (KneeSlice1, Phantoms, SmallAnimal, Transducers)."""
+def _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fake_results):
+    """Processes PA Experiment data (KneeSlice1, Phantoms, SmallAnimal, Transducers) with fixed top-cropping."""
     base_path = dataset_info["path"]
     subset = "Training"
+
+    # Define cropping ratios per dataset
+    crop_ratios = {
+        "KneeSlice1": 0.20,  # Remove top 20%
+        "Phantoms": 0.10,    # Remove top 10%
+        "SmallAnimal": 0.10, # Remove top 10%
+        "Transducers": 0.10  # Remove top 10%
+    }
 
     for category in dataset_info["training_categories"]:
         category_path = os.path.join(base_path, subset, category)
@@ -184,7 +274,6 @@ def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results
             print(f"Skipping {category}, missing directory.")
             continue
 
-        # List all subfolders (each should have PA1 - PA7 images)
         subfolders = [f for f in os.listdir(category_path) if os.path.isdir(os.path.join(category_path, f))]
 
         if not subfolders:
@@ -192,6 +281,7 @@ def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results
             continue
 
         for quality_level in range(2, 8):  # PA2 to PA7
+            print(f"Processing dataset={dataset}, category={category}, config=PA{quality_level}, ground truth={dataset_info['ground_truth']}")
             y_pred_stack = []
             y_true_stack = []
 
@@ -208,15 +298,28 @@ def _process_pa_experiment_data(dataset_info, results, metric_type, fake_results
                 y_true = cv2.imread(gt_path, cv2.IMREAD_GRAYSCALE)
 
                 if y_pred is not None and y_true is not None:
+                    # Get cropping percentage
+                    crop_ratio = crop_ratios.get(category, 0.0)
+                    
+                    if crop_ratio > 0:
+                        h, w = y_pred.shape  # Get height and width
+                        crop_height = int(h * crop_ratio)  # Calculate pixels to crop
+                        y_pred = y_pred[crop_height:, :]  # Crop top portion
+                        y_true = y_true[crop_height:, :]  # Crop top portion
+                        print(f"Cropped the images")
+
                     y_pred_stack.append(y_pred)
                     y_true_stack.append(y_true)
 
             if y_pred_stack and y_true_stack:
                 y_pred_stack = np.stack(y_pred_stack, axis=0)
                 y_true_stack = np.stack(y_true_stack, axis=0)
+                print(f"Stacked the images")
 
                 # Compute metrics
-                metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results)
+                y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred_stack))
+                y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true_stack))
+                metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
                 results.append((f"pa_experiment_data/Training/{category}", f"PA{quality_level}", "PA1", "---", metrics))
 
 def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results):
@@ -235,9 +338,13 @@ def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results,
 def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_results):
     """Evaluate MSFD dataset by iterating over each wavelength."""
     for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
+        print(f"Processing MSFD dataset with config={full_config}, wavelength={wavelength} and ground truth={ground_truth_key}")
         expected_key = f"{full_config}"
         if expected_key[-4:] == ground_truth_key[-4:]:
-            print("Fake results: ", fake_results)
+
+            if fake_results:
+                print("Fake results: ", fake_results)
+
             y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[expected_key][:]))
             y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
             metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
@@ -253,8 +360,12 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
     if not ground_truth_key or full_config not in data or ground_truth_key not in data:
         print(f"[ERROR] Missing configuration {full_config} or ground truth {ground_truth_key}. Skipping...")
         return
+    
+    print(f"Processing dataset={dataset}, config={full_config} with ground truth={ground_truth_key}")
 
-    print("Fake results: ", fake_results)
+    if fake_results:
+        print("Fake results: ", fake_results)
+
     y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[full_config][:]))
     y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
@@ -269,7 +380,11 @@ def _process_mat_dataset(dataset, dataset_info, config, full_config, results, me
         print(f"[WARNING] Missing MAT files for {dataset}. Skipping...")
         return
 
-    print("Fake results: ", fake_results)
+    print(f"Processing dataset={dataset}, config={full_config} with ground truth={gt_file}")
+
+    if fake_results:
+        print("Fake results: ", fake_results)
+
     y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(config_file, full_config)))
     y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(gt_file, dataset_info["ground_truth"])))
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)

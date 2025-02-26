@@ -13,6 +13,7 @@ dependencies:
   - astropy
   - mkl_fft
   - pip
+  - cudatoolkit=11.8  # CUDA for GPU acceleration (matches PyTorch and TensorFlow)
   - pip:
       - git+https://github.com/berkanlafci/pyoat.git
       - ipython
@@ -21,7 +22,11 @@ dependencies:
       - pyfftw
       - read-roi
       - tqdm
-      - opencv-python  # cv2 package
-      - image-similarity-measures  # phasepack package
-      - brisque  # BRISQUE package
+      - opencv-python
+      - image-similarity-measures
+      - brisque
       - libsvm-official
+      - torch 
+      - torchvision 
+      - torchaudio
+      - joblib
