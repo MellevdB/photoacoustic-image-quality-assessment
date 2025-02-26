@@ -23,8 +23,8 @@ from .nr_metrics import (
 import os
 import numpy as np
 import cv2
-import torch
-from joblib import Parallel, delayed
+# import torch
+# from joblib import Parallel, delayed
 
 
 def stack_images(image_dir, file_extension=".png", fake_results=False):
@@ -345,8 +345,8 @@ def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_r
             if fake_results:
                 print("Fake results: ", fake_results)
 
-            y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[expected_key][:]))
-            y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
+            y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[expected_key][:]), method="mean")
+            y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]), method="mean")
             metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
             results.append((full_config, ground_truth_key, wavelength, metrics))
         else:
@@ -366,8 +366,8 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
     if fake_results:
         print("Fake results: ", fake_results)
 
-    y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[full_config][:]))
-    y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]))
+    y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[full_config][:]), method="mean")
+    y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]), method="mean")
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
     results.append((full_config, ground_truth_key, metrics))
 
@@ -385,7 +385,26 @@ def _process_mat_dataset(dataset, dataset_info, config, full_config, results, me
     if fake_results:
         print("Fake results: ", fake_results)
 
-    y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(config_file, full_config)))
-    y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(load_mat_file(gt_file, dataset_info["ground_truth"])))
+    # **Select normalization method**
+    if dataset == "mice" or dataset == "phantom":
+        norm_method = "zscore"
+    elif dataset == "v_phantom":
+        norm_method = "minmax"
+    else:
+        norm_method = "mean"
+
+    # **Apply filtering for Mice & Phantom, but NOT for V-Phantom**
+    apply_filter = dataset in ["mice", "phantom"]
+
+    y_pred = np.random.rand(128, 128, 128) if fake_results else (
+        sigMatNormalize(sigMatFilter(load_mat_file(config_file, full_config)), method=norm_method) if apply_filter 
+        else sigMatNormalize(load_mat_file(config_file, full_config), method=norm_method)
+    )
+
+    y_true = np.random.rand(128, 128, 128) if fake_results else (
+        sigMatNormalize(sigMatFilter(load_mat_file(gt_file, dataset_info["ground_truth"])), method=norm_method) if apply_filter 
+        else sigMatNormalize(load_mat_file(gt_file, dataset_info["ground_truth"]), method=norm_method)
+    )
+
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
     results.append((full_config, dataset_info["ground_truth"], metrics))
