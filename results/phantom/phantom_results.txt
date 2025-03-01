@@ -1,8 +1,0 @@
-Dataset   Configuration       Wavelength   PSNR     SSIM
-------------------------------------------------------
-phantom   BP_phantom_8         ---         19.969  0.064  
-phantom   BP_phantom_16        ---         23.024  0.123  
-phantom   BP_phantom_32        ---         26.526  0.255  
-phantom   BP_phantom_64        ---         29.926  0.462  
-phantom   BP_phantom_128       ---         33.816  0.707  
-phantom   BP_phantom_GT        ---         inf     1.000  

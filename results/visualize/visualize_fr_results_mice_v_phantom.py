@@ -92,12 +92,12 @@ def plot_metrics(configs, metrics, title):
 
 # Plot MICE dataset
 # With no title
-plot_metrics(mice_configs, mice_metrics, "")
+plot_metrics(mice_configs, mice_metrics, "Mice Dataset")
 
 # Plot PHANTOM dataset
-plot_metrics(phantom_configs, phantom_metrics, "")
+plot_metrics(phantom_configs, phantom_metrics, "Phantom Dataset")
 
 # Plot V_PHANTOM dataset
-plot_metrics(phantom_configs, v_phantom_metrics, "")
+plot_metrics(phantom_configs, v_phantom_metrics, "V Phantom Dataset")
 
 

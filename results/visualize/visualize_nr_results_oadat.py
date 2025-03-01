@@ -18,12 +18,11 @@ def plot_brisque(configs, brisque_means, brisque_stds, title):
     plt.fill_between(x, np.array(brisque_means) - np.array(brisque_stds), 
                      np.array(brisque_means) + np.array(brisque_stds), color="r", alpha=0.2)
 
-    plt.xlabel("Configurations")
-    plt.ylabel("BRISQUE Score")
-    plt.xticks(x, configs, rotation=45)
-    plt.title(title)
+    plt.ylabel("BRISQUE Score", fontsize=18)
+    plt.xticks(x, configs, rotation=45, fontsize=16)
+    plt.title(title, fontsize=20)
     plt.grid(True)
-    plt.legend()
+    plt.legend(fontsize=16)
     plt.show()
 
 # --- Data for SCD (VC & MS) ---

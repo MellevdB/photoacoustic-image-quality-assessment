@@ -65,17 +65,16 @@ def plot_metrics(configs, metric_means, metric_stds, title):
     ax_bottom.plot((1-d, 1+d), (1-d, 1+d), **kwargs)
     
     # Set labels and ticks
-    ax_top.set_ylabel("PSNR (dB)", color="r")
-    ax_bottom.set_ylabel("Metric Values (FSIM, UQI, SSIM, VIF, S3IM)")
-    ax_bottom.set_xlabel("Configurations")
+    ax_top.set_ylabel("PSNR (dB)", color="r", fontsize=18)
+    ax_bottom.set_ylabel("Metric Value", fontsize=18)
     ax_bottom.set_xticks(x)
-    ax_bottom.set_xticklabels(configs_sorted, rotation=45)
+    ax_bottom.set_xticklabels(configs_sorted, rotation=45, fontsize=16)
     
     # Add legends
-    ax_top.legend(loc="upper right", fontsize=10)
-    ax_bottom.legend(loc="upper left", fontsize=10)
+    ax_top.legend(loc="upper right", fontsize=14)
+    ax_bottom.legend(loc="upper left", fontsize=14)
     
-    plt.suptitle(title, fontsize=14)
+    plt.suptitle(title, fontsize=20)
     plt.show()
 
 
@@ -136,8 +135,25 @@ swfd_sc_stds = {
     "S3IM": [0.029, 0.048, 0.058]
 }
 
-plot_metrics(swfd_configs, swfd_sc_means, swfd_sc_stds, "SWFD - Semi Circle")
+swfd_ms_means = {
+    "FSIM": [0.957, 0.863, 0.771],
+    "UQI": [0.420, 0.156, 0.059],
+    "PSNR": [38.220, 35.195, 34.008],
+    "SSIM": [0.887, 0.775, 0.712],
+    "VIF": [0.040, 0.020, 0.010],
+    "S3IM": [0.916, 0.830, 0.776]
+}
+swfd_ms_stds = {
+    "FSIM": [0.005, 0.012, 0.019],
+    "UQI": [0.013, 0.006, 0.003],
+    "PSNR": [2.075, 2.128, 2.145],
+    "SSIM": [0.024, 0.047, 0.060],
+    "VIF": [0.002, 0.001, 0.001],
+    "S3IM": [0.034, 0.057, 0.068]
+}
 
+plot_metrics(swfd_configs, swfd_sc_means, swfd_sc_stds, "SWFD - Semi Circle")
+plot_metrics(swfd_configs, swfd_ms_means, swfd_ms_stds, "SWFD - Multisegment")
 # --- Data for MSFD (w760) ---
 msfd_configs = ["128", "64", "32"]
 msfd_means = {

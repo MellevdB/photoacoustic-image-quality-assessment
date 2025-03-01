@@ -1,8 +1,0 @@
-Dataset   Configuration       PSNR     SSIM     VIF      FSIM     NQM      GMSD     MSSIM   HDRVDP
---------------------------------------------------------------------------------------------------
-phantom   BP_phantom_8         19.969  0.064   0.003   0.803   0.009   --- --- ---
-phantom   BP_phantom_16        23.024  0.123   0.004   0.809   0.016   --- --- ---
-phantom   BP_phantom_32        26.526  0.255   0.005   0.820   0.030   --- --- ---
-phantom   BP_phantom_64        29.926  0.462   0.009   0.842   0.057   --- --- ---
-phantom   BP_phantom_128       33.816  0.707   0.017   0.874   0.116   --- --- ---
-phantom   BP_phantom_GT        inf     1.000   1.000   1.000   1.000   --- --- ---
