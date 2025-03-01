@@ -1,3 +1,4 @@
+# mean normalization + filtering
 Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pa_experiment_data/Training/KneeSlice1 PA2        PA1             ---        0.453      0.045   -1376829301390.813 6001459787269.53522.989     2.691   0.122      0.148   0.044      0.038   0.161      0.059   53.600     1.623   
