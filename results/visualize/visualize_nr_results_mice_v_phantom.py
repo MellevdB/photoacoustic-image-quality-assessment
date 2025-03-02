@@ -28,19 +28,37 @@ def plot_brisque(configs, brisque_means, brisque_stds, title):
 
 # --- Data for MICE dataset ---
 mice_configs = ["Sparse 4", "Sparse 8", "Sparse 16", "Sparse 32", "Sparse 64", "Sparse 128", "Sparse 256"]
-mice_brisque_means = [48.675, 59.187, 57.535, 55.934, 56.297, 56.459, 54.093]
-mice_brisque_stds = [4.666, 5.467, 4.282, 3.566, 3.336, 3.151, 3.469]
+mice_brisque_means_mean_norm_filter = [48.675, 59.187, 57.535, 55.934, 56.297, 56.459, 54.093]
+mice_brisque_stds_mean_norm_filter = [4.666, 5.467, 4.282, 3.566, 3.336, 3.151, 3.469]
 
 # --- Data for PHANTOM dataset ---
 phantom_configs = ["Sparse 8", "Sparse 16", "Sparse 32", "Sparse 64", "Sparse 128"]
-phantom_brisque_means = [76.652, 73.379, 72.226, 71.802, 73.253]
-phantom_brisque_stds = [4.169, 4.081, 4.127, 3.951, 3.851]
+phantom_brisque_means_mean_norm_filter = [76.652, 73.379, 72.226, 71.802, 73.253]
+phantom_brisque_stds_mean_norm_filter = [4.169, 4.081, 4.127, 3.951, 3.851]
 
 # --- Data for V_PHANTOM dataset ---
-v_phantom_brisque_means = [72.931, 75.234, 75.678, 76.071, 77.634]
-v_phantom_brisque_stds = [3.050, 3.246, 3.215, 3.359, 3.498]
+v_phantom_brisque_means_mean_norm_filter = [72.931, 75.234, 75.678, 76.071, 77.634]
+v_phantom_brisque_stds_mean_norm_filter = [3.050, 3.246, 3.215, 3.359, 3.498]
+
+
+
+mice_brisque_means_zscore_norm_filter = [47.058, 57.970, 56.466, 54.960, 55.245, 55.164, 52.317]
+mice_brisque_stds_zscore_norm_filter = [4.344, 5.235, 4.091, 3.455, 3.226, 3.088, 3.381]
+
+phantom_brisque_means_zscore_norm_filter = [75.784, 72.464, 71.246, 70.753, 72.139]
+phantom_brisque_stds_zscore_norm_filter = [4.331, 4.269, 4.342, 4.157, 4.078]
+
+v_phantom_brisque_means_minmax_norm_no_filter = [76.358, 77.992, 77.524, 77.686, 78.500]
+v_phantom_brisque_stds_minmax_norm_no_filter = [3.424, 4.451, 4.532, 4.190, 4.220]
 
 # --- Plot BRISQUE scores ---
-plot_brisque(mice_configs, mice_brisque_means, mice_brisque_stds, "Mice Dataset")
-plot_brisque(phantom_configs, phantom_brisque_means, phantom_brisque_stds, "Phantom Dataset")
-plot_brisque(phantom_configs, v_phantom_brisque_means, v_phantom_brisque_stds, "V Phantom Dataset")
+# Mean normalization + BandPass Filter
+# plot_brisque(mice_configs, mice_brisque_means_mean_norm_filter, mice_brisque_stds_mean_norm_filter, "Mice Dataset")
+# plot_brisque(phantom_configs, phantom_brisque_means_mean_norm_filter, phantom_brisque_stds_mean_norm_filter, "Phantom Dataset")
+# plot_brisque(phantom_configs, v_phantom_brisque_means_mean_norm_filter, v_phantom_brisque_stds_mean_norm_filter, "V Phantom Dataset")
+
+# Zscore normalization + BandPass filter for mice and phantom
+# MinMax normalization (no filter) for v_phantom
+plot_brisque(mice_configs, mice_brisque_means_zscore_norm_filter, mice_brisque_stds_zscore_norm_filter, "Mice Dataset")
+plot_brisque(phantom_configs, phantom_brisque_means_zscore_norm_filter, phantom_brisque_stds_zscore_norm_filter, "Phantom Dataset")
+plot_brisque(phantom_configs, v_phantom_brisque_means_minmax_norm_no_filter, v_phantom_brisque_stds_minmax_norm_no_filter, "V Phantom Dataset")
