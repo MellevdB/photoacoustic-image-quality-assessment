@@ -1,3 +1,4 @@
+# mean normalization + bandpass filtering
 Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   NQM_mean   NQM_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 MSFD      ms,ss32_BP_w700      ms_BP_w700      700        0.814      0.021   0.050      0.003   34.816     3.014   0.798      0.066   0.010      0.001   0.833      0.052   
