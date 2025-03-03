@@ -1,4 +1,4 @@
-mean normalization +  bandpass filtering (not sure...)
+mean normalization +  bandpass filtering or no preprocessing...
 Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 denoising_data/nne/train       10db       ground_truth    ---        0.304      0.029   0.203      0.130   33.233     1.773   0.556      0.178   0.032      0.005   0.227      0.187   108.570    2.640   
