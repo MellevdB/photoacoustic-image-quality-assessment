@@ -5,8 +5,12 @@ import matplotlib.pyplot as plt
 configs = ["10dB", "20dB", "30dB", "40dB", "50dB"]
 
 # BRISQUE Scores for Denoising Data
-denoising_brisque = {
+denoising_brisque_mean_norm_filter = {
     "BRISQUE": ([108.570, 93.643, 68.554, 34.757, 33.191], [2.640, 3.888, 8.217, 4.966, 4.573])
+}
+
+denoising_brisque_zscore_norm_filter = {
+    "BRISQUE": ([89.886, 61.056, 37.271, 58.534, 59.356], [3.528, 6.399, 9.369, 6.698, 6.545])
 }
 
 def plot_brisque(configs, brisque_means, brisque_stds, title):
@@ -33,4 +37,5 @@ def plot_brisque(configs, brisque_means, brisque_stds, title):
     plt.show()
 
 # Generate BRISQUE plot for denoising dataset
-plot_brisque(configs, denoising_brisque["BRISQUE"][0], denoising_brisque["BRISQUE"][1], "Denoising Data")
+# plot_brisque(configs, denoising_brisque_mean_norm_filter["BRISQUE"][0], denoising_brisque_mean_norm_filter["BRISQUE"][1], "Denoising Data")
+plot_brisque(configs, denoising_brisque_zscore_norm_filter["BRISQUE"][0], denoising_brisque_zscore_norm_filter["BRISQUE"][1], "Denoising Data")
