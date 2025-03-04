@@ -117,6 +117,7 @@ DATASETS = {
         "ground_truth": "v_phantom_gt",
     },
 
+    # Simulated PA Data
     "denoising_data": {
         "path": os.path.join(DATA_DIR, "denoising_data/"),
         "subsets": ["train", "test", "validation"],
@@ -128,7 +129,7 @@ DATASETS = {
         }
     },
 
-    # Photoacoustic Experiment Data (Previously "data/Dataset")
+    # Experimental Phantom Data
     "pa_experiment_data": {
         "path": os.path.join(DATA_DIR, "pa_experiment_data/"),
         "subsets": ["Training", "Testing"],

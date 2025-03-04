@@ -26,6 +26,15 @@ import cv2
 # import torch
 # from joblib import Parallel, delayed
 
+def preprocess_bp_data(bp_data):
+    """Scale each reconstructed image by its own maximum value and clip all values below -0.2."""
+    scaled_data = np.zeros_like(bp_data)
+    for i in range(bp_data.shape[0]):  # Process each image slice separately
+        max_val = np.max(bp_data[i])
+        if max_val > 0:
+            scaled_data[i] = bp_data[i] / max_val  # Scale by max value
+        scaled_data[i] = np.clip(scaled_data[i], -0.2, None)  # Clip below -0.2
+    return scaled_data
 
 def stack_images(image_dir, file_extension=".png", fake_results=False):
     """
@@ -128,82 +137,6 @@ def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
 
     return metrics_mean, metrics_std
 
-# def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
-#     """
-#     Optimized parallel computation of image quality metrics.
-    
-#     - Uses **Torch** for full-reference (FR) metrics (GPU-accelerated).
-#     - Uses **Joblib** for no-reference (NR) metrics (parallel CPU execution).
-    
-#     :param y_pred: Predicted image (numpy array [slices, height, width]).
-#     :param y_true: Ground truth image (same shape as y_pred).
-#     :param metric_type: "fr", "nr", or "all".
-#     :param fake_results: If True, return random dummy values.
-#     :return: Tuple containing mean and standard deviation dictionaries.
-#     """
-#     print("Going to calculate metrics")
-#     num_images = y_pred.shape[0]
-#     print(f"Number of images: {num_images}")
-
-#     if fake_results:
-#         print("Using FAKE metric values for quick testing!")
-#         metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM', 'BRISQUE']}
-#         metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
-#         return metrics_mean, metrics_std
-
-#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-#     # **FR Metrics (Torch - GPU accelerated)**
-#     if metric_type in ["fr", "all"]:
-#         print(f"Using Torch for FR metrics on {device}...")
-        
-#         y_pred_torch = torch.tensor(y_pred, dtype=torch.float32, device=device)
-#         y_true_torch = torch.tensor(y_true, dtype=torch.float32, device=device)
-#         data_range = (y_true_torch.max() - y_true_torch.min()).item()
-
-#         # Compute FR metrics **per image** and store results
-#         fr_results = []
-#         for i in range(num_images):
-#             fr_results.append({
-#                 'PSNR': calculate_psnr(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy(), data_range),
-#                 'SSIM': calculate_ssim(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy(), data_range),
-#                 'VIF': calculate_vifp(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
-#                 'FSIM': fsim(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
-#                 'UQI': calculate_uqi(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy()),
-#                 'S3IM': calculate_s3im(y_true_torch[i].cpu().numpy(), y_pred_torch[i].cpu().numpy())
-#             })
-
-#         # Compute **mean and std per metric** across all images
-#         fr_metrics = {key: np.mean([res[key] for res in fr_results]) for key in fr_results[0]}
-#         fr_std = {key: np.std([res[key] for res in fr_results]) for key in fr_results[0]}
-#     else:
-#         fr_metrics, fr_std = {}, {}
-
-#     # **NR Metrics (Joblib - CPU Parallelized)**
-#     if metric_type in ["nr", "all"]:
-#         print("Using Joblib for NR metrics...")
-
-#         def compute_nr(i):
-#             return {
-#                 'BRISQUE': calculate_brisque(y_pred[i]),
-#                 # 'NIQE': calculate_niqe(y_pred[i]),
-#                 # 'NIQE-K': calculate_niqe_k(y_pred[i])
-#             }
-
-#         nr_results = Parallel(n_jobs=-1)(delayed(compute_nr)(i) for i in range(num_images))
-
-#         # Compute **mean and std per metric** across all images
-#         nr_metrics = {k: np.mean([res[k] for res in nr_results if k in res]) for k in nr_results[0]}
-#         nr_std = {k: np.std([res[k] for res in nr_results if k in res]) for k in nr_results[0]}
-#     else:
-#         nr_metrics, nr_std = {}, {}
-
-#     # Merge results
-#     metrics_mean = {**fr_metrics, **nr_metrics}
-#     metrics_std = {**fr_std, **nr_std}
-
-#     return metrics_mean, metrics_std
-
 def evaluate(dataset, config, full_config, file_key=None, metric_type="all", fake_results=False):
     """
     Evaluate a specific dataset and configuration for PSNR, SSIM, etc.
@@ -250,8 +183,9 @@ def _process_denoising_data(dataset, dataset_info, results, metric_type, fake_re
             continue
 
         # Compute metrics
-        y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred), method="minmax")
-        y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true), method="minmax")
+        if fake_results:
+            y_pred = np.random.rand(128, 128, 128)
+            y_true = np.random.rand(128, 128, 128)
         metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
         results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
 
@@ -317,9 +251,10 @@ def _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fak
                 print(f"Stacked the images")
 
                 # Compute metrics
-                y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_pred_stack), method="zscore")
-                y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(y_true_stack), method="zscore")
-                metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+                if fake_results:
+                    y_pred_stack = np.random.rand(128, 128, 128)
+                    y_true_stack = np.random.rand(128, 128, 128)
+                metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results)
                 results.append((f"pa_experiment_data/Training/{category}", f"PA{quality_level}", "PA1", "---", metrics))
 
 def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results):
@@ -345,8 +280,8 @@ def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_r
             if fake_results:
                 print("Fake results: ", fake_results)
 
-            y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[expected_key][:]), method="mean")
-            y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]), method="mean")
+            y_pred = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[expected_key][:])
+            y_true = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[ground_truth_key][:])
             metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
             results.append((full_config, ground_truth_key, wavelength, metrics))
         else:
@@ -366,8 +301,8 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
     if fake_results:
         print("Fake results: ", fake_results)
 
-    y_pred = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[full_config][:]), method="mean")
-    y_true = np.random.rand(128, 128, 128) if fake_results else sigMatNormalize(sigMatFilter(data[ground_truth_key][:]), method="mean")
+    y_pred = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[full_config][:])
+    y_true = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[ground_truth_key][:])
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
     results.append((full_config, ground_truth_key, metrics))
 
@@ -385,26 +320,10 @@ def _process_mat_dataset(dataset, dataset_info, config, full_config, results, me
     if fake_results:
         print("Fake results: ", fake_results)
 
-    # **Select normalization method**
-    if dataset == "mice" or dataset == "phantom":
-        norm_method = "zscore"
-    elif dataset == "v_phantom":
-        norm_method = "minmax"
-    else:
-        norm_method = "mean"
+    y_pred = np.random.rand(128, 128, 128) if fake_results else load_mat_file(config_file, full_config)
+    y_true = np.random.rand(128, 128, 128) if fake_results else load_mat_file(gt_file, dataset_info["ground_truth"])
 
-    # **Apply filtering for Mice & Phantom, but NOT for V-Phantom**
-    apply_filter = dataset in ["mice", "phantom"]
-
-    y_pred = np.random.rand(128, 128, 128) if fake_results else (
-        sigMatNormalize(sigMatFilter(load_mat_file(config_file, full_config)), method=norm_method) if apply_filter 
-        else sigMatNormalize(load_mat_file(config_file, full_config), method=norm_method)
-    )
-
-    y_true = np.random.rand(128, 128, 128) if fake_results else (
-        sigMatNormalize(sigMatFilter(load_mat_file(gt_file, dataset_info["ground_truth"])), method=norm_method) if apply_filter 
-        else sigMatNormalize(load_mat_file(gt_file, dataset_info["ground_truth"]), method=norm_method)
-    )
+    
 
     metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
     results.append((full_config, dataset_info["ground_truth"], metrics))
