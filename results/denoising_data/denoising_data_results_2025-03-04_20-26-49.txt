@@ -1,0 +1,7 @@
+Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+denoising_data/nne/train       10db       ground_truth    ---        0.316      0.086   0.056      0.095   29.606     2.717   0.524      0.246   0.050      0.017   0.370      0.259   nan        nan     
+denoising_data/nne/train       20db       ground_truth    ---        0.513      0.089   0.120      0.150   32.099     2.641   0.807      0.132   0.233      0.061   0.696      0.196   nan        nan     
+denoising_data/nne/train       30db       ground_truth    ---        0.720      0.063   0.475      0.269   33.020     2.890   0.932      0.031   0.382      0.093   0.927      0.038   nan        nan     
+denoising_data/nne/train       40db       ground_truth    ---        0.773      0.042   0.774      0.094   33.070     2.916   0.933      0.031   0.421      0.108   0.930      0.038   105.616    33.468  
+denoising_data/nne/train       50db       ground_truth    ---        0.776      0.043   0.779      0.092   33.092     2.923   0.933      0.031   0.430      0.112   0.930      0.038   100.611    37.498  

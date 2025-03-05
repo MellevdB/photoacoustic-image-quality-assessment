@@ -1,0 +1,8 @@
+Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+phantom                        BP_phantom_8 BP_phantom_GT   ---        0.747      0.020   0.476      0.054   24.218     1.202   0.268      0.046   0.002      0.000   0.202      0.049   79.256     5.586   
+phantom                        BP_phantom_16 BP_phantom_GT   ---        0.799      0.017   0.611      0.057   27.259     1.215   0.389      0.057   0.003      0.000   0.311      0.058   75.263     5.769   
+phantom                        BP_phantom_32 BP_phantom_GT   ---        0.837      0.016   0.772      0.046   30.793     1.292   0.572      0.064   0.004      0.000   0.513      0.067   73.247     6.243   
+phantom                        BP_phantom_64 BP_phantom_GT   ---        0.891      0.014   0.884      0.028   34.207     1.329   0.733      0.052   0.007      0.000   0.710      0.054   72.377     6.118   
+phantom                        BP_phantom_128 BP_phantom_GT   ---        0.931      0.012   0.949      0.014   38.119     1.375   0.863      0.033   0.013      0.001   0.860      0.033   74.080     5.895   
+phantom                        BP_phantom_GT BP_phantom_GT   ---        1.000      0.000   1.000      0.000   inf        nan     1.000      0.000   1.000      0.000   1.000      0.000   84.454     3.461   
