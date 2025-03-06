@@ -13,6 +13,10 @@ denoising_brisque_zscore_norm_filter = {
     "BRISQUE": ([89.886, 61.056, 37.271, 58.534, 59.356], [3.528, 6.399, 9.369, 6.698, 6.545])
 }
 
+denoising_brisque_no_preprocessing = {
+    "BRISQUE": ([float("nan"), float("nan"), float("nan"), 105.616, 100.611], [float("nan"), float("nan"), float("nan"), 33.468, 37.498])
+}
+
 def plot_brisque(configs, brisque_means, brisque_stds, title):
     """
     Creates a line plot for BRISQUE scores with error bands (std deviation).
@@ -38,4 +42,5 @@ def plot_brisque(configs, brisque_means, brisque_stds, title):
 
 # Generate BRISQUE plot for denoising dataset
 # plot_brisque(configs, denoising_brisque_mean_norm_filter["BRISQUE"][0], denoising_brisque_mean_norm_filter["BRISQUE"][1], "Denoising Data")
-plot_brisque(configs, denoising_brisque_zscore_norm_filter["BRISQUE"][0], denoising_brisque_zscore_norm_filter["BRISQUE"][1], "Denoising Data")
+# plot_brisque(configs, denoising_brisque_zscore_norm_filter["BRISQUE"][0], denoising_brisque_zscore_norm_filter["BRISQUE"][1], "Denoising Data")
+plot_brisque(configs, denoising_brisque_no_preprocessing["BRISQUE"][0], denoising_brisque_no_preprocessing["BRISQUE"][1], "Denoising Data")

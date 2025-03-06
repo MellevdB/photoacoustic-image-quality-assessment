@@ -60,6 +60,40 @@ v_phantom_metrics_minmax_norm_no_filter = {
     "S3IM": ([1.000, 0.812, 0.568, 0.369, 0.338], [0.000, 0.053, 0.074, 0.066, 0.078])
 }
 
+# Results for no additional preprocessing:
+mice_configs = ["Sparse 256", "Sparse 128", "Sparse 64", "Sparse 32", "Sparse 16", "Sparse 8", "Sparse 4"]
+
+mice_metrics_no_preprocessing = {
+    "FSIM": ([0.867, 0.759, 0.709, 0.686, 0.678, 0.677, 0.679], [0.013, 0.014, 0.017, 0.020, 0.023, 0.024, 0.025]),
+    "UQI": ([0.562, 0.199, 0.069, 0.027, 0.012, 0.006, 0.004], [0.021, 0.006, 0.003, 0.003, 0.002, 0.002, 0.001]),
+    "PSNR": ([50.209, 47.181, 46.036, 45.518, 45.276, 45.158, 45.104], [1.629, 1.625, 1.629, 1.630, 1.630, 1.631, 1.630]),
+    "SSIM": ([0.963, 0.917, 0.888, 0.872, 0.864, 0.860, 0.858], [0.008, 0.018, 0.024, 0.027, 0.029, 0.030, 0.030]),
+    "VIF": ([0.047, 0.019, 0.010, 0.006, 0.004, 0.003, 0.002], [0.004, 0.002, 0.001, 0.001, 0.000, 0.000, 0.000]),
+    "S3IM": ([0.747, 0.513, 0.404, 0.358, 0.340, 0.334, 0.334], [0.067, 0.115, 0.134, 0.141, 0.144, 0.145, 0.145])
+}
+
+phantom_configs = ["Sparse 128", "Sparse 64", "Sparse 32", "Sparse 16", "Sparse 8"]
+
+phantom_metrics_no_preprocessing = {
+    "FSIM": ([0.931, 0.891, 0.837, 0.799, 0.747], [0.012, 0.014, 0.016, 0.017, 0.020]),
+    "UQI": ([0.949, 0.884, 0.772, 0.611, 0.476], [0.014, 0.028, 0.046, 0.057, 0.054]),
+    "PSNR": ([38.119, 34.207, 30.793, 27.259, 24.218], [1.375, 1.329, 1.292, 1.215, 1.202]),
+    "SSIM": ([0.863, 0.733, 0.572, 0.389, 0.268], [0.033, 0.052, 0.064, 0.057, 0.046]),
+    "VIF": ([0.013, 0.007, 0.004, 0.003, 0.002], [0.001, 0.000, 0.000, 0.000, 0.000]),
+    "S3IM": ([0.860, 0.710, 0.513, 0.311, 0.202], [0.033, 0.054, 0.067, 0.058, 0.049])
+}
+
+v_phantom_configs = ["Sparse 128", "Sparse 64", "Sparse 32", "Sparse 16", "Sparse 8"]
+
+v_phantom_metrics_no_preprocessing = {
+    "FSIM": ([0.597, 0.464, 0.396, 0.353, 0.324], [0.025, 0.025, 0.020, 0.018, 0.019]),
+    "UQI": ([0.443, 0.277, 0.183, 0.124, 0.087], [0.062, 0.056, 0.043, 0.033, 0.027]),
+    "PSNR": ([41.137, 35.342, 31.153, 27.450, 24.244], [3.233, 3.491, 3.710, 3.848, 3.898]),
+    "SSIM": ([0.834, 0.609, 0.411, 0.260, 0.162], [0.082, 0.126, 0.127, 0.105, 0.076]),
+    "VIF": ([0.074, 0.033, 0.019, 0.013, 0.010], [0.009, 0.004, 0.002, 0.002, 0.001]),
+    "S3IM": ([0.510, 0.248, 0.130, 0.075, 0.046], [0.079, 0.051, 0.029, 0.018, 0.013])
+}
+
 def plot_metrics(configs, metrics, title):
     # Reverse the configs list so that it goes from low to high
     configs_sorted = configs[::-1]
@@ -121,13 +155,16 @@ def plot_metrics(configs, metrics, title):
 # Plot MICE dataset
 # With no title
 # plot_metrics(mice_configs, mice_metrics_mean_norm_filter, "Mice Dataset")
-plot_metrics(mice_configs, mice_metrics_zscore_norm_filter, "Mice Dataset")
+# plot_metrics(mice_configs, mice_metrics_zscore_norm_filter, "Mice Dataset")
+plot_metrics(mice_configs, mice_metrics_no_preprocessing, "Mice Dataset")
 
 # Plot PHANTOM dataset
 # plot_metrics(phantom_configs, phantom_metrics_mean_norm_filter, "Phantom Dataset")
-plot_metrics(phantom_configs, phantom_metrics_zscore_norm_filter, "Phantom Dataset")
+# plot_metrics(phantom_configs, phantom_metrics_zscore_norm_filter, "Phantom Dataset")
+plot_metrics(phantom_configs, phantom_metrics_no_preprocessing, "Phantom Dataset")
 
 # Plot V_PHANTOM dataset
 # plot_metrics(phantom_configs, v_phantom_metrics_mean_norm_filter, "V Phantom Dataset")
-plot_metrics(phantom_configs, v_phantom_metrics_minmax_norm_no_filter, "V Phantom Dataset")
+# plot_metrics(phantom_configs, v_phantom_metrics_minmax_norm_no_filter, "V Phantom Dataset")
+plot_metrics(phantom_configs, v_phantom_metrics_no_preprocessing, "V Phantom Dataset")
 

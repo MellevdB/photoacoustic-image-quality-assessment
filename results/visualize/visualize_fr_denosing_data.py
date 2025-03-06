@@ -23,6 +23,15 @@ denoising_metrics_zscore_norm_filter = {
     "S3IM": ([0.218, 0.716, 0.831, 0.836, 0.836], [0.058, 0.064, 0.038, 0.038, 0.038])
 }
 
+denoising_metrics_no_preprocessing = {
+    "FSIM": ([0.316, 0.513, 0.720, 0.773, 0.776], [0.086, 0.089, 0.063, 0.042, 0.043]),
+    "UQI": ([0.056, 0.120, 0.475, 0.774, 0.779], [0.095, 0.150, 0.269, 0.094, 0.092]),
+    "PSNR": ([29.606, 32.099, 33.020, 33.070, 33.092], [2.717, 2.641, 2.890, 2.916, 2.923]),
+    "SSIM": ([0.524, 0.807, 0.932, 0.933, 0.933], [0.246, 0.132, 0.031, 0.031, 0.031]),
+    "VIF": ([0.050, 0.233, 0.382, 0.421, 0.430], [0.017, 0.061, 0.093, 0.108, 0.112]),
+    "S3IM": ([0.370, 0.696, 0.927, 0.930, 0.930], [0.259, 0.196, 0.038, 0.038, 0.038])
+}
+
 def plot_metrics(title, metrics):
     x = np.arange(len(configs))
     fig, (ax_top, ax_bottom) = plt.subplots(2, 1, sharex=True, figsize=(12, 10), gridspec_kw={'height_ratios': [1, 1]})
@@ -50,4 +59,5 @@ def plot_metrics(title, metrics):
 
 # Generate plot for denoising dataset
 # plot_metrics("Denoising Data", denoising_metrics_mean_norm_filter)
-plot_metrics("denoising Data", denoising_metrics_zscore_norm_filter)
+# plot_metrics("denoising Data", denoising_metrics_zscore_norm_filter)
+plot_metrics("denoising Data", denoising_metrics_no_preprocessing)

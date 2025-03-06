@@ -44,11 +44,22 @@ pa_experiment_brisque_zscore = {
     "Transducers": ([42.984, 40.558, 39.636, 42.773, 51.885, 50.948], [3.747, 2.706, 3.133, 2.740, 2.509, 0.305])
 }
 
+# Results no additional preprocessing
+pa_experiment_brisque_no_preprocessing = {
+    "KneeSlice1": ([168.769, 162.175, 165.365, 153.699, 154.712, 155.846], [8.230, 6.791, 7.946, 8.956, 5.240, 0.006]),
+    "Phantoms": ([159.095, 157.025, 156.089, 155.819, 155.705, 155.570], [9.169, 7.350, 3.505, 6.152, 0.812, 2.254]),
+    "SmallAnimal": ([158.795, 153.037, 154.095, 155.845, 155.845, 155.845], [8.138, 9.748, 7.498, 0.000, 0.000, 0.000]),
+    "Transducers": ([163.694, 157.110, 158.481, 154.723, 155.845, 155.845], [9.462, 10.661, 4.567, 1.943, 0.000, 0.000])
+}
+
 
 # Generate BRISQUE plots
 # for dataset, (means, stds) in pa_experiment_brisque_mean.items():
 #     plot_brisque(configs, means, stds, f"{dataset} Dataset")
 
 
-for dataset, (means, stds) in pa_experiment_brisque_zscore.items():
+# for dataset, (means, stds) in pa_experiment_brisque_zscore.items():
+#     plot_brisque(configs, means, stds, f"{dataset} Dataset")
+
+for dataset, (means, stds) in pa_experiment_brisque_no_preprocessing.items():
     plot_brisque(configs, means, stds, f"{dataset} Dataset")

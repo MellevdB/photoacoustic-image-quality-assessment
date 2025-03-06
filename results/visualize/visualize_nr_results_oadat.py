@@ -25,26 +25,49 @@ def plot_brisque(configs, brisque_means, brisque_stds, title):
     plt.legend(fontsize=16)
     plt.show()
 
-# --- Data for SCD (VC & MS) ---
-scd_configs = ["128", "64", "32"]
-scd_vc_brisque_means = [34.953, 42.149, 44.211]
-scd_vc_brisque_stds = [4.241, 4.552, 3.523]
+# # Results with preprocessing:
+# # --- Data for SCD (VC & MS) ---
+# scd_configs = ["32", "64", "128"]
+# scd_vc_brisque_means = [44.211, 42.149, 34.953]
+# scd_vc_brisque_stds = [3.523, 4.552, 4.241]
 
-scd_ms_brisque_means = [42.047, 52.377, 61.611]
-scd_ms_brisque_stds = [4.287, 5.102, 6.394]
+# scd_ms_brisque_means = [61.611, 52.377, 42.047]
+# scd_ms_brisque_stds = [6.394, 5.102, 4.287]
 
-# --- Data for SWFD (SC & MS) ---
-swfd_configs = ["128", "64", "32"]
-swfd_sc_brisque_means = [75.869, 79.288, 70.195]
-swfd_sc_brisque_stds = [5.704, 5.367, 6.365]
+# # --- Data for SWFD (SC & MS) ---
+# swfd_configs = ["32", "64", "128"]
+# swfd_sc_brisque_means = [70.195, 79.288, 75.869]
+# swfd_sc_brisque_stds = [6.365, 5.367, 5.704]
 
-swfd_ms_brisque_means = [44.165, 46.556, 42.484]
-swfd_ms_brisque_stds = [4.152, 4.406, 4.869]
+# swfd_ms_brisque_means = [42.484, 46.556, 44.165]
+# swfd_ms_brisque_stds = [4.869, 4.406, 4.152]
 
-# --- Data for MSFD (w760) ---
-msfd_configs = ["128", "64", "32"]
-msfd_brisque_means = [62.050, 64.032, 60.229]
-msfd_brisque_stds = [8.819, 9.793, 10.130]
+# # --- Data for MSFD (w760) ---
+# msfd_configs = ["32", "64", "128"]
+# msfd_brisque_means = [60.229, 64.032, 62.050]
+# msfd_brisque_stds = [10.130, 9.793, 8.819]
+
+# Results without additional preprocessing:
+scd_configs = ["32", "64", "128"]
+
+scd_vc_brisque_means = [44.211, 42.149, 34.953]
+scd_vc_brisque_stds = [3.523, 4.552, 4.241]
+
+scd_ms_brisque_means = [61.611, 52.377, 42.047]
+scd_ms_brisque_stds = [6.394, 5.102, 4.287]
+
+msfd_configs = ["32", "64", "128"]
+
+msfd_brisque_means = [60.229, 64.032, 62.050]
+msfd_brisque_stds = [10.130, 9.793, 8.819]
+
+swfd_configs = ["32", "64", "128"]
+
+swfd_sc_brisque_means = [70.195, 79.288, 75.869]
+swfd_sc_brisque_stds = [6.365, 5.367, 5.704]
+
+swfd_ms_brisque_means = [42.484, 46.556, 44.165]
+swfd_ms_brisque_stds = [4.869, 4.406, 4.152]
 
 # --- Plot BRISQUE scores ---
 plot_brisque(scd_configs, scd_vc_brisque_means, scd_vc_brisque_stds, "SCD - Virtual Circle")
