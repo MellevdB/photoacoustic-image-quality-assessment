@@ -30,3 +30,4 @@ dependencies:
       - torchvision 
       - torchaudio
       - joblib
+      - piq

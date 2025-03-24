@@ -117,6 +117,7 @@ def explore_denoising_data(root_dir):
         image_files = sorted([f for f in os.listdir(quality_path) if f.endswith(".png")])
         num_images = len(image_files)
         total_images += num_images
+        print("Total images: ", total_images)
 
         if num_images == 0:
             print(f"⚠️ No images found in {quality_path}")
@@ -128,7 +129,7 @@ def explore_denoising_data(root_dir):
         image_type = first_image.dtype if first_image is not None else "Unknown"
 
         # Compute statistics
-        all_pixels = np.array([cv2.imread(os.path.join(quality_path, f), cv2.IMREAD_GRAYSCALE).flatten() for f in image_files])
+        all_pixels = first_image.flatten()
         min_val, max_val, mean_val = np.min(all_pixels), np.max(all_pixels), np.mean(all_pixels)
 
         print(f"\nKey: {quality}")
