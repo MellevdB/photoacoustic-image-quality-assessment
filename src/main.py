@@ -69,7 +69,13 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", fake_results=Fals
 
     # Open file in append mode for progressive saving
     with open(file_path, 'a') as f:
-        if dataset not in ["denoising_data", "pa_experiment_data"]:
+        if dataset == "zenodo":
+            # Directly process Zenodo dataset
+            results = evaluate(dataset, None, None, None, metric_type, fake_results)
+            if results:
+                for entry in results:
+                    write_result_entry(f, dataset, entry, metric_type)
+        elif dataset not in ["denoising_data", "pa_experiment_data"]:
             if isinstance(dataset_info["path"], dict):
                 for file_key in dataset_info["path"]:
                     for config, config_values in dataset_info["configs"].items():

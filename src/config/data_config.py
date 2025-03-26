@@ -139,6 +139,14 @@ DATASETS = {
         "ground_truth": "PA1.png",
         "image_extension": ".png",
     },
+
+    "zenodo": {
+        "path": "/Users/mellevanderbrugge/Documents/UvA/Master AI/Master Thesis/photoacoustic-image-quality-assessment/data/zenodo/normalised_images",
+        "reference": "reference",
+        "algorithms": "algorithms",
+        "categories": ["0", "1", "2"],  # Corresponding to reconstruction methods
+        "ground_truth": "reference"
+    }
 }
 
 # Ensure results directories exist
