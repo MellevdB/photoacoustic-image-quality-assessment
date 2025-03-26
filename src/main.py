@@ -109,10 +109,17 @@ def write_header(f, metric_type):
     :param f: Open file object
     :param metric_type: "fr", "nr", or "all"
     """
-    metric_headers = ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM'] if metric_type == "fr" else \
-                     ['BRISQUE'] if metric_type == "nr" else \
-                     ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM', 'BRISQUE']
-    header = "Dataset   Configuration   Ground Truth   Wavelength   " + "   ".join([f"{m}_mean   {m}_std" for m in metric_headers])
+    base_metrics = ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM'] if metric_type == "fr" else \
+                   ['BRISQUE'] if metric_type == "nr" else \
+                   ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM', 'BRISQUE']
+    
+    # Add PIQ metrics to the header
+    piq_metrics = ['PIQ_PSNR', 'PIQ_SSIM', 'PIQ_MSSSIM', 'PIQ_IWSSIM', 'PIQ_VIF', 
+                  'PIQ_FSIM', 'PIQ_GMSD', 'PIQ_MSGMSD', 'PIQ_HAARPSI']
+    
+    all_metrics = base_metrics + piq_metrics
+    header = "Dataset   Configuration   Ground Truth   Wavelength   " + \
+            "   ".join([f"{m}_mean   {m}_std" for m in all_metrics])
     f.write(header + "\n" + "-" * len(header) + "\n")
 
 

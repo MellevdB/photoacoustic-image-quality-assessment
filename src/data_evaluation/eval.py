@@ -2,6 +2,8 @@ import os
 import scipy.io as sio
 import h5py
 import numpy as np
+import torch
+import piq
 from preprocessing_data.normalize import sigMatNormalize
 from preprocessing_data.filterBandPass import sigMatFilter
 from config.data_config import DATASETS, DATA_DIR, RESULTS_DIR
@@ -76,64 +78,139 @@ def load_mat_file(file_path, key):
         with h5py.File(file_path, "r") as f:
             return f[key][()]
 
-def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False):
+def calculate_metrics(y_pred, y_true, metric_type="all", fake_results=False, dataset=None):
     """
-    Calculate image quality metrics based on `metric_type` while also computing 
-    standard deviations across slices.
-
-    :param y_pred: Predicted image (numpy array [slices, height, width]).
-    :param y_true: Ground truth image (same shape as y_pred).
-    :param metric_type: "fr" (full-reference), "nr" (no-reference), or "all".
-    :param fake_results: If True, return random dummy values.
-    :return: Tuple containing mean and standard deviation dictionaries.
+    Calculate image quality metrics based on dataset type and metric_type.
+    
+    :param y_pred: Predicted images (numpy array)
+    :param y_true: Ground truth images (numpy array)
+    :param metric_type: Type of metrics to calculate ("fr", "nr", or "all")
+    :param fake_results: Whether to return fake results for testing
+    :param dataset: String indicating which dataset is being processed
+    :return: Tuple of (metrics_mean, metrics_std)
     """
-    print("Going to calculate metrics")
+    print(f"Calculating metrics for dataset: {dataset}")
     num_images = y_pred.shape[0]
     print(f"Number of images: {num_images}")
 
+    # Check if CUDA is available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Using device: {device}")
+
     if fake_results:
         print("Using FAKE metric values for quick testing!")
-        metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM', 'BRISQUE']}
-        metrics_std = {key: np.random.uniform(0.01, 0.1) for key in metrics_mean}
+        all_metrics = ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM', 'BRISQUE', 
+                      'PIQ_PSNR', 'PIQ_SSIM', 'PIQ_MSSSIM', 'PIQ_IWSSIM', 'PIQ_VIF', 
+                      'PIQ_FSIM', 'PIQ_GMSD', 'PIQ_MSGMSD', 'PIQ_HAARPSI']
+        metrics_mean = {key: np.random.uniform(0.1, 1.0) for key in all_metrics}
+        metrics_std = {key: np.random.uniform(0.01, 0.1) for key in all_metrics}
         return metrics_mean, metrics_std
 
-    fr_values = {key: [] for key in ['PSNR', 'SSIM', 'VIF', 'FSIM', 'UQI', 'S3IM']}
-    nr_values = {key: [] for key in ['BRISQUE', 'NIQE', 'NIQE-K']}
-    
+    # Initialize metric dictionaries
+    fr_values = {key: [] for key in ['FSIM', 'UQI', 'PSNR', 'SSIM', 'VIF', 'S3IM']}
+    nr_values = {key: [] for key in ['BRISQUE']}
+    piq_values = {key: float('nan') for key in ['PIQ_PSNR', 'PIQ_SSIM', 'PIQ_MSSSIM', 
+                                               'PIQ_IWSSIM', 'PIQ_VIF', 'PIQ_FSIM', 
+                                               'PIQ_GMSD', 'PIQ_MSGMSD', 'PIQ_HAARPSI']}
+
+    # Calculate PyTorch-PIQ metrics for specific datasets
+    if dataset in ['zenodo', 'pa_experiment_data', 'denoising_data']:
+        try:
+            # Convert numpy arrays to PyTorch tensors
+            y_pred_tensor = torch.from_numpy(y_pred).float()
+            y_true_tensor = torch.from_numpy(y_true).float()
+
+            # Add channel dimension if needed
+            if y_pred_tensor.dim() == 3:
+                y_pred_tensor = y_pred_tensor.unsqueeze(1)
+                y_true_tensor = y_true_tensor.unsqueeze(1)
+
+            # Move tensors to appropriate device
+            y_pred_tensor = y_pred_tensor.to(device)
+            y_true_tensor = y_true_tensor.to(device)
+
+            # Check tensor shapes and values
+            print(f"Tensor shapes - Pred: {y_pred_tensor.shape}, True: {y_true_tensor.shape}")
+            print(f"Value ranges - Pred: [{y_pred_tensor.min():.2f}, {y_pred_tensor.max():.2f}], "
+                  f"True: [{y_true_tensor.min():.2f}, {y_true_tensor.max():.2f}]")
+
+            # Normalize to [0, 1] if needed
+            if y_pred_tensor.max() > 1.0:
+                y_pred_tensor = y_pred_tensor / 255.0
+                y_true_tensor = y_true_tensor / 255.0
+
+            # Calculate PIQ metrics with error handling for each metric
+            piq_metrics = {
+                'PIQ_PSNR': lambda: piq.psnr(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_SSIM': lambda: piq.ssim(y_pred_tensor, y_true_tensor, data_range=1.0)[0],
+                'PIQ_MSSSIM': lambda: piq.multi_scale_ssim(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_IWSSIM': lambda: piq.information_weighted_ssim(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_VIF': lambda: piq.vif_p(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_FSIM': lambda: piq.fsim(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_GMSD': lambda: piq.gmsd(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_MSGMSD': lambda: piq.multi_scale_gmsd(y_pred_tensor, y_true_tensor, data_range=1.0),
+                'PIQ_HAARPSI': lambda: piq.haarpsi(y_pred_tensor, y_true_tensor, data_range=1.0)
+            }
+
+            for metric_name, metric_fn in piq_metrics.items():
+                try:
+                    value = metric_fn().item()
+                    piq_values[metric_name] = value
+                    print(f"Successfully calculated {metric_name}: {value}")
+                except Exception as e:
+                    print(f"Error calculating {metric_name}: {str(e)}")
+                    piq_values[metric_name] = float('nan')
+
+        except Exception as e:
+            print(f"Error in PIQ metrics calculation: {str(e)}")
+            # Keep default nan values in piq_values
+
+        finally:
+            # Clean up GPU memory
+            if device.type == 'cuda':
+                torch.cuda.empty_cache()
+
+    # Calculate traditional metrics based on metric_type
     if metric_type in ["fr", "all"]:
         data_range = y_true.max() - y_true.min()
-        
         for i in range(num_images):
-            print(f"Calculating FR metrics for image {i}")
-            fr_values['PSNR'].append(calculate_psnr(y_true[i], y_pred[i], data_range))
-            fr_values['SSIM'].append(calculate_ssim(y_true[i], y_pred[i], data_range))
-            fr_values['VIF'].append(calculate_vifp(y_true[i], y_pred[i]))
-            fr_values['FSIM'].append(fsim(y_true[i], y_pred[i]))
-            fr_values['UQI'].append(calculate_uqi(y_true[i], y_pred[i]))
-            fr_values['S3IM'].append(calculate_s3im(y_true[i], y_pred[i]))
-        
-        # Compute mean and std for FR metrics
-        fr_metrics = {key: np.mean(values) for key, values in fr_values.items()}
-        fr_std = {key: np.std(values) for key, values in fr_values.items()}
-    else:
-        fr_metrics, fr_std = {}, {}
+            try:
+                fr_values['PSNR'].append(calculate_psnr(y_true[i], y_pred[i], data_range))
+                fr_values['SSIM'].append(calculate_ssim(y_true[i], y_pred[i], data_range))
+                fr_values['VIF'].append(calculate_vifp(y_true[i], y_pred[i]))
+                fr_values['FSIM'].append(fsim(y_true[i], y_pred[i]))
+                fr_values['UQI'].append(calculate_uqi(y_true[i], y_pred[i]))
+                fr_values['S3IM'].append(calculate_s3im(y_true[i], y_pred[i]))
+            except Exception as e:
+                print(f"Error calculating FR metrics for image {i}: {str(e)}")
+                for key in fr_values:
+                    fr_values[key].append(float('nan'))
 
     if metric_type in ["nr", "all"]:
         for i in range(num_images):
-            print(f"Calculating NR metrics for image {i}")
-            nr_values['BRISQUE'].append(calculate_brisque(y_pred[i]))
-            # nr_values['NIQE'].append(calculate_niqe(y_pred[i]))
-            # nr_values['NIQE-K'].append(calculate_niqe_k(y_pred[i]))
+            try:
+                nr_values['BRISQUE'].append(calculate_brisque(y_pred[i]))
+            except Exception as e:
+                print(f"Error calculating NR metrics for image {i}: {str(e)}")
+                nr_values['BRISQUE'].append(float('nan'))
 
-        # Compute mean and std for NR metrics
-        nr_metrics = {k: np.mean(v) for k, v in nr_values.items()}
-        nr_std = {k: np.std(v) for k, v in nr_values.items()}
-    else:
-        nr_metrics, nr_std = {}, {}
+    # Compute means and standard deviations
+    fr_metrics = {key: np.nanmean(values) for key, values in fr_values.items()}
+    fr_std = {key: np.nanstd(values) for key, values in fr_values.items()}
+    nr_metrics = {key: np.nanmean(values) for key, values in nr_values.items()}
+    nr_std = {key: np.nanstd(values) for key, values in nr_values.items()}
 
-    # Merge results
+    # Combine all metrics
     metrics_mean = {**fr_metrics, **nr_metrics}
     metrics_std = {**fr_std, **nr_std}
+
+    # Add PIQ metrics (or "---" for datasets not using them)
+    if dataset not in ['zenodo', 'pa_experiment_data', 'denoising_data']:
+        metrics_mean.update({key: "---" for key in piq_values.keys()})
+        metrics_std.update({key: "---" for key in piq_values.keys()})
+    else:
+        metrics_mean.update(piq_values)
+        metrics_std.update({key: 0.0 for key in piq_values})  # Single values, no std
 
     return metrics_mean, metrics_std
 
@@ -148,7 +225,9 @@ def evaluate(dataset, config, full_config, file_key=None, metric_type="all", fak
     results = []
     dataset_info = DATASETS[dataset]
 
-    if dataset in ["SCD", "SWFD", "MSFD"]:
+    if dataset == "zenodo":
+        _process_zenodo_data(dataset, dataset_info, results, metric_type, fake_results)
+    elif dataset in ["SCD", "SWFD", "MSFD"]:
         _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results)
     elif dataset in ["mice", "phantom", "v_phantom"]:
         _process_mat_dataset(dataset, dataset_info, config, full_config, results, metric_type, fake_results)
@@ -186,7 +265,7 @@ def _process_denoising_data(dataset, dataset_info, results, metric_type, fake_re
         if fake_results:
             y_pred = np.random.rand(128, 128, 128)
             y_true = np.random.rand(128, 128, 128)
-        metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+        metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results, dataset='denoising_data')
         results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
 
 def _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fake_results):
@@ -254,7 +333,7 @@ def _process_pa_experiment_data(dataset, dataset_info, results, metric_type, fak
                 if fake_results:
                     y_pred_stack = np.random.rand(128, 128, 128)
                     y_true_stack = np.random.rand(128, 128, 128)
-                metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results)
+                metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results, dataset='pa_experiment_data')
                 results.append((f"pa_experiment_data/Training/{category}", f"PA{quality_level}", "PA1", "---", metrics))
 
 def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results, metric_type, fake_results):
@@ -282,7 +361,7 @@ def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_r
 
             y_pred = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[expected_key][:])
             y_true = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[ground_truth_key][:])
-            metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+            metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results, dataset='MSFD')
             results.append((full_config, ground_truth_key, wavelength, metrics))
         else:
             print(f"Skipping mismatched keys: {expected_key} vs {ground_truth_key}")
@@ -303,7 +382,7 @@ def _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, resul
 
     y_pred = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[full_config][:])
     y_true = np.random.rand(128, 128, 128) if fake_results else preprocess_bp_data(data[ground_truth_key][:])
-    metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+    metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results, dataset=dataset)
     results.append((full_config, ground_truth_key, metrics))
 
 def _process_mat_dataset(dataset, dataset_info, config, full_config, results, metric_type, fake_results):
@@ -325,5 +404,86 @@ def _process_mat_dataset(dataset, dataset_info, config, full_config, results, me
 
     
 
-    metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results)
+    metrics = calculate_metrics(y_pred, y_true, metric_type, fake_results, dataset=None)
     results.append((full_config, dataset_info["ground_truth"], metrics))
+
+def _process_zenodo_data(dataset, dataset_info, results, metric_type, fake_results):
+    """Processes the Zenodo dataset."""
+    base_path = dataset_info["path"]
+    reference_path = os.path.join(base_path, dataset_info["reference"])
+    algorithms_path = os.path.join(base_path, dataset_info["algorithms"])
+
+    # Load all reference images into a stack in sorted order
+    print("Loading reference images...")
+    y_true_stack = []
+    reference_images = sorted(os.listdir(reference_path))  # Sort to ensure consistent ordering
+    for reference_image in reference_images:
+        if not reference_image.endswith('.png'):
+            continue
+
+        ground_truth_path = os.path.join(reference_path, reference_image)
+        y_true = cv2.imread(ground_truth_path, cv2.IMREAD_GRAYSCALE)
+
+        if y_true is None:
+            print(f"Skipping {reference_image} due to loading error.")
+            continue
+
+        y_true_stack.append(y_true)
+        print(f"Loaded reference image: {reference_image}")
+
+    if not y_true_stack:
+        print("No reference images found. Exiting.")
+        return
+
+    y_true_stack = np.stack(y_true_stack, axis=0)
+    print(f"Total reference images stacked: {len(y_true_stack)}")
+
+    # Iterate over each configuration (0, 1, 2)
+    for category in dataset_info["categories"]:
+        print(f"\nProcessing configuration {category}...")
+        y_pred_stack = []
+
+        # For each reference image, load the corresponding algorithm image
+        for idx, reference_image in enumerate(reference_images):
+            if not reference_image.endswith('.png'):
+                continue
+
+            # Get image number from reference image (e.g., "image0.png" -> "0")
+            image_number = reference_image.split('.')[0].replace('image', '')
+            
+            # Construct algorithm image name (e.g., "image0_1.png")
+            algorithm_image = f"image{image_number}_{category}.png"
+            category_path = os.path.join(algorithms_path, algorithm_image)
+
+            if not os.path.exists(category_path):
+                print(f"Skipping {algorithm_image}, missing file.")
+                continue
+
+            # Load predicted image
+            y_pred = cv2.imread(category_path, cv2.IMREAD_GRAYSCALE)
+
+            if y_pred is None:
+                print(f"Skipping {algorithm_image} due to loading error.")
+                continue
+
+            if y_pred.shape != y_true_stack[0].shape:
+                print(f"Skipping {algorithm_image} due to shape mismatch {y_pred.shape} vs {y_true_stack[0].shape}")
+                continue
+
+            y_pred_stack.append(y_pred)
+            print(f"Loaded algorithm image {algorithm_image} (matches with {reference_image})")
+
+        if y_pred_stack:
+            # Stack predicted images along the first dimension
+            y_pred_stack = np.stack(y_pred_stack, axis=0)
+            print(f"\nConfiguration {category} complete:")
+            print(f"- Number of algorithm images: {len(y_pred_stack)}")
+            print(f"- Number of reference images: {len(y_true_stack)}")
+
+            # Compute metrics with dataset parameter
+            metrics = calculate_metrics(y_pred_stack, y_true_stack, metric_type, fake_results, dataset='zenodo')
+
+            # Append results for this configuration
+            config = f"method_{category}"
+            ground_truth = "reference"
+            results.append((config, ground_truth, metrics))
