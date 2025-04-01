@@ -6,6 +6,18 @@ from sewar.full_ref import vifp, uqi, msssim
 from skimage.filters import threshold_local
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 
+def compute_fr_metrics(y_true, y_pred):
+    results = {k: [] for k in ["PSNR", "SSIM", "VIF", "FSIM", "UQI", "S3IM"]}
+    data_range = y_true.max() - y_true.min()
+    for i in range(y_true.shape[0]):
+        results["PSNR"].append(calculate_psnr(y_true[i], y_pred[i], data_range))
+        results["SSIM"].append(calculate_ssim(y_true[i], y_pred[i], data_range))
+        results["VIF"].append(calculate_vifp(y_true[i], y_pred[i]))
+        results["FSIM"].append(fsim(y_true[i], y_pred[i]))
+        results["UQI"].append(calculate_uqi(y_true[i], y_pred[i]))
+        results["S3IM"].append(calculate_s3im(y_true[i], y_pred[i]))
+    return results
+
 def calculate_s3im(org_img: np.ndarray, pred_img: np.ndarray) -> float:
     """
     Sparse SSIM (S3IM) metric for image quality assessment.

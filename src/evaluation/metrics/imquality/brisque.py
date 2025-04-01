@@ -11,9 +11,9 @@ import skimage.color
 import skimage.transform
 from libsvm import svmutil
 
-from imquality.models import MODELS_PATH
-from imquality.statistics import AsymmetricGeneralizedGaussian, gaussian_kernel2d
-from imquality.utils import pil2ndarray
+from evaluation.metrics.imquality.models import MODELS_PATH
+from evaluation.metrics.imquality.statistics import AsymmetricGeneralizedGaussian, gaussian_kernel2d
+from evaluation.metrics.imquality.utils import pil2ndarray
 
 with open(os.path.join(MODELS_PATH, "normalize.pickle"), "rb") as file:
     scale_parameters = pickle.load(file)

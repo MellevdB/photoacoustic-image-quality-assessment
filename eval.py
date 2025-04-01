@@ -349,6 +349,7 @@ def _process_hdf5_dataset(dataset, dataset_info, full_config, file_key, results,
         else:
             _evaluate_scd_swfd(data, dataset, dataset_info, full_config, file_key, results, metric_type, fake_results)
 
+
 def _evaluate_msfd(data, dataset_info, full_config, results, metric_type, fake_results):
     """Evaluate MSFD dataset by iterating over each wavelength."""
     for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():

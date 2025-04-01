@@ -23,7 +23,7 @@ Placeholders (to be implemented later):
 import numpy as np
 import cv2
 from PIL import Image
-from imquality.brisque import score
+from evaluation.metrics.imquality.brisque import score
 
 # --- For NIQE ---
 import scipy
@@ -37,6 +37,12 @@ from scipy.stats import kurtosis
 from scipy.ndimage.filters import convolve
 from scipy.special import gamma
 from brisque import BRISQUE
+
+def compute_nr_metrics(y_pred):
+    results = {"BRISQUE": []}
+    for i in range(y_pred.shape[0]):
+        results["BRISQUE"].append(calculate_brisque(y_pred[i]))
+    return results
 
 # -------------------------
 # BRISQUE
