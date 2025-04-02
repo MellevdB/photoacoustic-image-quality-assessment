@@ -10,17 +10,17 @@ def calculate_metrics(y_pred, y_true, metric_type="all"):
     print("Using", device)
 
     if device.type == "cuda":
-        piq = compute_piq_metrics(y_pred, y_true)
-        metrics_mean.update(piq)
-        metrics_std.update({k: 0.0 for k in piq})
+        piq_mean, piq_std = compute_piq_metrics(y_pred, y_true)
+        metrics_mean.update({k: round(v, 4) for k, v in piq_mean.items()})
+        metrics_std.update({k: round(v, 4) for k, v in piq_std.items()})
     else:
         if metric_type in ["fr", "all"]:
             fr = compute_fr_metrics(y_pred, y_true)
-            metrics_mean.update({k: np.nanmean(v) for k, v in fr.items()})
-            metrics_std.update({k: np.nanstd(v) for k, v in fr.items()})
+            metrics_mean.update({k: round(np.nanmean(v), 4) for k, v in fr.items()})
+            metrics_std.update({k: round(np.nanstd(v), 4) for k, v in fr.items()})
         if metric_type in ["nr", "all"]:
             nr = compute_nr_metrics(y_pred)
-            metrics_mean.update({k: np.nanmean(v) for k, v in nr.items()})
-            metrics_std.update({k: np.nanstd(v) for k, v in nr.items()})
+            metrics_mean.update({k: round(np.nanmean(v), 4) for k, v in nr.items()})
+            metrics_std.update({k: round(np.nanstd(v), 4) for k, v in nr.items()})
 
     return metrics_mean, metrics_std
