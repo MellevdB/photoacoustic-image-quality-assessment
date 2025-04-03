@@ -1,0 +1,19 @@
+To evaluate the alignment between objective image quality metrics 
+and human perception, we computed the Spearman rank correlation between 
+per-image metric scores and the average expert ratings from the annotated 
+Zenodo dataset. The analysis was performed separately for each of the 
+three reconstruction methods (categories 0, 1, and 2), using 378 image pairs per category.
+
+The results show that MSSSIM, IWSSIM, and HAARPSI consistently exhibit
+strong positive correlations (r > 0.75 in category 2), indicating that 
+these metrics closely follow expert judgments of image quality. SSIM
+and VIF also demonstrate moderate to strong correlations, depending on 
+the category. On the other hand, error-based metrics such as GMSD and
+MSGMSD show strong negative correlations with expert scores, which is 
+expected given their inverse formulation (lower metric = higher quality).
+
+These findings suggest that certain full-reference metrics—particularly 
+MSSSIM, IWSSIM, and HAARPSI—are reliable indicators of perceptual quality
+in optoacoustic image reconstruction, and could be favored for future evaluations. 
+Furthermore, the consistency of these results across different reconstruction 
+categories supports the robustness of these metrics in varying configurations.

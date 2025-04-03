@@ -10,7 +10,7 @@ def calculate_metrics(y_pred, y_true, metric_type="all"):
     print("Using", device)
 
     if device.type == "cuda":
-        piq_mean, piq_std = compute_piq_metrics(y_pred, y_true)
+        piq_mean, piq_std, raw_metrics = compute_piq_metrics(y_pred, y_true)
         metrics_mean.update({k: round(v, 4) for k, v in piq_mean.items()})
         metrics_std.update({k: round(v, 4) for k, v in piq_std.items()})
     else:
@@ -23,4 +23,4 @@ def calculate_metrics(y_pred, y_true, metric_type="all"):
             metrics_mean.update({k: round(np.nanmean(v), 4) for k, v in nr.items()})
             metrics_std.update({k: round(np.nanstd(v), 4) for k, v in nr.items()})
 
-    return metrics_mean, metrics_std
+    return metrics_mean, metrics_std, raw_metrics

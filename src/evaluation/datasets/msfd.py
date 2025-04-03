@@ -17,5 +17,5 @@ def process_msfd(data, dataset_info, full_config, results, metric_type):
             if expected_key[-4:] == ground_truth_key[-4:]:
                 y_pred = scale_and_clip(data[expected_key][:])
                 y_true = scale_and_clip(data[ground_truth_key][:])
-                metrics = calculate_metrics(y_pred, y_true, metric_type)
-                results.append((full_config, ground_truth_key, wavelength, metrics))
+                metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
+                results.append((full_config, ground_truth_key, wavelength, (metrics_mean, metrics_std)))

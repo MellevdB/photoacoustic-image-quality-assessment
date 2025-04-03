@@ -19,5 +19,5 @@ def process_mat_dataset(dataset, dataset_info, config, full_config, results, met
     if os.path.isfile(gt_path) and os.path.isfile(pred_path):
         y_true = load_mat_file(gt_path, dataset_info["ground_truth"])
         y_pred = load_mat_file(pred_path, full_config)
-        metrics = calculate_metrics(y_pred, y_true, metric_type)
-        results.append((full_config, dataset_info["ground_truth"], metrics))
+        metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
+        results.append((full_config, dataset_info["ground_truth"], (metrics_mean, metrics_std)))

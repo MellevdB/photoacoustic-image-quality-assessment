@@ -62,9 +62,16 @@ def compute_piq_metrics(y_pred, y_true, batch_size=256):
     mean_metrics = {}
     std_metrics = {}
 
+    for key, value in all_metrics.items():
+        print(f"Metric: {key}, Total values: {sum(v.shape[0] for v in value)}")
+
+    raw_metrics = {}
     for name in metric_names:
         values = torch.cat(all_metrics[name])
+        raw_metrics[name] = values.cpu().numpy()
         mean_metrics[name] = values.mean().item()
         std_metrics[name] = values.std().item()
+        
 
-    return mean_metrics, std_metrics
+
+    return mean_metrics, std_metrics, raw_metrics

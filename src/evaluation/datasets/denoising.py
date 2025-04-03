@@ -11,5 +11,5 @@ def process_denoising_data(dataset_info, results, metric_type):
         y_pred = load_image_stack(pred_path)
         y_true = load_image_stack(gt_path)
         if y_pred.shape == y_true.shape:
-            metrics = calculate_metrics(y_pred, y_true, metric_type)
-            results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", metrics))
+            metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
+            results.append((f"denoising_data/noise/train", quality, "ground_truth", "---", (metrics_mean, metrics_std)))

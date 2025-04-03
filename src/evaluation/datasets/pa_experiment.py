@@ -24,5 +24,5 @@ def process_pa_experiment_data(dataset_info, results, metric_type):
             if y_pred:
                 y_pred = np.stack(y_pred, axis=0)
                 y_true = np.stack(y_true, axis=0)
-                metrics = calculate_metrics(y_pred, y_true, metric_type)
-                results.append((f"pa_experiment_data/Training/{category}", f"PA{q}", "PA1", "---", metrics))
+                metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
+                results.append((f"pa_experiment_data/Training/{category}", f"PA{q}", "PA1", "---", (metrics_mean, metrics_std)))

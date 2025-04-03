@@ -22,7 +22,6 @@ def evaluate(dataset, config, full_config, file_key=None, metric_type="all", tes
     elif dataset == "MSFD":
         process_msfd(dataset, dataset_info, full_config, results, metric_type)
     elif dataset in ["SCD", "SWFD"]:
-        print("Processing SCD or SWFD")
         process_scd_swfd(dataset, dataset_info, full_config, file_key, results, metric_type)
     elif dataset in ["mice", "phantom", "v_phantom"]:
         process_mat_dataset(dataset, dataset_info, config, full_config, results, metric_type)

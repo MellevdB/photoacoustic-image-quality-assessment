@@ -31,3 +31,6 @@ dependencies:
       - torchaudio
       - joblib
       - piq
+      - pandas
+      - seaborn
+      - scikit-learn

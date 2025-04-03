@@ -21,5 +21,5 @@ def process_scd_swfd(dataset, dataset_info, full_config, file_key, results, metr
 
         y_pred = scale_and_clip(data[full_config][:])
         y_true = scale_and_clip(data[ground_truth_key][:])
-        metrics = calculate_metrics(y_pred, y_true, metric_type)
-        results.append((full_config, ground_truth_key, metrics))
+        metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
+        results.append((full_config, ground_truth_key, (metrics_mean, metrics_std)))
