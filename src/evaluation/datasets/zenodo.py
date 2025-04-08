@@ -152,7 +152,7 @@ def save_polynomial_predictions_plot(df, y_true, y_pred, category_dir, degree):
     save_path = os.path.join(category_dir, f"predicted_vs_actual_degree{degree}.png")
     plt.savefig(save_path)
     plt.close()
-    print(f"📈 Saved predicted vs actual plot at: {save_path}")
+    print(f"Saved predicted vs actual plot at: {save_path}")
 
 def extract_weighted_formula(poly, linreg, metrics):
     """
@@ -206,7 +206,7 @@ def analyze_with_polynomial_features(df, category_dir, expert_col="ExpertAvg", d
     # Save CSV
     save_path = os.path.join(category_dir, f"polynomial_regression_degree{degree}.csv")
     coeff_df.to_csv(save_path, index=False)
-    print(f"✅ Saved polynomial regression results to: {save_path}")
+    print(f"Saved polynomial regression results to: {save_path}")
 
     # Plot predictions vs ground truth
     save_polynomial_predictions_plot(df_clean, y, y_pred, category_dir, degree)
@@ -216,6 +216,6 @@ def analyze_with_polynomial_features(df, category_dir, expert_col="ExpertAvg", d
     formula_path = os.path.join(category_dir, f"composite_metric_formula_degree{degree}.txt")
     with open(formula_path, "w") as f:
         f.write(formula)
-    print(f"🧮 Saved composite metric formula at: {formula_path}")
+    print(f"Saved composite metric formula at: {formula_path}")
 
     return coeff_df, r2, spearman_corr, formula
