@@ -20,18 +20,20 @@ def explore_mouse_data(data_path):
         print(f"⚠️ No .mat or .h5 files found in {data_path}")
         return
 
-    total_images = 0  # To store the total image count per dataset
-
     for file in files:
         file_path = os.path.join(data_path, file)
         print(f"\nLoading {file}...")
+        file_total_images = 0  # Reset for each file
+        dataset_count = 0  # Count number of datasets in file
 
         # Load the file using h5py for MATLAB v7.3 format
         with h5py.File(file_path, "r") as data:
             print(f"Keys in {file}: {list(data.keys())}")
+            print(f"Number of datasets in {file}: {len(data.keys())}")
 
             for key in data:
                 dataset = data[key]
+                dataset_count += 1
 
                 # Check if the dataset is actually an array (not a group)
                 if isinstance(dataset, h5py.Dataset):
@@ -45,16 +47,18 @@ def explore_mouse_data(data_path):
 
                     # Determine the number of images
                     num_images = array_data.shape[0] if len(array_data.shape) > 2 else 1
-                    total_images += num_images
+                    file_total_images += num_images
 
-                    print(f"Key: {key}")
+                    print(f"\nDataset {dataset_count}: {key}")
                     print(f"   ➤ Shape: {array_data.shape}")
                     print(f"   ➤ Type: {array_data.dtype}")
                     print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
-                    print(f"   ➤ Number of images: {num_images}")
+                    print(f"   ➤ Number of images in this dataset: {num_images}")
                     print("-" * 50)
 
-        print(f"Total images in {file}: {total_images}")
+        print(f"\nSummary for {file}:")
+        print(f"   ➤ Total number of datasets: {dataset_count}")
+        print(f"   ➤ Total number of images across all datasets: {file_total_images}")
         print("=" * 80)
 
 if __name__ == "__main__":
