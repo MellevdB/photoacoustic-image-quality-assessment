@@ -6,7 +6,7 @@ from config.data_config import DATASETS, RESULTS_DIR
 
 ALL_METRICS = [
     'PSNR', 'SSIM', 'MSSSIM', 'IWSSIM', 'VIF', 'FSIM', 'GMSD', 'MSGMSD', 'HAARPSI',
-    'UQI', 'S3IM', 'BRISQUE'
+    'UQI', 'S3IM', "TV", "BRISQUE", "CLIP-IQA"
 ]
 
 def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, timestamp=None):
