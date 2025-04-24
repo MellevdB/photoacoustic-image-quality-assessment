@@ -1,21 +1,40 @@
+import os
+import h5py
 import numpy as np
+import imageio
 from evaluation.metrics.calculate import calculate_metrics
 from evaluation.preprocess.scale_clip import scale_and_clip
-import h5py
-import os
 
-def process_msfd(data, dataset_info, full_config, results, metric_type):
-    file_path = dataset_info["path"].get(file_key) if isinstance(dataset_info["path"], dict) else dataset_info["path"]
+def save_images_from_array(img_array, output_dir, prefix):
+    os.makedirs(output_dir, exist_ok=True)
+    image_paths = []
+
+    for i, img in enumerate(img_array):
+        path = os.path.join(output_dir, f"{prefix}_slice_{i}.png")
+        img = np.clip(img, 0, 1) * 255
+        imageio.imwrite(path, img.astype(np.uint8))
+        image_paths.append(path)
+
+    return image_paths
+
+def process_msfd(dataset, dataset_info, full_config, results, metric_type):
+    file_path = dataset_info["path"].get(dataset) if isinstance(dataset_info["path"], dict) else dataset_info["path"]
     if not os.path.isfile(file_path):
         print(f"[WARNING] File not found: {file_path}. Skipping...")
         return
-    
+
     with h5py.File(file_path, 'r') as data:
         for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
             print(f"Processing MSFD dataset with config={full_config}, wavelength={wavelength} and ground truth={ground_truth_key}")
             expected_key = f"{full_config}"
+
             if expected_key[-4:] == ground_truth_key[-4:]:
                 y_pred = scale_and_clip(data[expected_key][:])
                 y_true = scale_and_clip(data[ground_truth_key][:])
-                metrics_mean, metrics_std, _ = calculate_metrics(y_pred, y_true, metric_type)
-                results.append((full_config, ground_truth_key, wavelength, (metrics_mean, metrics_std)))
+
+                image_ids = [f"{expected_key}_w{wavelength}_slice_{i}" for i in range(y_pred.shape[0])]
+
+                metrics_mean, metrics_std, raw_metrics, image_ids = calculate_metrics(
+                    y_pred, y_true, metric_type, image_ids=image_ids, store_images=True
+                )
+                results.append((full_config, ground_truth_key, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids)))

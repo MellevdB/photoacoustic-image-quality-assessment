@@ -1,0 +1,302 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for all metrics...
+
+🔁 Training model on metric: CLIP-IQA
+[Epoch 1/15] Train Loss: 0.0953 | Val Loss: 0.0668
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0668
+[Epoch 2/15] Train Loss: 0.0735 | Val Loss: 0.0613
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0613
+[Epoch 3/15] Train Loss: 0.0691 | Val Loss: 0.0661
+[Epoch 4/15] Train Loss: 0.0664 | Val Loss: 0.0593
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0593
+[Epoch 5/15] Train Loss: 0.0638 | Val Loss: 0.0526
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0526
+[Epoch 6/15] Train Loss: 0.0626 | Val Loss: 0.0513
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0513
+[Epoch 7/15] Train Loss: 0.0617 | Val Loss: 0.0524
+[Epoch 8/15] Train Loss: 0.0602 | Val Loss: 0.0565
+[Epoch 9/15] Train Loss: 0.0595 | Val Loss: 0.0492
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0492
+[Epoch 10/15] Train Loss: 0.0589 | Val Loss: 0.0507
+[Epoch 11/15] Train Loss: 0.0582 | Val Loss: 0.0491
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0491
+[Epoch 12/15] Train Loss: 0.0577 | Val Loss: 0.0512
+[Epoch 13/15] Train Loss: 0.0571 | Val Loss: 0.0493
+[Epoch 14/15] Train Loss: 0.0558 | Val Loss: 0.0480
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0480
+[Epoch 15/15] Train Loss: 0.0555 | Val Loss: 0.0498
+
+🔁 Training model on metric: SSIM
+[Epoch 1/15] Train Loss: 0.1330 | Val Loss: 0.0555
+✔ New best model saved to models/SSIM/best_model.pth with val_loss=0.0555
+[Epoch 2/15] Train Loss: 0.0815 | Val Loss: 0.0532
+✔ New best model saved to models/SSIM/best_model.pth with val_loss=0.0532
+[Epoch 3/15] Train Loss: 0.0696 | Val Loss: 0.0559
+[Epoch 4/15] Train Loss: 0.0632 | Val Loss: 0.0719
+[Epoch 5/15] Train Loss: 0.0603 | Val Loss: 0.0586
+[Epoch 6/15] Train Loss: 0.0583 | Val Loss: 0.0597
+[Epoch 7/15] Train Loss: 0.0568 | Val Loss: 0.0420
+✔ New best model saved to models/SSIM/best_model.pth with val_loss=0.0420
+[Epoch 8/15] Train Loss: 0.0545 | Val Loss: 0.0423
+[Epoch 9/15] Train Loss: 0.0536 | Val Loss: 0.0462
+[Epoch 10/15] Train Loss: 0.0532 | Val Loss: 0.0469
+[Epoch 11/15] Train Loss: 0.0520 | Val Loss: 0.0437
+[Epoch 12/15] Train Loss: 0.0513 | Val Loss: 0.0455
+[Epoch 13/15] Train Loss: 0.0506 | Val Loss: 0.0498
+[Epoch 14/15] Train Loss: 0.0497 | Val Loss: 0.0484
+[Epoch 15/15] Train Loss: 0.0494 | Val Loss: 0.0441
+
+🔁 Training model on metric: PSNR
+[Epoch 1/15] Train Loss: 7.0074 | Val Loss: 13.7450
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=13.7450
+[Epoch 2/15] Train Loss: 6.0289 | Val Loss: 12.9697
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=12.9697
+[Epoch 3/15] Train Loss: 5.6146 | Val Loss: 12.2709
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=12.2709
+[Epoch 4/15] Train Loss: 5.2277 | Val Loss: 10.9945
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=10.9945
+[Epoch 5/15] Train Loss: 4.8616 | Val Loss: 6.0931
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=6.0931
+[Epoch 6/15] Train Loss: 4.5064 | Val Loss: 4.1922
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=4.1922
+[Epoch 7/15] Train Loss: 4.1414 | Val Loss: 3.0042
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=3.0042
+[Epoch 8/15] Train Loss: 3.8556 | Val Loss: 2.7274
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.7274
+[Epoch 9/15] Train Loss: 3.7104 | Val Loss: 2.6815
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.6815
+[Epoch 10/15] Train Loss: 3.5916 | Val Loss: 2.4114
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.4114
+[Epoch 11/15] Train Loss: 3.5772 | Val Loss: 2.3978
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.3978
+[Epoch 12/15] Train Loss: 3.4539 | Val Loss: 2.2743
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.2743
+[Epoch 13/15] Train Loss: 3.3743 | Val Loss: 2.2460
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.2460
+[Epoch 14/15] Train Loss: 3.3153 | Val Loss: 2.0966
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.0966
+[Epoch 15/15] Train Loss: 3.3046 | Val Loss: 2.1540
+
+🔁 Training model on metric: VIF
+[Epoch 1/15] Train Loss: 0.0960 | Val Loss: 0.0692
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0692
+[Epoch 2/15] Train Loss: 0.0769 | Val Loss: 0.0667
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0667
+[Epoch 3/15] Train Loss: 0.0720 | Val Loss: 0.0630
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0630
+[Epoch 4/15] Train Loss: 0.0669 | Val Loss: 0.0562
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0562
+[Epoch 5/15] Train Loss: 0.0644 | Val Loss: 0.0504
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0504
+[Epoch 6/15] Train Loss: 0.0628 | Val Loss: 0.0694
+[Epoch 7/15] Train Loss: 0.0615 | Val Loss: 0.0582
+[Epoch 8/15] Train Loss: 0.0607 | Val Loss: 0.0576
+[Epoch 9/15] Train Loss: 0.0594 | Val Loss: 0.0586
+[Epoch 10/15] Train Loss: 0.0579 | Val Loss: 0.0619
+[Epoch 11/15] Train Loss: 0.0570 | Val Loss: 0.0601
+[Epoch 12/15] Train Loss: 0.0557 | Val Loss: 0.0581
+[Epoch 13/15] Train Loss: 0.0542 | Val Loss: 0.0600
+[Epoch 14/15] Train Loss: 0.0538 | Val Loss: 0.0577
+[Epoch 15/15] Train Loss: 0.0527 | Val Loss: 0.0582
+
+🔁 Training model on metric: GMSD
+[Epoch 1/15] Train Loss: 0.0378 | Val Loss: 0.0311
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0311
+[Epoch 2/15] Train Loss: 0.0311 | Val Loss: 0.0273
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0273
+[Epoch 3/15] Train Loss: 0.0285 | Val Loss: 0.0249
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0249
+[Epoch 4/15] Train Loss: 0.0271 | Val Loss: 0.0231
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0231
+[Epoch 5/15] Train Loss: 0.0264 | Val Loss: 0.0229
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0229
+[Epoch 6/15] Train Loss: 0.0246 | Val Loss: 0.0210
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0210
+[Epoch 7/15] Train Loss: 0.0227 | Val Loss: 0.0196
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0196
+[Epoch 8/15] Train Loss: 0.0216 | Val Loss: 0.0198
+[Epoch 9/15] Train Loss: 0.0208 | Val Loss: 0.0192
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0192
+[Epoch 10/15] Train Loss: 0.0205 | Val Loss: 0.0188
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0188
+[Epoch 11/15] Train Loss: 0.0200 | Val Loss: 0.0169
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0169
+[Epoch 12/15] Train Loss: 0.0196 | Val Loss: 0.0166
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0166
+[Epoch 13/15] Train Loss: 0.0192 | Val Loss: 0.0171
+[Epoch 14/15] Train Loss: 0.0190 | Val Loss: 0.0164
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0164
+[Epoch 15/15] Train Loss: 0.0188 | Val Loss: 0.0186
+
+🔁 Training model on metric: HAARPSI
+[Epoch 1/15] Train Loss: 0.1094 | Val Loss: 0.0889
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0889
+[Epoch 2/15] Train Loss: 0.0865 | Val Loss: 0.0759
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0759
+[Epoch 3/15] Train Loss: 0.0779 | Val Loss: 0.0702
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0702
+[Epoch 4/15] Train Loss: 0.0709 | Val Loss: 0.0605
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0605
+[Epoch 5/15] Train Loss: 0.0653 | Val Loss: 0.0566
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0566
+[Epoch 6/15] Train Loss: 0.0619 | Val Loss: 0.0511
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0511
+[Epoch 7/15] Train Loss: 0.0595 | Val Loss: 0.0540
+[Epoch 8/15] Train Loss: 0.0583 | Val Loss: 0.0588
+[Epoch 9/15] Train Loss: 0.0563 | Val Loss: 0.0480
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0480
+[Epoch 10/15] Train Loss: 0.0552 | Val Loss: 0.0499
+[Epoch 11/15] Train Loss: 0.0544 | Val Loss: 0.0494
+[Epoch 12/15] Train Loss: 0.0531 | Val Loss: 0.0490
+[Epoch 13/15] Train Loss: 0.0521 | Val Loss: 0.0565
+[Epoch 14/15] Train Loss: 0.0521 | Val Loss: 0.0481
+[Epoch 15/15] Train Loss: 0.0517 | Val Loss: 0.0519
+
+🔁 Training model on metric: MSSSIM
+[Epoch 1/15] Train Loss: 0.1126 | Val Loss: 0.0558
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0558
+[Epoch 2/15] Train Loss: 0.0631 | Val Loss: 0.0418
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0418
+[Epoch 3/15] Train Loss: 0.0512 | Val Loss: 0.0404
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0404
+[Epoch 4/15] Train Loss: 0.0442 | Val Loss: 0.0425
+[Epoch 5/15] Train Loss: 0.0411 | Val Loss: 0.0350
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0350
+[Epoch 6/15] Train Loss: 0.0395 | Val Loss: 0.0324
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0324
+[Epoch 7/15] Train Loss: 0.0386 | Val Loss: 0.0412
+[Epoch 8/15] Train Loss: 0.0379 | Val Loss: 0.0421
+[Epoch 9/15] Train Loss: 0.0369 | Val Loss: 0.0350
+[Epoch 10/15] Train Loss: 0.0363 | Val Loss: 0.0398
+[Epoch 11/15] Train Loss: 0.0362 | Val Loss: 0.0380
+[Epoch 12/15] Train Loss: 0.0357 | Val Loss: 0.0381
+[Epoch 13/15] Train Loss: 0.0354 | Val Loss: 0.0381
+[Epoch 14/15] Train Loss: 0.0346 | Val Loss: 0.0422
+[Epoch 15/15] Train Loss: 0.0343 | Val Loss: 0.0372
+
+🔁 Training model on metric: IWSSIM
+[Epoch 1/15] Train Loss: 0.1200 | Val Loss: 0.0782
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0782
+[Epoch 2/15] Train Loss: 0.0788 | Val Loss: 0.0628
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0628
+[Epoch 3/15] Train Loss: 0.0683 | Val Loss: 0.0577
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0577
+[Epoch 4/15] Train Loss: 0.0610 | Val Loss: 0.0499
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0499
+[Epoch 5/15] Train Loss: 0.0568 | Val Loss: 0.0561
+[Epoch 6/15] Train Loss: 0.0546 | Val Loss: 0.0525
+[Epoch 7/15] Train Loss: 0.0528 | Val Loss: 0.0457
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0457
+[Epoch 8/15] Train Loss: 0.0516 | Val Loss: 0.0493
+[Epoch 9/15] Train Loss: 0.0501 | Val Loss: 0.0500
+[Epoch 10/15] Train Loss: 0.0500 | Val Loss: 0.0524
+[Epoch 11/15] Train Loss: 0.0486 | Val Loss: 0.0491
+[Epoch 12/15] Train Loss: 0.0483 | Val Loss: 0.0495
+[Epoch 13/15] Train Loss: 0.0479 | Val Loss: 0.0435
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0435
+[Epoch 14/15] Train Loss: 0.0471 | Val Loss: 0.0479
+[Epoch 15/15] Train Loss: 0.0474 | Val Loss: 0.0479
+
+🔁 Training model on metric: MSGMSD
+[Epoch 1/15] Train Loss: 0.0399 | Val Loss: 0.0337
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0337
+[Epoch 2/15] Train Loss: 0.0329 | Val Loss: 0.0290
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0290
+[Epoch 3/15] Train Loss: 0.0290 | Val Loss: 0.0264
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0264
+[Epoch 4/15] Train Loss: 0.0265 | Val Loss: 0.0256
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0256
+[Epoch 5/15] Train Loss: 0.0250 | Val Loss: 0.0226
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0226
+[Epoch 6/15] Train Loss: 0.0239 | Val Loss: 0.0230
+[Epoch 7/15] Train Loss: 0.0232 | Val Loss: 0.0218
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0218
+[Epoch 8/15] Train Loss: 0.0226 | Val Loss: 0.0213
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0213
+[Epoch 9/15] Train Loss: 0.0222 | Val Loss: 0.0224
+[Epoch 10/15] Train Loss: 0.0217 | Val Loss: 0.0207
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0207
+[Epoch 11/15] Train Loss: 0.0214 | Val Loss: 0.0248
+[Epoch 12/15] Train Loss: 0.0211 | Val Loss: 0.0210
+[Epoch 13/15] Train Loss: 0.0210 | Val Loss: 0.0240
+[Epoch 14/15] Train Loss: 0.0207 | Val Loss: 0.0200
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0200
+[Epoch 15/15] Train Loss: 0.0203 | Val Loss: 0.0227
+
+🔁 Training model on metric: BRISQUE
+[Epoch 1/15] Train Loss: 21.2572 | Val Loss: 19.0444
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=19.0444
+[Epoch 2/15] Train Loss: 15.2962 | Val Loss: 20.7837
+[Epoch 3/15] Train Loss: 13.7894 | Val Loss: 27.2969
+[Epoch 4/15] Train Loss: 12.8768 | Val Loss: 22.4545
+[Epoch 5/15] Train Loss: 12.0744 | Val Loss: 19.8349
+[Epoch 6/15] Train Loss: 11.4262 | Val Loss: 21.1865
+[Epoch 7/15] Train Loss: 10.9272 | Val Loss: 22.9493
+[Epoch 8/15] Train Loss: 10.5650 | Val Loss: 17.6321
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=17.6321
+[Epoch 9/15] Train Loss: 10.2143 | Val Loss: 16.3084
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=16.3084
+[Epoch 10/15] Train Loss: 9.8478 | Val Loss: 16.7103
+[Epoch 11/15] Train Loss: 9.6641 | Val Loss: 18.1516
+[Epoch 12/15] Train Loss: 9.4071 | Val Loss: 16.0485
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=16.0485
+[Epoch 13/15] Train Loss: 9.1835 | Val Loss: 15.8542
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=15.8542
+[Epoch 14/15] Train Loss: 8.9781 | Val Loss: 10.5242
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=10.5242
+[Epoch 15/15] Train Loss: 8.7986 | Val Loss: 9.8098
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=9.8098
+
+🔁 Training model on metric: TV
+[Epoch 1/15] Train Loss: 5.1601 | Val Loss: 3.2035
+✔ New best model saved to models/TV/best_model.pth with val_loss=3.2035
+[Epoch 2/15] Train Loss: 3.3446 | Val Loss: 3.1897
+✔ New best model saved to models/TV/best_model.pth with val_loss=3.1897
+[Epoch 3/15] Train Loss: 2.9695 | Val Loss: 2.7997
+✔ New best model saved to models/TV/best_model.pth with val_loss=2.7997
+[Epoch 4/15] Train Loss: 2.7224 | Val Loss: 2.8554
+[Epoch 5/15] Train Loss: 2.5168 | Val Loss: 2.7207
+✔ New best model saved to models/TV/best_model.pth with val_loss=2.7207
+[Epoch 6/15] Train Loss: 2.4046 | Val Loss: 2.7682
+[Epoch 7/15] Train Loss: 2.3299 | Val Loss: 3.6743
+[Epoch 8/15] Train Loss: 2.2807 | Val Loss: 2.4903
+✔ New best model saved to models/TV/best_model.pth with val_loss=2.4903
+[Epoch 9/15] Train Loss: 2.2060 | Val Loss: 3.3014
+[Epoch 10/15] Train Loss: 2.1522 | Val Loss: 3.1019
+[Epoch 11/15] Train Loss: 2.1403 | Val Loss: 2.3849
+✔ New best model saved to models/TV/best_model.pth with val_loss=2.3849
+[Epoch 12/15] Train Loss: 2.1017 | Val Loss: 2.7964
+[Epoch 13/15] Train Loss: 2.0554 | Val Loss: 3.1474
+[Epoch 14/15] Train Loss: 2.0258 | Val Loss: 3.1169
+[Epoch 15/15] Train Loss: 2.0224 | Val Loss: 2.9344
+
+JOB STATISTICS
+==============
+Job ID: 11344645
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: RUNNING
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:04
+CPU Efficiency: 0.00% of 2-14:02:42 core-walltime
+Job Wall-clock time: 03:26:49
+Memory Utilized: 1.65 MB
+Memory Efficiency: 0.00% of 120.00 GB (120.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

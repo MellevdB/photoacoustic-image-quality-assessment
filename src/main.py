@@ -1,8 +1,11 @@
 import os
 import argparse
 import datetime
+import pandas as pd
 from evaluation.eval import evaluate
 from config.data_config import DATASETS, RESULTS_DIR
+import numpy as np
+from PIL import Image
 
 ALL_METRICS = [
     'PSNR', 'SSIM', 'MSSSIM', 'IWSSIM', 'VIF', 'FSIM', 'GMSD', 'MSGMSD', 'HAARPSI',
@@ -10,15 +13,6 @@ ALL_METRICS = [
 ]
 
 def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, timestamp=None):
-    """
-    Evaluates a dataset configuration-by-configuration and saves results progressively.
-
-    :param dataset: Name of the dataset.
-    :param dataset_info: Dictionary with dataset info from DATASETS.
-    :param metric_type: "fr", "nr", or "all".
-    :param test_mode: If True, uses test logic instead of real computation.
-    :param timestamp: Consistent timestamp for per-dataset files.
-    """
     results_dir = os.path.join(RESULTS_DIR, dataset)
     os.makedirs(results_dir, exist_ok=True)
 
@@ -32,28 +26,83 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
             f.write("TEST MODE - NO REAL METRICS\n")
         write_header(f)
 
+    all_results = []
+
     with open(file_path, 'a') as f:
         if dataset == "zenodo" or dataset in ["denoising_data", "pa_experiment_data"]:
             results = evaluate(dataset, None, None, None, metric_type, test_mode)
+            all_results.extend(results)
             for entry in results or []:
                 write_result_entry(f, dataset, entry)
-
         else:
             if isinstance(dataset_info["path"], dict):
                 for file_key in dataset_info["path"]:
                     for config, full_list in dataset_info["configs"].items():
                         for full_config in full_list:
                             results = evaluate(dataset, config, full_config, file_key, metric_type, test_mode)
+                            all_results.extend(results)
                             for entry in results or []:
                                 write_result_entry(f, dataset, entry)
             else:
                 for config, full_list in dataset_info["configs"].items():
                     for full_config in full_list:
                         results = evaluate(dataset, config, full_config, None, metric_type, test_mode)
+                        all_results.extend(results)
                         for entry in results or []:
                             write_result_entry(f, dataset, entry)
 
     print(f"Results saved to: {file_path}")
+
+    # Save per-image metrics to CSV
+    per_image_rows = []
+
+    image_dir = os.path.join(results_dir, "images_used")
+    os.makedirs(image_dir, exist_ok=True)
+
+    for entry in all_results:
+        if dataset == "MSFD":
+            config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
+        elif dataset in ["denoising_data", "pa_experiment_data"]:
+            _, config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
+        else:
+            config, gt, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
+            wavelength = "---"
+
+        for idx, image_id in enumerate(image_ids):
+            # Decide how to construct image_path
+            if dataset in ["denoising_data", "pa_experiment_data", "zenodo"] and os.path.isfile(image_id):
+                image_path = image_id  # keep original path
+            else:
+                if "RECON_IMAGE" in raw_metrics:
+                    image_array = raw_metrics["RECON_IMAGE"][idx]
+                    base_name = os.path.basename(image_id).replace('.png', '')  # Strip path and .png extension if present
+                    image_name = f"{base_name}.png"
+                    image_path = os.path.join(image_dir, image_name)
+                    Image.fromarray((np.clip(image_array, 0, 1) * 255).astype(np.uint8)).save(image_path)
+                else:
+                    image_path = image_id  # fallback
+
+            row = {
+                "dataset": dataset,
+                "configuration": config,
+                "ground_truth": gt,
+                "wavelength": wavelength,
+                "image_path": image_path
+            }
+
+            for metric in ALL_METRICS:
+                if raw_metrics.get(metric) is not None:
+                    row[metric] = raw_metrics[metric][idx]
+                else:
+                    row[metric] = float('nan')
+
+            per_image_rows.append(row)
+
+    if per_image_rows:
+        df = pd.DataFrame(per_image_rows)
+        csv_path = os.path.join(results_dir, f"{dataset}_per_image_metrics_{timestamp}.csv")
+        df.to_csv(csv_path, index=False)
+        print(f"Per-image metric scores saved to: {csv_path}")
 
 def write_header(f):
     header = "Dataset   Configuration   Ground Truth   Wavelength   " + \
@@ -62,17 +111,14 @@ def write_header(f):
 
 def write_result_entry(f, dataset, entry):
     if dataset == "MSFD":
-        config, gt, wavelength, (metrics_mean, metrics_std) = entry
-    elif dataset == "denoising_data":
-        _, config, gt, wavelength, (metrics_mean, metrics_std) = entry
-    elif dataset == "pa_experiment_data":
-        _, config, gt, wavelength, (metrics_mean, metrics_std) = entry
+        config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
+    elif dataset in ["denoising_data", "pa_experiment_data"]:
+        _, config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
     else:
-        config, gt, (metrics_mean, metrics_std) = entry
+        config, gt, (metrics_mean, metrics_std, *_rest) = entry
         wavelength = "---"
 
-    dataset_path = dataset
-    line = f"{dataset_path:<30} {config:<15} {gt:<15} {wavelength:<11}"
+    line = f"{dataset:<30} {config:<15} {gt:<15} {wavelength:<11}"
     for metric in ALL_METRICS:
         mean = metrics_mean.get(metric, '---') if isinstance(metrics_mean, dict) else '---'
         std = metrics_std.get(metric, '---') if isinstance(metrics_std, dict) else '---'

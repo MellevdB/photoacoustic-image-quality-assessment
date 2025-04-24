@@ -16,6 +16,7 @@ def process_zenodo_data(dataset_info, results, metric_type):
 
     for category in dataset_info["categories"]:
         y_pred_stack = []
+        image_ids = []  # NEW: to store predicted image paths
         for ref_img in reference_images:
             number = ref_img.replace("image", "").replace(".png", "")
             pred_img = f"image{number}_{category}.png"
@@ -24,19 +25,21 @@ def process_zenodo_data(dataset_info, results, metric_type):
                 continue
             img = cv2.imread(pred_path, cv2.IMREAD_GRAYSCALE)
             y_pred_stack.append(img)
+            image_ids.append(pred_path)  # NEW
 
         if y_pred_stack:
             y_pred_stack = np.stack(y_pred_stack, axis=0)
             print(f"Stacked predicted images for category {category}:", y_pred_stack.shape)
-            metrics_mean, metrics_std, metric_score_per_image = calculate_metrics(y_pred_stack, y_true_stack, metric_type)
+            metrics_mean, metrics_std, raw_metrics, _ = calculate_metrics(y_pred_stack, y_true_stack, metric_type, image_ids=image_ids, store_images=True)
+
             analyze_zenodo_correlation(
-                metric_score_per_image,
+                raw_metrics,
                 reference_images,
                 category,
                 dataset_info["path"]
             )
 
-            results.append((f"method_{category}", "reference", (metrics_mean, metrics_std)))
+            results.append((f"method_{category}", "reference", (metrics_mean, metrics_std, raw_metrics, image_ids)))
 
 
 
@@ -60,7 +63,11 @@ def analyze_zenodo_correlation(metric_score_per_image, reference_images, categor
     # Compute the expert average for later correlation, but keep individual scores for difference analysis
     expert_df["ExpertAvg"] = expert_df[["overall_quality_1", "overall_quality_2"]].mean(axis=1)
     
-    # Create DataFrame from metric scores
+    # Remove RECON_IMAGE before creating DataFrame
+    metric_score_per_image = {
+        k: v for k, v in metric_score_per_image.items() if k != "RECON_IMAGE"
+    }
+
     df = pd.DataFrame(metric_score_per_image)
     # Strip leading "image" and ".png" to get the number, then reformat the actual filename with category
     numbers = [f.replace("image", "").replace(".png", "") for f in reference_images]

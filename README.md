@@ -38,3 +38,6 @@ python src/main.py --datasets mice
 python src/main.py --datasets phantom
 python src/main.py --datasets v_phantom
 python src/main.py
+
+
+python -m training.train --data_dir results/csv_all_datasets --batch_size 16 --learning_rate 1e-3 --num_epochs 15
