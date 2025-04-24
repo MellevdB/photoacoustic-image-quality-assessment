@@ -1,0 +1,3 @@
+[submodule "third_party/pytorch-fsim"]
+	path = third_party/pytorch-fsim
+	url = https://github.com/mikhailiuk/pytorch-fsim.git
