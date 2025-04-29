@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from dl_model.model_definition import PhotoacousticQualityNet
-from dl_model.utils import PhotoacousticDataset, create_train_val_splits
+from dl_model.utils import PhotoacousticDataset, create_train_val_test_split
 
 # 0) Define custom Anti-Bias L1 loss function
 class AntiBiasL1Loss(nn.Module):
@@ -22,7 +22,7 @@ def train_model(
     target_metric="CLIP-IQA"
 ):
     # 1) Create train and val datasets from combined CSVs
-    train_data, val_data, _ = create_train_val_splits(data_dir, target_metric=target_metric)
+    train_data, val_data, _ = create_train_val_test_split(data_dir, target_metric=target_metric)
 
     # 2) Wrap them in DataLoader for batch processing
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)

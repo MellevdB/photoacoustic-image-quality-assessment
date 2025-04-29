@@ -1,2 +1,0 @@
-Spearman Correlation: 0.9285
-Pearson Correlation : 0.9655

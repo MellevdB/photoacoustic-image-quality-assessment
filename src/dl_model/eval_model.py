@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from scipy.stats import spearmanr, pearsonr
 from dl_model.inference import load_model_checkpoint, run_inference
-from dl_model.utils import create_train_val_splits, PhotoacousticDatasetFromDataFrame
+from dl_model.utils import create_train_val_test_split, PhotoacousticDatasetFromDataFrame
 
 metrics_to_eval = [
     'CLIP-IQA', 'SSIM', 'PSNR', 'VIF', 'GMSD', 'HAARPSI', 'MSSSIM', 'IWSSIM',
@@ -15,7 +15,7 @@ data_dir = "results"
 device = "cuda"
 
 # Load common test split once
-_, _, test_data = create_train_val_splits(data_dir)
+_, _, test_data = create_train_val_test_split(data_dir)
 for metric in metrics_to_eval:
     print(f"\n🔍 Evaluating model trained on: {metric}")
     # Adapt test dataset to target this metric
