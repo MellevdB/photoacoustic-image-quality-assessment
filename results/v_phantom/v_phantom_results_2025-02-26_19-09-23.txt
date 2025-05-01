@@ -1,9 +1,0 @@
-# minmax normalization (no filtering)
-Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-v_phantom                      v_phantom_8 v_phantom_gt    ---        0.750      0.020   0.848      0.104   16.025     2.751   0.336      0.078   0.560      0.192   0.338      0.078   76.358     3.424   
-v_phantom                      v_phantom_16 v_phantom_gt    ---        0.765      0.018   0.872      0.084   17.020     2.470   0.367      0.066   0.704      0.207   0.369      0.066   77.992     4.451   
-v_phantom                      v_phantom_32 v_phantom_gt    ---        0.785      0.017   0.922      0.059   19.782     2.404   0.441      0.069   0.851      0.190   0.442      0.070   77.524     4.532   
-v_phantom                      v_phantom_64 v_phantom_gt    ---        0.826      0.019   0.970      0.024   24.289     2.180   0.568      0.074   0.968      0.114   0.568      0.074   77.686     4.190   
-v_phantom                      v_phantom_128 v_phantom_gt    ---        0.889      0.021   0.994      0.004   31.046     2.196   0.764      0.063   1.004      0.053   0.762      0.064   78.500     4.220   
-v_phantom                      v_phantom_gt v_phantom_gt    ---        1.000      0.000   1.000      0.000   inf        nan     1.000      0.000   1.000      0.000   1.000      0.000   60.707     4.310   

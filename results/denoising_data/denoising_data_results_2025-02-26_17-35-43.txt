@@ -1,8 +1,0 @@
-mean normalization +  bandpass filtering
-Dataset   Configuration   Ground Truth   Wavelength   FSIM_mean   FSIM_std   UQI_mean   UQI_std   PSNR_mean   PSNR_std   SSIM_mean   SSIM_std   VIF_mean   VIF_std   S3IM_mean   S3IM_std   BRISQUE_mean   BRISQUE_std
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-denoising_data/nne/train       10db       ground_truth    ---        0.304      0.029   0.203      0.130   33.233     1.773   0.556      0.178   0.032      0.005   0.227      0.187   108.570    2.640   
-denoising_data/nne/train       20db       ground_truth    ---        0.553      0.036   0.313      0.086   35.693     1.779   0.738      0.082   0.228      0.026   0.442      0.161   93.643     3.888   
-denoising_data/nne/train       30db       ground_truth    ---        0.696      0.026   0.369      0.018   36.626     1.855   0.791      0.033   0.370      0.041   0.529      0.056   68.554     8.217   
-denoising_data/nne/train       40db       ground_truth    ---        0.711      0.027   0.376      0.004   36.682     1.862   0.792      0.031   0.389      0.045   0.530      0.051   34.757     4.966   
-denoising_data/nne/train       50db       ground_truth    ---        0.713      0.028   0.377      0.004   36.701     1.864   0.792      0.031   0.394      0.046   0.530      0.051   33.191     4.573   
