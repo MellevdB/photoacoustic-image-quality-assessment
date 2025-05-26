@@ -1,0 +1,321 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for all metrics...
+
+ Training model on metric: CLIP-IQA
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0081, max: 0.9399
+[Debug] Sample predictions: [-0.03457336 -0.04369753  0.01076054  0.03160591 -0.05080959]
+[Debug] Corresponding targets: [0.2399701  0.03669577 0.10068676 0.02640856 0.52891505]
+[Epoch 1/15] Train Loss: 0.1035 | Val Loss: 0.0993
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0993
+[Epoch 2/15] Train Loss: 0.1002 | Val Loss: 0.1024
+[Epoch 3/15] Train Loss: 0.0999 | Val Loss: 0.1008
+[Epoch 4/15] Train Loss: 0.0876 | Val Loss: 0.0807
+✔ New best model saved to models/CLIP-IQA/best_model.pth with val_loss=0.0807
+[Epoch 5/15] Train Loss: 0.0632 | Val Loss: 0.0850
+[Epoch 6/15] Train Loss: 0.0597 | Val Loss: 0.0887
+[Epoch 7/15] Train Loss: 0.0584 | Val Loss: 0.0832
+[Epoch 8/15] Train Loss: 0.0573 | Val Loss: 0.0874
+[Epoch 9/15] Train Loss: 0.0571 | Val Loss: 0.0858
+[Epoch 10/15] Train Loss: 0.0559 | Val Loss: 0.0836
+[Epoch 11/15] Train Loss: 0.0559 | Val Loss: 0.0831
+[Epoch 12/15] Train Loss: 0.0552 | Val Loss: 0.0824
+[Epoch 13/15] Train Loss: 0.0550 | Val Loss: 0.0903
+[Epoch 14/15] Train Loss: 0.0548 | Val Loss: 0.0856
+[Epoch 15/15] Train Loss: 0.0545 | Val Loss: 0.0827
+Saved training loss log to models/CLIP-IQA/train_val_loss.csv
+
+ Training model on metric: SSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0211, max: 1.0000
+[Debug] Sample predictions: [0.03119729 0.07641539 0.11798908 0.06817776 0.03834731]
+[Debug] Corresponding targets: [0.9711007  0.58111763 0.7725286  0.95975375 0.15676996]
+[Epoch 1/15] Train Loss: 0.1321 | Val Loss: 0.0433
+✔ New best model saved to models/SSIM/best_model.pth with val_loss=0.0433
+[Epoch 2/15] Train Loss: 0.0623 | Val Loss: 0.0603
+[Epoch 3/15] Train Loss: 0.0543 | Val Loss: 0.0557
+[Epoch 4/15] Train Loss: 0.0522 | Val Loss: 0.0502
+[Epoch 5/15] Train Loss: 0.0515 | Val Loss: 0.0636
+[Epoch 6/15] Train Loss: 0.0502 | Val Loss: 0.0646
+[Epoch 7/15] Train Loss: 0.0498 | Val Loss: 0.0560
+[Epoch 8/15] Train Loss: 0.0500 | Val Loss: 0.0542
+[Epoch 9/15] Train Loss: 0.0487 | Val Loss: 0.0667
+[Epoch 10/15] Train Loss: 0.0486 | Val Loss: 0.0681
+[Epoch 11/15] Train Loss: 0.0474 | Val Loss: 0.0616
+[Epoch 12/15] Train Loss: 0.0462 | Val Loss: 0.0547
+[Epoch 13/15] Train Loss: 0.0459 | Val Loss: 0.0597
+[Epoch 14/15] Train Loss: 0.0461 | Val Loss: 0.0579
+[Epoch 15/15] Train Loss: 0.0448 | Val Loss: 0.0622
+Saved training loss log to models/SSIM/train_val_loss.csv
+
+ Training model on metric: PSNR
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 10.9323, max: 80.0000
+[Debug] Sample predictions: [-0.06903654 -0.01374578 -0.0430827  -0.02681158 -0.05679419]
+[Debug] Corresponding targets: [32.786568 27.64518  25.687248 32.208855 33.826576]
+[Epoch 1/15] Train Loss: 8.7387 | Val Loss: 13.6979
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=13.6979
+[Epoch 2/15] Train Loss: 7.2211 | Val Loss: 14.0090
+[Epoch 3/15] Train Loss: 6.5470 | Val Loss: 9.1265
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=9.1265
+[Epoch 4/15] Train Loss: 5.2387 | Val Loss: 2.4640
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.4640
+[Epoch 5/15] Train Loss: 4.1945 | Val Loss: 2.2423
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=2.2423
+[Epoch 6/15] Train Loss: 4.0652 | Val Loss: 1.9342
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=1.9342
+[Epoch 7/15] Train Loss: 3.9801 | Val Loss: 1.9810
+[Epoch 8/15] Train Loss: 3.9405 | Val Loss: 1.9510
+[Epoch 9/15] Train Loss: 3.8659 | Val Loss: 2.4204
+[Epoch 10/15] Train Loss: 3.7473 | Val Loss: 1.6778
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=1.6778
+[Epoch 11/15] Train Loss: 3.6395 | Val Loss: 1.9214
+[Epoch 12/15] Train Loss: 3.5949 | Val Loss: 1.6571
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=1.6571
+[Epoch 13/15] Train Loss: 3.5477 | Val Loss: 1.7818
+[Epoch 14/15] Train Loss: 3.4866 | Val Loss: 1.6503
+✔ New best model saved to models/PSNR/best_model.pth with val_loss=1.6503
+[Epoch 15/15] Train Loss: 3.4400 | Val Loss: 1.7182
+Saved training loss log to models/PSNR/train_val_loss.csv
+
+ Training model on metric: VIF
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0005, max: 1.0000
+[Debug] Sample predictions: [0.05569067 0.09383413 0.09682356 0.11893587 0.09486448]
+[Debug] Corresponding targets: [0.3316069  0.04731056 0.4364018  0.36862886 0.05423659]
+[Epoch 1/15] Train Loss: 0.0996 | Val Loss: 0.0765
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0765
+[Epoch 2/15] Train Loss: 0.0754 | Val Loss: 0.0653
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0653
+[Epoch 3/15] Train Loss: 0.0695 | Val Loss: 0.0688
+[Epoch 4/15] Train Loss: 0.0655 | Val Loss: 0.0688
+[Epoch 5/15] Train Loss: 0.0639 | Val Loss: 0.0670
+[Epoch 6/15] Train Loss: 0.0629 | Val Loss: 0.0670
+[Epoch 7/15] Train Loss: 0.0617 | Val Loss: 0.0714
+[Epoch 8/15] Train Loss: 0.0609 | Val Loss: 0.0805
+[Epoch 9/15] Train Loss: 0.0607 | Val Loss: 0.0658
+[Epoch 10/15] Train Loss: 0.0610 | Val Loss: 0.0606
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0606
+[Epoch 11/15] Train Loss: 0.0598 | Val Loss: 0.0599
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0599
+[Epoch 12/15] Train Loss: 0.0601 | Val Loss: 0.0709
+[Epoch 13/15] Train Loss: 0.0587 | Val Loss: 0.0727
+[Epoch 14/15] Train Loss: 0.0595 | Val Loss: 0.0596
+✔ New best model saved to models/VIF/best_model.pth with val_loss=0.0596
+[Epoch 15/15] Train Loss: 0.0592 | Val Loss: 0.0743
+Saved training loss log to models/VIF/train_val_loss.csv
+
+ Training model on metric: GMSD
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0000, max: 0.2973
+[Debug] Sample predictions: [-0.10658437 -0.04759856 -0.09767411 -0.07284516 -0.0529676 ]
+[Debug] Corresponding targets: [0.11939932 0.19142741 0.18128188 0.15135397 0.10667959]
+[Epoch 1/15] Train Loss: 0.0334 | Val Loss: 0.0284
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0284
+[Epoch 2/15] Train Loss: 0.0287 | Val Loss: 0.0284
+[Epoch 3/15] Train Loss: 0.0287 | Val Loss: 0.0283
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0283
+[Epoch 4/15] Train Loss: 0.0286 | Val Loss: 0.0283
+✔ New best model saved to models/GMSD/best_model.pth with val_loss=0.0283
+[Epoch 5/15] Train Loss: 0.0286 | Val Loss: 0.0284
+[Epoch 6/15] Train Loss: 0.0286 | Val Loss: 0.0284
+[Epoch 7/15] Train Loss: 0.0286 | Val Loss: 0.0283
+[Epoch 8/15] Train Loss: 0.0286 | Val Loss: 0.0283
+[Epoch 9/15] Train Loss: 0.0286 | Val Loss: 0.0285
+[Epoch 10/15] Train Loss: 0.0286 | Val Loss: 0.0287
+[Epoch 11/15] Train Loss: 0.0286 | Val Loss: 0.0285
+[Epoch 12/15] Train Loss: 0.0286 | Val Loss: 0.0283
+[Epoch 13/15] Train Loss: 0.0286 | Val Loss: 0.0284
+[Epoch 14/15] Train Loss: 0.0286 | Val Loss: 0.0283
+[Epoch 15/15] Train Loss: 0.0286 | Val Loss: 0.0283
+Saved training loss log to models/GMSD/train_val_loss.csv
+
+ Training model on metric: HAARPSI
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.1179, max: 1.0000
+[Debug] Sample predictions: [-0.03097291  0.0050075   0.02450723  0.00906938  0.02264921]
+[Debug] Corresponding targets: [0.38433114 0.9329521  0.2265818  0.4303397  0.2920769 ]
+[Epoch 1/15] Train Loss: 0.1001 | Val Loss: 0.0933
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0933
+[Epoch 2/15] Train Loss: 0.0920 | Val Loss: 0.0904
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0904
+[Epoch 3/15] Train Loss: 0.0916 | Val Loss: 0.0883
+✔ New best model saved to models/HAARPSI/best_model.pth with val_loss=0.0883
+[Epoch 4/15] Train Loss: 0.0910 | Val Loss: 0.0921
+[Epoch 5/15] Train Loss: 0.0908 | Val Loss: 0.0897
+[Epoch 6/15] Train Loss: 0.0906 | Val Loss: 0.0911
+[Epoch 7/15] Train Loss: 0.0905 | Val Loss: 0.0921
+[Epoch 8/15] Train Loss: 0.0906 | Val Loss: 0.0921
+[Epoch 9/15] Train Loss: 0.0905 | Val Loss: 0.0923
+[Epoch 10/15] Train Loss: 0.0907 | Val Loss: 0.0921
+[Epoch 11/15] Train Loss: 0.0905 | Val Loss: 0.0913
+[Epoch 12/15] Train Loss: 0.0905 | Val Loss: 0.0920
+[Epoch 13/15] Train Loss: 0.0911 | Val Loss: 0.0937
+[Epoch 14/15] Train Loss: 0.0907 | Val Loss: 0.0938
+[Epoch 15/15] Train Loss: 0.0906 | Val Loss: 0.0925
+Saved training loss log to models/HAARPSI/train_val_loss.csv
+
+ Training model on metric: MSSSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.3179, max: 1.0000
+[Debug] Sample predictions: [ 0.02534908  0.04294369 -0.00397126  0.02745629  0.01220848]
+[Debug] Corresponding targets: [0.90030116 0.8760183  0.7923777  0.7052835  0.76169556]
+[Epoch 1/15] Train Loss: 0.1235 | Val Loss: 0.0553
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0553
+[Epoch 2/15] Train Loss: 0.0653 | Val Loss: 0.0555
+[Epoch 3/15] Train Loss: 0.0564 | Val Loss: 0.0548
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0548
+[Epoch 4/15] Train Loss: 0.0553 | Val Loss: 0.0550
+[Epoch 5/15] Train Loss: 0.0552 | Val Loss: 0.0547
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0547
+[Epoch 6/15] Train Loss: 0.0551 | Val Loss: 0.0547
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0547
+[Epoch 7/15] Train Loss: 0.0551 | Val Loss: 0.0547
+[Epoch 8/15] Train Loss: 0.0550 | Val Loss: 0.0547
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0547
+[Epoch 9/15] Train Loss: 0.0551 | Val Loss: 0.0547
+✔ New best model saved to models/MSSSIM/best_model.pth with val_loss=0.0547
+[Epoch 10/15] Train Loss: 0.0550 | Val Loss: 0.0549
+[Epoch 11/15] Train Loss: 0.0551 | Val Loss: 0.0547
+[Epoch 12/15] Train Loss: 0.0550 | Val Loss: 0.0547
+[Epoch 13/15] Train Loss: 0.0551 | Val Loss: 0.0547
+[Epoch 14/15] Train Loss: 0.0550 | Val Loss: 0.0547
+[Epoch 15/15] Train Loss: 0.0551 | Val Loss: 0.0547
+Saved training loss log to models/MSSSIM/train_val_loss.csv
+
+ Training model on metric: IWSSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.1409, max: 1.0000
+[Debug] Sample predictions: [-0.07540138 -0.14057179 -0.06270213 -0.00443693 -0.01857594]
+[Debug] Corresponding targets: [0.6472755 0.5208659 0.4435577 0.7260845 0.6890075]
+[Epoch 1/15] Train Loss: 0.1313 | Val Loss: 0.0908
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0908
+[Epoch 2/15] Train Loss: 0.0971 | Val Loss: 0.0889
+✔ New best model saved to models/IWSSIM/best_model.pth with val_loss=0.0889
+[Epoch 3/15] Train Loss: 0.0923 | Val Loss: 0.0907
+[Epoch 4/15] Train Loss: 0.0913 | Val Loss: 0.0898
+[Epoch 5/15] Train Loss: 0.0911 | Val Loss: 0.0899
+[Epoch 6/15] Train Loss: 0.0946 | Val Loss: 0.0944
+[Epoch 7/15] Train Loss: 0.0951 | Val Loss: 0.0944
+[Epoch 8/15] Train Loss: 0.0952 | Val Loss: 0.0943
+[Epoch 9/15] Train Loss: 0.0952 | Val Loss: 0.0944
+[Epoch 10/15] Train Loss: 0.0952 | Val Loss: 0.0943
+[Epoch 11/15] Train Loss: 0.0952 | Val Loss: 0.0943
+[Epoch 12/15] Train Loss: 0.0951 | Val Loss: 0.0943
+[Epoch 13/15] Train Loss: 0.0952 | Val Loss: 0.0944
+[Epoch 14/15] Train Loss: 0.0951 | Val Loss: 0.0943
+[Epoch 15/15] Train Loss: 0.0951 | Val Loss: 0.0943
+Saved training loss log to models/IWSSIM/train_val_loss.csv
+
+ Training model on metric: MSGMSD
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0000, max: 0.2953
+[Debug] Sample predictions: [ 0.09886927  0.00701424  0.02044103 -0.009961   -0.00159512]
+[Debug] Corresponding targets: [0.14483535 0.14441039 0.1509931  0.11377418 0.15426822]
+[Epoch 1/15] Train Loss: 0.0315 | Val Loss: 0.0298
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0298
+[Epoch 2/15] Train Loss: 0.0300 | Val Loss: 0.0299
+[Epoch 3/15] Train Loss: 0.0300 | Val Loss: 0.0297
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0297
+[Epoch 4/15] Train Loss: 0.0300 | Val Loss: 0.0298
+[Epoch 5/15] Train Loss: 0.0300 | Val Loss: 0.0298
+[Epoch 6/15] Train Loss: 0.0300 | Val Loss: 0.0298
+[Epoch 7/15] Train Loss: 0.0300 | Val Loss: 0.0297
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0297
+[Epoch 8/15] Train Loss: 0.0300 | Val Loss: 0.0297
+[Epoch 9/15] Train Loss: 0.0300 | Val Loss: 0.0299
+[Epoch 10/15] Train Loss: 0.0300 | Val Loss: 0.0298
+[Epoch 11/15] Train Loss: 0.0300 | Val Loss: 0.0297
+[Epoch 12/15] Train Loss: 0.0300 | Val Loss: 0.0298
+[Epoch 13/15] Train Loss: 0.0300 | Val Loss: 0.0297
+✔ New best model saved to models/MSGMSD/best_model.pth with val_loss=0.0297
+[Epoch 14/15] Train Loss: 0.0300 | Val Loss: 0.0297
+[Epoch 15/15] Train Loss: 0.0300 | Val Loss: 0.0298
+Saved training loss log to models/MSGMSD/train_val_loss.csv
+
+ Training model on metric: BRISQUE
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: -13.2443, max: 123.2609
+[Debug] Sample predictions: [0.05073132 0.08200984 0.08129784 0.03064765 0.05316843]
+[Debug] Corresponding targets: [ 91.73505   51.97235  100.05829   94.56317   50.078796]
+[Epoch 1/15] Train Loss: 25.1406 | Val Loss: 50.0652
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=50.0652
+[Epoch 2/15] Train Loss: 19.6160 | Val Loss: 50.7326
+[Epoch 3/15] Train Loss: 18.4799 | Val Loss: 49.0407
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=49.0407
+[Epoch 4/15] Train Loss: 17.9511 | Val Loss: 45.0303
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=45.0303
+[Epoch 5/15] Train Loss: 17.1981 | Val Loss: 47.3066
+[Epoch 6/15] Train Loss: 16.2986 | Val Loss: 42.0019
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=42.0019
+[Epoch 7/15] Train Loss: 15.2856 | Val Loss: 38.0747
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=38.0747
+[Epoch 8/15] Train Loss: 14.8267 | Val Loss: 31.9021
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=31.9021
+[Epoch 9/15] Train Loss: 14.3369 | Val Loss: 29.0947
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=29.0947
+[Epoch 10/15] Train Loss: 13.8700 | Val Loss: 30.3844
+[Epoch 11/15] Train Loss: 13.3893 | Val Loss: 29.5380
+[Epoch 12/15] Train Loss: 12.9655 | Val Loss: 30.2458
+[Epoch 13/15] Train Loss: 12.5903 | Val Loss: 27.0531
+✔ New best model saved to models/BRISQUE/best_model.pth with val_loss=27.0531
+[Epoch 14/15] Train Loss: 12.5478 | Val Loss: 30.1958
+[Epoch 15/15] Train Loss: 12.3015 | Val Loss: 28.4533
+Saved training loss log to models/BRISQUE/train_val_loss.csv
+
+ Training model on metric: TV
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0260, max: 36.1898
+[Debug] Sample predictions: [-0.11421737 -0.13324048 -0.12674859 -0.08722878 -0.10430796]
+[Debug] Corresponding targets: [2.5955899 2.2905922 2.893541  4.421339  3.2055724]
+[Epoch 1/15] Train Loss: 1.2750 | Val Loss: 0.6149
+✔ New best model saved to models/TV/best_model.pth with val_loss=0.6149
+[Epoch 2/15] Train Loss: 0.8482 | Val Loss: 0.4657
+✔ New best model saved to models/TV/best_model.pth with val_loss=0.4657
+[Epoch 3/15] Train Loss: 0.7915 | Val Loss: 0.5579
+[Epoch 4/15] Train Loss: 0.7277 | Val Loss: 0.5554
+[Epoch 5/15] Train Loss: 0.6966 | Val Loss: 0.4117
+✔ New best model saved to models/TV/best_model.pth with val_loss=0.4117
+[Epoch 6/15] Train Loss: 0.6532 | Val Loss: 0.4554
+[Epoch 7/15] Train Loss: 0.6393 | Val Loss: 0.6118
+[Epoch 8/15] Train Loss: 0.6092 | Val Loss: 0.4116
+✔ New best model saved to models/TV/best_model.pth with val_loss=0.4116
+[Epoch 9/15] Train Loss: 0.5966 | Val Loss: 0.5207
+[Epoch 10/15] Train Loss: 0.5923 | Val Loss: 0.4427
+[Epoch 11/15] Train Loss: 0.5820 | Val Loss: 0.6809
+[Epoch 12/15] Train Loss: 0.5705 | Val Loss: 0.7178
+[Epoch 13/15] Train Loss: 0.5680 | Val Loss: 0.4665
+[Epoch 14/15] Train Loss: 0.5637 | Val Loss: 0.5831
+[Epoch 15/15] Train Loss: 0.5614 | Val Loss: 0.6395
+Saved training loss log to models/TV/train_val_loss.csv
+
+JOB STATISTICS
+==============
+Job ID: 11578765
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: RUNNING
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:04
+CPU Efficiency: 0.00% of 2-00:10:12 core-walltime
+Job Wall-clock time: 02:40:34
+Memory Utilized: 1.59 MB
+Memory Efficiency: 0.00% of 120.00 GB (120.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

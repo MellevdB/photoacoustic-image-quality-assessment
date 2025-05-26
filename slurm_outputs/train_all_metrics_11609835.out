@@ -1,0 +1,294 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for all metrics...
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+
+[CONFIG 1] Training best CV model for metric: MSGMSD_norm
+Loaded 21616 train, 5404 val, 9239 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0000, max: 0.8438
+[Debug] Sample predictions: [-0.03462448 -0.03463582 -0.03462406 -0.03460357 -0.03456147]
+[Debug] Corresponding targets: [0.40605918 0.29562178 0.31083328 0.31402525 0.45646033]
+[Epoch 1] Train Loss: 0.0873 | Val Loss: 0.0775
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0775
+[Epoch 2] Train Loss: 0.0720 | Val Loss: 0.0690
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0690
+[Epoch 3] Train Loss: 0.0672 | Val Loss: 0.0636
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0636
+[Epoch 4] Train Loss: 0.0610 | Val Loss: 0.0548
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0548
+[Epoch 5] Train Loss: 0.0549 | Val Loss: 0.0544
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0544
+[Epoch 6] Train Loss: 0.0509 | Val Loss: 0.0528
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0528
+[Epoch 7] Train Loss: 0.0479 | Val Loss: 0.0447
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0447
+[Epoch 8] Train Loss: 0.0444 | Val Loss: 0.0411
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0411
+[Epoch 9] Train Loss: 0.0422 | Val Loss: 0.0396
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0396
+[Epoch 10] Train Loss: 0.0400 | Val Loss: 0.0393
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0393
+[Epoch 11] Train Loss: 0.0380 | Val Loss: 0.0353
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0353
+[Epoch 12] Train Loss: 0.0355 | Val Loss: 0.0337
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0337
+[Epoch 13] Train Loss: 0.0341 | Val Loss: 0.0329
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0329
+[Epoch 14] Train Loss: 0.0323 | Val Loss: 0.0331
+[Epoch 15] Train Loss: 0.0310 | Val Loss: 0.0317
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0317
+[Epoch 16] Train Loss: 0.0303 | Val Loss: 0.0304
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0304
+[Epoch 17] Train Loss: 0.0289 | Val Loss: 0.0319
+[Epoch 18] Train Loss: 0.0282 | Val Loss: 0.0296
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0296
+[Epoch 19] Train Loss: 0.0273 | Val Loss: 0.0272
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0272
+[Epoch 20] Train Loss: 0.0264 | Val Loss: 0.0276
+[Epoch 21] Train Loss: 0.0258 | Val Loss: 0.0263
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0263
+[Epoch 22] Train Loss: 0.0251 | Val Loss: 0.0284
+[Epoch 23] Train Loss: 0.0242 | Val Loss: 0.0297
+[Epoch 24] Train Loss: 0.0238 | Val Loss: 0.0257
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0257
+[Epoch 25] Train Loss: 0.0233 | Val Loss: 0.0250
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0250
+[Epoch 26] Train Loss: 0.0223 | Val Loss: 0.0260
+[Epoch 27] Train Loss: 0.0220 | Val Loss: 0.0236
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0236
+[Epoch 28] Train Loss: 0.0215 | Val Loss: 0.0274
+[Epoch 29] Train Loss: 0.0211 | Val Loss: 0.0261
+[Epoch 30] Train Loss: 0.0206 | Val Loss: 0.0245
+[Epoch 31] Train Loss: 0.0203 | Val Loss: 0.0228
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0228
+[Epoch 32] Train Loss: 0.0196 | Val Loss: 0.0224
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0224
+[Epoch 33] Train Loss: 0.0195 | Val Loss: 0.0239
+[Epoch 34] Train Loss: 0.0190 | Val Loss: 0.0217
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0217
+[Epoch 35] Train Loss: 0.0187 | Val Loss: 0.0219
+[Epoch 36] Train Loss: 0.0183 | Val Loss: 0.0232
+[Epoch 37] Train Loss: 0.0180 | Val Loss: 0.0221
+[Epoch 38] Train Loss: 0.0174 | Val Loss: 0.0210
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0210
+[Epoch 39] Train Loss: 0.0170 | Val Loss: 0.0218
+[Epoch 40] Train Loss: 0.0169 | Val Loss: 0.0215
+[Epoch 41] Train Loss: 0.0169 | Val Loss: 0.0219
+[Epoch 42] Train Loss: 0.0163 | Val Loss: 0.0205
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0205
+[Epoch 43] Train Loss: 0.0161 | Val Loss: 0.0202
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0202
+[Epoch 44] Train Loss: 0.0155 | Val Loss: 0.0205
+[Epoch 45] Train Loss: 0.0157 | Val Loss: 0.0204
+[Epoch 46] Train Loss: 0.0150 | Val Loss: 0.0198
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0198
+[Epoch 47] Train Loss: 0.0150 | Val Loss: 0.0204
+[Epoch 48] Train Loss: 0.0147 | Val Loss: 0.0216
+[Epoch 49] Train Loss: 0.0146 | Val Loss: 0.0195
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0195
+[Epoch 50] Train Loss: 0.0140 | Val Loss: 0.0204
+[Epoch 51] Train Loss: 0.0139 | Val Loss: 0.0209
+[Epoch 52] Train Loss: 0.0135 | Val Loss: 0.0202
+[Epoch 53] Train Loss: 0.0135 | Val Loss: 0.0193
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0193
+[Epoch 54] Train Loss: 0.0133 | Val Loss: 0.0191
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0191
+[Epoch 55] Train Loss: 0.0131 | Val Loss: 0.0185
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0185
+[Epoch 56] Train Loss: 0.0127 | Val Loss: 0.0195
+[Epoch 57] Train Loss: 0.0126 | Val Loss: 0.0187
+[Epoch 58] Train Loss: 0.0122 | Val Loss: 0.0185
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0185
+[Epoch 59] Train Loss: 0.0121 | Val Loss: 0.0181
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0181
+[Epoch 60] Train Loss: 0.0119 | Val Loss: 0.0182
+[Epoch 61] Train Loss: 0.0118 | Val Loss: 0.0201
+[Epoch 62] Train Loss: 0.0117 | Val Loss: 0.0202
+[Epoch 63] Train Loss: 0.0113 | Val Loss: 0.0182
+[Epoch 64] Train Loss: 0.0111 | Val Loss: 0.0185
+[Epoch 65] Train Loss: 0.0111 | Val Loss: 0.0178
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0178
+[Epoch 66] Train Loss: 0.0108 | Val Loss: 0.0180
+[Epoch 67] Train Loss: 0.0107 | Val Loss: 0.0180
+[Epoch 68] Train Loss: 0.0105 | Val Loss: 0.0180
+[Epoch 69] Train Loss: 0.0103 | Val Loss: 0.0178
+[Epoch 70] Train Loss: 0.0102 | Val Loss: 0.0180
+[Epoch 71] Train Loss: 0.0101 | Val Loss: 0.0174
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0174
+[Epoch 72] Train Loss: 0.0099 | Val Loss: 0.0175
+[Epoch 73] Train Loss: 0.0098 | Val Loss: 0.0182
+[Epoch 74] Train Loss: 0.0098 | Val Loss: 0.0178
+[Epoch 75] Train Loss: 0.0095 | Val Loss: 0.0178
+[Epoch 76] Train Loss: 0.0094 | Val Loss: 0.0182
+[Epoch 77] Train Loss: 0.0093 | Val Loss: 0.0177
+[Epoch 78] Train Loss: 0.0090 | Val Loss: 0.0185
+[Epoch 79] Train Loss: 0.0091 | Val Loss: 0.0176
+[Epoch 80] Train Loss: 0.0091 | Val Loss: 0.0186
+[Epoch 81] Train Loss: 0.0090 | Val Loss: 0.0171
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0171
+[Epoch 82] Train Loss: 0.0087 | Val Loss: 0.0172
+[Epoch 83] Train Loss: 0.0086 | Val Loss: 0.0175
+[Epoch 84] Train Loss: 0.0085 | Val Loss: 0.0168
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0168
+[Epoch 85] Train Loss: 0.0083 | Val Loss: 0.0169
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 86] Train Loss: 0.0083 | Val Loss: 0.0170
+[Epoch 87] Train Loss: 0.0082 | Val Loss: 0.0165
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0165
+[Epoch 88] Train Loss: 0.0080 | Val Loss: 0.0164
+✔ New best model saved to models/best_config/MSGMSD_norm/best_model.pth with val_loss=0.0164
+[Epoch 89] Train Loss: 0.0080 | Val Loss: 0.0167
+[Epoch 90] Train Loss: 0.0078 | Val Loss: 0.0183
+[Epoch 91] Train Loss: 0.0080 | Val Loss: 0.0180
+[Epoch 92] Train Loss: 0.0078 | Val Loss: 0.0168
+[Epoch 93] Train Loss: 0.0076 | Val Loss: 0.0171
+[Epoch 94] Train Loss: 0.0078 | Val Loss: 0.0171
+[Epoch 95] Train Loss: 0.0074 | Val Loss: 0.0181
+[Epoch 96] Train Loss: 0.0075 | Val Loss: 0.0169
+[Epoch 97] Train Loss: 0.0074 | Val Loss: 0.0172
+[Epoch 98] Train Loss: 0.0074 | Val Loss: 0.0165
+⏹️ Early stopping triggered after 10 no-improve epochs.
+Saved training loss log to models/best_config/MSGMSD_norm/train_val_loss.csv
+
+[CONFIG 2] Training IQA-DCNN config for metric: MSGMSD_norm
+Loaded 21536 train, 5384 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+ Target range → min: 0.0186, max: 0.8438
+[Debug] Sample predictions: [0.01276211 0.05573514 0.04106117 0.04821095 0.04519279]
+[Debug] Corresponding targets: [0.41324168 0.23781085 0.15493816 0.4711931  0.4765291 ]
+[Epoch 1] Train Loss: 0.0994 | Val Loss: 0.0887
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0887
+[Epoch 2] Train Loss: 0.0809 | Val Loss: 0.0803
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0803
+[Epoch 3] Train Loss: 0.0763 | Val Loss: 0.0688
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0688
+[Epoch 4] Train Loss: 0.0732 | Val Loss: 0.0673
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0673
+[Epoch 5] Train Loss: 0.0703 | Val Loss: 0.0690
+[Epoch 6] Train Loss: 0.0671 | Val Loss: 0.0620
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0620
+[Epoch 7] Train Loss: 0.0641 | Val Loss: 0.0602
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0602
+[Epoch 8] Train Loss: 0.0611 | Val Loss: 0.0594
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0594
+[Epoch 9] Train Loss: 0.0592 | Val Loss: 0.0662
+[Epoch 10] Train Loss: 0.0566 | Val Loss: 0.0532
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0532
+[Epoch 11] Train Loss: 0.0545 | Val Loss: 0.0489
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0489
+[Epoch 12] Train Loss: 0.0526 | Val Loss: 0.0492
+[Epoch 13] Train Loss: 0.0507 | Val Loss: 0.0469
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0469
+[Epoch 14] Train Loss: 0.0502 | Val Loss: 0.0474
+[Epoch 15] Train Loss: 0.0486 | Val Loss: 0.0445
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0445
+[Epoch 16] Train Loss: 0.0471 | Val Loss: 0.0444
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0444
+[Epoch 17] Train Loss: 0.0459 | Val Loss: 0.0471
+[Epoch 18] Train Loss: 0.0448 | Val Loss: 0.0404
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0404
+[Epoch 19] Train Loss: 0.0440 | Val Loss: 0.0415
+[Epoch 20] Train Loss: 0.0426 | Val Loss: 0.0409
+[Epoch 21] Train Loss: 0.0417 | Val Loss: 0.0407
+[Epoch 22] Train Loss: 0.0405 | Val Loss: 0.0397
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0397
+[Epoch 23] Train Loss: 0.0399 | Val Loss: 0.0355
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0355
+[Epoch 24] Train Loss: 0.0390 | Val Loss: 0.0346
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0346
+[Epoch 25] Train Loss: 0.0383 | Val Loss: 0.0335
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0335
+[Epoch 26] Train Loss: 0.0373 | Val Loss: 0.0332
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0332
+[Epoch 27] Train Loss: 0.0367 | Val Loss: 0.0378
+[Epoch 28] Train Loss: 0.0360 | Val Loss: 0.0331
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0331
+[Epoch 29] Train Loss: 0.0351 | Val Loss: 0.0380
+[Epoch 30] Train Loss: 0.0347 | Val Loss: 0.0319
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0319
+[Epoch 31] Train Loss: 0.0340 | Val Loss: 0.0301
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0301
+[Epoch 32] Train Loss: 0.0336 | Val Loss: 0.0332
+[Epoch 33] Train Loss: 0.0331 | Val Loss: 0.0298
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0298
+[Epoch 34] Train Loss: 0.0322 | Val Loss: 0.0293
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0293
+[Epoch 35] Train Loss: 0.0319 | Val Loss: 0.0315
+[Epoch 36] Train Loss: 0.0316 | Val Loss: 0.0292
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0292
+[Epoch 37] Train Loss: 0.0312 | Val Loss: 0.0296
+[Epoch 38] Train Loss: 0.0305 | Val Loss: 0.0321
+[Epoch 39] Train Loss: 0.0301 | Val Loss: 0.0288
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0288
+[Epoch 40] Train Loss: 0.0298 | Val Loss: 0.0285
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0285
+[Epoch 41] Train Loss: 0.0294 | Val Loss: 0.0285
+[Epoch 42] Train Loss: 0.0287 | Val Loss: 0.0278
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0278
+[Epoch 43] Train Loss: 0.0286 | Val Loss: 0.0313
+[Epoch 44] Train Loss: 0.0282 | Val Loss: 0.0313
+[Epoch 45] Train Loss: 0.0277 | Val Loss: 0.0273
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0273
+[Epoch 46] Train Loss: 0.0277 | Val Loss: 0.0266
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0266
+[Epoch 47] Train Loss: 0.0272 | Val Loss: 0.0260
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0260
+[Epoch 48] Train Loss: 0.0271 | Val Loss: 0.0272
+[Epoch 49] Train Loss: 0.0268 | Val Loss: 0.0283
+[Epoch 50] Train Loss: 0.0265 | Val Loss: 0.0267
+[Epoch 51] Train Loss: 0.0263 | Val Loss: 0.0304
+[Epoch 52] Train Loss: 0.0260 | Val Loss: 0.0264
+[Epoch 53] Train Loss: 0.0256 | Val Loss: 0.0276
+[Epoch 54] Train Loss: 0.0253 | Val Loss: 0.0267
+[Epoch 55] Train Loss: 0.0252 | Val Loss: 0.0309
+[Epoch 56] Train Loss: 0.0251 | Val Loss: 0.0251
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0251
+[Epoch 57] Train Loss: 0.0250 | Val Loss: 0.0247
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0247
+[Epoch 58] Train Loss: 0.0244 | Val Loss: 0.0288
+[Epoch 59] Train Loss: 0.0245 | Val Loss: 0.0307
+[Epoch 60] Train Loss: 0.0243 | Val Loss: 0.0243
+✔ New best model saved to models/iqadcnn_config/MSGMSD_norm/best_model.pth with val_loss=0.0243
+[Epoch 61] Train Loss: 0.0239 | Val Loss: 0.0280
+[Epoch 62] Train Loss: 0.0240 | Val Loss: 0.0308
+[Epoch 63] Train Loss: 0.0239 | Val Loss: 0.0278
+[Epoch 64] Train Loss: 0.0233 | Val Loss: 0.0299
+[Epoch 65] Train Loss: 0.0237 | Val Loss: 0.0255
+[Epoch 66] Train Loss: 0.0233 | Val Loss: 0.0267
+[Epoch 67] Train Loss: 0.0228 | Val Loss: 0.0291
+[Epoch 68] Train Loss: 0.0229 | Val Loss: 0.0274
+[Epoch 69] Train Loss: 0.0226 | Val Loss: 0.0279
+[Epoch 70] Train Loss: 0.0226 | Val Loss: 0.0261
+⏹️ Early stopping triggered after 10 no-improve epochs.
+Saved training loss log to models/iqadcnn_config/MSGMSD_norm/train_val_loss.csv
+
+JOB STATISTICS
+==============
+Job ID: 11609835
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: RUNNING
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 02:35:40
+CPU Efficiency: 5.46% of 1-23:30:18 core-walltime
+Job Wall-clock time: 02:38:21
+Memory Utilized: 936.46 MB
+Memory Efficiency: 0.76% of 120.00 GB (120.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

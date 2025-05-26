@@ -11,6 +11,7 @@ ALL_METRICS = [
     'PSNR', 'SSIM', 'MSSSIM', 'IWSSIM', 'VIF', 'FSIM', 'GMSD', 'MSGMSD', 'HAARPSI',
     'UQI', 'S3IM', "TV", "BRISQUE", "CLIP-IQA"
 ]
+NORMALIZED_METRICS = ["PSNR_norm", "GMSD_norm", "MSGMSD_norm", "BRISQUE_norm"]
 
 def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, timestamp=None):
     results_dir = os.path.join(RESULTS_DIR, dataset)
@@ -63,7 +64,7 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
         if dataset == "MSFD":
             config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
         elif dataset in ["denoising_data", "pa_experiment_data"]:
-            _, config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
+            path, config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
         else:
             config, gt, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
             wavelength = "---"
@@ -96,6 +97,10 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
                 else:
                     row[metric] = float('nan')
 
+            for metric in NORMALIZED_METRICS:
+                if raw_metrics.get(metric) is not None:
+                    row[metric] = raw_metrics[metric][idx]
+
             per_image_rows.append(row)
 
     if per_image_rows:
@@ -113,12 +118,15 @@ def write_result_entry(f, dataset, entry):
     if dataset == "MSFD":
         config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
     elif dataset in ["denoising_data", "pa_experiment_data"]:
-        _, config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
+        path, config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
     else:
         config, gt, (metrics_mean, metrics_std, *_rest) = entry
         wavelength = "---"
-
-    line = f"{dataset:<30} {config:<15} {gt:<15} {wavelength:<11}"
+    
+    if dataset == "pa_experiment_data":
+        line = f"{path:<30} {config:<15} {gt:<15} {wavelength:<11}"
+    else:
+        line = f"{dataset:<30} {config:<15} {gt:<15} {wavelength:<11}"
     for metric in ALL_METRICS:
         mean = metrics_mean.get(metric, '---') if isinstance(metrics_mean, dict) else '---'
         std = metrics_std.get(metric, '---') if isinstance(metrics_std, dict) else '---'

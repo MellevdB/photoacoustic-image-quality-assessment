@@ -3,19 +3,8 @@ import h5py
 import numpy as np
 import imageio
 from evaluation.metrics.calculate import calculate_metrics
-from evaluation.preprocess.scale_clip import scale_and_clip
+from evaluation.preprocess.normalize import min_max_normalize_per_image
 
-def save_images_from_array(img_array, output_dir, prefix):
-    os.makedirs(output_dir, exist_ok=True)
-    image_paths = []
-
-    for i, img in enumerate(img_array):
-        path = os.path.join(output_dir, f"{prefix}_slice_{i}.png")
-        img = np.clip(img, 0, 1) * 255
-        imageio.imwrite(path, img.astype(np.uint8))
-        image_paths.append(path)
-
-    return image_paths
 
 def process_msfd(dataset, dataset_info, full_config, results, metric_type):
     file_path = dataset_info["path"].get(dataset) if isinstance(dataset_info["path"], dict) else dataset_info["path"]
@@ -29,8 +18,8 @@ def process_msfd(dataset, dataset_info, full_config, results, metric_type):
             expected_key = f"{full_config}"
 
             if expected_key[-4:] == ground_truth_key[-4:]:
-                y_pred = scale_and_clip(data[expected_key][:])
-                y_true = scale_and_clip(data[ground_truth_key][:])
+                y_pred = min_max_normalize_per_image(data[expected_key][:])
+                y_true = min_max_normalize_per_image(data[ground_truth_key][:])
 
                 image_ids = [f"{expected_key}_w{wavelength}_slice_{i}" for i in range(y_pred.shape[0])]
 

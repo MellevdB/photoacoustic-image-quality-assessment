@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class PhotoacousticQualityNet(nn.Module):
-    def __init__(self, in_channels=1, num_fc_units=128, dropout_rate=0.5):
+    def __init__(self, in_channels=1, num_fc_units=128, dropout_rate=0.3):
         super().__init__()
 
-        self.conv1 = nn.Conv2d(in_channels, 16, kernel_size=3, padding=1)
+        self.conv1 = nn.Conv2d(in_channels, 16, kernel_size=5, padding=2)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
         self.conv3 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
         self.conv4 = nn.Conv2d(64, 128, kernel_size=3, padding=1)

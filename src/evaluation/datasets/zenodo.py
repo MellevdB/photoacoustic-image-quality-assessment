@@ -2,6 +2,10 @@ import os
 import cv2
 import numpy as np
 from evaluation.metrics.calculate import calculate_metrics
+import numpy as np
+
+def normalize_uint8_image_stack(image_stack):
+    return image_stack.astype(np.float32) / 255.0
 
 def process_zenodo_data(dataset_info, results, metric_type):
     print(dataset_info["path"])
@@ -29,6 +33,10 @@ def process_zenodo_data(dataset_info, results, metric_type):
 
         if y_pred_stack:
             y_pred_stack = np.stack(y_pred_stack, axis=0)
+            
+            y_pred_stack = normalize_uint8_image_stack(y_pred_stack)
+            y_true_stack = normalize_uint8_image_stack(y_true_stack)
+            
             print(f"Stacked predicted images for category {category}:", y_pred_stack.shape)
             metrics_mean, metrics_std, raw_metrics, _ = calculate_metrics(y_pred_stack, y_true_stack, metric_type, image_ids=image_ids, store_images=True)
 
@@ -42,12 +50,6 @@ def process_zenodo_data(dataset_info, results, metric_type):
             results.append((f"method_{category}", "reference", (metrics_mean, metrics_std, raw_metrics, image_ids)))
 
 
-
-import os
-import pandas as pd
-from scipy.stats import spearmanr
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 import os
 import pandas as pd

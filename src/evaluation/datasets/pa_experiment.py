@@ -2,6 +2,10 @@ import os
 import cv2
 import numpy as np
 from evaluation.metrics.calculate import calculate_metrics
+import numpy as np
+
+def normalize_uint8_image_stack(image_stack):
+    return image_stack.astype(np.float32) / 255.0
 
 def process_pa_experiment_data(dataset_info, results, metric_type):
     base = dataset_info["path"]
@@ -36,5 +40,10 @@ def process_pa_experiment_data(dataset_info, results, metric_type):
             if y_pred:
                 y_pred = np.stack(y_pred, axis=0)
                 y_true = np.stack(y_true, axis=0)
+
+                # Normalize to [0, 1]
+                y_pred = normalize_uint8_image_stack(y_pred)
+                y_true = normalize_uint8_image_stack(y_true)
+
                 metrics_mean, metrics_std, raw_metrics, _ = calculate_metrics(y_pred, y_true, metric_type, image_ids=image_ids, store_images=True)
                 results.append((f"pa_experiment_data/Training/{category}", f"PA{q}", "PA1", "---", (metrics_mean, metrics_std, raw_metrics, image_ids)))

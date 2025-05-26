@@ -5,7 +5,7 @@
 #SBATCH --job-name=train_all_metrics    # Job name
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12             # Adjust CPU usage if needed
-#SBATCH --time=14:00:00                # Max time
+#SBATCH --time=12:00:00                # Max time
 #SBATCH --output=slurm_outputs/train_all_metrics_%A.out  # Save output logs
 
 # Load necessary modules

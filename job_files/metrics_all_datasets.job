@@ -2,11 +2,11 @@
 
 #SBATCH --partition=gpu_a100  # Use GPU partition (adjust if needed)
 #SBATCH --gpus=1         # Request 1 GPU
-#SBATCH --job-name=metrics_v_phantom  # Job name
+#SBATCH --job-name=metrics_eval_all_datasets  # Job name
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12  # Adjust CPU usage if needed
 #SBATCH --time=14:00:00  # Max time (adjust as needed)
-#SBATCH --output=slurm_outputs/metrics_v_phantom_%A.out  # Save output logs
+#SBATCH --output=slurm_outputs/metrics_all_%A.out  # Save output logs
 
 # Load necessary modules
 module purge
@@ -25,4 +25,4 @@ echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 # Run the script
 echo "Starting main.py..."
-srun python src/main.py --datasets v_phantom
+srun python src/main.py

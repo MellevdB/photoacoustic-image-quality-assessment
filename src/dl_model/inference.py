@@ -25,4 +25,4 @@ def run_inference(model, dataloader, device='cpu'):
             outputs = model(images)
             preds.extend(outputs.cpu().numpy().flatten().tolist())
 
-    return preds
+    return preds 
