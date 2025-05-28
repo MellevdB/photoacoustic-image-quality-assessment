@@ -10,9 +10,13 @@ import numpy as np
 from dl_model.inference import load_model_checkpoint, run_inference
 from dl_model.utils import create_train_val_test_split
 
+# metrics_to_eval = [
+#     'CLIP-IQA', 'SSIM', 'PSNR_norm', 'VIF', 'GMSD_norm', 'HAARPSI', 'MSSSIM', 'IWSSIM',
+#     'MSGMSD_norm', 'BRISQUE_norm', 'TV'
+# ]
+
 metrics_to_eval = [
-    'CLIP-IQA', 'SSIM', 'PSNR_norm', 'VIF', 'GMSD_norm', 'HAARPSI', 'MSSSIM', 'IWSSIM',
-    'MSGMSD_norm', 'BRISQUE_norm', 'TV'
+    "FSIM", "UQI", "S3IM"
 ]
 
 # metrics_to_eval = [
