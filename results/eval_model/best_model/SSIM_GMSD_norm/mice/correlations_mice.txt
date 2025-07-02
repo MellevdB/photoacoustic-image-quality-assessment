@@ -1,0 +1,2 @@
+SSIM → Spearman: 0.9192 | Pearson: 0.9624
+GMSD_norm → Spearman: 0.8657 | Pearson: 0.9359

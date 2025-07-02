@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus=1
+#SBATCH --job-name=eval_model
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=15:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=mellevdbrugge@gmail.com
+#SBATCH --output=slurm_outputs/eval_EfficientNetIQA_%A.out
+
+# Load necessary modules
+module purge
+module load 2023
+module load Anaconda3/2023.07-2
+
+# Change to the project directory
+cd /home/mvanderbrugge/photoacoustic-image-quality-assessment
+
+# Activate the virtual environment
+source activate photoacoustic-env
+
+# Set PYTHONPATH so src is treated as module root
+export PYTHONPATH=src
+
+# --- System info before training ---
+echo "Running on $(hostname)"
+nvidia-smi
+free -h
+
+
+# Check GPU availability
+echo "Checking whether the GPU is available"
+srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
+
+# Run evaluate
+echo "Evaluating EfficientNetIQA"
+srun python src/dl_model/eval_model.py

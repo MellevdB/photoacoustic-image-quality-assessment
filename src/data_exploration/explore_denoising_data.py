@@ -24,7 +24,7 @@ def map_denoising_data_structure(root_dir):
     for main_dir in expected_main_dirs:
         main_path = os.path.join(root_dir, main_dir)
         if not os.path.exists(main_path):
-            print(f"⚠️ Missing main directory: {main_dir}")
+            print(f"Missing main directory: {main_dir}")
             continue
 
         dataset_mapping[main_dir] = {}
@@ -36,7 +36,7 @@ def map_denoising_data_structure(root_dir):
             for sub_dir in expected_sub_dirs:
                 sub_path = os.path.join(main_path, sub_dir)
                 if not os.path.exists(sub_path):
-                    print(f"⚠️ Missing subdirectory: {sub_dir} in {main_dir}")
+                    print(f"Missing subdirectory: {sub_dir} in {main_dir}")
                     continue
 
                 dataset_mapping[main_dir][sub_dir] = {}
@@ -79,7 +79,7 @@ def save_mapping(data, filename):
     json_path = os.path.join(CONFIG_DIR, filename + ".json")
     with open(json_path, "w") as f:
         json.dump(data, f, indent=4)
-    print(f"✅ Saved mapping to {json_path}")
+    print(f"Saved mapping to {json_path}")
 
     # Save as CSV
     csv_path = os.path.join(CONFIG_DIR, filename + ".csv")
@@ -95,7 +95,7 @@ def save_mapping(data, filename):
                 else:
                     writer.writerow([main, sub, "Total Files", categories])
 
-    print(f"✅ Saved mapping to {csv_path}")
+    print(f"Saved mapping to {csv_path}")
 
 def explore_denoising_data(root_dir):
     """
@@ -103,7 +103,7 @@ def explore_denoising_data(root_dir):
     
     :param root_dir: Path to the dataset.
     """
-    print(f"\n🔍 Exploring Denoising Data in: {root_dir}")
+    print(f"\nExploring Denoising Data in: {root_dir}")
 
     expected_quality_levels = ["10db", "20db", "30db", "40db", "50db", "ground_truth"]
     total_images = 0
@@ -111,7 +111,7 @@ def explore_denoising_data(root_dir):
     for quality in expected_quality_levels:
         quality_path = os.path.join(root_dir, "nne", "train", quality)
         if not os.path.exists(quality_path):
-            print(f"⚠️ Missing directory: {quality_path}")
+            print(f"Missing directory: {quality_path}")
             continue
 
         image_files = sorted([f for f in os.listdir(quality_path) if f.endswith(".png")])
@@ -120,7 +120,7 @@ def explore_denoising_data(root_dir):
         print("Total images: ", total_images)
 
         if num_images == 0:
-            print(f"⚠️ No images found in {quality_path}")
+            print(f"No images found in {quality_path}")
             continue
 
         # Load first image to check dimensions
@@ -133,9 +133,9 @@ def explore_denoising_data(root_dir):
         min_val, max_val, mean_val = np.min(all_pixels), np.max(all_pixels), np.mean(all_pixels)
 
         print(f"\nKey: {quality}")
-        print(f"   ➤ Shape: {image_shape}")
-        print(f"   ➤ Type: {image_type}")
-        print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+        print(f"   Shape: {image_shape}")
+        print(f"   Type: {image_type}")
+        print(f"   Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
         print(f"   ➤ Number of images: {num_images}")
         print("-" * 50)
 

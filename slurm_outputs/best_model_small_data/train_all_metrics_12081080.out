@@ -1,0 +1,1479 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for all metrics...
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+
+Training best model for metric: CLIP-IQA
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: CLIP-IQA
+Target range → min: 0.0081, max: 0.9399
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0043 | Val Loss: 0.0023
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0023
+[Epoch 2] Train Loss: 0.0023 | Val Loss: 0.0024
+[Epoch 3] Train Loss: 0.0019 | Val Loss: 0.0018
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0018
+[Epoch 4] Train Loss: 0.0017 | Val Loss: 0.0015
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0015
+[Epoch 5] Train Loss: 0.0015 | Val Loss: 0.0014
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0014
+[Epoch 6] Train Loss: 0.0014 | Val Loss: 0.0013
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0013
+[Epoch 7] Train Loss: 0.0013 | Val Loss: 0.0014
+[Epoch 8] Train Loss: 0.0012 | Val Loss: 0.0014
+[Epoch 9] Train Loss: 0.0011 | Val Loss: 0.0015
+[Epoch 10] Train Loss: 0.0011 | Val Loss: 0.0013
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0013
+[Epoch 11] Train Loss: 0.0010 | Val Loss: 0.0012
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0012
+[Epoch 12] Train Loss: 0.0010 | Val Loss: 0.0012
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0012
+[Epoch 13] Train Loss: 0.0009 | Val Loss: 0.0011
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0011
+[Epoch 14] Train Loss: 0.0009 | Val Loss: 0.0011
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0011
+[Epoch 15] Train Loss: 0.0008 | Val Loss: 0.0010
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0010
+[Epoch 16] Train Loss: 0.0008 | Val Loss: 0.0010
+[Epoch 17] Train Loss: 0.0007 | Val Loss: 0.0010
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0010
+[Epoch 18] Train Loss: 0.0007 | Val Loss: 0.0009
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0009
+[Epoch 19] Train Loss: 0.0007 | Val Loss: 0.0009
+[Epoch 20] Train Loss: 0.0006 | Val Loss: 0.0009
+[Epoch 21] Train Loss: 0.0006 | Val Loss: 0.0009
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0009
+[Epoch 22] Train Loss: 0.0006 | Val Loss: 0.0009
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0009
+[Epoch 23] Train Loss: 0.0006 | Val Loss: 0.0009
+[Epoch 24] Train Loss: 0.0005 | Val Loss: 0.0009
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0009
+[Epoch 25] Train Loss: 0.0005 | Val Loss: 0.0008
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0008
+[Epoch 26] Train Loss: 0.0005 | Val Loss: 0.0008
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0008
+[Epoch 27] Train Loss: 0.0005 | Val Loss: 0.0008
+[Epoch 28] Train Loss: 0.0005 | Val Loss: 0.0009
+[Epoch 29] Train Loss: 0.0005 | Val Loss: 0.0009
+[Epoch 30] Train Loss: 0.0004 | Val Loss: 0.0009
+[Epoch 31] Train Loss: 0.0004 | Val Loss: 0.0008
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0008
+[Epoch 32] Train Loss: 0.0004 | Val Loss: 0.0009
+[Epoch 33] Train Loss: 0.0004 | Val Loss: 0.0008
+[Epoch 34] Train Loss: 0.0004 | Val Loss: 0.0008
+[Epoch 35] Train Loss: 0.0004 | Val Loss: 0.0010
+[Epoch 36] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 37] Train Loss: 0.0003 | Val Loss: 0.0008
+New best model saved to models/best_model/CLIP-IQA/best_model.pth with val_loss=0.0008
+[Epoch 38] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 39] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 40] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 41] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 42] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 43] Train Loss: 0.0003 | Val Loss: 0.0008
+[Epoch 44] Train Loss: 0.0002 | Val Loss: 0.0008
+[Epoch 45] Train Loss: 0.0002 | Val Loss: 0.0008
+[Epoch 46] Train Loss: 0.0002 | Val Loss: 0.0008
+[Epoch 47] Train Loss: 0.0002 | Val Loss: 0.0009
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/CLIP-IQA/train_val_loss.csv
+
+Training best model for metric: SSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: SSIM
+Target range → min: 0.0211, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0073 | Val Loss: 0.0015
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0015
+[Epoch 2] Train Loss: 0.0014 | Val Loss: 0.0015
+[Epoch 3] Train Loss: 0.0010 | Val Loss: 0.0007
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0007
+[Epoch 4] Train Loss: 0.0006 | Val Loss: 0.0010
+[Epoch 5] Train Loss: 0.0005 | Val Loss: 0.0004
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0004
+[Epoch 6] Train Loss: 0.0004 | Val Loss: 0.0003
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0003
+[Epoch 7] Train Loss: 0.0003 | Val Loss: 0.0002
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0002
+[Epoch 8] Train Loss: 0.0003 | Val Loss: 0.0002
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0002
+[Epoch 9] Train Loss: 0.0003 | Val Loss: 0.0002
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0002
+[Epoch 10] Train Loss: 0.0002 | Val Loss: 0.0002
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0002
+[Epoch 11] Train Loss: 0.0002 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 12] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 13] Train Loss: 0.0002 | Val Loss: 0.0001
+[Epoch 14] Train Loss: 0.0002 | Val Loss: 0.0006
+[Epoch 15] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 16] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 17] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 18] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 19] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 20] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 21] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 22] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 23] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 24] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 25] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 26] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 27] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 28] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 29] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/SSIM/best_model.pth with val_loss=0.0001
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0001
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/SSIM/train_val_loss.csv
+
+Training best model for metric: PSNR_norm
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: PSNR_norm
+Target range → min: 0.1367, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0022 | Val Loss: 0.0017
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0017
+[Epoch 2] Train Loss: 0.0015 | Val Loss: 0.0016
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0016
+[Epoch 3] Train Loss: 0.0014 | Val Loss: 0.0015
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0015
+[Epoch 4] Train Loss: 0.0013 | Val Loss: 0.0016
+[Epoch 5] Train Loss: 0.0012 | Val Loss: 0.0013
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0013
+[Epoch 6] Train Loss: 0.0011 | Val Loss: 0.0012
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0012
+[Epoch 7] Train Loss: 0.0010 | Val Loss: 0.0011
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0011
+[Epoch 8] Train Loss: 0.0009 | Val Loss: 0.0010
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0010
+[Epoch 9] Train Loss: 0.0008 | Val Loss: 0.0009
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0009
+[Epoch 10] Train Loss: 0.0007 | Val Loss: 0.0012
+[Epoch 11] Train Loss: 0.0006 | Val Loss: 0.0008
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0008
+[Epoch 12] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0005
+[Epoch 13] Train Loss: 0.0006 | Val Loss: 0.0006
+[Epoch 14] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0005
+[Epoch 15] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0005
+[Epoch 16] Train Loss: 0.0004 | Val Loss: 0.0008
+[Epoch 17] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 18] Train Loss: 0.0004 | Val Loss: 0.0006
+[Epoch 19] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0005
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0005
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 23] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 24] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0004
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0004
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0006
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 30] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0004
+[Epoch 31] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0006
+[Epoch 33] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0003
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0003
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0003
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0003
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0003
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0003
+[Epoch 46] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 48] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0002
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0002
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 54] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 55] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0002
+[Epoch 57] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 58] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 59] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 60] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 61] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 62] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 63] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0002
+[Epoch 64] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 65] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 66] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 67] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 68] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 69] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/PSNR_norm/best_model.pth with val_loss=0.0002
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 71] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 72] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 76] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0002
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/PSNR_norm/train_val_loss.csv
+
+Training best model for metric: VIF
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: VIF
+Target range → min: 0.0005, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0063 | Val Loss: 0.0038
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0038
+[Epoch 2] Train Loss: 0.0037 | Val Loss: 0.0035
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0035
+[Epoch 3] Train Loss: 0.0031 | Val Loss: 0.0028
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0028
+[Epoch 4] Train Loss: 0.0024 | Val Loss: 0.0018
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0018
+[Epoch 5] Train Loss: 0.0018 | Val Loss: 0.0019
+[Epoch 6] Train Loss: 0.0014 | Val Loss: 0.0019
+[Epoch 7] Train Loss: 0.0012 | Val Loss: 0.0011
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0011
+[Epoch 8] Train Loss: 0.0010 | Val Loss: 0.0009
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0009
+[Epoch 9] Train Loss: 0.0008 | Val Loss: 0.0016
+[Epoch 10] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0007
+[Epoch 11] Train Loss: 0.0006 | Val Loss: 0.0007
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0007
+[Epoch 12] Train Loss: 0.0006 | Val Loss: 0.0006
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0006
+[Epoch 13] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0005
+[Epoch 14] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 15] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0005
+[Epoch 16] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 17] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0004
+[Epoch 18] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 19] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0004
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0004
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0006
+[Epoch 23] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0004
+[Epoch 24] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 30] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 31] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 35] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0003
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0003
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 46] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 48] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 51] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 52] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 54] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 55] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 56] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 57] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 58] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 59] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 60] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 61] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 62] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 63] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 64] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 65] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 66] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 67] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 68] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 69] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 71] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 72] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 82] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 85] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 86] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 87] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 90] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 91] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 92] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 93] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 94] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 95] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 96] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 97] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 98] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 99] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 100] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 101] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 102] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 103] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 104] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 105] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 106] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 107] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 108] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 109] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 110] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 111] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 112] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 113] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/VIF/best_model.pth with val_loss=0.0002
+[Epoch 114] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 115] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 116] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 117] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 118] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 119] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 120] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 121] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 122] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 123] Train Loss: 0.0000 | Val Loss: 0.0002
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/VIF/train_val_loss.csv
+
+Training best model for metric: GMSD_norm
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: GMSD_norm
+Target range → min: 0.0000, max: 0.8494
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0055 | Val Loss: 0.0036
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0036
+[Epoch 2] Train Loss: 0.0036 | Val Loss: 0.0031
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0031
+[Epoch 3] Train Loss: 0.0027 | Val Loss: 0.0024
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0024
+[Epoch 4] Train Loss: 0.0022 | Val Loss: 0.0019
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0019
+[Epoch 5] Train Loss: 0.0018 | Val Loss: 0.0017
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0017
+[Epoch 6] Train Loss: 0.0015 | Val Loss: 0.0017
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0017
+[Epoch 7] Train Loss: 0.0013 | Val Loss: 0.0012
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0012
+[Epoch 8] Train Loss: 0.0011 | Val Loss: 0.0011
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0011
+[Epoch 9] Train Loss: 0.0010 | Val Loss: 0.0009
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0009
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 10] Train Loss: 0.0009 | Val Loss: 0.0010
+[Epoch 11] Train Loss: 0.0008 | Val Loss: 0.0007
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 12] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 13] Train Loss: 0.0006 | Val Loss: 0.0006
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0006
+[Epoch 14] Train Loss: 0.0006 | Val Loss: 0.0005
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 15] Train Loss: 0.0005 | Val Loss: 0.0005
+[Epoch 16] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 17] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 18] Train Loss: 0.0004 | Val Loss: 0.0006
+[Epoch 19] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 20] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 23] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 24] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 43] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 46] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 48] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 49] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 50] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 53] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 54] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 55] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 57] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 58] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 59] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 60] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 61] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 62] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 63] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 64] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 65] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 66] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 67] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 68] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 69] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 71] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 72] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0003
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/GMSD_norm/train_val_loss.csv
+
+Training best model for metric: HAARPSI
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: HAARPSI
+Target range → min: 0.1179, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0064 | Val Loss: 0.0053
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0053
+[Epoch 2] Train Loss: 0.0048 | Val Loss: 0.0045
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0045
+[Epoch 3] Train Loss: 0.0040 | Val Loss: 0.0035
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0035
+[Epoch 4] Train Loss: 0.0029 | Val Loss: 0.0022
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0022
+[Epoch 5] Train Loss: 0.0020 | Val Loss: 0.0017
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0017
+[Epoch 6] Train Loss: 0.0017 | Val Loss: 0.0025
+[Epoch 7] Train Loss: 0.0014 | Val Loss: 0.0012
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0012
+[Epoch 8] Train Loss: 0.0011 | Val Loss: 0.0010
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0010
+[Epoch 9] Train Loss: 0.0009 | Val Loss: 0.0013
+[Epoch 10] Train Loss: 0.0009 | Val Loss: 0.0013
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 11] Train Loss: 0.0008 | Val Loss: 0.0008
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0008
+[Epoch 12] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0007
+[Epoch 13] Train Loss: 0.0006 | Val Loss: 0.0008
+[Epoch 14] Train Loss: 0.0006 | Val Loss: 0.0008
+[Epoch 15] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0005
+[Epoch 16] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 17] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0005
+[Epoch 18] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 19] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0004
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0004
+[Epoch 23] Train Loss: 0.0003 | Val Loss: 0.0007
+[Epoch 24] Train Loss: 0.0003 | Val Loss: 0.0003
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0003
+[Epoch 25] Train Loss: 0.0003 | Val Loss: 0.0003
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 30] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 31] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 32] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0003
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0003
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 46] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 48] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 51] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 52] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 54] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 55] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 57] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 58] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 59] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 60] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 61] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 62] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 63] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 64] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 65] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 66] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 67] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 68] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 69] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 71] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 72] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/HAARPSI/best_model.pth with val_loss=0.0002
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 82] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 85] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 86] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 87] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0002
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/HAARPSI/train_val_loss.csv
+
+Training best model for metric: MSSSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: MSSSIM
+Target range → min: 0.3179, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0061 | Val Loss: 0.0013
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0013
+[Epoch 2] Train Loss: 0.0013 | Val Loss: 0.0010
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0010
+[Epoch 3] Train Loss: 0.0008 | Val Loss: 0.0010
+[Epoch 4] Train Loss: 0.0007 | Val Loss: 0.0005
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0005
+[Epoch 5] Train Loss: 0.0006 | Val Loss: 0.0006
+[Epoch 6] Train Loss: 0.0005 | Val Loss: 0.0005
+[Epoch 7] Train Loss: 0.0005 | Val Loss: 0.0004
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0004
+[Epoch 8] Train Loss: 0.0004 | Val Loss: 0.0005
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 9] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0004
+[Epoch 10] Train Loss: 0.0004 | Val Loss: 0.0003
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0003
+[Epoch 11] Train Loss: 0.0003 | Val Loss: 0.0003
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0003
+[Epoch 12] Train Loss: 0.0003 | Val Loss: 0.0002
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0002
+[Epoch 13] Train Loss: 0.0003 | Val Loss: 0.0003
+[Epoch 14] Train Loss: 0.0002 | Val Loss: 0.0002
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0002
+[Epoch 15] Train Loss: 0.0002 | Val Loss: 0.0002
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0002
+[Epoch 16] Train Loss: 0.0002 | Val Loss: 0.0002
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0002
+[Epoch 17] Train Loss: 0.0002 | Val Loss: 0.0002
+[Epoch 18] Train Loss: 0.0002 | Val Loss: 0.0002
+[Epoch 19] Train Loss: 0.0002 | Val Loss: 0.0002
+[Epoch 20] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 21] Train Loss: 0.0002 | Val Loss: 0.0002
+[Epoch 22] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 23] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 24] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 25] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 26] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 27] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 28] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 29] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0001
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 42] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 43] Train Loss: 0.0000 | Val Loss: 0.0001
+New best model saved to models/best_model/MSSSIM/best_model.pth with val_loss=0.0001
+[Epoch 44] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 45] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 46] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 47] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 48] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 49] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 50] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0001
+[Epoch 53] Train Loss: 0.0000 | Val Loss: 0.0001
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/MSSSIM/train_val_loss.csv
+
+Training best model for metric: IWSSIM
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: IWSSIM
+Target range → min: 0.1409, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0056 | Val Loss: 0.0032
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0032
+[Epoch 2] Train Loss: 0.0026 | Val Loss: 0.0020
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0020
+[Epoch 3] Train Loss: 0.0018 | Val Loss: 0.0015
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0015
+[Epoch 4] Train Loss: 0.0014 | Val Loss: 0.0014
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0014
+[Epoch 5] Train Loss: 0.0011 | Val Loss: 0.0015
+[Epoch 6] Train Loss: 0.0010 | Val Loss: 0.0023
+[Epoch 7] Train Loss: 0.0008 | Val Loss: 0.0011
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0011
+[Epoch 8] Train Loss: 0.0008 | Val Loss: 0.0008
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0008
+[Epoch 9] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0007
+[Epoch 10] Train Loss: 0.0006 | Val Loss: 0.0006
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0006
+[Epoch 11] Train Loss: 0.0005 | Val Loss: 0.0006
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0006
+[Epoch 12] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0005
+[Epoch 13] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0005
+[Epoch 14] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0004
+[Epoch 15] Train Loss: 0.0004 | Val Loss: 0.0004
+[Epoch 16] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0004
+[Epoch 17] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 18] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 19] Train Loss: 0.0003 | Val Loss: 0.0003
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0003
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0003
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0003
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 23] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 24] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0003
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0003
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0003
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0003
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0002
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0002
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/IWSSIM/best_model.pth with val_loss=0.0002
+[Epoch 46] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 48] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 49] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 50] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 53] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 54] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 55] Train Loss: 0.0000 | Val Loss: 0.0002
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/IWSSIM/train_val_loss.csv
+
+Training best model for metric: MSGMSD_norm
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: MSGMSD_norm
+Target range → min: 0.0000, max: 0.8438
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0054 | Val Loss: 0.0039
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0039
+[Epoch 2] Train Loss: 0.0033 | Val Loss: 0.0031
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0031
+[Epoch 3] Train Loss: 0.0025 | Val Loss: 0.0021
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0021
+[Epoch 4] Train Loss: 0.0020 | Val Loss: 0.0018
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0018
+[Epoch 5] Train Loss: 0.0017 | Val Loss: 0.0016
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0016
+[Epoch 6] Train Loss: 0.0014 | Val Loss: 0.0014
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0014
+[Epoch 7] Train Loss: 0.0013 | Val Loss: 0.0012
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0012
+[Epoch 8] Train Loss: 0.0010 | Val Loss: 0.0010
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0010
+[Epoch 9] Train Loss: 0.0009 | Val Loss: 0.0010
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0010
+[Epoch 10] Train Loss: 0.0008 | Val Loss: 0.0009
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0009
+[Epoch 11] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 12] Train Loss: 0.0007 | Val Loss: 0.0007
+[Epoch 13] Train Loss: 0.0006 | Val Loss: 0.0007
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 14] Train Loss: 0.0006 | Val Loss: 0.0007
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 15] Train Loss: 0.0005 | Val Loss: 0.0006
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0006
+[Epoch 16] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 17] Train Loss: 0.0004 | Val Loss: 0.0006
+[Epoch 18] Train Loss: 0.0004 | Val Loss: 0.0006
+[Epoch 19] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 21] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 22] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 23] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 24] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 29] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0005
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 46] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 47] Train Loss: 0.0000 | Val Loss: 0.0004
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 48] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 49] Train Loss: 0.0000 | Val Loss: 0.0003
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 50] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0004
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0004
+[Epoch 53] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 54] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 55] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 57] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 58] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 59] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 60] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 61] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 62] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 63] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 64] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 65] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 66] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 67] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 68] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 69] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 71] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 72] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 82] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0003
+New best model saved to models/best_model/MSGMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 85] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 86] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 87] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 90] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 91] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 92] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 93] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 94] Train Loss: 0.0000 | Val Loss: 0.0003
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/MSGMSD_norm/train_val_loss.csv
+
+Training best model for metric: BRISQUE_norm
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: BRISQUE_norm
+Target range → min: 0.0000, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0160 | Val Loss: 0.0049
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0049
+[Epoch 2] Train Loss: 0.0042 | Val Loss: 0.0040
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0040
+[Epoch 3] Train Loss: 0.0038 | Val Loss: 0.0033
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0033
+[Epoch 4] Train Loss: 0.0036 | Val Loss: 0.0031
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0031
+[Epoch 5] Train Loss: 0.0033 | Val Loss: 0.0031
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0031
+[Epoch 6] Train Loss: 0.0030 | Val Loss: 0.0029
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0029
+[Epoch 7] Train Loss: 0.0028 | Val Loss: 0.0035
+[Epoch 8] Train Loss: 0.0027 | Val Loss: 0.0027
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0027
+[Epoch 9] Train Loss: 0.0026 | Val Loss: 0.0025
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0025
+[Epoch 10] Train Loss: 0.0025 | Val Loss: 0.0025
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0025
+[Epoch 11] Train Loss: 0.0023 | Val Loss: 0.0028
+[Epoch 12] Train Loss: 0.0023 | Val Loss: 0.0022
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0022
+[Epoch 13] Train Loss: 0.0022 | Val Loss: 0.0021
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0021
+[Epoch 14] Train Loss: 0.0021 | Val Loss: 0.0037
+[Epoch 15] Train Loss: 0.0020 | Val Loss: 0.0020
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0020
+[Epoch 16] Train Loss: 0.0019 | Val Loss: 0.0023
+[Epoch 17] Train Loss: 0.0018 | Val Loss: 0.0023
+[Epoch 18] Train Loss: 0.0017 | Val Loss: 0.0019
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0019
+[Epoch 19] Train Loss: 0.0017 | Val Loss: 0.0021
+[Epoch 20] Train Loss: 0.0016 | Val Loss: 0.0018
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0018
+[Epoch 21] Train Loss: 0.0015 | Val Loss: 0.0016
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0016
+[Epoch 22] Train Loss: 0.0015 | Val Loss: 0.0016
+[Epoch 23] Train Loss: 0.0014 | Val Loss: 0.0017
+[Epoch 24] Train Loss: 0.0014 | Val Loss: 0.0021
+[Epoch 25] Train Loss: 0.0013 | Val Loss: 0.0015
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0015
+[Epoch 26] Train Loss: 0.0012 | Val Loss: 0.0015
+[Epoch 27] Train Loss: 0.0012 | Val Loss: 0.0015
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0015
+[Epoch 28] Train Loss: 0.0011 | Val Loss: 0.0015
+[Epoch 29] Train Loss: 0.0011 | Val Loss: 0.0016
+[Epoch 30] Train Loss: 0.0010 | Val Loss: 0.0014
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0014
+[Epoch 31] Train Loss: 0.0010 | Val Loss: 0.0015
+[Epoch 32] Train Loss: 0.0009 | Val Loss: 0.0014
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0014
+[Epoch 33] Train Loss: 0.0009 | Val Loss: 0.0014
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0014
+[Epoch 34] Train Loss: 0.0009 | Val Loss: 0.0015
+[Epoch 35] Train Loss: 0.0008 | Val Loss: 0.0015
+[Epoch 36] Train Loss: 0.0008 | Val Loss: 0.0015
+[Epoch 37] Train Loss: 0.0008 | Val Loss: 0.0014
+[Epoch 38] Train Loss: 0.0007 | Val Loss: 0.0013
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0013
+[Epoch 39] Train Loss: 0.0007 | Val Loss: 0.0013
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0013
+[Epoch 40] Train Loss: 0.0007 | Val Loss: 0.0014
+[Epoch 41] Train Loss: 0.0006 | Val Loss: 0.0013
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0013
+[Epoch 42] Train Loss: 0.0006 | Val Loss: 0.0012
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0012
+[Epoch 43] Train Loss: 0.0006 | Val Loss: 0.0013
+[Epoch 44] Train Loss: 0.0006 | Val Loss: 0.0013
+[Epoch 45] Train Loss: 0.0006 | Val Loss: 0.0014
+[Epoch 46] Train Loss: 0.0005 | Val Loss: 0.0013
+[Epoch 47] Train Loss: 0.0005 | Val Loss: 0.0014
+[Epoch 48] Train Loss: 0.0005 | Val Loss: 0.0013
+[Epoch 49] Train Loss: 0.0005 | Val Loss: 0.0012
+[Epoch 50] Train Loss: 0.0005 | Val Loss: 0.0012
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0012
+[Epoch 51] Train Loss: 0.0005 | Val Loss: 0.0012
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0012
+[Epoch 52] Train Loss: 0.0004 | Val Loss: 0.0013
+[Epoch 53] Train Loss: 0.0004 | Val Loss: 0.0013
+[Epoch 54] Train Loss: 0.0004 | Val Loss: 0.0013
+[Epoch 55] Train Loss: 0.0004 | Val Loss: 0.0013
+[Epoch 56] Train Loss: 0.0004 | Val Loss: 0.0012
+[Epoch 57] Train Loss: 0.0004 | Val Loss: 0.0012
+[Epoch 58] Train Loss: 0.0004 | Val Loss: 0.0012
+[Epoch 59] Train Loss: 0.0004 | Val Loss: 0.0012
+[Epoch 60] Train Loss: 0.0004 | Val Loss: 0.0011
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0011
+[Epoch 61] Train Loss: 0.0004 | Val Loss: 0.0012
+[Epoch 62] Train Loss: 0.0003 | Val Loss: 0.0011
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0011
+[Epoch 63] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 64] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 65] Train Loss: 0.0003 | Val Loss: 0.0011
+New best model saved to models/best_model/BRISQUE_norm/best_model.pth with val_loss=0.0011
+[Epoch 66] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 67] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 68] Train Loss: 0.0003 | Val Loss: 0.0011
+[Epoch 69] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 70] Train Loss: 0.0003 | Val Loss: 0.0011
+[Epoch 71] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 72] Train Loss: 0.0003 | Val Loss: 0.0012
+[Epoch 73] Train Loss: 0.0003 | Val Loss: 0.0013
+[Epoch 74] Train Loss: 0.0003 | Val Loss: 0.0011
+[Epoch 75] Train Loss: 0.0003 | Val Loss: 0.0012
+⏹Early stopping triggered after 10 no-improve epochs.
+📄 Saved training log to models/best_model/BRISQUE_norm/train_val_loss.csv
+
+Training best model for metric: TV
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: TV
+Target range → min: 0.0260, max: 36.1898
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.4523 | Val Loss: 0.1328
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.1328
+[Epoch 2] Train Loss: 0.1206 | Val Loss: 0.1474
+[Epoch 3] Train Loss: 0.1005 | Val Loss: 0.0918
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0918
+[Epoch 4] Train Loss: 0.0893 | Val Loss: 0.0535
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0535
+[Epoch 5] Train Loss: 0.0778 | Val Loss: 0.0506
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0506
+[Epoch 6] Train Loss: 0.0681 | Val Loss: 0.1176
+[Epoch 7] Train Loss: 0.0660 | Val Loss: 0.0438
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0438
+[Epoch 8] Train Loss: 0.0596 | Val Loss: 0.0364
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0364
+[Epoch 9] Train Loss: 0.0612 | Val Loss: 0.0329
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0329
+[Epoch 10] Train Loss: 0.0539 | Val Loss: 0.0318
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0318
+[Epoch 11] Train Loss: 0.0539 | Val Loss: 0.0300
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0300
+[Epoch 12] Train Loss: 0.0478 | Val Loss: 0.0602
+[Epoch 13] Train Loss: 0.0482 | Val Loss: 0.0330
+[Epoch 14] Train Loss: 0.0443 | Val Loss: 0.0432
+[Epoch 15] Train Loss: 0.0488 | Val Loss: 0.0711
+[Epoch 16] Train Loss: 0.0415 | Val Loss: 0.0269
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0269
+[Epoch 17] Train Loss: 0.0430 | Val Loss: 0.0419
+[Epoch 18] Train Loss: 0.0417 | Val Loss: 0.0316
+[Epoch 19] Train Loss: 0.0445 | Val Loss: 0.0255
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0255
+[Epoch 20] Train Loss: 0.0353 | Val Loss: 0.0245
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0245
+[Epoch 21] Train Loss: 0.0401 | Val Loss: 0.0543
+[Epoch 22] Train Loss: 0.0373 | Val Loss: 0.0360
+[Epoch 23] Train Loss: 0.0373 | Val Loss: 0.0294
+[Epoch 24] Train Loss: 0.0398 | Val Loss: 0.0476
+[Epoch 25] Train Loss: 0.0343 | Val Loss: 0.0249
+[Epoch 26] Train Loss: 0.0319 | Val Loss: 0.0334
+[Epoch 27] Train Loss: 0.0358 | Val Loss: 0.0244
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0244
+[Epoch 28] Train Loss: 0.0339 | Val Loss: 0.0568
+[Epoch 29] Train Loss: 0.0326 | Val Loss: 0.0251
+[Epoch 30] Train Loss: 0.0304 | Val Loss: 0.0294
+[Epoch 31] Train Loss: 0.0315 | Val Loss: 0.0182
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0182
+[Epoch 32] Train Loss: 0.0276 | Val Loss: 0.0234
+[Epoch 33] Train Loss: 0.0277 | Val Loss: 0.0532
+[Epoch 34] Train Loss: 0.0285 | Val Loss: 0.0191
+[Epoch 35] Train Loss: 0.0259 | Val Loss: 0.0298
+[Epoch 36] Train Loss: 0.0286 | Val Loss: 0.0416
+[Epoch 37] Train Loss: 0.0267 | Val Loss: 0.0208
+[Epoch 38] Train Loss: 0.0228 | Val Loss: 0.0246
+[Epoch 39] Train Loss: 0.0264 | Val Loss: 0.0162
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0162
+[Epoch 40] Train Loss: 0.0227 | Val Loss: 0.0153
+New best model saved to models/best_model/TV/best_model.pth with val_loss=0.0153
+[Epoch 41] Train Loss: 0.0239 | Val Loss: 0.0155
+[Epoch 42] Train Loss: 0.0219 | Val Loss: 0.0246
+[Epoch 43] Train Loss: 0.0205 | Val Loss: 0.0130
+/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:62: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+slurmstepd: error: *** JOB 12081080 ON gcn46 CANCELLED AT 2025-05-30T12:04:13 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 12081080.1 ON gcn46 CANCELLED AT 2025-05-30T12:04:13 DUE TO TIME LIMIT ***
+
+JOB STATISTICS
+==============
+Job ID: 12081080
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 11:48:58
+CPU Efficiency: 5.47% of 9-00:04:12 core-walltime
+Job Wall-clock time: 12:00:14
+Memory Utilized: 941.30 MB
+Memory Efficiency: 0.77% of 120.00 GB (120.00 GB/node)

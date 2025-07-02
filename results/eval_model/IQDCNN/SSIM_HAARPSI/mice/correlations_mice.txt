@@ -1,0 +1,2 @@
+SSIM → Spearman: 0.9209 | Pearson: 0.9511
+HAARPSI → Spearman: 0.8737 | Pearson: 0.9370

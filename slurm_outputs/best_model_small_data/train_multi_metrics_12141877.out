@@ -1,0 +1,686 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for multiple metrics...
+
+Training multi-output model for metrics: ['FSIM', 'PSNR_norm', 'SSIM', 'UQI']
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: ['FSIM', 'PSNR_norm', 'SSIM', 'UQI']
+Target ranges:
+  FSIM: min=0.4086, max=1.0000
+  PSNR_norm: min=0.1367, max=1.0000
+  SSIM: min=0.0211, max=1.0000
+  UQI: min=0.0034, max=1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 4]             516
+================================================================
+Total params: 2,502,660
+Trainable params: 2,502,660
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0134 | Val Loss: 0.0057
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0057
+[Epoch 2] Train Loss: 0.0038 | Val Loss: 0.0042
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0042
+[Epoch 3] Train Loss: 0.0030 | Val Loss: 0.0020
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0020
+[Epoch 4] Train Loss: 0.0025 | Val Loss: 0.0025
+[Epoch 5] Train Loss: 0.0022 | Val Loss: 0.0020
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0020
+[Epoch 6] Train Loss: 0.0018 | Val Loss: 0.0019
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0019
+[Epoch 7] Train Loss: 0.0015 | Val Loss: 0.0016
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0016
+[Epoch 8] Train Loss: 0.0014 | Val Loss: 0.0011
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0011
+[Epoch 9] Train Loss: 0.0012 | Val Loss: 0.0013
+[Epoch 10] Train Loss: 0.0011 | Val Loss: 0.0012
+[Epoch 11] Train Loss: 0.0010 | Val Loss: 0.0010
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0010
+[Epoch 12] Train Loss: 0.0010 | Val Loss: 0.0008
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0008
+[Epoch 13] Train Loss: 0.0009 | Val Loss: 0.0009
+[Epoch 14] Train Loss: 0.0009 | Val Loss: 0.0008
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0008
+[Epoch 15] Train Loss: 0.0008 | Val Loss: 0.0008
+[Epoch 16] Train Loss: 0.0008 | Val Loss: 0.0014
+[Epoch 17] Train Loss: 0.0007 | Val Loss: 0.0009
+[Epoch 18] Train Loss: 0.0006 | Val Loss: 0.0007
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0007
+[Epoch 19] Train Loss: 0.0007 | Val Loss: 0.0011
+[Epoch 20] Train Loss: 0.0006 | Val Loss: 0.0006
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0006
+[Epoch 21] Train Loss: 0.0006 | Val Loss: 0.0007
+[Epoch 22] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0005
+[Epoch 23] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 24] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 25] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 26] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0004
+[Epoch 27] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0004
+[Epoch 28] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0004
+[Epoch 29] Train Loss: 0.0004 | Val Loss: 0.0004
+[Epoch 30] Train Loss: 0.0004 | Val Loss: 0.0007
+[Epoch 31] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0004
+[Epoch 32] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 33] Train Loss: 0.0003 | Val Loss: 0.0006
+[Epoch 34] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 35] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0004
+[Epoch 36] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0003
+[Epoch 37] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 38] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 39] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 40] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 41] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0003
+[Epoch 42] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 43] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 44] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 45] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 46] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0003
+[Epoch 47] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0003
+[Epoch 48] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 51] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 52] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 54] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 55] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 57] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 58] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 59] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 60] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 61] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 62] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 63] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 64] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 65] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 66] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 67] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 68] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 69] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 70] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 71] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 72] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 73] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 74] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 75] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 76] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 77] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 78] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 79] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 82] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 85] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 86] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 87] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI/best_model.pth with val_loss=0.0002
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 90] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 91] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 92] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 93] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 94] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 95] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 96] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 97] Train Loss: 0.0000 | Val Loss: 0.0002
+Early stopping triggered after 10 no-improve epochs.
+Saved training log to models/best_model/FSIM_PSNR_norm_SSIM_UQI/train_val_loss.csv
+
+Training multi-output model for metrics: ['GMSD_norm', 'SSIM', 'FSIM']
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: ['GMSD_norm', 'SSIM', 'FSIM']
+Target ranges:
+  GMSD_norm: min=0.0000, max=0.8494
+  SSIM: min=0.0211, max=1.0000
+  FSIM: min=0.4086, max=1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 3]             387
+================================================================
+Total params: 2,502,531
+Trainable params: 2,502,531
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0065 | Val Loss: 0.0022
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0022
+[Epoch 2] Train Loss: 0.0020 | Val Loss: 0.0015
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0015
+[Epoch 3] Train Loss: 0.0016 | Val Loss: 0.0015
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0015
+[Epoch 4] Train Loss: 0.0013 | Val Loss: 0.0013
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0013
+[Epoch 5] Train Loss: 0.0012 | Val Loss: 0.0012
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0012
+[Epoch 6] Train Loss: 0.0010 | Val Loss: 0.0009
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0009
+[Epoch 7] Train Loss: 0.0009 | Val Loss: 0.0009
+[Epoch 8] Train Loss: 0.0008 | Val Loss: 0.0008
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0008
+[Epoch 9] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0007
+[Epoch 10] Train Loss: 0.0007 | Val Loss: 0.0007
+[Epoch 11] Train Loss: 0.0006 | Val Loss: 0.0006
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0006
+[Epoch 12] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 13] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0005
+[Epoch 14] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0004
+[Epoch 15] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 16] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 17] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0004
+[Epoch 18] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0004
+[Epoch 19] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0004
+[Epoch 20] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0004
+[Epoch 21] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 22] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0003
+[Epoch 23] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0003
+[Epoch 24] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 25] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 26] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0003
+[Epoch 27] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 28] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 29] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 30] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 31] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 32] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 33] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 34] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 35] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 36] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 37] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 38] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 39] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 40] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 41] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 42] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 43] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 46] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 48] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 50] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 51] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 52] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 53] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 54] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 55] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 56] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 57] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 58] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 59] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 60] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 61] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 62] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 63] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 64] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 65] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 66] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 67] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 68] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 69] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 70] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 71] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 72] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 74] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 75] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 77] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 82] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 85] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 86] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 87] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 90] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 91] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 92] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/GMSD_norm_SSIM_FSIM/best_model.pth with val_loss=0.0002
+[Epoch 93] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 94] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 95] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 96] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 97] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 98] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 99] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 100] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 101] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 102] Train Loss: 0.0000 | Val Loss: 0.0002
+Early stopping triggered after 10 no-improve epochs.
+Saved training log to models/best_model/GMSD_norm_SSIM_FSIM/train_val_loss.csv
+
+Training multi-output model for metrics: ['FSIM', 'PSNR_norm', 'CLIP-IQA']
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: ['FSIM', 'PSNR_norm', 'CLIP-IQA']
+Target ranges:
+  FSIM: min=0.4086, max=1.0000
+  PSNR_norm: min=0.1367, max=1.0000
+  CLIP-IQA: min=0.0081, max=0.9399
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 3]             387
+================================================================
+Total params: 2,502,531
+Trainable params: 2,502,531
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0046 | Val Loss: 0.0019
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0019
+[Epoch 2] Train Loss: 0.0018 | Val Loss: 0.0018
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0018
+[Epoch 3] Train Loss: 0.0015 | Val Loss: 0.0016
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0016
+[Epoch 4] Train Loss: 0.0014 | Val Loss: 0.0016
+[Epoch 5] Train Loss: 0.0013 | Val Loss: 0.0013
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0013
+[Epoch 6] Train Loss: 0.0012 | Val Loss: 0.0011
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0011
+[Epoch 7] Train Loss: 0.0011 | Val Loss: 0.0011
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0011
+[Epoch 8] Train Loss: 0.0010 | Val Loss: 0.0010
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0010
+[Epoch 9] Train Loss: 0.0010 | Val Loss: 0.0010
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0010
+[Epoch 10] Train Loss: 0.0009 | Val Loss: 0.0011
+[Epoch 11] Train Loss: 0.0008 | Val Loss: 0.0010
+[Epoch 12] Train Loss: 0.0008 | Val Loss: 0.0008
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0008
+[Epoch 13] Train Loss: 0.0007 | Val Loss: 0.0011
+[Epoch 14] Train Loss: 0.0006 | Val Loss: 0.0007
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0007
+[Epoch 15] Train Loss: 0.0006 | Val Loss: 0.0009
+[Epoch 16] Train Loss: 0.0006 | Val Loss: 0.0007
+[Epoch 17] Train Loss: 0.0005 | Val Loss: 0.0006
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0006
+[Epoch 18] Train Loss: 0.0005 | Val Loss: 0.0006
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0006
+[Epoch 19] Train Loss: 0.0005 | Val Loss: 0.0006
+[Epoch 20] Train Loss: 0.0004 | Val Loss: 0.0006
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0006
+[Epoch 21] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 22] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 23] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 24] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 25] Train Loss: 0.0003 | Val Loss: 0.0006
+[Epoch 26] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 27] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 28] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 29] Train Loss: 0.0003 | Val Loss: 0.0005
+[Epoch 30] Train Loss: 0.0003 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0005
+[Epoch 31] Train Loss: 0.0002 | Val Loss: 0.0006
+[Epoch 32] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 33] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 34] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 35] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 36] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 37] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 38] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 39] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 40] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 41] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 42] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 43] Train Loss: 0.0002 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0005
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 46] Train Loss: 0.0002 | Val Loss: 0.0005
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 48] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 51] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 52] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_CLIP-IQA/best_model.pth with val_loss=0.0004
+[Epoch 54] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 55] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 56] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 57] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 58] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 59] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 60] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 61] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 62] Train Loss: 0.0001 | Val Loss: 0.0004
+[Epoch 63] Train Loss: 0.0001 | Val Loss: 0.0004
+Early stopping triggered after 10 no-improve epochs.
+Saved training log to models/best_model/FSIM_PSNR_norm_CLIP-IQA/train_val_loss.csv
+
+Training multi-output model for metrics: ['FSIM', 'PSNR_norm', 'SSIM', 'UQI', 'GMSD_norm']
+[Warning] Skipping unknown dataset: varied_split
+Loaded 21616 train, 5404 val, 8398 test samples from ['MSFD', 'mice', 'pa_experiment_data', 'phantom', 'v_phantom', 'zenodo']
+Target metric: ['FSIM', 'PSNR_norm', 'SSIM', 'UQI', 'GMSD_norm']
+Target ranges:
+  FSIM: min=0.4086, max=1.0000
+  PSNR_norm: min=0.1367, max=1.0000
+  SSIM: min=0.0211, max=1.0000
+  UQI: min=0.0034, max=1.0000
+  GMSD_norm: min=0.0000, max=0.8494
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 5]             645
+================================================================
+Total params: 2,502,789
+Trainable params: 2,502,789
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0110 | Val Loss: 0.0040
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0040
+[Epoch 2] Train Loss: 0.0044 | Val Loss: 0.0047
+[Epoch 3] Train Loss: 0.0033 | Val Loss: 0.0031
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0031
+[Epoch 4] Train Loss: 0.0027 | Val Loss: 0.0024
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0024
+[Epoch 5] Train Loss: 0.0022 | Val Loss: 0.0037
+[Epoch 6] Train Loss: 0.0018 | Val Loss: 0.0015
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0015
+[Epoch 7] Train Loss: 0.0015 | Val Loss: 0.0016
+[Epoch 8] Train Loss: 0.0013 | Val Loss: 0.0012
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0012
+[Epoch 9] Train Loss: 0.0011 | Val Loss: 0.0010
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0010
+[Epoch 10] Train Loss: 0.0010 | Val Loss: 0.0010
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0010
+[Epoch 11] Train Loss: 0.0010 | Val Loss: 0.0009
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0009
+[Epoch 12] Train Loss: 0.0009 | Val Loss: 0.0010
+[Epoch 13] Train Loss: 0.0009 | Val Loss: 0.0007
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 14] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 15] Train Loss: 0.0007 | Val Loss: 0.0007
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0007
+[Epoch 16] Train Loss: 0.0006 | Val Loss: 0.0007
+[Epoch 17] Train Loss: 0.0006 | Val Loss: 0.0007
+[Epoch 18] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 19] Train Loss: 0.0005 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 20] Train Loss: 0.0004 | Val Loss: 0.0005
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0005
+[Epoch 21] Train Loss: 0.0005 | Val Loss: 0.0005
+[Epoch 22] Train Loss: 0.0004 | Val Loss: 0.0005
+[Epoch 23] Train Loss: 0.0004 | Val Loss: 0.0021
+[Epoch 24] Train Loss: 0.0004 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 25] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 26] Train Loss: 0.0004 | Val Loss: 0.0004
+[Epoch 27] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 28] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 29] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 30] Train Loss: 0.0003 | Val Loss: 0.0004
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0004
+[Epoch 31] Train Loss: 0.0003 | Val Loss: 0.0004
+[Epoch 32] Train Loss: 0.0003 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 33] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 34] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 35] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 36] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 37] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 38] Train Loss: 0.0002 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 39] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 40] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 41] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 42] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 43] Train Loss: 0.0002 | Val Loss: 0.0003
+[Epoch 44] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 45] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 46] Train Loss: 0.0002 | Val Loss: 0.0004
+[Epoch 47] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 48] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 49] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 50] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 51] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 52] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 53] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 54] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 55] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 56] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 57] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 58] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 59] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 60] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 61] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 62] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 63] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 64] Train Loss: 0.0001 | Val Loss: 0.0003
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0003
+[Epoch 65] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 66] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 67] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 68] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 69] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 70] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 71] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 72] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 73] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 74] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 75] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 76] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 77] Train Loss: 0.0001 | Val Loss: 0.0003
+[Epoch 78] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 79] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 80] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 81] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 82] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 83] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 84] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 85] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 86] Train Loss: 0.0001 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 87] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 88] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 89] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 90] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 91] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 92] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 93] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 94] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 95] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 96] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 97] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 98] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 99] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 100] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 101] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 102] Train Loss: 0.0001 | Val Loss: 0.0002
+[Epoch 103] Train Loss: 0.0000 | Val Loss: 0.0002
+New best model saved to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/best_model.pth with val_loss=0.0002
+[Epoch 104] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 105] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 106] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 107] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 108] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 109] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 110] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 111] Train Loss: 0.0000 | Val Loss: 0.0003
+[Epoch 112] Train Loss: 0.0000 | Val Loss: 0.0002
+[Epoch 113] Train Loss: 0.0000 | Val Loss: 0.0002
+Early stopping triggered after 10 no-improve epochs.
+Saved training log to models/best_model/FSIM_PSNR_norm_SSIM_UQI_GMSD_norm/train_val_loss.csv
+
+JOB STATISTICS
+==============
+Job ID: 12141877
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: RUNNING
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:04
+CPU Efficiency: 0.00% of 4-07:41:42 core-walltime
+Job Wall-clock time: 05:45:39
+Memory Utilized: 1.60 MB
+Memory Efficiency: 0.00% of 120.00 GB (120.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

@@ -73,6 +73,183 @@ DATASETS = {
         },
     },
 
+    # Full SCD
+    "SCD_full": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_RawBP.h5",
+        "configs": {
+            "lv128": ["vc,lv128_BP"],
+            "ss128": ["vc,ss128_BP"],
+            "ss64": ["vc,ss64_BP"],
+            "ss32": ["vc,ss32_BP"],
+            "linear": ["linear_BP"],
+        },
+        "ground_truth": {
+            "vc": "vc_BP",
+            "linear": "linear_BP",
+        },
+    },
+
+    "SCD_ms_lv128_full": {
+        "path": {
+            "recon": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_multisegment_ss_RawBP.h5",
+            "gt": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_RawBP.h5"
+        },
+        "configs": {
+            "ms_lv128": ["ms,lv128_BP"],
+        },
+        "ground_truth": {
+            "ms": "ms_BP",
+        },
+    },
+
+    "SCD_ms_ss128_full": {
+        "path": {
+            "recon": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_multisegment_ss_RawBP.h5",
+            "gt": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_RawBP.h5"
+        },
+        "configs": {
+            "ms_ss128": ["ms,ss128_BP"],
+        },
+        "ground_truth": {
+            "ms": "ms_BP",
+        },
+    },
+
+    "SCD_ms_ss64_full": {
+        "path": {
+            "recon": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_multisegment_ss_RawBP.h5",
+            "gt": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_RawBP.h5"
+        },
+        "configs": {
+            "ms_ss64": ["ms,ss64_BP"],
+        },
+        "ground_truth": {
+            "ms": "ms_BP",
+        },
+    },
+
+    "SCD_ms_ss32_full": {
+        "path": {
+            "recon": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_multisegment_ss_RawBP.h5",
+            "gt": "/projects/prjs1596/photoacoustic/data/OADAT-full/SCD_RawBP.h5"
+        },
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP"],
+        },
+        "ground_truth": {
+            "ms": "ms_BP",
+        },
+    },
+
+    "SWFD_multisegment_ss_full": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/SWFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss128": ["ms,ss128_BP"],
+            "ms_ss64": ["ms,ss64_BP"],
+            "ms_ss32": ["ms,ss32_BP"],
+        },
+        "ground_truth": {
+            "ms": "ms_BP",
+        },
+    },
+
+    "SWFD_semicircle_full": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/SWFD_semicircle_RawBP.h5",
+        "configs": {
+            "sc_ss128": ["sc,ss128_BP"],
+            "sc_ss64": ["sc,ss64_BP"],
+            "sc_ss32": ["sc,ss32_BP"],
+            "sc_lv128": ["sc,lv128_BP"],
+        },
+        "ground_truth": {
+            "sc": "sc_BP",
+        },
+    },
+
+    "MSFD_full_w700": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w700"],
+            "ms_ss64": ["ms,ss64_BP_w700"],
+            "ms_ss128": ["ms,ss128_BP_w700"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "700": "ms_BP_w700"
+            }
+        },
+    },
+
+    "MSFD_full_w730": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w730"],
+            "ms_ss64": ["ms,ss64_BP_w730"],
+            "ms_ss128": ["ms,ss128_BP_w730"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "730": "ms_BP_w730"
+            }
+        },
+    },
+
+    "MSFD_full_w760": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w760"],
+            "ms_ss64": ["ms,ss64_BP_w760"],
+            "ms_ss128": ["ms,ss128_BP_w760"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "760": "ms_BP_w760"
+            }
+        },
+    },
+
+    "MSFD_full_w780": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w780"],
+            "ms_ss64": ["ms,ss64_BP_w780"],
+            "ms_ss128": ["ms,ss128_BP_w780"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "780": "ms_BP_w780"
+            }
+        },
+    },
+
+    "MSFD_full_w800": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w800"],
+            "ms_ss64": ["ms,ss64_BP_w800"],
+            "ms_ss128": ["ms,ss128_BP_w800"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "800": "ms_BP_w800"
+            }
+        },
+    },
+
+    "MSFD_full_w850": {
+        "path": "/projects/prjs1596/photoacoustic/data/OADAT-full/MSFD_multisegment_ss_RawBP.h5",
+        "configs": {
+            "ms_ss32": ["ms,ss32_BP_w850"],
+            "ms_ss64": ["ms,ss64_BP_w850"],
+            "ms_ss128": ["ms,ss128_BP_w850"],
+        },
+        "ground_truth": {
+            "wavelengths": {
+                "850": "ms_BP_w850"
+            }
+        },
+    },
+
     # Mice dataset
     "mice": {
         "path": os.path.join(DATA_DIR, "mice/"),
@@ -146,7 +323,11 @@ DATASETS = {
         "algorithms": "algorithms",
         "categories": ["0", "1", "2"],  # Corresponding to reconstruction methods
         "ground_truth": "reference"
-    }
+    },
+
+    "varied_split": {
+    "path": "data/VARIED SPLIT V3 CURRENT"
+}
 }
 
 # Ensure results directories exist

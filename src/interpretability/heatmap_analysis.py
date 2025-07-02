@@ -61,18 +61,27 @@ def plot_heatmap_on_image(image_path, heatmap, save_path):
     plt.close()
 
 
+
 if __name__ == "__main__":
-    import argparse
+    model_paths = {
+        "best_model": "models/best_model/SSIM/best_model.pth",
+        "EfficientNetIQA": "models/EfficientNetIQA/SSIM/best_model.pth",
+        "IQDCNN": "models/IQDCNN/SSIM/best_model.pth",
+    }
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, required=True)
-    parser.add_argument('--image_path', type=str, required=True)
-    parser.add_argument('--save_path', type=str, default="heatmap.png")
-    parser.add_argument('--device', type=str, default="cuda")
-    args = parser.parse_args()
+    images = {
+        "SWFD": "results/SWFD/images_used/sc,ss128_BP_slice_89.png",
+        "PhantomsEFA": "data/VARIED SPLIT V3 CURRENT/scene_5003/BVPhantom_Rf_102622_020539 PA4.webp",
+    }
 
-    model = load_model_checkpoint(args.model_path, device=args.device)
-    heatmap, base_score = generate_occlusion_heatmap(model, args.image_path, device=args.device)
-    print(f"Baseline score: {base_score:.4f}")
-    plot_heatmap_on_image(args.image_path, heatmap, args.save_path)
-    print(f" Heatmap saved to {args.save_path}")
+    output_dir = "results/heatmaps"
+    os.makedirs(output_dir, exist_ok=True)
+
+    for model_name, model_path in model_paths.items():
+        model = load_model_checkpoint(model_path, device="cuda")
+        for dataset_name, image_path in images.items():
+            heatmap, base_score = generate_occlusion_heatmap(model, image_path, device="cuda")
+            filename = f"{dataset_name}_{model_name}_SSIM_heatmap.png"
+            save_path = os.path.join(output_dir, filename)
+            plot_heatmap_on_image(image_path, heatmap, save_path)
+            print(f"[✓] {model_name} on {dataset_name} → Baseline score: {base_score:.4f} → Saved: {save_path}")

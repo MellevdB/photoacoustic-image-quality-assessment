@@ -1,0 +1,407 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting Starting MSFD_full_w850
+Going to evaluate_dataset
+Going into: with open(file_path, 'a') as f:
+Dataset is not zenodo, denoising or pa_experiment
+We are here!!!
+[DEBUG] Running evaluate for dataset=MSFD_full_w850, config=ms_ss32, full_config=ms,ss32_BP_w850, file_key=None
+[DEBUG] evaluate() called for dataset=MSFD_full_w850, config=ms_ss32, full_config=ms,ss32_BP_w850, file_key=None
+In evaluate
+Processing MSFD config=ms,ss32_BP_w850, wavelength=850
+Using cuda
+batch size: 256
+[DEBUG] Total samples: 25200, using batch size: 256
+[DEBUG] Processing batch 0 [0:256]
+[DEBUG] Processing batch 1 [256:512]
+[DEBUG] Processing batch 2 [512:768]
+[DEBUG] Processing batch 3 [768:1024]
+[DEBUG] Processing batch 4 [1024:1280]
+[DEBUG] Processing batch 5 [1280:1536]
+[DEBUG] Processing batch 6 [1536:1792]
+[DEBUG] Processing batch 7 [1792:2048]
+[DEBUG] Processing batch 8 [2048:2304]
+[DEBUG] Processing batch 9 [2304:2560]
+[DEBUG] Processing batch 10 [2560:2816]
+[DEBUG] Processing batch 11 [2816:3072]
+[DEBUG] Processing batch 12 [3072:3328]
+[DEBUG] Processing batch 13 [3328:3584]
+[DEBUG] Processing batch 14 [3584:3840]
+[DEBUG] Processing batch 15 [3840:4096]
+[DEBUG] Processing batch 16 [4096:4352]
+[DEBUG] Processing batch 17 [4352:4608]
+[DEBUG] Processing batch 18 [4608:4864]
+[DEBUG] Processing batch 19 [4864:5120]
+[DEBUG] Processing batch 20 [5120:5376]
+[DEBUG] Processing batch 21 [5376:5632]
+[DEBUG] Processing batch 22 [5632:5888]
+[DEBUG] Processing batch 23 [5888:6144]
+[DEBUG] Processing batch 24 [6144:6400]
+[DEBUG] Processing batch 25 [6400:6656]
+[DEBUG] Processing batch 26 [6656:6912]
+[DEBUG] Processing batch 27 [6912:7168]
+[DEBUG] Processing batch 28 [7168:7424]
+[DEBUG] Processing batch 29 [7424:7680]
+[DEBUG] Processing batch 30 [7680:7936]
+[DEBUG] Processing batch 31 [7936:8192]
+[DEBUG] Processing batch 32 [8192:8448]
+[DEBUG] Processing batch 33 [8448:8704]
+[DEBUG] Processing batch 34 [8704:8960]
+[DEBUG] Processing batch 35 [8960:9216]
+[DEBUG] Processing batch 36 [9216:9472]
+[DEBUG] Processing batch 37 [9472:9728]
+[DEBUG] Processing batch 38 [9728:9984]
+[DEBUG] Processing batch 39 [9984:10240]
+[DEBUG] Processing batch 40 [10240:10496]
+[DEBUG] Processing batch 41 [10496:10752]
+[DEBUG] Processing batch 42 [10752:11008]
+[DEBUG] Processing batch 43 [11008:11264]
+[DEBUG] Processing batch 44 [11264:11520]
+[DEBUG] Processing batch 45 [11520:11776]
+[DEBUG] Processing batch 46 [11776:12032]
+[DEBUG] Processing batch 47 [12032:12288]
+[DEBUG] Processing batch 48 [12288:12544]
+[DEBUG] Processing batch 49 [12544:12800]
+[DEBUG] Processing batch 50 [12800:13056]
+[DEBUG] Processing batch 51 [13056:13312]
+[DEBUG] Processing batch 52 [13312:13568]
+[DEBUG] Processing batch 53 [13568:13824]
+[DEBUG] Processing batch 54 [13824:14080]
+[DEBUG] Processing batch 55 [14080:14336]
+[DEBUG] Processing batch 56 [14336:14592]
+[DEBUG] Processing batch 57 [14592:14848]
+[DEBUG] Processing batch 58 [14848:15104]
+[DEBUG] Processing batch 59 [15104:15360]
+[DEBUG] Processing batch 60 [15360:15616]
+[DEBUG] Processing batch 61 [15616:15872]
+[DEBUG] Processing batch 62 [15872:16128]
+[DEBUG] Processing batch 63 [16128:16384]
+[DEBUG] Processing batch 64 [16384:16640]
+[DEBUG] Processing batch 65 [16640:16896]
+[DEBUG] Processing batch 66 [16896:17152]
+[DEBUG] Processing batch 67 [17152:17408]
+[DEBUG] Processing batch 68 [17408:17664]
+[DEBUG] Processing batch 69 [17664:17920]
+[DEBUG] Processing batch 70 [17920:18176]
+[DEBUG] Processing batch 71 [18176:18432]
+[DEBUG] Processing batch 72 [18432:18688]
+[DEBUG] Processing batch 73 [18688:18944]
+[DEBUG] Processing batch 74 [18944:19200]
+[DEBUG] Processing batch 75 [19200:19456]
+[DEBUG] Processing batch 76 [19456:19712]
+[DEBUG] Processing batch 77 [19712:19968]
+[DEBUG] Processing batch 78 [19968:20224]
+[DEBUG] Processing batch 79 [20224:20480]
+[DEBUG] Processing batch 80 [20480:20736]
+[DEBUG] Processing batch 81 [20736:20992]
+[DEBUG] Processing batch 82 [20992:21248]
+[DEBUG] Processing batch 83 [21248:21504]
+[DEBUG] Processing batch 84 [21504:21760]
+[DEBUG] Processing batch 85 [21760:22016]
+[DEBUG] Processing batch 86 [22016:22272]
+[DEBUG] Processing batch 87 [22272:22528]
+[DEBUG] Processing batch 88 [22528:22784]
+[DEBUG] Processing batch 89 [22784:23040]
+[DEBUG] Processing batch 90 [23040:23296]
+[DEBUG] Processing batch 91 [23296:23552]
+[DEBUG] Processing batch 92 [23552:23808]
+[DEBUG] Processing batch 93 [23808:24064]
+[DEBUG] Processing batch 94 [24064:24320]
+[DEBUG] Processing batch 95 [24320:24576]
+[DEBUG] Processing batch 96 [24576:24832]
+[DEBUG] Processing batch 97 [24832:25088]
+[DEBUG] Processing batch 98 [25088:25344]
+Raw metric 'PSNR': shape torch.Size([25200]), sample: tensor([18.0044, 20.6883, 17.2481, 21.1784, 21.3458], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([25200]), sample: tensor([0.5642, 0.5906, 0.5386, 0.5946, 0.5578], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([25200]), sample: tensor([0.7965, 0.8020, 0.7769, 0.7991, 0.7782], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([25200]), sample: tensor([0.7202, 0.7225, 0.6970, 0.7122, 0.6946], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([25200]), sample: tensor([0.1265, 0.1301, 0.1277, 0.1278, 0.1348], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([25200]), sample: tensor([0.8586, 0.8498, 0.8536, 0.8609, 0.8679], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([25200]), sample: tensor([0.1970, 0.1944, 0.2101, 0.1927, 0.2075], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([25200]), sample: tensor([0.1802, 0.1772, 0.1925, 0.1765, 0.1914], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([25200]), sample: tensor([0.5493, 0.5600, 0.5262, 0.5517, 0.5143], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([25200]), sample: tensor([0.8857, 0.9403, 0.8737, 0.9445, 0.9500], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([25200]), sample: tensor([0.5546, 0.5802, 0.5289, 0.5837, 0.5471], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([25200]), sample: tensor([19.9652, 18.8391, 20.5544, 18.3927, 19.7224], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([25200]), sample: tensor([34.6772, 27.6496, 33.9682, 28.8007, 25.1796], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([25200]), sample: tensor([0.5742, 0.4936, 0.5783, 0.4822, 0.5833], device='cuda:0')
+[DEBUG] Running evaluate for dataset=MSFD_full_w850, config=ms_ss64, full_config=ms,ss64_BP_w850, file_key=None
+[DEBUG] evaluate() called for dataset=MSFD_full_w850, config=ms_ss64, full_config=ms,ss64_BP_w850, file_key=None
+In evaluate
+Processing MSFD config=ms,ss64_BP_w850, wavelength=850
+Using cuda
+batch size: 256
+[DEBUG] Total samples: 25200, using batch size: 256
+[DEBUG] Processing batch 0 [0:256]
+[DEBUG] Processing batch 1 [256:512]
+[DEBUG] Processing batch 2 [512:768]
+[DEBUG] Processing batch 3 [768:1024]
+[DEBUG] Processing batch 4 [1024:1280]
+[DEBUG] Processing batch 5 [1280:1536]
+[DEBUG] Processing batch 6 [1536:1792]
+[DEBUG] Processing batch 7 [1792:2048]
+[DEBUG] Processing batch 8 [2048:2304]
+[DEBUG] Processing batch 9 [2304:2560]
+[DEBUG] Processing batch 10 [2560:2816]
+[DEBUG] Processing batch 11 [2816:3072]
+[DEBUG] Processing batch 12 [3072:3328]
+[DEBUG] Processing batch 13 [3328:3584]
+[DEBUG] Processing batch 14 [3584:3840]
+[DEBUG] Processing batch 15 [3840:4096]
+[DEBUG] Processing batch 16 [4096:4352]
+[DEBUG] Processing batch 17 [4352:4608]
+[DEBUG] Processing batch 18 [4608:4864]
+[DEBUG] Processing batch 19 [4864:5120]
+[DEBUG] Processing batch 20 [5120:5376]
+[DEBUG] Processing batch 21 [5376:5632]
+[DEBUG] Processing batch 22 [5632:5888]
+[DEBUG] Processing batch 23 [5888:6144]
+[DEBUG] Processing batch 24 [6144:6400]
+[DEBUG] Processing batch 25 [6400:6656]
+[DEBUG] Processing batch 26 [6656:6912]
+[DEBUG] Processing batch 27 [6912:7168]
+[DEBUG] Processing batch 28 [7168:7424]
+[DEBUG] Processing batch 29 [7424:7680]
+[DEBUG] Processing batch 30 [7680:7936]
+[DEBUG] Processing batch 31 [7936:8192]
+[DEBUG] Processing batch 32 [8192:8448]
+[DEBUG] Processing batch 33 [8448:8704]
+[DEBUG] Processing batch 34 [8704:8960]
+[DEBUG] Processing batch 35 [8960:9216]
+[DEBUG] Processing batch 36 [9216:9472]
+[DEBUG] Processing batch 37 [9472:9728]
+[DEBUG] Processing batch 38 [9728:9984]
+[DEBUG] Processing batch 39 [9984:10240]
+[DEBUG] Processing batch 40 [10240:10496]
+[DEBUG] Processing batch 41 [10496:10752]
+[DEBUG] Processing batch 42 [10752:11008]
+[DEBUG] Processing batch 43 [11008:11264]
+[DEBUG] Processing batch 44 [11264:11520]
+[DEBUG] Processing batch 45 [11520:11776]
+[DEBUG] Processing batch 46 [11776:12032]
+[DEBUG] Processing batch 47 [12032:12288]
+[DEBUG] Processing batch 48 [12288:12544]
+[DEBUG] Processing batch 49 [12544:12800]
+[DEBUG] Processing batch 50 [12800:13056]
+[DEBUG] Processing batch 51 [13056:13312]
+[DEBUG] Processing batch 52 [13312:13568]
+[DEBUG] Processing batch 53 [13568:13824]
+[DEBUG] Processing batch 54 [13824:14080]
+[DEBUG] Processing batch 55 [14080:14336]
+[DEBUG] Processing batch 56 [14336:14592]
+[DEBUG] Processing batch 57 [14592:14848]
+[DEBUG] Processing batch 58 [14848:15104]
+[DEBUG] Processing batch 59 [15104:15360]
+[DEBUG] Processing batch 60 [15360:15616]
+[DEBUG] Processing batch 61 [15616:15872]
+[DEBUG] Processing batch 62 [15872:16128]
+[DEBUG] Processing batch 63 [16128:16384]
+[DEBUG] Processing batch 64 [16384:16640]
+[DEBUG] Processing batch 65 [16640:16896]
+[DEBUG] Processing batch 66 [16896:17152]
+[DEBUG] Processing batch 67 [17152:17408]
+[DEBUG] Processing batch 68 [17408:17664]
+[DEBUG] Processing batch 69 [17664:17920]
+[DEBUG] Processing batch 70 [17920:18176]
+[DEBUG] Processing batch 71 [18176:18432]
+[DEBUG] Processing batch 72 [18432:18688]
+[DEBUG] Processing batch 73 [18688:18944]
+[DEBUG] Processing batch 74 [18944:19200]
+[DEBUG] Processing batch 75 [19200:19456]
+[DEBUG] Processing batch 76 [19456:19712]
+[DEBUG] Processing batch 77 [19712:19968]
+[DEBUG] Processing batch 78 [19968:20224]
+[DEBUG] Processing batch 79 [20224:20480]
+[DEBUG] Processing batch 80 [20480:20736]
+[DEBUG] Processing batch 81 [20736:20992]
+[DEBUG] Processing batch 82 [20992:21248]
+[DEBUG] Processing batch 83 [21248:21504]
+[DEBUG] Processing batch 84 [21504:21760]
+[DEBUG] Processing batch 85 [21760:22016]
+[DEBUG] Processing batch 86 [22016:22272]
+[DEBUG] Processing batch 87 [22272:22528]
+[DEBUG] Processing batch 88 [22528:22784]
+[DEBUG] Processing batch 89 [22784:23040]
+[DEBUG] Processing batch 90 [23040:23296]
+[DEBUG] Processing batch 91 [23296:23552]
+[DEBUG] Processing batch 92 [23552:23808]
+[DEBUG] Processing batch 93 [23808:24064]
+[DEBUG] Processing batch 94 [24064:24320]
+[DEBUG] Processing batch 95 [24320:24576]
+[DEBUG] Processing batch 96 [24576:24832]
+[DEBUG] Processing batch 97 [24832:25088]
+[DEBUG] Processing batch 98 [25088:25344]
+Raw metric 'PSNR': shape torch.Size([25200]), sample: tensor([27.8694, 26.1143, 26.1666, 27.0236, 24.4268], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([25200]), sample: tensor([0.6736, 0.6734, 0.6404, 0.6648, 0.6578], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([25200]), sample: tensor([0.8621, 0.8604, 0.8363, 0.8490, 0.8455], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([25200]), sample: tensor([0.8215, 0.8166, 0.7926, 0.8013, 0.7972], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([25200]), sample: tensor([0.2404, 0.2443, 0.2472, 0.2492, 0.2462], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([25200]), sample: tensor([0.9013, 0.8957, 0.8987, 0.9032, 0.9048], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([25200]), sample: tensor([0.1696, 0.1664, 0.1948, 0.1819, 0.1766], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([25200]), sample: tensor([0.1549, 0.1521, 0.1769, 0.1658, 0.1615], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([25200]), sample: tensor([0.6362, 0.6611, 0.6074, 0.6135, 0.6275], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([25200]), sample: tensor([0.9901, 0.9834, 0.9844, 0.9879, 0.9744], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([25200]), sample: tensor([0.6683, 0.6676, 0.6342, 0.6581, 0.6518], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([25200]), sample: tensor([18.2373, 17.3479, 19.8843, 18.3539, 18.0489], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([25200]), sample: tensor([40.7067, 38.6818, 42.8181, 35.2040, 34.0292], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([25200]), sample: tensor([0.7085, 0.6002, 0.7263, 0.6794, 0.6477], device='cuda:0')
+[DEBUG] Running evaluate for dataset=MSFD_full_w850, config=ms_ss128, full_config=ms,ss128_BP_w850, file_key=None
+[DEBUG] evaluate() called for dataset=MSFD_full_w850, config=ms_ss128, full_config=ms,ss128_BP_w850, file_key=None
+In evaluate
+Processing MSFD config=ms,ss128_BP_w850, wavelength=850
+Using cuda
+batch size: 256
+[DEBUG] Total samples: 25200, using batch size: 256
+[DEBUG] Processing batch 0 [0:256]
+[DEBUG] Processing batch 1 [256:512]
+[DEBUG] Processing batch 2 [512:768]
+[DEBUG] Processing batch 3 [768:1024]
+[DEBUG] Processing batch 4 [1024:1280]
+[DEBUG] Processing batch 5 [1280:1536]
+[DEBUG] Processing batch 6 [1536:1792]
+[DEBUG] Processing batch 7 [1792:2048]
+[DEBUG] Processing batch 8 [2048:2304]
+[DEBUG] Processing batch 9 [2304:2560]
+[DEBUG] Processing batch 10 [2560:2816]
+[DEBUG] Processing batch 11 [2816:3072]
+[DEBUG] Processing batch 12 [3072:3328]
+[DEBUG] Processing batch 13 [3328:3584]
+[DEBUG] Processing batch 14 [3584:3840]
+[DEBUG] Processing batch 15 [3840:4096]
+[DEBUG] Processing batch 16 [4096:4352]
+[DEBUG] Processing batch 17 [4352:4608]
+[DEBUG] Processing batch 18 [4608:4864]
+[DEBUG] Processing batch 19 [4864:5120]
+[DEBUG] Processing batch 20 [5120:5376]
+[DEBUG] Processing batch 21 [5376:5632]
+[DEBUG] Processing batch 22 [5632:5888]
+[DEBUG] Processing batch 23 [5888:6144]
+[DEBUG] Processing batch 24 [6144:6400]
+[DEBUG] Processing batch 25 [6400:6656]
+[DEBUG] Processing batch 26 [6656:6912]
+[DEBUG] Processing batch 27 [6912:7168]
+[DEBUG] Processing batch 28 [7168:7424]
+[DEBUG] Processing batch 29 [7424:7680]
+[DEBUG] Processing batch 30 [7680:7936]
+[DEBUG] Processing batch 31 [7936:8192]
+[DEBUG] Processing batch 32 [8192:8448]
+[DEBUG] Processing batch 33 [8448:8704]
+[DEBUG] Processing batch 34 [8704:8960]
+[DEBUG] Processing batch 35 [8960:9216]
+[DEBUG] Processing batch 36 [9216:9472]
+[DEBUG] Processing batch 37 [9472:9728]
+[DEBUG] Processing batch 38 [9728:9984]
+[DEBUG] Processing batch 39 [9984:10240]
+[DEBUG] Processing batch 40 [10240:10496]
+[DEBUG] Processing batch 41 [10496:10752]
+[DEBUG] Processing batch 42 [10752:11008]
+[DEBUG] Processing batch 43 [11008:11264]
+[DEBUG] Processing batch 44 [11264:11520]
+[DEBUG] Processing batch 45 [11520:11776]
+[DEBUG] Processing batch 46 [11776:12032]
+[DEBUG] Processing batch 47 [12032:12288]
+[DEBUG] Processing batch 48 [12288:12544]
+[DEBUG] Processing batch 49 [12544:12800]
+[DEBUG] Processing batch 50 [12800:13056]
+[DEBUG] Processing batch 51 [13056:13312]
+[DEBUG] Processing batch 52 [13312:13568]
+[DEBUG] Processing batch 53 [13568:13824]
+[DEBUG] Processing batch 54 [13824:14080]
+[DEBUG] Processing batch 55 [14080:14336]
+[DEBUG] Processing batch 56 [14336:14592]
+[DEBUG] Processing batch 57 [14592:14848]
+[DEBUG] Processing batch 58 [14848:15104]
+[DEBUG] Processing batch 59 [15104:15360]
+[DEBUG] Processing batch 60 [15360:15616]
+[DEBUG] Processing batch 61 [15616:15872]
+[DEBUG] Processing batch 62 [15872:16128]
+[DEBUG] Processing batch 63 [16128:16384]
+[DEBUG] Processing batch 64 [16384:16640]
+[DEBUG] Processing batch 65 [16640:16896]
+[DEBUG] Processing batch 66 [16896:17152]
+[DEBUG] Processing batch 67 [17152:17408]
+[DEBUG] Processing batch 68 [17408:17664]
+[DEBUG] Processing batch 69 [17664:17920]
+[DEBUG] Processing batch 70 [17920:18176]
+[DEBUG] Processing batch 71 [18176:18432]
+[DEBUG] Processing batch 72 [18432:18688]
+[DEBUG] Processing batch 73 [18688:18944]
+[DEBUG] Processing batch 74 [18944:19200]
+[DEBUG] Processing batch 75 [19200:19456]
+[DEBUG] Processing batch 76 [19456:19712]
+[DEBUG] Processing batch 77 [19712:19968]
+[DEBUG] Processing batch 78 [19968:20224]
+[DEBUG] Processing batch 79 [20224:20480]
+[DEBUG] Processing batch 80 [20480:20736]
+[DEBUG] Processing batch 81 [20736:20992]
+[DEBUG] Processing batch 82 [20992:21248]
+[DEBUG] Processing batch 83 [21248:21504]
+[DEBUG] Processing batch 84 [21504:21760]
+[DEBUG] Processing batch 85 [21760:22016]
+[DEBUG] Processing batch 86 [22016:22272]
+[DEBUG] Processing batch 87 [22272:22528]
+[DEBUG] Processing batch 88 [22528:22784]
+[DEBUG] Processing batch 89 [22784:23040]
+[DEBUG] Processing batch 90 [23040:23296]
+[DEBUG] Processing batch 91 [23296:23552]
+[DEBUG] Processing batch 92 [23552:23808]
+[DEBUG] Processing batch 93 [23808:24064]
+[DEBUG] Processing batch 94 [24064:24320]
+[DEBUG] Processing batch 95 [24320:24576]
+[DEBUG] Processing batch 96 [24576:24832]
+[DEBUG] Processing batch 97 [24832:25088]
+[DEBUG] Processing batch 98 [25088:25344]
+Raw metric 'PSNR': shape torch.Size([25200]), sample: tensor([32.4919, 32.9689, 31.9639, 32.3835, 27.5129], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([25200]), sample: tensor([0.8235, 0.8251, 0.8063, 0.8191, 0.8191], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([25200]), sample: tensor([0.9420, 0.9417, 0.9330, 0.9357, 0.9358], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([25200]), sample: tensor([0.9337, 0.9324, 0.9232, 0.9246, 0.9240], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([25200]), sample: tensor([0.4534, 0.4575, 0.4655, 0.4622, 0.4491], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([25200]), sample: tensor([0.9592, 0.9544, 0.9587, 0.9618, 0.9594], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([25200]), sample: tensor([0.0848, 0.0834, 0.0999, 0.0928, 0.0880], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([25200]), sample: tensor([0.0840, 0.0823, 0.0954, 0.0888, 0.0856], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([25200]), sample: tensor([0.8620, 0.8744, 0.8583, 0.8609, 0.8663], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([25200]), sample: tensor([0.9965, 0.9972, 0.9962, 0.9967, 0.9857], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([25200]), sample: tensor([0.8226, 0.8247, 0.8054, 0.8189, 0.8183], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([25200]), sample: tensor([15.4177, 14.4807, 15.6981, 14.5461, 14.3273], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([25200]), sample: tensor([40.7682, 41.1445, 45.1662, 41.5087, 40.4062], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([25200]), sample: tensor([0.7064, 0.5428, 0.6637, 0.5710, 0.5792], device='cuda:0')
+Results saved to: results/MSFD_full_w850/MSFD_full_w850_results_2025-06-09_16-12-03.txt
+Per-image metric scores saved to: results/MSFD_full_w850/MSFD_full_w850_per_image_metrics_2025-06-09_16-12-03.csv
+
+JOB STATISTICS
+==============
+Job ID: 12260018
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 1-22:48:51
+CPU Efficiency: 32.21% of 6-01:19:12 core-walltime
+Job Wall-clock time: 08:04:24
+Memory Utilized: 19.02 GB
+Memory Efficiency: 15.85% of 120.00 GB (120.00 GB/node)

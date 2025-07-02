@@ -1,12 +1,15 @@
 #!/bin/bash
 
-#SBATCH --partition=gpu_a100            # Use GPU partition
-#SBATCH --gpus=1                        # Request 1 GPU
-#SBATCH --job-name=train_all_metrics    # Job name
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus=1
+#SBATCH --job-name=train_model
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=12             # Adjust CPU usage if needed
-#SBATCH --time=12:00:00                # Max time
-#SBATCH --output=slurm_outputs/train_all_metrics_%A.out  # Save output logs
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=40:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=mellevdbrugge@gmail.com
+#SBATCH --output=slurm_outputs/train_SSIM_HAARPSI_EfficientNetIQA_%A.out
 
 # Load necessary modules
 module purge
@@ -22,10 +25,16 @@ source activate photoacoustic-env
 # Set PYTHONPATH so src is treated as module root
 export PYTHONPATH=src
 
+# --- System info before training ---
+echo "Running on $(hostname)"
+nvidia-smi
+free -h
+
+
 # Check GPU availability
 echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 
 # Run training for all metrics
-echo "Starting training for all metrics..."
+echo "Starting training for ['SSIM', 'HAARPSI'] on EfficientNetIQA"
 srun python src/dl_model/train_all_metrics.py

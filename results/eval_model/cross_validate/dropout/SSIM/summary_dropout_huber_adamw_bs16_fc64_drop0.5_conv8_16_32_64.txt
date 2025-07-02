@@ -1,0 +1,13 @@
+Metric         : SSIM
+Model          : dropout
+Loss           : huber
+Optimizer      : adamw
+Dropout        : 0.5
+FC Units       : 64
+Conv Filters   : [8, 16, 32, 64]
+Batch Size     : 16
+LR             : 0.0001
+Epochs         : 20
+Folds          : 3
+Mean Val Loss  : 0.030630
+Fold losses    : [0.02909596963656562, 0.02775954297363097, 0.03503343349620111]

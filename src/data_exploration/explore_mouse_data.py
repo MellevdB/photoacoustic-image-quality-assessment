@@ -12,12 +12,12 @@ def explore_mouse_data(data_path):
     print(f"Exploring data in: {data_path}")
 
     if not os.path.exists(data_path):
-        print(f"⚠️ Path does not exist: {data_path}")
+        print(f"Path does not exist: {data_path}")
         return
 
     files = [f for f in os.listdir(data_path) if f.endswith('.mat') or f.endswith('.h5')]
     if not files:
-        print(f"⚠️ No .mat or .h5 files found in {data_path}")
+        print(f"No .mat or .h5 files found in {data_path}")
         return
 
     for file in files:
@@ -50,15 +50,15 @@ def explore_mouse_data(data_path):
                     file_total_images += num_images
 
                     print(f"\nDataset {dataset_count}: {key}")
-                    print(f"   ➤ Shape: {array_data.shape}")
-                    print(f"   ➤ Type: {array_data.dtype}")
-                    print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
-                    print(f"   ➤ Number of images in this dataset: {num_images}")
+                    print(f"   Shape: {array_data.shape}")
+                    print(f"   Type: {array_data.dtype}")
+                    print(f"   Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+                    print(f"   Number of images in this dataset: {num_images}")
                     print("-" * 50)
 
         print(f"\nSummary for {file}:")
-        print(f"   ➤ Total number of datasets: {dataset_count}")
-        print(f"   ➤ Total number of images across all datasets: {file_total_images}")
+        print(f"   Total number of datasets: {dataset_count}")
+        print(f"   Total number of images across all datasets: {file_total_images}")
         print("=" * 80)
 
 if __name__ == "__main__":

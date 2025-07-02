@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --partition=gpu_mig
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --time=00:10:00
+#SBATCH --output=slurm_outputs/test_gpu_%A.out
+
+module load 2023
+module load Anaconda3/2023.07-2
+source activate photoacoustic-env
+
+nvidia-smi

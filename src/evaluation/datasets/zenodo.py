@@ -82,7 +82,7 @@ def analyze_zenodo_correlation(metric_score_per_image, reference_images, categor
         corr, _ = spearmanr(df[metric], df["ExpertAvg"])
         correlations[metric] = corr
 
-    print(f"\n📊 Correlations for category {category}:")
+    print(f"\nCorrelations for category {category}:")
     for k, v in correlations.items():
         print(f"{k}: {v:.3f}")
 
@@ -196,7 +196,7 @@ def analyze_with_polynomial_features(df, category_dir, expert_col="ExpertAvg", d
     r2 = r2_score(y, y_pred)
 
     spearman_corr, _ = spearmanr(y, y_pred)
-    print(f"📊 Spearman correlation (degree {degree}): {spearman_corr:.4f}")
+    print(f"Spearman correlation (degree {degree}): {spearman_corr:.4f}")
 
     # Extract features and coefficients
     poly = poly_pipeline.named_steps['poly']

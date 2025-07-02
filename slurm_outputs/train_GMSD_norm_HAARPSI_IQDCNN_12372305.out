@@ -1,0 +1,89 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Running on gcn36.local.snellius.surf.nl
+Sat Jun 14 12:50:57 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:CA:00.0 Off |                    0 |
+| N/A   30C    P0             47W /  400W |       1MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        31Gi       452Gi       535Mi        26Gi       471Gi
+Swap:             0B          0B          0B
+Checking whether the GPU is available
+GPU available? True
+Starting training for ['GMSD_norm', 'HAARPSI'] on best_model
+
+Training IQDCNN model for metrics: ['GMSD_norm', 'HAARPSI']
+Loaded 573629 train, 25910 val, 339535 test samples from ['SCD_vc_ms', 'SCD_ms_ss32', 'SCD_ms_ss64', 'SCD_ms_ss128', 'SWFD_sc', 'mice', 'pa_experiment_data']
+Target metric: ['GMSD_norm', 'HAARPSI']
+Target ranges:
+  GMSD_norm: min=0.0178, max=0.7650
+  HAARPSI: min=0.2021, max=0.9785
+Using IQDCNNMulti
+Traceback (most recent call last):
+  File "/gpfs/home4/mvanderbrugge/photoacoustic-image-quality-assessment/src/dl_model/train_all_metrics.py", line 91, in <module>
+    train_model(
+  File "/gpfs/home4/mvanderbrugge/photoacoustic-image-quality-assessment/src/dl_model/train.py", line 145, in train_model
+    summary(model, input_size=(1, 128, 128))
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torchsummary/torchsummary.py", line 72, in summary
+    model(*x)
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs/home4/mvanderbrugge/photoacoustic-image-quality-assessment/src/dl_model/model_definition.py", line 203, in forward
+    x = F.relu(self.fc1(x)); x = self.dropout1(x)
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1845, in _call_impl
+    return inner()
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1793, in inner
+    result = forward_call(*args, **kwargs)
+  File "/home/mvanderbrugge/.conda/envs/photoacoustic-env/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (2x1568 and 2048x1024)
+srun: error: gcn36: task 0: Exited with exit code 1
+srun: Terminating StepId=12372305.1
+
+JOB STATISTICS
+==============
+Job ID: 12372305
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: RUNNING
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:03
+CPU Efficiency: 0.01% of 07:28:12 core-walltime
+Job Wall-clock time: 00:24:54
+Memory Utilized: 1.68 MB
+Memory Efficiency: 0.01% of 32.00 GB (32.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

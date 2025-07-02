@@ -1,0 +1,131 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting SCD_full evaluation
+In evaluate
+Processing dataset=SCD_full, config=vc,lv128_BP with ground truth=vc_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([20000]), sample: tensor([14.2923, 13.1493, 20.3710, 19.8206, 16.2263], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([20000]), sample: tensor([0.8256, 0.7018, 0.9037, 0.8946, 0.8496], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([20000]), sample: tensor([0.9136, 0.8720, 0.9101, 0.9196, 0.9139], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([20000]), sample: tensor([0.8081, 0.7476, 0.7584, 0.8037, 0.8107], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([20000]), sample: tensor([0.2313, 0.2453, 0.2204, 0.2114, 0.2311], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([20000]), sample: tensor([0.7415, 0.7416, 0.7720, 0.7655, 0.7313], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([20000]), sample: tensor([0.1103, 0.1140, 0.1290, 0.1171, 0.0989], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([20000]), sample: tensor([0.1132, 0.1220, 0.1323, 0.1218, 0.1033], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([20000]), sample: tensor([0.6112, 0.5375, 0.5368, 0.4972, 0.5653], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([20000]), sample: tensor([0.7802, 0.5449, 0.9454, 0.9172, 0.8111], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([20000]), sample: tensor([0.8193, 0.6988, 0.8971, 0.8880, 0.8445], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([20000]), sample: tensor([7.9946, 7.8191, 8.6923, 8.4350, 8.4477], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([20000]), sample: tensor([45.8727, 59.1252, 51.1413, 52.7873, 54.8557], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([20000]), sample: tensor([0.1657, 0.2018, 0.1339, 0.2538, 0.2982], device='cuda:0')
+In evaluate
+Processing dataset=SCD_full, config=vc,ss128_BP with ground truth=vc_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([20000]), sample: tensor([30.3050, 26.1217, 31.1705, 26.2808, 25.7779], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([20000]), sample: tensor([0.6180, 0.7190, 0.7468, 0.5848, 0.6105], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([20000]), sample: tensor([0.8759, 0.9057, 0.9261, 0.8305, 0.8521], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([20000]), sample: tensor([0.8602, 0.8683, 0.9051, 0.7896, 0.8052], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([20000]), sample: tensor([0.4163, 0.4747, 0.4459, 0.3613, 0.3976], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([20000]), sample: tensor([0.8956, 0.9297, 0.9128, 0.8966, 0.9121], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([20000]), sample: tensor([0.1565, 0.1822, 0.1660, 0.2094, 0.2013], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([20000]), sample: tensor([0.1379, 0.1551, 0.1424, 0.1808, 0.1743], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([20000]), sample: tensor([0.6289, 0.5989, 0.6241, 0.5597, 0.5518], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([20000]), sample: tensor([0.9942, 0.9440, 0.9966, 0.9814, 0.9735], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([20000]), sample: tensor([0.6010, 0.7012, 0.7318, 0.5639, 0.5923], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([20000]), sample: tensor([14.1700, 11.3260, 12.7555, 15.4359, 14.8399], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([20000]), sample: tensor([26.9770, 23.0558, 30.0974, 32.5707, 31.5580], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([20000]), sample: tensor([0.7946, 0.5848, 0.6574, 0.7472, 0.8288], device='cuda:0')
+In evaluate
+Processing dataset=SCD_full, config=vc,ss64_BP with ground truth=vc_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([20000]), sample: tensor([21.0169, 16.2563, 25.5319, 23.1206, 19.3908], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([20000]), sample: tensor([0.4279, 0.5434, 0.6628, 0.5393, 0.5418], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([20000]), sample: tensor([0.6985, 0.8051, 0.8435, 0.7422, 0.7755], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([20000]), sample: tensor([0.6479, 0.7442, 0.7749, 0.6469, 0.6871], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([20000]), sample: tensor([0.2653, 0.2933, 0.2965, 0.1979, 0.1997], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([20000]), sample: tensor([0.8348, 0.8462, 0.8449, 0.8407, 0.8497], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([20000]), sample: tensor([0.2516, 0.2227, 0.2146, 0.2336, 0.2336], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([20000]), sample: tensor([0.2327, 0.2050, 0.1975, 0.2138, 0.2115], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([20000]), sample: tensor([0.3365, 0.3980, 0.4298, 0.3861, 0.3913], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([20000]), sample: tensor([0.9408, 0.6863, 0.9833, 0.9626, 0.8945], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([20000]), sample: tensor([0.4071, 0.5225, 0.6423, 0.5132, 0.5213], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([20000]), sample: tensor([20.1483, 12.7589, 15.4186, 15.6044, 15.7051], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([20000]), sample: tensor([32.1223, 23.5729, 35.1838, 35.4389, 32.2819], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([20000]), sample: tensor([0.8654, 0.6396, 0.5237, 0.7625, 0.7728], device='cuda:0')
+In evaluate
+Processing dataset=SCD_full, config=vc,ss32_BP with ground truth=vc_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([20000]), sample: tensor([18.6116, 12.6715, 16.0133, 18.7074, 20.2929], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([20000]), sample: tensor([0.4509, 0.4952, 0.4506, 0.4917, 0.5478], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([20000]), sample: tensor([0.6722, 0.7457, 0.6790, 0.6706, 0.7290], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([20000]), sample: tensor([0.5821, 0.6611, 0.5652, 0.5384, 0.5887], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([20000]), sample: tensor([0.1912, 0.2096, 0.1340, 0.1456, 0.1407], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([20000]), sample: tensor([0.7959, 0.8013, 0.7309, 0.7851, 0.7568], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([20000]), sample: tensor([0.2554, 0.2061, 0.2548, 0.2431, 0.2353], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([20000]), sample: tensor([0.2406, 0.1968, 0.2439, 0.2295, 0.2225], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([20000]), sample: tensor([0.3105, 0.3915, 0.2797, 0.3212, 0.3401], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([20000]), sample: tensor([0.9019, 0.5244, 0.8763, 0.9028, 0.9164], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([20000]), sample: tensor([0.4318, 0.4778, 0.4262, 0.4656, 0.5266], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([20000]), sample: tensor([19.8588, 12.8483, 18.1126, 17.2325, 15.7589], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([20000]), sample: tensor([30.9089, 18.4860, 33.0007, 29.0226, 25.2526], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([20000]), sample: tensor([0.6525, 0.5206, 0.4709, 0.7447, 0.6806], device='cuda:0')
+In evaluate
+Processing dataset=SCD_full, config=linear_BP with ground truth=linear_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([20000]), sample: tensor([80., 80., 80., 80., 80.], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([20000]), sample: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0', dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([20000]), sample: tensor([0., 0., 0., 0., 0.], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([20000]), sample: tensor([0., 0., 0., 0., 0.], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([20000]), sample: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0', dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([20000]), sample: tensor([1., 1., 1., 1., 1.], device='cuda:0', dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([20000]), sample: tensor([10.8459, 10.0318,  9.3915, 10.1126, 10.5823], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([20000]), sample: tensor([22.9557, 39.9728, 34.8068, 34.6579, 32.1564], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([20000]), sample: tensor([0.3055, 0.2739, 0.1683, 0.3387, 0.3288], device='cuda:0')
+Results saved to: results/SCD_full/SCD_full_results_2025-06-08_12-40-15.txt
+Per-image metric scores saved to: results/SCD_full/SCD_full_per_image_metrics_2025-06-08_12-40-15.csv
+
+JOB STATISTICS
+==============
+Job ID: 12245920
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 2-13:47:17
+CPU Efficiency: 31.68% of 8-03:03:36 core-walltime
+Job Wall-clock time: 10:50:12
+Memory Utilized: 19.64 GB
+Memory Efficiency: 16.37% of 120.00 GB (120.00 GB/node)

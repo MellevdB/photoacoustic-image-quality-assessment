@@ -1,0 +1,109 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting SWFD multisegment
+In evaluate
+[DEBUG] Opening file: /projects/prjs1596/photoacoustic/data/OADAT-full/SWFD_multisegment_ss_RawBP.h5
+[DEBUG] Available keys in file: ['ms,ss128_BP', 'ms,ss128_raw', 'ms,ss32_BP', 'ms,ss32_raw', 'ms,ss64_BP', 'ms,ss64_raw', 'ms_BP', 'ms_raw', 'patientID', 'side', 'skin_type', 'sliceID']
+[DEBUG] Looking for config: ms,ss128_BP
+[DEBUG] Ground truth mapping: {'ms': 'ms_BP'}
+[DEBUG] Matched ground truth key: ms_BP
+Processing dataset=SWFD_multisegment_ss_full, config=ms,ss128_BP with ground truth=ms_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([39228]), sample: tensor([34.3883, 33.8850, 36.1588, 34.3530, 33.0898], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([39228]), sample: tensor([0.8323, 0.8561, 0.8624, 0.8405, 0.8343], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([39228]), sample: tensor([0.9547, 0.9614, 0.9632, 0.9556, 0.9534], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([39228]), sample: tensor([0.9546, 0.9588, 0.9610, 0.9538, 0.9503], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([39228]), sample: tensor([0.3586, 0.4104, 0.4003, 0.3877, 0.3741], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([39228]), sample: tensor([0.9624, 0.9561, 0.9520, 0.9577, 0.9591], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([39228]), sample: tensor([0.0339, 0.0377, 0.0353, 0.0413, 0.0451], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([39228]), sample: tensor([0.0402, 0.0405, 0.0380, 0.0442, 0.0468], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([39228]), sample: tensor([0.8496, 0.8743, 0.8783, 0.8635, 0.8550], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([39228]), sample: tensor([0.9986, 0.9988, 0.9994, 0.9990, 0.9983], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([39228]), sample: tensor([0.8320, 0.8523, 0.8590, 0.8375, 0.8316], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([39228]), sample: tensor([11.7750, 10.0257,  9.7354, 11.0287, 11.4775], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([39228]), sample: tensor([ 5.5229, 10.9238,  9.4345, 10.1760, 12.4294], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([39228]), sample: tensor([0.5406, 0.2860, 0.3088, 0.2579, 0.1752], device='cuda:0')
+In evaluate
+[DEBUG] Opening file: /projects/prjs1596/photoacoustic/data/OADAT-full/SWFD_multisegment_ss_RawBP.h5
+[DEBUG] Available keys in file: ['ms,ss128_BP', 'ms,ss128_raw', 'ms,ss32_BP', 'ms,ss32_raw', 'ms,ss64_BP', 'ms,ss64_raw', 'ms_BP', 'ms_raw', 'patientID', 'side', 'skin_type', 'sliceID']
+[DEBUG] Looking for config: ms,ss64_BP
+[DEBUG] Ground truth mapping: {'ms': 'ms_BP'}
+[DEBUG] Matched ground truth key: ms_BP
+Processing dataset=SWFD_multisegment_ss_full, config=ms,ss64_BP with ground truth=ms_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([39228]), sample: tensor([25.8900, 30.7277, 30.6351, 30.0271, 25.1507], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([39228]), sample: tensor([0.6104, 0.6620, 0.6583, 0.6433, 0.5983], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([39228]), sample: tensor([0.8617, 0.8731, 0.8732, 0.8639, 0.8365], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([39228]), sample: tensor([0.8451, 0.8406, 0.8418, 0.8297, 0.8033], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([39228]), sample: tensor([0.1968, 0.2196, 0.2155, 0.2054, 0.2021], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([39228]), sample: tensor([0.8706, 0.8694, 0.8655, 0.8775, 0.8784], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([39228]), sample: tensor([0.1035, 0.1164, 0.1110, 0.1127, 0.1315], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([39228]), sample: tensor([0.1026, 0.1109, 0.1071, 0.1097, 0.1269], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([39228]), sample: tensor([0.6482, 0.6730, 0.6687, 0.6654, 0.6284], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([39228]), sample: tensor([0.9868, 0.9981, 0.9980, 0.9974, 0.9864], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([39228]), sample: tensor([0.6066, 0.6512, 0.6485, 0.6336, 0.5899], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([39228]), sample: tensor([16.2154, 13.2896, 13.4984, 14.2702, 16.2307], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([39228]), sample: tensor([-0.2322, 14.6562, 15.0512, 11.7526, 13.3051], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([39228]), sample: tensor([0.7328, 0.7212, 0.6137, 0.5384, 0.5350], device='cuda:0')
+In evaluate
+[DEBUG] Opening file: /projects/prjs1596/photoacoustic/data/OADAT-full/SWFD_multisegment_ss_RawBP.h5
+[DEBUG] Available keys in file: ['ms,ss128_BP', 'ms,ss128_raw', 'ms,ss32_BP', 'ms,ss32_raw', 'ms,ss64_BP', 'ms,ss64_raw', 'ms_BP', 'ms_raw', 'patientID', 'side', 'skin_type', 'sliceID']
+[DEBUG] Looking for config: ms,ss32_BP
+[DEBUG] Ground truth mapping: {'ms': 'ms_BP'}
+[DEBUG] Matched ground truth key: ms_BP
+Processing dataset=SWFD_multisegment_ss_full, config=ms,ss32_BP with ground truth=ms_BP
+Using cuda
+Raw metric 'PSNR': shape torch.Size([39228]), sample: tensor([20.6818, 25.2937, 25.6938, 24.9224, 22.3665], device='cuda:0')
+Raw metric 'SSIM': shape torch.Size([39228]), sample: tensor([0.4036, 0.4736, 0.4335, 0.4424, 0.3933], device='cuda:0')
+Raw metric 'MSSSIM': shape torch.Size([39228]), sample: tensor([0.7141, 0.7478, 0.7227, 0.7169, 0.6734], device='cuda:0')
+Raw metric 'IWSSIM': shape torch.Size([39228]), sample: tensor([0.6631, 0.6677, 0.6410, 0.6370, 0.5912], device='cuda:0')
+Raw metric 'VIF': shape torch.Size([39228]), sample: tensor([0.1097, 0.1207, 0.1218, 0.1137, 0.1116], device='cuda:0')
+Raw metric 'FSIM': shape torch.Size([39228]), sample: tensor([0.7640, 0.7856, 0.7841, 0.7940, 0.7996], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'GMSD': shape torch.Size([39228]), sample: tensor([0.1792, 0.1771, 0.1884, 0.1810, 0.2026], device='cuda:0')
+Raw metric 'MSGMSD': shape torch.Size([39228]), sample: tensor([0.1707, 0.1670, 0.1790, 0.1744, 0.1966], device='cuda:0')
+Raw metric 'HAARPSI': shape torch.Size([39228]), sample: tensor([0.4720, 0.5122, 0.4738, 0.4812, 0.4269], device='cuda:0')
+Raw metric 'UQI': shape torch.Size([39228]), sample: tensor([0.9580, 0.9920, 0.9927, 0.9891, 0.9758], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'S3IM': shape torch.Size([39228]), sample: tensor([0.3950, 0.4598, 0.4222, 0.4309, 0.3834], device='cuda:0',
+       dtype=torch.float64)
+Raw metric 'TV': shape torch.Size([39228]), sample: tensor([22.2920, 17.5958, 19.5074, 19.3195, 22.6913], device='cuda:0')
+Raw metric 'BRISQUE': shape torch.Size([39228]), sample: tensor([-3.1744,  6.3749,  8.8498,  7.3327, 11.6359], device='cuda:0')
+Raw metric 'CLIP-IQA': shape torch.Size([39228]), sample: tensor([0.6854, 0.8091, 0.8071, 0.6910, 0.7509], device='cuda:0')
+Results saved to: results/SWFD_multisegment_ss_full/SWFD_multisegment_ss_full_results_2025-06-08_13-18-56.txt
+Per-image metric scores saved to: results/SWFD_multisegment_ss_full/SWFD_multisegment_ss_full_per_image_metrics_2025-06-08_13-18-56.csv
+
+JOB STATISTICS
+==============
+Job ID: 12246351
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 3-01:08:47
+CPU Efficiency: 31.99% of 9-12:39:54 core-walltime
+Job Wall-clock time: 12:42:13
+Memory Utilized: 29.83 GB
+Memory Efficiency: 24.86% of 120.00 GB (120.00 GB/node)

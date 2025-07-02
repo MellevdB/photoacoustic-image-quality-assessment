@@ -1,0 +1,77 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+Checking whether the GPU is available
+GPU available? True
+Starting training for S3IM on best model
+
+Training best model for metric: S3IM
+Loaded 671284 train, 85420 val, 162370 test samples from ['SWFD_sc', 'mice', 'phantom', 'v_phantom', 'pa_experiment_data']
+Target metric: S3IM
+Target range → min: 0.2399, max: 1.0000
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 128, 128]             832
+         MaxPool2d-2           [-1, 32, 64, 64]               0
+            Conv2d-3           [-1, 64, 64, 64]          18,496
+         MaxPool2d-4           [-1, 64, 32, 32]               0
+            Conv2d-5          [-1, 128, 32, 32]          73,856
+         MaxPool2d-6          [-1, 128, 16, 16]               0
+            Conv2d-7          [-1, 256, 16, 16]         295,168
+         MaxPool2d-8            [-1, 256, 8, 8]               0
+            Linear-9                  [-1, 128]       2,097,280
+          Dropout-10                  [-1, 128]               0
+           Linear-11                  [-1, 128]          16,512
+          Dropout-12                  [-1, 128]               0
+           Linear-13                    [-1, 1]             129
+================================================================
+Total params: 2,502,273
+Trainable params: 2,502,273
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.06
+Forward/backward pass size (MB): 9.38
+Params size (MB): 9.55
+Estimated Total Size (MB): 18.99
+----------------------------------------------------------------
+[Epoch 1] Train Loss: 0.0009 | Val Loss: 0.0104
+New best model saved to models/best_model/S3IM/best_model.pth with val_loss=0.0104
+[Epoch 2] Train Loss: 0.0002 | Val Loss: 0.0105
+[Epoch 3] Train Loss: 0.0001 | Val Loss: 0.0111
+[Epoch 4] Train Loss: 0.0001 | Val Loss: 0.0135
+[Epoch 5] Train Loss: 0.0001 | Val Loss: 0.0177
+[Epoch 6] Train Loss: 0.0001 | Val Loss: 0.0159
+[Epoch 7] Train Loss: 0.0001 | Val Loss: 0.0155
+[Epoch 8] Train Loss: 0.0001 | Val Loss: 0.0178
+[Epoch 9] Train Loss: 0.0001 | Val Loss: 0.0163
+[Epoch 10] Train Loss: 0.0001 | Val Loss: 0.0157
+[Epoch 11] Train Loss: 0.0001 | Val Loss: 0.0170
+Early stopping triggered after 10 no-improve epochs.
+Saved training log to models/best_model/S3IM/train_val_loss.csv
+
+JOB STATISTICS
+==============
+Job ID: 12280580
+Cluster: snellius
+User/Group: mvanderbrugge/mvanderbrugge
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 05:07:15
+CPU Efficiency: 3.53% of 6-00:57:54 core-walltime
+Job Wall-clock time: 08:03:13
+Memory Utilized: 1.34 GB
+Memory Efficiency: 1.11% of 120.00 GB (120.00 GB/node)

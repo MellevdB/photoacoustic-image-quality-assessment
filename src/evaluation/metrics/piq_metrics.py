@@ -12,28 +12,58 @@ from evaluation.metrics.fr import fsim, calculate_s3im
 
 def compute_piq_metrics(y_pred, y_true=None, image_ids=None, batch_size=256):
 
+    print("batch size:", batch_size)
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     if image_ids is None or len(image_ids) != len(y_pred):
         raise ValueError("`image_ids` must be provided and must match the number of images in y_pred.")
 
-    # Convert numpy arrays to torch tensors
-    y_pred = torch.from_numpy(y_pred).unsqueeze(1).to(device)
+    # === Optional override for GPU-sensitive scenes ===
+    if any(f"scene_600{i}" in image_ids[0] for i in range(5)):
+        print("[INFO] Forcing CPU mode for high-memory scene by scene name.")
+        device = torch.device("cpu")
+
+    # Convert numpy arrays to torch tensors (initially on CPU for inspection)
+    y_pred = torch.from_numpy(y_pred).unsqueeze(1)
 
     if y_true is not None:
-        y_true = torch.from_numpy(y_true).unsqueeze(1).to(device)
+        y_true = torch.from_numpy(y_true).unsqueeze(1)
 
-    fr_metric_names = ['PSNR', 'SSIM', 'MSSSIM', 'IWSSIM', 'VIF', 'FSIM', 'GMSD', 'MSGMSD', 'HAARPSI','UQI', 'S3IM']
+    # === Check if image size is too big for GPU ===
+    max_pixels = np.max([img.shape[-1] * img.shape[-2] for img in y_pred.numpy()])
+    if max_pixels > 2_000_000:
+        print(f"[INFO] Large image detected ({max_pixels} px), forcing CPU mode.")
+        device = torch.device("cpu")
+        if batch_size > 1:
+            print("[INFO] Reducing batch size to 1 due to large image size on CPU.")
+            batch_size = 1
+
+    # Move tensors to correct device
+    y_pred = y_pred.to(device)
+    if y_true is not None:
+        y_true = y_true.to(device)
+
+    fr_metric_names = ['PSNR', 'SSIM', 'MSSSIM', 'IWSSIM', 'VIF', 'FSIM', 'GMSD', 'MSGMSD', 'HAARPSI', 'UQI', 'S3IM']
     nr_metric_names = ["TV", "BRISQUE", "CLIP-IQA"]
     all_metrics = {name: [] for name in fr_metric_names + nr_metric_names}
-    
+
     clip_model = piq.CLIPIQA(data_range=1.0).to(device)
 
+    print(f"[DEBUG] Total samples: {y_pred.shape[0]}, using batch size: {batch_size}")
+    print(f"[DEBUG] Image shapes summary:")
+    unique_shapes = set([img.shape for img in y_pred.cpu().numpy()])
+    print(f"  Unique prediction image shapes: {unique_shapes}")
+    if y_true is not None:
+        unique_gt_shapes = set([img.shape for img in y_true.cpu().numpy()])
+        print(f"  Unique GT image shapes: {unique_gt_shapes}")
+
     for i in range(0, y_pred.shape[0], batch_size):
+
+        print(f"[DEBUG] Processing batch {i // batch_size} [{i}:{i + batch_size}]")
         pred_batch = y_pred[i:i+batch_size]
         if y_true is not None:
             true_batch = y_true[i:i+batch_size]
-
         try:
             if y_true is not None:
                 all_metrics["PSNR"].append(piq.psnr(pred_batch, true_batch, data_range=1.0, reduction='none'))
@@ -45,15 +75,20 @@ def compute_piq_metrics(y_pred, y_true=None, image_ids=None, batch_size=256):
                 all_metrics["MSGMSD"].append(piq.multi_scale_gmsd(pred_batch, true_batch, data_range=1.0, reduction='none'))
                 all_metrics["HAARPSI"].append(piq.haarpsi(pred_batch, true_batch, data_range=1.0, reduction='none'))
 
-            tv_values = [piq.total_variation(img.unsqueeze(0)) for img in pred_batch]
+            tv_values = [
+                piq.total_variation(img.unsqueeze(0), reduction='mean')
+                for img in pred_batch
+            ]
             all_metrics["TV"].append(torch.stack(tv_values).flatten())
             all_metrics["BRISQUE"].append(piq.brisque(pred_batch, data_range=1.0, reduction='none'))
             clip_scores = clip_model(pred_batch)
             all_metrics["CLIP-IQA"].append(clip_scores.flatten())
 
-            # FSIM, UQI, S3IM: compute per image
             for j in range(pred_batch.shape[0]):
                 pred_img = pred_batch[j].squeeze().detach().cpu().numpy()
+                print(f"[DEBUG] Image {j}: shape={pred_img.shape}, min={pred_img.min():.4f}, max={pred_img.max():.4f}, mean={pred_img.mean():.4f}")
+                if pred_img.shape[0] < 32 or pred_img.shape[1] < 32:
+                    print(f"[WARNING] Small image detected — some metrics may fail.")
                 true_img = true_batch[j].squeeze().detach().cpu().numpy() if y_true is not None else None
 
                 if true_img is not None:
@@ -109,7 +144,6 @@ def compute_piq_metrics(y_pred, y_true=None, image_ids=None, batch_size=256):
                 brisque_max = brisque_vals.max()
                 norm = (brisque_vals - brisque_min) / (brisque_max - brisque_min + 1e-8)
                 raw_metrics["BRISQUE_norm"] = np.clip(norm, 0, 1)
-
         else:
             raw_metrics[name] = None
             mean_metrics[name] = float('nan')
@@ -119,6 +153,6 @@ def compute_piq_metrics(y_pred, y_true=None, image_ids=None, batch_size=256):
         raise ValueError("`image_ids` must be provided and must match the number of images in y_pred.")
 
     if "RECON_IMAGE" not in raw_metrics:
-        raw_metrics["RECON_IMAGE"] = y_pred.squeeze(1).cpu().numpy()  # shape: (N, H, W)
-        
+        raw_metrics["RECON_IMAGE"] = y_pred.squeeze(1).cpu().numpy()
+
     return mean_metrics, std_metrics, raw_metrics, image_ids

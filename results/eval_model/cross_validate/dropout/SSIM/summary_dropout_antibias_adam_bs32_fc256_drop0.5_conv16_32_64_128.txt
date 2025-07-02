@@ -1,0 +1,13 @@
+Metric         : SSIM
+Model          : dropout
+Loss           : antibias
+Optimizer      : adam
+Dropout        : 0.5
+FC Units       : 256
+Conv Filters   : [16, 32, 64, 128]
+Batch Size     : 32
+LR             : 0.0001
+Epochs         : 20
+Folds          : 3
+Mean Val Loss  : 0.016040
+Fold losses    : [0.014382027813640298, 0.016735600804516342, 0.01700364012008685]

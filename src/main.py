@@ -29,24 +29,32 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
 
     all_results = []
 
+    print("Going into: with open(file_path, 'a') as f:")
     with open(file_path, 'a') as f:
-        if dataset == "zenodo" or dataset in ["denoising_data", "pa_experiment_data"]:
+        if dataset == "zenodo" or dataset in ["denoising_data", "pa_experiment_data", "varied_split"]:
             results = evaluate(dataset, None, None, None, metric_type, test_mode)
             all_results.extend(results)
             for entry in results or []:
                 write_result_entry(f, dataset, entry)
         else:
+            print("Dataset is not zenodo, denoising or pa_experiment")
             if isinstance(dataset_info["path"], dict):
                 for file_key in dataset_info["path"]:
+                    if file_key == "gt":
+                        continue
                     for config, full_list in dataset_info["configs"].items():
                         for full_config in full_list:
+                            print(f"[DEBUG] Running evaluate for dataset={dataset}, config={config}, full_config={full_config}, file_key={file_key}")
                             results = evaluate(dataset, config, full_config, file_key, metric_type, test_mode)
                             all_results.extend(results)
                             for entry in results or []:
                                 write_result_entry(f, dataset, entry)
             else:
+                print("We are here!!!")
                 for config, full_list in dataset_info["configs"].items():
                     for full_config in full_list:
+                        file_key = None
+                        print(f"[DEBUG] Running evaluate for dataset={dataset}, config={config}, full_config={full_config}, file_key={file_key}")
                         results = evaluate(dataset, config, full_config, None, metric_type, test_mode)
                         all_results.extend(results)
                         for entry in results or []:
@@ -57,13 +65,17 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
     # Save per-image metrics to CSV
     per_image_rows = []
 
-    image_dir = os.path.join(results_dir, "images_used")
+    # Decide where to save used images
+    if dataset.endswith("_full") or dataset.endswith("_sparse_full"):
+        image_dir = os.path.join("/projects/prjs1596/photoacoustic/data/OADAT-full", f"{dataset}_images_used")
+    else:
+        image_dir = os.path.join(results_dir, "images_used")
     os.makedirs(image_dir, exist_ok=True)
 
     for entry in all_results:
-        if dataset == "MSFD":
+        if dataset.startswith("MSFD"):
             config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
-        elif dataset in ["denoising_data", "pa_experiment_data"]:
+        elif dataset in ["denoising_data", "pa_experiment_data", "varied_split"]:
             path, config, gt, wavelength, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
         else:
             config, gt, (metrics_mean, metrics_std, raw_metrics, image_ids) = entry
@@ -71,7 +83,7 @@ def evaluate_dataset(dataset, dataset_info, metric_type="all", test_mode=False, 
 
         for idx, image_id in enumerate(image_ids):
             # Decide how to construct image_path
-            if dataset in ["denoising_data", "pa_experiment_data", "zenodo"] and os.path.isfile(image_id):
+            if dataset in ["denoising_data", "pa_experiment_data", "zenodo", "varied_split"] and os.path.isfile(image_id):
                 image_path = image_id  # keep original path
             else:
                 if "RECON_IMAGE" in raw_metrics:
@@ -115,9 +127,9 @@ def write_header(f):
     f.write(header + "\n" + "-" * len(header) + "\n")
 
 def write_result_entry(f, dataset, entry):
-    if dataset == "MSFD":
+    if dataset.startswith("MSFD"):
         config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
-    elif dataset in ["denoising_data", "pa_experiment_data"]:
+    elif dataset in ["denoising_data", "pa_experiment_data", "varied_split"]:
         path, config, gt, wavelength, (metrics_mean, metrics_std, *_rest) = entry
     else:
         config, gt, (metrics_mean, metrics_std, *_rest) = entry
@@ -150,6 +162,7 @@ def main():
         if dataset not in DATASETS:
             print(f"Unknown dataset '{dataset}'. Available: {list(DATASETS.keys())}")
             continue
+        print("Going to evaluate_dataset")
         evaluate_dataset(dataset, DATASETS[dataset], metric_type=args.metric_type, test_mode=args.test, timestamp=timestamp)
 
 if __name__ == "__main__":

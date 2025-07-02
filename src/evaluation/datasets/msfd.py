@@ -7,19 +7,23 @@ from evaluation.preprocess.normalize import min_max_normalize_per_image
 
 
 def process_msfd(dataset, dataset_info, full_config, results, metric_type):
-    file_path = dataset_info["path"].get(dataset) if isinstance(dataset_info["path"], dict) else dataset_info["path"]
-    if not os.path.isfile(file_path):
-        print(f"[WARNING] File not found: {file_path}. Skipping...")
+    if isinstance(dataset_info["path"], dict):
+        sparse_path = dataset_info["path"]["sparse"]
+        gt_path = dataset_info["path"]["full"]
+    else:
+        sparse_path = gt_path = dataset_info["path"]
+    if not os.path.isfile(sparse_path) or not os.path.isfile(gt_path):
+        print(f"[WARNING] File(s) not found: {sparse_path} or {gt_path}. Skipping...")
         return
 
-    with h5py.File(file_path, 'r') as data:
+    with h5py.File(sparse_path, 'r') as sparse_data, h5py.File(gt_path, 'r') as gt_data:
         for wavelength, ground_truth_key in dataset_info["ground_truth"]["wavelengths"].items():
-            print(f"Processing MSFD dataset with config={full_config}, wavelength={wavelength} and ground truth={ground_truth_key}")
             expected_key = f"{full_config}"
+            if expected_key.endswith(f"w{wavelength}"):
+                print(f"Processing MSFD config={expected_key}, wavelength={wavelength}")
 
-            if expected_key[-4:] == ground_truth_key[-4:]:
-                y_pred = min_max_normalize_per_image(data[expected_key][:])
-                y_true = min_max_normalize_per_image(data[ground_truth_key][:])
+                y_pred = min_max_normalize_per_image(sparse_data[expected_key][:])
+                y_true = min_max_normalize_per_image(gt_data[ground_truth_key][:])
 
                 image_ids = [f"{expected_key}_w{wavelength}_slice_{i}" for i in range(y_pred.shape[0])]
 

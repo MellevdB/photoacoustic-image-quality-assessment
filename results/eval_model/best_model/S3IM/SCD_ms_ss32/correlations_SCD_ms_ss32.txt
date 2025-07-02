@@ -1,0 +1,1 @@
+S3IM → Spearman: 0.8210 | Pearson: 0.7759

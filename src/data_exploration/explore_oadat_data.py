@@ -44,7 +44,7 @@ def explore_dataset(dataset_name, file_path, keys):
     print(f"\n Exploring {dataset_name} dataset in: {file_path}")
 
     if not os.path.exists(file_path):
-        print(f"⚠️ Path does not exist: {file_path}")
+        print(f"Path does not exist: {file_path}")
         return
 
     with h5py.File(file_path, "r") as data:
@@ -60,9 +60,9 @@ def explore_dataset(dataset_name, file_path, keys):
                 mean_val = np.mean(dataset)
 
                 print(f"\nDataset: {key}")
-                print(f"   ➤ Shape: {dataset.shape}")
-                print(f"   ➤ Type: {dataset.dtype}")
-                print(f"   ➤ Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
+                print(f"   Shape: {dataset.shape}")
+                print(f"   Type: {dataset.dtype}")
+                print(f"   Min: {min_val:.4f}, Max: {max_val:.4f}, Mean: {mean_val:.4f}")
                 print("-" * 50)
             else:
                 print(f" Key '{key}' not found in {dataset_name}")
