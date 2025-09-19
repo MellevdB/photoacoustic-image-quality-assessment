@@ -1,3 +1,0 @@
-FSIM → Spearman: 0.1511 | Pearson: 0.1445
-PSNR_norm → Spearman: 0.0732 | Pearson: 0.0929
-SSIM → Spearman: 0.3331 | Pearson: 0.3405

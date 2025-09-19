@@ -1,3 +1,0 @@
-FSIM → Spearman: 0.1760 | Pearson: 0.2036
-PSNR_norm → Spearman: 0.5304 | Pearson: 0.5337
-CLIP-IQA → Spearman: 0.1813 | Pearson: 0.1502

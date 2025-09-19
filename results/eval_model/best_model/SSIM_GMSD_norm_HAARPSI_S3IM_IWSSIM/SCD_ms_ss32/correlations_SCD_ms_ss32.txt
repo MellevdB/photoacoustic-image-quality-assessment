@@ -1,5 +1,0 @@
-SSIM → Spearman: 0.8909 | Pearson: 0.9045
-GMSD_norm → Spearman: 0.9420 | Pearson: 0.9437
-HAARPSI → Spearman: 0.6670 | Pearson: 0.7062
-S3IM → Spearman: 0.8934 | Pearson: 0.9053
-IWSSIM → Spearman: 0.9372 | Pearson: 0.9523

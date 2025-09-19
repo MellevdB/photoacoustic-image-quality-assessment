@@ -9,7 +9,7 @@
 #SBATCH --time=40:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mellevdbrugge@gmail.com
-#SBATCH --output=slurm_outputs/train_SSIM_HAARPSI_EfficientNetIQA_%A.out
+#SBATCH --output=slurm_outputs/paper/train_%A.out
 
 # Load necessary modules
 module purge
@@ -36,5 +36,4 @@ echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 
 # Run training for all metrics
-echo "Starting training for ['SSIM', 'HAARPSI'] on EfficientNetIQA"
 srun python src/dl_model/train_all_metrics.py

@@ -1,4 +1,0 @@
-Expert Score Difference Statistics for category 2:
-Mean Difference: 0.444
-Minimum Difference: 0.000
-Maximum Difference: 3.000

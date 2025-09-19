@@ -10,15 +10,25 @@ import numpy as np
 from dl_model.inference import load_model_checkpoint, run_inference
 from dl_model.utils import create_train_val_test_split
 
+# metrics_to_eval = [
+#     'SSIM', 'GMSD_norm', 'HAARPSI', 'IWSSIM','S3IM',
+#     ['SSIM', 'GMSD_norm'],
+#     ['SSIM', 'HAARPSI'],
+#     ['GMSD_norm', 'HAARPSI'],
+#     ['SSIM', 'GMSD_norm', 'HAARPSI', 'S3IM', 'IWSSIM']
+# ]
+
 metrics_to_eval = [
-    'S3IM'
+    ['SSIM', 'GMSD_norm', 'HAARPSI', 'S3IM', 'IWSSIM']
 ]
+
+
 
 data_dir = "results"
 device = "cuda"
 configs = ["best_model", "IQDCNN", "EfficientNetIQA"]
 _, _, test_sets = create_train_val_test_split(data_dir)
-test_sets = {"varied_split": test_sets["varied_split"]}
+# test_sets = {"varied_split": test_sets["varied_split"]}
 
 print("Going to evaluate the following metrics or metric combinations:")
 print(metrics_to_eval)

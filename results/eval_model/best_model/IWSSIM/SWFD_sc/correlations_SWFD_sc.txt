@@ -1,1 +1,0 @@
-IWSSIM → Spearman: 0.7921 | Pearson: 0.9187

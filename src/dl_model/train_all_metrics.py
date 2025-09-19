@@ -11,7 +11,7 @@ from dl_model.train import train_model
 # ]
 
 metrics_to_train = [
-    ['SSIM', 'HAARPSI']
+    'HAARPSI'
 ]
 
 
@@ -20,9 +20,9 @@ device = "cuda"
 
 
 # Choose model type: "best_model", "IQDCNN", or "EfficientNetIQA"
-# model_type = "best_model"
+model_type = "best_model"
 # model_type = "IQDCNN" 
-model_type = "EfficientNetIQA" 
+# model_type = "EfficientNetIQA" 
 
 # Model-specific hyperparameters
 if model_type == "best_model":
@@ -30,21 +30,21 @@ if model_type == "best_model":
     learning_rate = 1e-4
     num_fc_units = 128
     conv_filters=[32, 64, 128, 256]
-    loss_fn = "huber"
+    loss_fn = "l1"
     optimizer="adam"
 elif model_type == "IQDCNN":
     conv_filters = [32, 32, 32, 32]
     num_fc_units = 1024
     dropout_rate = 0.3
-    learning_rate = 5e-5
+    learning_rate = 1e-4
     loss_fn = "l1"
     optimizer = "adam"
 elif model_type == "EfficientNetIQA":
     dropout_rate = 0.0 
-    learning_rate = 2e-5
+    learning_rate = 1e-4
     num_fc_units = 128
     conv_filters=[32, 64, 128, 256]
-    loss_fn = "mse"
+    loss_fn = "l1"
     optimizer="adam"
 else:
     raise ValueError(f"Unknown model_type: {model_type}")

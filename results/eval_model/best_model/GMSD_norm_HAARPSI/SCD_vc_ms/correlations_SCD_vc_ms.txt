@@ -1,2 +1,0 @@
-GMSD_norm → Spearman: 0.8758 | Pearson: 0.8914
-HAARPSI → Spearman: 0.7332 | Pearson: 0.7552

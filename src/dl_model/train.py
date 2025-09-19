@@ -71,16 +71,17 @@ def train_model(
     val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False)
 
     print(f"Target metric: {target_metric}")
+
+    print("Computing target value ranges...")
     if isinstance(target_metric, list):
-        train_targets = torch.stack([label for _, label in train_data])  # shape [N, 3]
+        train_targets = torch.stack([sample[1] for sample in train_data])  # shape [N, num_metrics]
         mins = train_targets.min(dim=0).values
         maxs = train_targets.max(dim=0).values
-        print("Target ranges:")
         for i, m in enumerate(target_metric):
             print(f"  {m}: min={mins[i]:.4f}, max={maxs[i]:.4f}")
     else:
-        train_targets = [label.item() for _, label in train_data]
-        print(f"Target range → min: {min(train_targets):.4f}, max: {max(train_targets):.4f}")
+        train_targets = torch.tensor([sample[1].item() for sample in train_data])
+        print(f"Target range → min: {train_targets.min():.4f}, max: {train_targets.max():.4f}")
 
     num_outputs = len(target_metric) if isinstance(target_metric, list) else 1
 
@@ -158,7 +159,8 @@ def train_model(
             print("Entering first epoch of training loop")
         model.train()
         train_loss = 0.0
-        for images, labels in train_loader:
+        for batch in train_loader:
+            images, labels = batch[0], batch[1]
             images = images.to(device)
             if num_outputs > 1:
                 labels = labels.to(device).float()  # shape: [B, 3]
@@ -176,7 +178,8 @@ def train_model(
         model.eval()
         val_loss = 0.0
         with torch.no_grad():
-            for images, labels in val_loader:
+            for batch in val_loader:
+                images, labels = batch[0], batch[1]
                 images = images.to(device)
                 if model_variant == "multi":
                     labels = labels.to(device).float()  # shape: [B, 3]

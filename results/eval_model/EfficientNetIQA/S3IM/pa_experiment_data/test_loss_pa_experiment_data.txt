@@ -1,2 +1,0 @@
-Test L1 Loss: 0.4210
-Test MSE Loss: 0.2118

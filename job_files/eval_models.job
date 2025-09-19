@@ -9,7 +9,7 @@
 #SBATCH --time=15:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mellevdbrugge@gmail.com
-#SBATCH --output=slurm_outputs/eval_EfficientNetIQA_%A.out
+#SBATCH --output=slurm_outputs/paper/eval/eval_model_%A.out
 
 # Load necessary modules
 module purge
@@ -36,5 +36,4 @@ echo "Checking whether the GPU is available"
 srun python -uc "import torch; print('GPU available?', torch.cuda.is_available())"
 
 # Run evaluate
-echo "Evaluating EfficientNetIQA"
 srun python src/dl_model/eval_model.py
