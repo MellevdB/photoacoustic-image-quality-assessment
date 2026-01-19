@@ -56,6 +56,7 @@ def train_model(
     device,
     save_path,
     target_metric,
+    split_mode,
     until_convergence,
     patience,
     dropout_rate,
@@ -65,10 +66,28 @@ def train_model(
     loss_fn,
     optimizer
 ):
-    train_data, val_data, _ = create_train_val_test_split(data_dir, target_metric=target_metric)
+    train_data, val_data, _ = create_train_val_test_split(
+        data_dir,
+        target_metric=target_metric,
+        split_mode=split_mode
+    )
 
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False)
+    # DataLoader performance settings
+    num_workers = int(os.environ.get("SLURM_CPUS_PER_TASK", 4))
+    loader_kwargs = dict(
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=True,
+        persistent_workers=True,
+        prefetch_factor=2,
+    )
+    train_loader = DataLoader(train_data, **loader_kwargs)
+    val_loader = DataLoader(val_data, **{**loader_kwargs, "shuffle": False})
+
+    # Enable cudnn autotuner for fixed-size inputs
+    if torch.backends.cudnn.is_available():
+        torch.backends.cudnn.benchmark = True
 
     print(f"Target metric: {target_metric}")
 
@@ -161,11 +180,11 @@ def train_model(
         train_loss = 0.0
         for batch in train_loader:
             images, labels = batch[0], batch[1]
-            images = images.to(device)
+            images = images.to(device, non_blocking=True)
             if num_outputs > 1:
-                labels = labels.to(device).float()  # shape: [B, 3]
+                labels = labels.to(device, non_blocking=True).float()  # shape: [B, 3]
             else:
-                labels = labels.to(device).unsqueeze(1).float()  # shape: [B, 1]
+                labels = labels.to(device, non_blocking=True).unsqueeze(1).float()  # shape: [B, 1]
             optimizer.zero_grad()
             outputs = model(images)
             loss = criterion(outputs, labels)
@@ -180,11 +199,11 @@ def train_model(
         with torch.no_grad():
             for batch in val_loader:
                 images, labels = batch[0], batch[1]
-                images = images.to(device)
+                images = images.to(device, non_blocking=True)
                 if model_variant == "multi":
-                    labels = labels.to(device).float()  # shape: [B, 3]
+                    labels = labels.to(device, non_blocking=True).float()  # shape: [B, 3]
                 else:
-                    labels = labels.to(device).unsqueeze(1).float()  # shape: [B, 1]
+                    labels = labels.to(device, non_blocking=True).unsqueeze(1).float()  # shape: [B, 1]
                 outputs = model(images)
                 loss = criterion(outputs, labels)
                 val_loss += loss.item() * images.size(0)
@@ -234,6 +253,7 @@ if __name__ == "__main__":
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--save_path", type=str, default="best_model.pth")
     parser.add_argument("--target_metric", type=str, required=True)
+    parser.add_argument("--split_mode", type=str, choices=["curated", "shuffled"], default="curated")
     parser.add_argument("--until_convergence", action="store_true")
     parser.add_argument("--patience", type=int, default=10)
     parser.add_argument("--dropout_rate", type=float, default=0.3)
@@ -261,6 +281,7 @@ if __name__ == "__main__":
         device=args.device,
         save_path=args.save_path,
         target_metric=args.target_metric,
+        split_mode=args.split_mode,
         until_convergence=args.until_convergence,
         patience=args.patience,
         dropout_rate=args.dropout_rate,

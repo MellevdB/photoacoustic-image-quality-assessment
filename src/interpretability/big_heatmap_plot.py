@@ -196,9 +196,9 @@ print(f" Saved: {output_path}")
 
 # Row config (label, path)
 scd_ms_rows = [
-    ("SCD_ms_ss32", "results/SCD/images_used/ms,ss32_BP_slice_81.png"),
-    ("SCD_ms_ss64", "results/SCD/images_used/ms,ss64_BP_slice_81.png"),
-    ("SCD_ms_ss128", "results/SCD/images_used/ms,ss128_BP_slice_81.png"),
+    ("sparse32", "results/SCD/images_used/ms,ss32_BP_slice_81.png"),
+    ("sparse64", "results/SCD/images_used/ms,ss64_BP_slice_81.png"),
+    ("sparse128", "results/SCD/images_used/ms,ss128_BP_slice_81.png"),
 ]
 
 # Collect data per row (original + heatmaps for each model) and vmin/vmax per row

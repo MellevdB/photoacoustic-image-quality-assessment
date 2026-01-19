@@ -6,10 +6,11 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --time=40:00:00
+#SBATCH --time=30:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mellevdbrugge@gmail.com
-#SBATCH --output=slurm_outputs/paper/train_%A.out
+#SBATCH --output=slurm_outputs/70_15_15_split/train_%A.out
+#SBATCH --error=slurm_outputs/70_15_15_split/train_%A.err
 
 # Load necessary modules
 module purge
@@ -19,11 +20,18 @@ module load Anaconda3/2023.07-2
 # Change to the project directory
 cd /home/mvanderbrugge/photoacoustic-image-quality-assessment
 
+# Ensure SLURM output directory exists (relative to submit dir)
+mkdir -p slurm_outputs/70_15_15_split
+
 # Activate the virtual environment
 source activate photoacoustic-env
 
 # Set PYTHONPATH so src is treated as module root
 export PYTHONPATH=src
+
+# Align thread counts with SLURM CPU allocation
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 # --- System info before training ---
 echo "Running on $(hostname)"

@@ -18,16 +18,24 @@ from dl_model.utils import create_train_val_test_split
 #     ['SSIM', 'GMSD_norm', 'HAARPSI', 'S3IM', 'IWSSIM']
 # ]
 
+# metrics_to_eval = [
+#     'S3IM',
+#     'SSIM', 
+#     'IWSSIM',
+#     'GMSD_norm',
+#     'HAARPSI'
+# ]
 metrics_to_eval = [
-    ['SSIM', 'GMSD_norm', 'HAARPSI', 'S3IM', 'IWSSIM']
+    'S3IM'
 ]
 
 
 
 data_dir = "results"
 device = "cuda"
+split_tag = "shuffled_70_15_15"
 configs = ["best_model", "IQDCNN", "EfficientNetIQA"]
-_, _, test_sets = create_train_val_test_split(data_dir)
+_, _, test_sets = create_train_val_test_split(data_dir, split_mode="shuffled")
 # test_sets = {"varied_split": test_sets["varied_split"]}
 
 print("Going to evaluate the following metrics or metric combinations:")
@@ -39,7 +47,7 @@ for config in configs:
         is_multi = isinstance(metric, list)
         metric_name = "_".join(metric) if is_multi else metric
         print(f"\nEvaluating [{config}] model trained on: {metric_name}")
-        model_path = os.path.join("models", config, metric_name, "best_model.pth")
+        model_path = os.path.join("models", split_tag, config, metric_name, "best_model.pth")
         model = load_model_checkpoint(model_path, device=device)
         criterion = nn.L1Loss()
 
@@ -71,7 +79,7 @@ for config in configs:
                 if targets.ndim == 2 and targets.shape[1] == 1:
                     targets = targets.squeeze(1)
 
-            output_dir = os.path.join("results", "eval_model", config, metric_name, dataset_name)
+            output_dir = os.path.join("results", "eval_model", split_tag, config, metric_name, dataset_name)
             os.makedirs(output_dir, exist_ok=True)
 
             # === Scatter Plot ===
@@ -142,6 +150,36 @@ for config in configs:
                     f.write(f"{m} → Spearman: {s:.4f} | Pearson: {p:.4f}\n")
 
             # === Loss Calculation ===
+            # Calculate MAE (Mean Absolute Error) directly from predictions and targets
+            if is_multi:
+                # For multi-output, calculate MAE for each output separately
+                absolute_errors = np.abs(preds - targets)
+                mae_values = np.mean(absolute_errors, axis=0)
+                mae_std_values = np.std(absolute_errors, axis=0)
+                n_samples = len(preds)
+                # 95% CI: mean ± 1.96 * (std / sqrt(n))
+                ci_95_values = 1.96 * (mae_std_values / np.sqrt(n_samples))
+                
+                print(f"{dataset_name} → MAE per metric:")
+                for i, m in enumerate(metric):
+                    print(f"  {m}: {mae_values[i]:.4f} ± {mae_std_values[i]:.4f} (95% CI: {mae_values[i]:.4f} ± {ci_95_values[i]:.4f})")
+                
+                # Also compute overall average
+                avg_mae = np.mean(absolute_errors)
+                std_mae = np.std(absolute_errors)
+                ci_95 = 1.96 * (std_mae / np.sqrt(n_samples))
+                print(f"{dataset_name} → Overall MAE: {avg_mae:.4f} ± {std_mae:.4f} (95% CI: {avg_mae:.4f} ± {ci_95:.4f})")
+            else:
+                # For single output
+                absolute_errors = np.abs(preds - targets)
+                mae = np.mean(absolute_errors)
+                mae_std = np.std(absolute_errors)
+                n_samples = len(preds)
+                # 95% CI: mean ± 1.96 * (std / sqrt(n))
+                ci_95 = 1.96 * (mae_std / np.sqrt(n_samples))
+                print(f"{dataset_name} → MAE: {mae:.4f} ± {mae_std:.4f} (95% CI: {mae:.4f} ± {ci_95:.4f})")
+            
+            # Also keep the batch-wise L1 and MSE calculations for backward compatibility
             l1_total_loss = 0.0
             mse_total_loss = 0.0
             mse_criterion = nn.MSELoss(reduction="none")
@@ -166,9 +204,16 @@ for config in configs:
             with open(os.path.join(output_dir, f"test_loss_{dataset_name}.txt"), "w") as f:
                 f.write(f"Test L1 Loss: {avg_l1_loss:.4f}\n")
                 f.write(f"Test MSE Loss: {avg_mse_loss:.4f}\n")
+                if is_multi:
+                    f.write(f"\nMAE per metric:\n")
+                    for i, m in enumerate(metric):
+                        f.write(f"{m}: {mae_values[i]:.4f} ± {mae_std_values[i]:.4f} (95% CI: {mae_values[i]:.4f} ± {ci_95_values[i]:.4f})\n")
+                    f.write(f"\nOverall MAE: {avg_mae:.4f} ± {std_mae:.4f} (95% CI: {avg_mae:.4f} ± {ci_95:.4f})\n")
+                else:
+                    f.write(f"MAE: {mae:.4f} ± {mae_std:.4f} (95% CI: {mae:.4f} ± {ci_95:.4f})\n")
 
         # === Loss Curve Plot ===
-        loss_log_path = os.path.join("models", config, metric_name, "train_val_loss.csv")
+        loss_log_path = os.path.join("models", split_tag, config, metric_name, "train_val_loss.csv")
         if os.path.exists(loss_log_path):
             loss_df = pd.read_csv(loss_log_path)
             plt.figure(figsize=(8, 5))
@@ -180,7 +225,7 @@ for config in configs:
             plt.legend()
             plt.grid(True)
             plt.tight_layout()
-            loss_plot_path = os.path.join("results", "eval_model", config, metric_name, "train_val_loss_plot.png")
+            loss_plot_path = os.path.join("results", "eval_model", split_tag, config, metric_name, "train_val_loss_plot.png")
             os.makedirs(os.path.dirname(loss_plot_path), exist_ok=True)
             plt.savefig(loss_plot_path)
             plt.close()
