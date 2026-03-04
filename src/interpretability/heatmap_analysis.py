@@ -84,4 +84,4 @@ if __name__ == "__main__":
             filename = f"{dataset_name}_{model_name}_SSIM_heatmap.png"
             save_path = os.path.join(output_dir, filename)
             plot_heatmap_on_image(image_path, heatmap, save_path)
-            print(f"[✓] {model_name} on {dataset_name} → Baseline score: {base_score:.4f} → Saved: {save_path}")
+            print(f"[OK] {model_name} on {dataset_name} -> Baseline score: {base_score:.4f} -> Saved: {save_path}")

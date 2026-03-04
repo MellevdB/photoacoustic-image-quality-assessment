@@ -236,7 +236,7 @@ def plot_dataset_rows(dataset_key, rows, models_by_key):
     out_path = out_dir / f"heatmap_{dataset_key}.png"
     fig.savefig(out_path.as_posix(), dpi=300)
     plt.close(fig)
-    print(f"[✓] Saved: {out_path}")
+    print(f"[OK] Saved: {out_path}")
 
 # ---------------------- Load Models ----------------------
 models = {k: load_model_checkpoint(p, device=device) for k, p in model_paths.items()}

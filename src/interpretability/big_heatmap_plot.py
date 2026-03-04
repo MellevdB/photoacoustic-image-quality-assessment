@@ -324,4 +324,4 @@ output_path2 = "results/visualize/Heatmaps/combined_occlusion_heatmap_grid_SCDms
 os.makedirs(os.path.dirname(output_path2), exist_ok=True)
 plt.savefig(output_path2, dpi=300)
 plt.close()
-print(f"[✓] Saved: {output_path2}")
+print(f"[OK] Saved: {output_path2}")
