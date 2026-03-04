@@ -7,7 +7,7 @@ import seaborn as sns
 from scipy.stats import ttest_ind
 
 # === PATH SETTINGS ===
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
 OUTPUT_DIR = os.path.dirname(__file__)  # save PNGs next to this script
 
