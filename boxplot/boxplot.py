@@ -98,6 +98,14 @@ for metric in all_metrics:
 
 sig_df = pd.DataFrame(ttest_results)
 
+# Print and save significance results (same location as boxplots)
+print("\n=== Significance (t-test, adjacent pairs) ===")
+print(sig_df.to_string())
+
+sig_csv_path = os.path.join(OUTPUT_DIR, "significance_ttest_results.csv")
+sig_df.to_csv(sig_csv_path, index=False)
+print(f"\n[INFO] Saved: {sig_csv_path}")
+
 def p_to_star(p):
     if p < 0.001: return "***"
     if p < 0.01:  return "**"
